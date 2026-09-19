@@ -15,7 +15,7 @@ motor único de cálculo. **No emite recomendaciones de inversión.**
 |---|---|---|---|
 | Definición del proyecto | ✅ v1 | [docs/](docs/) | Documento de requerimientos |
 | Glosario del dominio financiero | 🔶 hecho, por integrar | `docs/glosario.md` | Manual técnico |
-| SRS — Especificación de Requisitos | ⏳ en curso | `docs/srs.md` | Documento de requerimientos |
+| SRS — Especificación de Requisitos | 🔄 esqueleto creado | [docs/](docs/) | Documento de requerimientos |
 | Modelo E-R y diccionario de datos | ⏳ | SRS §4.3 y §4.4 | Documento de arquitectura |
 | Wireframes y guía de estilo | ⏳ | SRS §4.5 | Documento de arquitectura |
 | Registros de decisión (ADR) | ⏳ | `docs/adr/` | Documento de arquitectura |
