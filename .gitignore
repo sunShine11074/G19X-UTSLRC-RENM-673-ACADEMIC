@@ -1,0 +1,39 @@
+# ---- Secretos: nunca se versionan ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.glm-key
+
+# ---- Material confidencial del cliente (NDA) ----
+confidencial/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# ---- Node / frontend ----
+node_modules/
+.vite/
+npm-debug.log*
+
+# ---- Base de datos local ----
+*.sqlite3
+*.db
+dumps/
+
+# ---- Editor y sistema operativo ----
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*.swp
