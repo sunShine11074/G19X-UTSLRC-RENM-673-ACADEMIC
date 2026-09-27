@@ -32,8 +32,8 @@ motor único de cálculo. **No emite recomendaciones de inversión.**
 |---|---|
 | Lunes 21 de septiembre | Revisión de planeación con la asesora académica |
 | Lunes 28 de septiembre | Revisión de avance |
-| **Lunes 5 de octubre** | **Entrega del MVP** |
-| 5 de octubre – 20 de noviembre | Fase de refinamiento y pruebas de calidad |
+| **Domingo 18 de octubre** | **Entrega del MVP (fecha final, inclusive)** |
+| 19 de octubre – 20 de noviembre | Fase de refinamiento y pruebas de calidad |
 
 ---
 

@@ -137,7 +137,7 @@ GUÍA DE USO DE ESTE ESQUELETO
 
 ## 3.2 Requisitos funcionales
 
-<!-- Los 12 MUST. Formato: tabla enriquecida como representación principal.
+<!-- Los 17 MUST. Formato: tabla enriquecida como representación principal.
      SOLO RF-06, RF-09 y RF-10 llevan ficha larga aparte, porque cargan fórmula.
      No escribas doce fichas de ocho campos: son 15 páginas redundantes y 10 horas.
      Enunciado: "El sistema deberá <verbo> <objeto> <condición>". Sin tecnología. -->
@@ -170,14 +170,14 @@ GUÍA DE USO DE ESTE ESQUELETO
      NADA de rutas, códigos HTTP, nombres de algoritmo ni de tablas. Eso va en la columna
      de método de verificación o en restricciones de diseño.
 
-     Escribe unos 10. Verifica 4 o 5 para el 5 de octubre (los de precisión y aislamiento);
+     Escribe unos 10. Verifica 4 o 5 para el 18 de octubre (los de precisión y aislamiento);
      el resto lleva fecha 20 de noviembre. Los umbrales de desempeño que todavía no puedes
      medir se escriben como "por determinar tras medición de línea base; responsable Ramón;
      fecha 20 de noviembre". Un pendiente fechado es legítimo; un número inventado no. -->
 
 | ID | Característica (ISO/IEC 25010:2023) | Enunciado | Métrica y valor objetivo | Método de verificación | Prueba | Fecha de verificación |
 |---|---|---|---|---|---|---|
-| RNF-01 | Adecuación funcional — corrección | | | | CPNF-01 | 5 oct |
+| RNF-01 | Adecuación funcional — corrección | | | | CPNF-01 | 18 oct |
 
 ### Características declaradas no aplicables
 
@@ -227,7 +227,7 @@ GUÍA DE USO DE ESTE ESQUELETO
 |---|---|
 | Revisión de planeación | Lunes 21 de septiembre de 2026 |
 | Revisión de avance | Lunes 28 de septiembre de 2026 |
-| **Entrega del MVP** | **Lunes 5 de octubre de 2026** |
+| **Entrega del MVP** | **Domingo 18 de octubre de 2026, inclusive** |
 | Cierre de la fase de refinamiento | Viernes 20 de noviembre de 2026 |
 
 ## 3.9 Requisitos de aprobación y aceptación
