@@ -1,7 +1,7 @@
 # Proyecto 077 — Plataforma Inteligente de Gestión de Activos Financieros
 
 Estadías profesionales · Universidad Tecnológica × PluriOne S.A. de C.V. (Develop Talent & Technology)
-Autor: Ramón Ernesto Nieblas Mendívil
+Autor: Ramon Ernesto Nieblas Mendivil
 
 Plataforma web dirigida a inversionistas individuales que consolida instrumentos, posiciones y
 transacciones de un portafolio y calcula sobre ellos métricas de rendimiento y riesgo mediante un
@@ -63,7 +63,8 @@ frontend/    Aplicación web
 
 ## Avisos
 
-- Los datos utilizados durante el desarrollo son **sintéticos** y están marcados como tales en la
-  interfaz. No corresponden a información real de mercado ni de clientes.
+- Los precios utilizados durante el desarrollo son **sintéticos** y están marcados en la interfaz
+  como datos de demostración. Las tasas de CETES son reales y provienen del Banco de México
+  (Fuente: Banco de México, https://www.banxico.org.mx). No se usa información real de clientes.
 - La plataforma presenta información y análisis; **no constituye asesoría de inversión**.
 - Este repositorio es privado y no contiene documentación confidencial del cliente.

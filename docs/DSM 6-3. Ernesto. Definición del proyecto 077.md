@@ -92,17 +92,18 @@ El MVP se da por terminado a más tardar el domingo 18 de octubre de 2026, inclu
 | RF-04 | El sistema deberá permitir consultar el catálogo de instrumentos disponibles con su clave, nombre y clase de activo; cada emisión de CETES será un instrumento propio, identificado por su clave de emisión (BI seguida de su fecha de vencimiento en formato AAMMDD), con su valor nominal y su fecha de vencimiento. | OE-3 | CPF-04 |
 | RF-05 | El sistema deberá permitir registrar y consultar las transacciones de compra y venta del portafolio, con su intermediario, instrumento, fecha, cantidad de títulos y precio unitario, este último con las comisiones e impuestos de la operación incluidos. | OE-3 | CPF-05 |
 | RF-06 | El sistema deberá determinar, a una fecha de corte, la posición de cada instrumento del portafolio como la suma de sus saldos con cada intermediario, derivados del historial de transacciones registradas. | OE-3 | CPF-06 |
-| RF-07 | El sistema deberá incorporar los precios históricos de los instrumentos a partir del conjunto de datos semilla. | OE-4 | CPF-07 |
+| RF-07 | El sistema deberá incorporar los precios de cierre históricos de los instrumentos desde un conjunto de datos semilla sintético, con fecha fija, y señalarlos en la interfaz como datos de demostración. | OE-4 | CPF-07 |
 | RF-08 | El sistema deberá calcular el valor de mercado y el resultado no realizado de cada posición y del portafolio a una fecha dada, con el costo asignado por costo promedio ponderado dentro de cada intermediario. | OE-4 | CPF-08 |
 | RF-09 | El sistema deberá calcular el rendimiento ponderado por tiempo (TWR) del portafolio para un periodo determinado. | OE-4 | CPF-09 |
 | RF-10 | El sistema deberá calcular la máxima caída del rendimiento acumulado ponderado por tiempo del portafolio dentro de un periodo determinado. | OE-4 | CPF-10 |
 | RF-11 | El sistema deberá presentar un tablero con los indicadores calculados y la evolución del valor del portafolio en el tiempo. | OE-4 | CPF-11 |
-| RF-12 | El sistema deberá recabar el consentimiento expreso para el tratamiento de datos y mostrar de forma visible que la información no constituye asesoría de inversión. | OE-3 | CPF-12 |
+| RF-12 | El sistema deberá recabar el consentimiento expreso del usuario para el tratamiento de sus datos personales, financieros y patrimoniales, poner a su disposición el aviso de privacidad, permitirle revocar el consentimiento en cualquier momento y mostrar de forma visible que la información no constituye asesoría de inversión. | OE-3 | CPF-12 |
 | RF-25 | El sistema deberá permitir a cada usuario registrar y consultar los intermediarios con los que mantiene sus inversiones, identificados por un nombre único dentro de su cuenta. | OE-3 | CPF-25 |
 | RF-26a | El sistema deberá liquidar a su valor nominal, en su fecha de vencimiento, los títulos de cada emisión de CETES que sigan en posición, tratar ese importe como un retiro del portafolio y rechazar transacciones de la emisión con fecha igual o posterior a su vencimiento. | OE-4 | CPF-26a |
 | RF-26b | El sistema deberá estimar el valor de las posiciones en CETES antes de su vencimiento con P = VN / (1 + r·d/360), donde d son los días naturales por vencer y r la tasa de referencia más reciente, interpolada linealmente a d días. | OE-4 | CPF-26b |
 | RF-28 | El sistema deberá rechazar el registro, la modificación o la eliminación de una transacción que deje negativo, en cualquier fecha, el saldo de un instrumento con un intermediario, aunque la posición consolidada sea suficiente. | OE-3 | CPF-28 |
-| RF-30 | El sistema deberá incorporar, desde el conjunto de datos semilla, las tasas de rendimiento de las subastas primarias de CETES a 28, 91, 182 y 364 días. | OE-4 | CPF-30 |
+| RF-30 | El sistema deberá incorporar, desde un conjunto de datos semilla construido con las series que publica el Banco de México en su Sistema de Información Económica (SIE), las tasas de rendimiento de las subastas primarias de CETES a 28, 91, 182 y 364 días. | OE-4 | CPF-30 |
+| RF-31 | El sistema deberá registrar, para cada precio y cada tasa almacenados, su fuente, su fecha de carga y su licencia, y mostrar junto a cada dato externo su fuente y la fecha del dato; en el caso de las tasas, «Fuente: Banco de México, https://www.banxico.org.mx». | OE-4 | CPF-31 |
 
 ### Debería incluirse & Opcional
 
@@ -113,7 +114,7 @@ El MVP se da por terminado a más tardar el domingo 18 de octubre de 2026, inclu
 | RF-15 | Exportar el portafolio y sus transacciones a un archivo. | S | OE-3 | CPF-15 |
 | RF-27 | Presentar, a una fecha de corte, la cantidad de títulos y el valor de mercado de cada instrumento desglosados por intermediario, de modo que su suma coincida con la posición y el valor consolidados. | S | OE-3 | CPF-27 |
 | RF-16 | Calcular el valor en riesgo histórico del portafolio. | C | OE-4 | CPF-16 |
-| RF-18 | Comparar el rendimiento del portafolio contra un índice de referencia. | C | OE-4 | CPF-18 |
+| RF-18 | Comparar el rendimiento del portafolio contra un índice de referencia sintético o propio; el histórico del S&P/BMV IPC requiere una licencia de S&P Dow Jones Indices. | C | OE-4 | CPF-18 |
 
 ### Diferidos a la fase de refinamiento
 
@@ -123,9 +124,11 @@ Del lunes 19 de octubre al viernes 20 de noviembre de 2026. La semana del 16 de 
 |----|-----------|----------------|
 | RF-19 | Rendimiento ponderado por dinero (XIRR). | Semana del 19 oct |
 | RF-20 | Volatilidad anualizada. | Semana del 19 oct |
+| RF-32 | Actualización diaria y automática de las tasas de CETES, el tipo de cambio FIX y la UDI desde el SIE del Banco de México, en una sola consulta de hasta 20 series; los cálculos leen siempre de la base de datos, nunca del API. | Semana del 19 oct |
 | RF-17 | Índice de Sharpe con la tasa de CETES a 28 días como tasa libre de riesgo; depende de RF-20 y RF-30. | Semana del 26 oct |
 | RF-21 | Simulación de escenarios por método Monte Carlo. | Semana del 26 oct |
-| RF-22 | Optimización de la composición del portafolio. | Semana del 2 nov |
+| RF-33 | Captura o importación, por el propio usuario, de precios de cierre en un archivo CSV, por ejemplo los de sus estados de cuenta. | Semana del 26 oct |
+| RF-22 | Simulación de composiciones alternativas del portafolio definidas por el usuario, comparadas con el portafolio real por rendimiento y riesgo, sin que el sistema genere ni sugiera composiciones. | Semana del 2 nov |
 | RF-23 | Registro de transacciones en más de una divisa. | Semana del 2 nov |
 | RF-24 | Aplicación móvil con paridad de indicadores. | Semanas del 2 y del 9 nov |
 
@@ -134,7 +137,8 @@ Del lunes 19 de octubre al viernes 20 de noviembre de 2026. La semana del 16 de 
 - Ejecución de órdenes, conexión automática con intermediarios o importación de sus estados de cuenta; toda transacción se captura manualmente.
 - Asesoría o recomendaciones de inversión personalizadas.
 - Operación multi-tenant para varias organizaciones cliente.
-- Datos de mercado en tiempo real; precios y tasas provienen del conjunto de datos semilla.
+- Datos de mercado en tiempo real; los precios provienen del conjunto de datos semilla sintético (RF-07) y las tasas, del Banco de México (RF-30, RF-32).
+- Fuentes comerciales de precios (Twelve Data, EODHD o Marketstack) mientras PluriOne no contrate su licencia; la arquitectura las admite como un adaptador desactivado por configuración.
 - Cálculo fiscal de lotes y del costo promedio fiscal; el costo promedio de RF-08 no tiene efectos fiscales.
 - Ventas en corto y préstamo de valores.
 - Rendimiento y riesgo por intermediario; se miden sólo para el portafolio en su conjunto.
