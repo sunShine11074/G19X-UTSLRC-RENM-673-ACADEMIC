@@ -131,6 +131,7 @@ Del lunes 19 de octubre al viernes 20 de noviembre de 2026. La semana del 16 de 
 | RF-22 | Simulación de composiciones alternativas del portafolio definidas por el usuario, comparadas con el portafolio real por rendimiento y riesgo, sin que el sistema genere ni sugiera composiciones. | Semana del 2 nov |
 | RF-23 | Registro de transacciones en más de una divisa. | Semana del 2 nov |
 | RF-24 | Aplicación móvil con paridad de indicadores. | Semanas del 2 y del 9 nov |
+| RF-39 | Edición y eliminación de transacciones registradas. | ⟦decidir⟧ |
 
 ### No se incluirá — fuera de alcance
 
