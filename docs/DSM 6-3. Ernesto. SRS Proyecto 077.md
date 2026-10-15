@@ -60,7 +60,7 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 <!-- Pendiente: un término canónico por concepto, con los sinónimos que NO se usan. Términos que
      usan 2.4 a 3.4: transacción (no «operación»), saldo, posición, emisión, colocación, plazo
      nominal y plazo efectivo, carga de datos, portafolio en su conjunto, valor de mercado, resultado no realizado, TWR,
-     máxima caída. -->
+     máxima caída. Términos que agregan 4.3 y 4.4: dominio (de valores) y llave sustituta. -->
 
 | Término | Definición |
 |---|---|
@@ -85,8 +85,11 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | ETF | Fondo cotizado en bolsa (*exchange-traded fund*) |
 | FIBRA | Fideicomiso de Infraestructura y Bienes Raíces |
 | FIX | Tipo de cambio peso-dólar que determina y publica el Banco de México |
+| FK | Llave foránea (*foreign key*) |
 | GPL | Licencia Pública General de GNU (*GNU General Public License*) |
+| HTTP | Protocolo de transferencia de hipertexto (*Hypertext Transfer Protocol*) |
 | HTTPS | Protocolo seguro de transferencia de hipertexto (*Hypertext Transfer Protocol Secure*) |
+| IDEF1X | Definición de integración para el modelado de información (*Integration Definition for Information Modeling*) |
 | IPC | Índice de Precios y Cotizaciones (S&P/BMV IPC) |
 | ISR | Impuesto sobre la renta |
 | IVA | Impuesto al valor agregado |
@@ -96,7 +99,9 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | LTS | Soporte a largo plazo (*long-term support*) |
 | MPL | Licencia Pública de Mozilla (*Mozilla Public License*) |
 | MVP | Producto mínimo viable |
+| MXN | Peso mexicano (código ISO 4217) |
 | OE | Objetivo específico |
+| PK | Llave primaria (*primary key*) |
 | PRD | Documento de requisitos del producto (*product requirements document*) |
 | RAM | Memoria de acceso aleatorio (*random-access memory*) |
 | RD | Regla de datos (apartado 3.4) |
@@ -104,9 +109,11 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | RF / RNF | Requisito funcional / Requisito no funcional |
 | SHCP | Secretaría de Hacienda y Crédito Público |
 | SIE | Sistema de Información Económica del Banco de México |
+| SQL | Lenguaje de consulta estructurado (*Structured Query Language*) |
 | SRS | Software Requirements Specification — Especificación de Requisitos de Software |
 | TWR | Rendimiento ponderado por tiempo (*time-weighted return*) |
 | UDI | Unidad de inversión |
+| UK | Llave única (*unique key*) |
 | UML | Lenguaje Unificado de Modelado (*Unified Modeling Language*) |
 | VN | Valor nominal |
 | WAL | Registro de escritura anticipada de PostgreSQL (*write-ahead log*) |
@@ -276,7 +283,7 @@ Este apartado enumera los factores que afectan a los requisitos de este document
 
 | ID | Dependencia | Consecuencia si falla o cambia | Requisitos o apartados afectados |
 |---|---|---|---|
-| D-05 | Se asume que Python 3.13, PostgreSQL 18 y Node.js 24 seguirán recibiendo correcciones de seguridad durante la estadía y durante el periodo que cubra el plan de mantenimiento ⟦definir ese periodo con la empresa⟧. Python 3.13 ya solo recibe correcciones de seguridad, hasta octubre de 2029 (Python Software Foundation, s. f.); PostgreSQL 18 tiene soporte hasta el 14 de noviembre de 2030 (PostgreSQL Global Development Group, s. f.-d), y Node.js 24, hasta el 30 de abril de 2028 (Node.js Release Working Group, s. f.). | Si alguna pierde el soporte dentro de ese periodo, 3.5 debe pasar a una versión con soporte y las pruebas de 5.3 deben repetirse; la primera en perderlo es Node.js 24. Las correcciones solo protegen al sistema si se instalan, lo que corresponde al plan de mantenimiento. | 3.5; 3.6.2; 3.6.3; 5.3 |
+| D-05 | Se asume que Python 3.13, PostgreSQL 18 y Node.js 24 seguirán recibiendo correcciones de seguridad durante la estadía y durante el periodo que cubra el plan de mantenimiento ⟦definir ese periodo con la empresa⟧. Python 3.13 ya solo recibe correcciones de seguridad, hasta octubre de 2029 (Python Software Foundation, s. f.); PostgreSQL 18 tiene soporte hasta el 14 de noviembre de 2030 (PostgreSQL Global Development Group, s. f.-f), y Node.js 24, hasta el 30 de abril de 2028 (Node.js Release Working Group, s. f.). | Si alguna pierde el soporte dentro de ese periodo, 3.5 debe pasar a una versión con soporte y las pruebas de 5.3 deben repetirse; la primera en perderlo es Node.js 24. Las correcciones solo protegen al sistema si se instalan, lo que corresponde al plan de mantenimiento. | 3.5; 3.6.2; 3.6.3; 5.3 |
 | D-06 | Se asume que las licencias de las bibliotecas permiten incorporarlas a un producto de código cerrado de la empresa. La biblioteca pwdlib, elegida para el *hash* Argon2id de las contraseñas (RNF-04; P-06), y argon2-cffi, que esta usa para Argon2, tienen licencia MIT al 13 de octubre de 2026. Al 6 de octubre de 2026, las que se ejecutan en el servidor o llegan al navegador son permisivas (MIT, BSD, ISC, Apache-2.0 o PSF-2.0), salvo psycopg 3, con licencia LGPL-3.0 (Varrazzo, 2026), y certifi, que FastAPI instala de forma indirecta, con licencia MPL-2.0 (Reitz, 2026); ninguna es GPL ni AGPL. | Mientras el sistema se ofrezca solo como servicio web, esas dos licencias no imponen obligaciones adicionales, porque no se entrega una copia del programa. Si la empresa entrega el *backend* a sus clientes para que lo instalen ⟦confirmar con la empresa⟧, deberá incluir los avisos de licencia, ofrecer el código fuente de esas bibliotecas y permitir sustituir psycopg (Free Software Foundation, 2007, secc. 4), lo que cambia 3.8. Una dependencia AGPL contradiría la justificación técnica de la Definición del proyecto. | 3.5; 3.8 |
 | D-07 | Se asume que el líder de proyecto (1.2) estará disponible para revisar el MVP después del 18 de octubre, en el repositorio que él indique, y una segunda vez si encuentra inconsistencias o carencias, y que la asesora académica estará disponible para revisar la memoria de estadías y, quizá, el desarrollo o la terminación del proyecto el 20 de noviembre de 2026; el asesor empresarial no revisa el sistema (P-22) ⟦confirmar las fechas y la forma⟧. | Si no lo están, la aceptación del MVP se recorre a la fase de refinamiento y se reduce el margen de 2.6. Si la aceptación la da otra persona de la empresa, cambian 1.2 y 3.9. | 1.2; 2.6; 3.8; 3.9 |
 
@@ -333,7 +340,7 @@ Esta tabla registra las versiones de la especificación: las 0.x son borradores;
 |---|---|---|---|
 | 0.1 | 19/09/2026 | Ramon Ernesto Nieblas Mendivil | Creado el 17 de septiembre ⟦contenido inicial: confirmar⟧. Estructura de seis secciones basada en la plantilla institucional y conciliada con ISO/IEC/IEEE 29148:2018 (ISO et al., 2018). Acrónimos de 1.3, tablas de 3.5, 3.7 y 3.8 (MVP el 5 de octubre) y referencia de la AMIB en 6 ⟦confirmar fecha⟧. |
 | 0.2 | 26/09/2026 | Ramon Ernesto Nieblas Mendivil | Primeros apartados, sobre la Definición de 12 imprescindibles: 2.1, 2.2, 2.3 (del 20 de septiembre) y la introducción de 3.6 con 3.6.1. Fecha de 2.1, 2.2 y 3.6: entre el 19 y el 26 de septiembre ⟦confirmar⟧. Contiene además 1.2 y el enlace al glosario de 1.3 ⟦confirmar desde cuándo⟧. No incorpora los cambios de la Definición de ese día (17 imprescindibles; MVP al 18 de octubre). |
-| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4.2 a 4.5, 5.2 y 5.3. El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). Ese mismo día se integra 4.1 (diagramas de casos de uso en Mermaid y fichas de CU-01, CU-05 y CU-07), con sus referencias en 6; 5.3 agrega la columna del caso de uso y 1.3 agrega CU y UML. También se aplican las decisiones P-26 a P-31: 2.6 incorpora RF-34 (emisiones de CETES colocadas después de la semilla) y un orden de recorte MoSCoW estricto; RF-32 deja la UDI y carga las series de plazo del CF107; el FIX histórico se carga una sola vez con RF-23; 2.6 fija los métodos de RF-17, RF-19 (con su referencia en 6), RF-20 y RF-21, que pasa a depender de RF-20, y los indicadores de RF-24; RD-19 hace privados de su autor los precios que capture RF-33, que prevalecen en sus portafolios; RF-14 se hará en la semana del 2 de noviembre con plantillas, sin servicio externo, por lo que se retira R-09, y su explicación no emitirá juicios sobre la conveniencia de una inversión; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14, RF-21 y RF-22 se ajustarán a ella. |
+| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4.5, 5.2 y 5.3. El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). Ese mismo día se integra 4.1 (diagramas de casos de uso en Mermaid y fichas de CU-01, CU-05 y CU-07), con sus referencias en 6; 5.3 agrega la columna del caso de uso y 1.3 agrega CU y UML. También se aplican las decisiones P-26 a P-31: 2.6 incorpora RF-34 (emisiones de CETES colocadas después de la semilla) y un orden de recorte MoSCoW estricto; RF-32 deja la UDI y carga las series de plazo del CF107; el FIX histórico se carga una sola vez con RF-23; 2.6 fija los métodos de RF-17, RF-19 (con su referencia en 6), RF-20 y RF-21, que pasa a depender de RF-20, y los indicadores de RF-24; RD-19 hace privados de su autor los precios que capture RF-33, que prevalecen en sus portafolios; RF-14 se hará en la semana del 2 de noviembre con plantillas, sin servicio externo, por lo que se retira R-09, y su explicación no emitirá juicios sobre la conveniencia de una inversión; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14, RF-21 y RF-22 se ajustarán a ella. El 15 de octubre se integran 4.2 (diagramas de componentes del MVP y de la fase de refinamiento), 4.3 (modelo entidad-relación de las 13 entidades de 3.4.1, con sus relaciones y restricciones) y 4.4 (diccionario de datos); 5.3 registra las entidades de RF-01; 1.3 agrega FK, HTTP, IDEF1X, MXN, PK, SQL y UK, y 6 agrega las referencias de Mermaid (diagramas de clases y entidad-relación), IDEF1X, PostgreSQL (restricciones y tipos numéricos) y la documentación de psycopg, y reetiqueta las de Mermaid contributors (s. f.-a a s. f.-c) y PostgreSQL Global Development Group (s. f.-a a s. f.-h). |
 
 ## 3.2 Requisitos funcionales
 
@@ -522,13 +529,13 @@ El sistema no impone requisitos de cómputo al equipo del usuario porque ninguna
 
 ### 3.6.2 Servidor de aplicación y base de datos
 
-Fija los mínimos de un servidor futuro. PostgreSQL 18 no publica mínimos de *hardware* (PostgreSQL Global Development Group, s. f.-b): rige el piso del sistema operativo (Canonical Ltd., s. f.; Microsoft, 2025a) más el pico de memoria y el pico de procesador, expresado en núcleos lógicos ocupados, del *backend* y PostgreSQL en la prueba de RNF-06.
+Fija los mínimos de un servidor futuro. PostgreSQL 18 no publica mínimos de *hardware* (PostgreSQL Global Development Group, s. f.-d): rige el piso del sistema operativo (Canonical Ltd., s. f.; Microsoft, 2025a) más el pico de memoria y el pico de procesador, expresado en núcleos lógicos ocupados, del *backend* y PostgreSQL en la prueba de RNF-06.
 
 | Elemento | Requisito | Fundamento |
 |---|---|---|
-| Plataforma | x86-64, con Windows Server 2025 o Ubuntu Server 24.04 LTS y sus correcciones de seguridad ⟦decidir otras versiones: recomendado, solo las que instale RNF-12⟧. | Son las más recientes de cada familia con mínimos publicados, y PostgreSQL 18, uv y Node.js 24 las admiten (Astral Software Inc., s. f.; Node.js contributors, s. f.; PostgreSQL Global Development Group, s. f.-a, s. f.-e). |
-| Procesador y memoria | Los del sistema operativo (Windows Server 2025: 1.4 GHz y 2 GB; Ubuntu Server 24.04 desde ISO: 1.5 GB) más el consumo del *backend* y PostgreSQL, por determinar tras medición de línea base (RNF-06); responsable Ramon; fecha ⟦30/10/2026⟧. | PostgreSQL 18 reserva normalmente 128 MB de shared_buffers (PostgreSQL Global Development Group, s. f.-c), y Argon2id, al menos 19 MiB por registro o inicio de sesión simultáneo (RNF-04). |
-| Almacenamiento | El del sistema operativo (32 GB y 5 GB, respectivamente) más el de la aplicación, la base y sus respaldos, por medir con el volumen de RNF-06; responsable Ramon; fecha ⟦30/10/2026⟧. | En el equipo de desarrollo, PostgreSQL 18 ocupa 992 MB, de ellos 64 MB de datos y 686.5 MB de pgAdmin 4, innecesario en el servidor (13/10/2026); su WAL llega por omisión a 1 GB, o más con carga alta (PostgreSQL Global Development Group, s. f.-f). |
+| Plataforma | x86-64, con Windows Server 2025 o Ubuntu Server 24.04 LTS y sus correcciones de seguridad ⟦decidir otras versiones: recomendado, solo las que instale RNF-12⟧. | Son las más recientes de cada familia con mínimos publicados, y PostgreSQL 18, uv y Node.js 24 las admiten (Astral Software Inc., s. f.; Node.js contributors, s. f.; PostgreSQL Global Development Group, s. f.-b, s. f.-g). |
+| Procesador y memoria | Los del sistema operativo (Windows Server 2025: 1.4 GHz y 2 GB; Ubuntu Server 24.04 desde ISO: 1.5 GB) más el consumo del *backend* y PostgreSQL, por determinar tras medición de línea base (RNF-06); responsable Ramon; fecha ⟦30/10/2026⟧. | PostgreSQL 18 reserva normalmente 128 MB de shared_buffers (PostgreSQL Global Development Group, s. f.-e), y Argon2id, al menos 19 MiB por registro o inicio de sesión simultáneo (RNF-04). |
+| Almacenamiento | El del sistema operativo (32 GB y 5 GB, respectivamente) más el de la aplicación, la base y sus respaldos, por medir con el volumen de RNF-06; responsable Ramon; fecha ⟦30/10/2026⟧. | En el equipo de desarrollo, PostgreSQL 18 ocupa 992 MB, de ellos 64 MB de datos y 686.5 MB de pgAdmin 4, innecesario en el servidor (13/10/2026); su WAL llega por omisión a 1 GB, o más con carga alta (PostgreSQL Global Development Group, s. f.-h). |
 | Red | Salida HTTPS al SIE (RF-32), única interfaz externa del sistema, porque RF-14 usará plantillas (P-31); entrada HTTPS desde la red de los usuarios, con el cifrado en tránsito que agregará 3.3 (S-03). | R-08; R-15; RNF-05. El *token* lo generará quien opere el servidor ⟦confirmar con la empresa (D-01)⟧. |
 
 ### 3.6.3 Equipo de desarrollo
@@ -628,7 +635,7 @@ Como nadie aprueba esta especificación por separado (3.9.1), la versión 1.0 de
 
 Este apartado presenta los actores de la plataforma y los casos de uso en que participan. Se deriva de la sección 3 y no agrega funciones: el actor principal es el perfil único de 2.3, y los casos cubren los 18 imprescindibles de 3.2, con las reglas de 3.4; un segundo diagrama muestra los de 2.6.
 
-La notación es la de la cláusula 18 de UML 2.5.1 (Object Management Group, 2017), escrita con el tipo de diagrama de casos de uso de Mermaid, *usecase-beta*, disponible desde su versión 12 (Mermaid contributors, s. f.). Los actores quedan fuera del límite del sistema, y cada caso es una elipse con su identificador CU-nn y, si lo extienden, su punto de extensión. La línea continua asocia un actor con un caso; las flechas punteadas son las relaciones «include», del caso base al incluido, y «extend», del caso que extiende al caso base. Mermaid se aparta de UML en dos detalles: rotula esas flechas sin comillas angulares y las dibuja con punta rellena, no abierta.
+La notación es la de la cláusula 18 de UML 2.5.1 (Object Management Group, 2017), escrita con el tipo de diagrama de casos de uso de Mermaid, *usecase-beta*, disponible desde su versión 12 (Mermaid contributors, s. f.-c). Los actores quedan fuera del límite del sistema, y cada caso es una elipse con su identificador CU-nn y, si lo extienden, su punto de extensión. La línea continua asocia un actor con un caso; las flechas punteadas son las relaciones «include», del caso base al incluido, y «extend», del caso que extiende al caso base. Mermaid se aparta de UML en dos detalles: rotula esas flechas sin comillas angulares y las dibuja con punta rellena, no abierta.
 
 Los diagramas se leen de izquierda a derecha: el actor participa en los casos unidos a él; el caso base siempre ejecuta el incluido, y el extendido puede ejecutar, en su punto de extensión, el que lo extiende.
 
@@ -787,12 +794,685 @@ Solo CU-01, CU-05 y CU-07 tienen ficha; sus pasos remiten a 3.2 y 3.4 en lugar d
 
 ## 4.2 Diagrama de componentes
 
+Este apartado presenta la estructura lógica de la plataforma, derivada de la sección 3 y de 4.1 sin agregar funciones: componentes, interfaces que ofrecen y requieren, y dependencias. Un diagrama muestra el MVP y otro, la fase de refinamiento; ninguno muestra equipos ni puertos de red, propios del despliegue, ni tablas de la base de datos (4.3).
+
+La notación es la de la subcláusula 11.6 de UML 2.5.1 (Object Management Group, 2017), con interfaces en rectángulo (subcláusula 10.4.4). Como Mermaid 12 no tiene diagrama de componentes de UML, se usa su diagrama de clases, *classDiagram* (Mermaid contributors, s. f.-a), con las palabras clave «component» e «interface». La línea punteada con triángulo hueco va de quien ofrece una interfaz a ella; la flecha punteada «use», de quien la requiere, y la punteada sin rótulo es una dependencia directa. Mermaid se aparta de UML en que rellena la punta de las dependencias; en que los contenedores (Cliente web y *Backend*) son marcos sin relaciones propias, y en que no dibuja puertos, conectores, cuencas ni el ícono opcional de componente.
+
+Los diagramas se leen de arriba abajo; lo que queda fuera de los marcos es externo.
+
+### Componentes del MVP
+
+```mermaid
+%%{init: {"elk": {"lineHops": false}, "class": {"hideEmptyMembersBox": true}}}%%
+classDiagram
+  accTitle: Componentes del MVP del Proyecto 077
+  accDescr: El cliente web usa la interfaz API REST que ofrecen las rutas del backend. Las rutas dependen de los componentes de cuentas, autorización, portafolios, transacciones, catálogo y acceso a datos, y usan la interfaz Cálculo del motor único, que también usa Transacciones. El motor lee precios y tasas solo por la interfaz Datos de mercado, que ofrece Acceso a datos. La instalación de semillas siembra el catálogo e invoca las cargas con el adaptador de la semilla, que les entrega las observaciones por la interfaz Fuente de datos. Acceso a datos usa la interfaz SQL de PostgreSQL 18.
+  direction TB
+
+  namespace Cliente["«component» Cliente web (React 19 y Vite 8)"] {
+    class VCuenta["Vistas de cuenta y consentimiento"] {
+      <<component>>
+    }
+    class VPortafolio["Vistas de portafolio"] {
+      <<component>>
+    }
+    class VTablero["Tablero"] {
+      <<component>>
+    }
+    class VAvisos["Avisos y procedencia"] {
+      <<component>>
+    }
+    class ClienteApi["Cliente de la API"] {
+      <<component>>
+    }
+  }
+
+  namespace Backend["«component» Backend (Python 3.13)"] {
+    class IApi["API REST"] {
+      <<interface>>
+    }
+    class Rutas["Rutas de la API (FastAPI)"] {
+      <<component>>
+    }
+    class Cuentas["Cuentas, sesión y consentimiento"] {
+      <<component>>
+    }
+    class Autorizacion["Autorización por propietario"] {
+      <<component>>
+    }
+    class Portafolios["Portafolios e intermediarios"] {
+      <<component>>
+    }
+    class Transacciones["Transacciones"] {
+      <<component>>
+    }
+    class Catalogo["Catálogo de instrumentos"] {
+      <<component>>
+    }
+    class ICalculo["Cálculo"] {
+      <<interface>>
+    }
+    class Motor["Motor único de cálculo"] {
+      <<component>>
+    }
+    class IMercado["Datos de mercado"] {
+      <<interface>>
+    }
+    class AccesoDatos["Acceso a datos (SQLAlchemy 2)"] {
+      <<component>>
+    }
+    class Instalacion["Instalación de semillas"] {
+      <<component>>
+    }
+    class Cargas["Cargas de datos de mercado"] {
+      <<component>>
+    }
+    class IFuente["Fuente de datos"] {
+      <<interface>>
+    }
+    class AdSemilla["Adaptador de la semilla"] {
+      <<component>>
+    }
+    class Config["Configuración (pydantic-settings)"] {
+      <<component>>
+    }
+  }
+
+  class ISql["SQL"] {
+    <<interface>>
+  }
+  class Postgres["PostgreSQL 18"] {
+    <<component>>
+  }
+
+  VCuenta ..> ClienteApi
+  VPortafolio ..> ClienteApi
+  VTablero ..> ClienteApi
+  VPortafolio ..> VAvisos
+  VTablero ..> VAvisos
+  ClienteApi ..> IApi : «use»
+  Rutas ..|> IApi
+  Rutas ..> Cuentas
+  Rutas ..> Autorizacion
+  Rutas ..> Portafolios
+  Rutas ..> Transacciones
+  Rutas ..> Catalogo
+  Rutas ..> ICalculo : «use»
+  Rutas ..> AccesoDatos
+  Autorizacion ..> Cuentas
+  Transacciones ..> Catalogo
+  Transacciones ..> ICalculo : «use»
+  Motor ..|> ICalculo
+  Motor ..> IMercado : «use»
+  AccesoDatos ..|> IMercado
+  Cuentas ..> AccesoDatos
+  Autorizacion ..> AccesoDatos
+  Portafolios ..> AccesoDatos
+  Transacciones ..> AccesoDatos
+  Catalogo ..> AccesoDatos
+  Instalacion ..> Catalogo
+  Instalacion ..> Cargas
+  Instalacion ..> AdSemilla
+  Cargas ..> IFuente : «use»
+  AdSemilla ..|> IFuente
+  Cargas ..> AccesoDatos
+  AccesoDatos ..> ISql : «use»
+  Postgres ..|> ISql
+  Rutas ..> Config
+  Cuentas ..> Config
+  AccesoDatos ..> Config
+  AdSemilla ..> Config
+```
+
+| Componente | Responsabilidad | Interfaces (ofrece / requiere) | Requisitos | CU |
+|---|---|---|---|---|
+| Vistas de cuenta y consentimiento | Registro con consentimiento, inicio de sesión, aviso y revocación. | — / — | RF-01; RF-12 (crit. 1 a 3); RNF-11 | CU-01; CU-02; CU-09; CU-10 |
+| Vistas de portafolio | Portafolios, intermediarios, formulario guiado, transacciones, posiciones y catálogo, con el motivo de cada rechazo. | — / — | RF-03 a RF-06; RF-08; RF-25; RF-26a; RF-26b; RF-28; RNF-11 | CU-03 a CU-06; CU-08 |
+| Tablero | Indicadores y gráfica del valor a una fecha de corte y en un periodo ⟦decidir: biblioteca de gráficas⟧. | — / — | RF-08 a RF-11; RNF-06; RNF-07; RNF-11 | CU-07 |
+| Avisos y procedencia | Avisos, marca de demostración, fuente y fecha de cada dato, y definiciones ⟦decidir: dónde viven⟧. | — / — | RF-07 (crit. 3); RF-12 (crit. 4); RF-31 (crit. 2 y 3); RNF-07 | CU-06; CU-07 |
+| Cliente de la API | Único enlace con el servidor, sobre *fetch*: cifras como cadenas y fechas sin hora como AAAA-MM-DD, en ambos sentidos; sin secretos del servidor. | — / API REST | RD-12; RD-15; RNF-05 | CU-01 a CU-10 |
+| Rutas de la API (FastAPI) | Publican su esquema OpenAPI; validan con pydantic sin redondear, responden lo ajeno como inexistente y serializan como cadenas las cifras que redondea el motor. | API REST / Cálculo | RF-02 (crit. 2); RNF-02; RNF-03; RD-12 a RD-14; RD-16 | CU-01 a CU-10 |
+| Cuentas, sesión y consentimiento | Alta de la cuenta y su consentimiento en una operación; Argon2id con pwdlib; sesión firmada ⟦decidir: mecanismo y biblioteca⟧; revocación y bloqueo. | — / — | RF-01; RF-12 (crit. 1 a 3); RNF-04; RNF-05; RD-03; RD-11; RD-23 | CU-01; CU-02; CU-09; CU-10 |
+| Autorización por propietario | Exige sesión donde 4.1 la pide, comprueba que la cuenta siga activa y entrega el usuario vigente. | — / — | RF-02; RNF-03; RD-01; RD-02; RD-23 | CU-03 a CU-07; CU-10; CU-08 ⟦decidir⟧ |
+| Portafolios e intermediarios | Alta, consulta, cambio de nombre y eliminación de portafolios; alta y consulta de intermediarios. | — / — | RF-03; RF-25; RD-03; RD-08 a RD-10 | CU-03; CU-04 |
+| Transacciones | Valida y registra compras y ventas, con la regla de saldo de CU-12 sobre los saldos del motor. | — / Cálculo | RF-05; RF-26a (crit. 2 y 3); RF-28; RD-02; RD-05 a RD-09; RD-13 a RD-15 | CU-05; CU-06; CU-12 |
+| Catálogo de instrumentos | Común, con las emisiones de CETES; el inversionista solo lo consulta; lo siembra la instalación y, desde RF-34, lo amplía la tarea del SIE. | — / — | RF-04; RD-04; RD-09 | CU-05; CU-08; CU-11 |
+| Motor único de cálculo | Deriva cada cifra con la fecha y la fuente de sus datos, sin redondear salvo el precio de los CETES; ofrece la única función de redondeo para presentar; no guarda cifras ni consulta fuentes externas. | Cálculo / Datos de mercado | RF-05; RF-06; RF-08 a RF-11; RF-26a; RF-26b; RF-28; RF-31; RNF-01; RNF-02; RNF-08; RNF-10; RD-12; RD-16 | CU-05 a CU-07; CU-12 |
+| Acceso a datos (SQLAlchemy 2) | Sesión por solicitud (psycopg 3), que FastAPI inyecta en las rutas; consultas filtradas por propietario; precios y tasas vigentes a una fecha, con su fuente. | Datos de mercado / SQL | RF-02; RF-08 (crit. 4); RF-26b (crit. 3); RD-12; RD-15; RD-19; 3.4.8 | CU-01 a CU-12 |
+| Instalación de semillas | *Script* documentado en el README: siembra el catálogo e invoca las cargas con el adaptador de la semilla ⟦decidir: si carga aviso y cuentas de prueba⟧. | — / — | RF-04; RF-07 (crit. 1); RF-30 (crit. 1); AC-05; AC-07; RNF-12 | CU-11 |
+| Cargas de datos de mercado | Única vía de escritura de precios y tasas; registra cada carga con su procedencia. | — / Fuente de datos | RF-07; RF-30; RF-31 (crit. 1); RD-17 a RD-21; RD-24; RNF-09 | CU-11 |
+| Adaptador de la semilla | Entrega los archivos semilla como observaciones, con su fuente y licencia ⟦decidir: formato y ruta⟧. | Fuente de datos / — | RF-07; RF-30; RD-20; R-04; R-05 | CU-11 |
+| Configuración (pydantic-settings) | Lee backend/.env, que no se versiona: conexión, orígenes permitidos, clave de sesión y, ⟦decidir dónde⟧, activación y claves de los adaptadores. | — / — | RNF-05; RNF-10; X-07; AC-05 | — |
+| PostgreSQL 18 | Gestor externo; aloja la base proyecto077. | SQL / — | 3.5 | — |
+
+### Componentes de la fase de refinamiento
+
+Con borde punteado van los componentes de 2.6 y el adaptador ficticio de RNF-10; con borde continuo, los del MVP relacionados.
+
+```mermaid
+%%{init: {"elk": {"lineHops": false}, "class": {"hideEmptyMembersBox": true}}}%%
+classDiagram
+  accTitle: Componentes de la fase de refinamiento del Proyecto 077
+  accDescr: Seis componentes de 2.6 y el adaptador ficticio de RNF-10, con borde punteado, se agregan al backend del MVP. La tarea diaria del SIE invoca las cargas con el adaptador del SIE y da de alta emisiones en el catálogo; el adaptador del SIE y el de otra fuente de precios, desactivado por configuración, ofrecen la interfaz Fuente de datos, y el del SIE usa la API del SIE. La captura de precios escribe por las cargas. La modificación y eliminación de transacciones depende de Transacciones, y la exportación y la explicación usan la interfaz Cálculo del motor único.
+  direction TB
+
+  namespace Backend["«component» Backend (Python 3.13)"] {
+    class Rutas["Rutas de la API (FastAPI)"] {
+      <<component>>
+    }
+    class Edicion["Modificación y eliminación de transacciones"] {
+      <<component>>
+    }
+    class Exportacion["Exportación"] {
+      <<component>>
+    }
+    class Explicacion["Explicación con plantillas"] {
+      <<component>>
+    }
+    class Captura["Captura de precios"] {
+      <<component>>
+    }
+    class Portafolios["Portafolios e intermediarios"] {
+      <<component>>
+    }
+    class Transacciones["Transacciones"] {
+      <<component>>
+    }
+    class ICalculo["Cálculo"] {
+      <<interface>>
+    }
+    class Motor["Motor único de cálculo"] {
+      <<component>>
+    }
+    class Catalogo["Catálogo de instrumentos"] {
+      <<component>>
+    }
+    class Tarea["Tarea diaria del SIE"] {
+      <<component>>
+    }
+    class Cargas["Cargas de datos de mercado"] {
+      <<component>>
+    }
+    class IFuente["Fuente de datos"] {
+      <<interface>>
+    }
+    class AdSie["Adaptador del SIE"] {
+      <<component>>
+    }
+    class AdOtra["Adaptador de otra fuente de precios"] {
+      <<component>>
+    }
+    class Config["Configuración (pydantic-settings)"] {
+      <<component>>
+    }
+  }
+
+  class ISie["API del SIE"] {
+    <<interface>>
+  }
+  class Sie["SIE del Banco de México"] {
+    <<component>>
+  }
+
+  Rutas ..> Edicion
+  Rutas ..> Exportacion
+  Rutas ..> Explicacion
+  Rutas ..> Captura
+  Edicion ..> Transacciones
+  Exportacion ..> Portafolios
+  Exportacion ..> Transacciones
+  Exportacion ..> ICalculo : «use»
+  Explicacion ..> ICalculo : «use»
+  Motor ..|> ICalculo
+  Captura ..> Catalogo
+  Captura ..> Cargas
+  Tarea ..> Cargas
+  Tarea ..> AdSie
+  Tarea ..> Catalogo
+  Cargas ..> IFuente : «use»
+  AdSie ..|> IFuente
+  AdOtra ..|> IFuente
+  AdSie ..> ISie : «use»
+  Sie ..|> ISie
+  AdSie ..> Config
+  AdOtra ..> Config
+
+  class Edicion:::diferido
+  class Exportacion:::diferido
+  class Explicacion:::diferido
+  class Captura:::diferido
+  class Tarea:::diferido
+  class AdSie:::diferido
+  class AdOtra:::diferido
+  classDef diferido opacity:1,stroke-dasharray:5 5
+```
+
+| Componente | Responsabilidad | Interfaces (ofrece / requiere) | Requisitos | CU |
+|---|---|---|---|---|
+| Modificación y eliminación de transacciones | Reutiliza la regla de saldo de Transacciones. | — / — | RF-39 | CU-13 |
+| Captura de precios | Escribe por las cargas precios privados de su autor, que prevalecen en sus portafolios sin cambiar el motor ⟦decidir: importación en CSV (P-49)⟧. | — / — | RF-33; RF-02; RF-31; RD-19 | CU-15 |
+| Exportación | Archivo del portafolio y sus transacciones ⟦decidir: formato⟧, con su atribución. | — / Cálculo | RF-15; R-05; D-03 | CU-18 |
+| Explicación con plantillas | Describe los resultados del motor sin recalcularlos, sin servicio externo ni juicios sobre la conveniencia de invertir. | — / Cálculo | RF-14; R-01; R-08; S-15 | CU-19 |
+| Tarea diaria del SIE | Cada día, con el equipo encendido ⟦decidir: disparador⟧, invoca las cargas con el adaptador del SIE y da de alta emisiones nuevas. | — / — | RF-32; RF-34; S-03 | CU-14 |
+| Adaptador del SIE | Consulta diaria de hasta 20 series y carga única del FIX histórico (P-27); *token* solo en el encabezado Bmx-Token ⟦decidir: cliente HTTP⟧. | Fuente de datos / API del SIE | RF-23; RF-32; RF-34; RNF-05; RNF-08; RNF-09; R-15 | CU-14 |
+| Adaptador de otra fuente de precios | Desactivado por configuración; en la estadía, el ficticio de RNF-10. | Fuente de datos / — | RNF-10; X-07; R-05 | — |
+| SIE del Banco de México | Externo. | API del SIE / — | R-08; R-15; D-01 | CU-14 |
+
+RF-13, RF-16 a RF-22 y RF-27 (CU-07 ⟦decidir⟧, CU-16, CU-17, CU-20 y CU-21) ampliarán el motor, la interfaz Cálculo y las vistas; RF-23, además, Portafolios e intermediarios y Transacciones (CU-03 y CU-05), con el FIX histórico que cargará una vez el adaptador del SIE ⟦decidir: quién lo invoca⟧, y RF-24 será otro cliente de la API REST.
+
+Los diagramas reflejan cinco decisiones de diseño:
+
+- Motor único: solo el motor deriva cifras; rutas y vistas las presentan sin recalcularlas ni guardarlas (2.1; 3.4.3; RNF-01; RNF-02).
+- Adaptadores de datos: las cargas reciben las observaciones por Fuente de datos, y el motor lee lo almacenado solo por Datos de mercado; así, un sustituto de la fuente que falla si se invoca no lo detiene (RNF-08), y cambiar de fuente no lo toca (3.4.8; RNF-10; X-07; P-18 ⟦registro pendiente⟧).
+- Aritmética decimal: cada cálculo fija, en un contexto local, 28 dígitos y la mitad alejándose de cero; las cifras viajan como cadenas (RD-12; RD-16; P-13; P-18 ⟦registro pendiente⟧).
+- Autorización por propietario: se filtra por el usuario vigente lo que pertenece a una cuenta, no el catálogo ni los datos de mercado, comunes (3.4.2), y cada solicitud con sesión comprueba que la cuenta siga activa (RF-02; RNF-03; RD-23).
+- *Token* del SIE fuera del cliente: vive solo en backend/.env y viaja en el encabezado Bmx-Token (RNF-05; P-08). En el MVP solo lo usaría, antes de instalar, quien arme la semilla de tasas ⟦decidir: *script* del repositorio o exportación del CF107 (D-01)⟧; desde RF-32, el adaptador del SIE (R-08).
+
 ## 4.3 Modelo entidad-relación
 
-<!-- Se deriva de 3.4. Verificación: el modelo no debe contener ninguna entidad que no
-     esté nombrada en 3.4.1. Si aparece una, o falta un requisito o sobra una tabla. -->
+El modelo entidad-relación del MVP se deriva de 3.4 sin agregar información: las once filas de 3.4.1 dan trece entidades, porque el consentimiento se separa de la versión del aviso de privacidad, y la fuente de datos, de la versión de su licencia (P-05). Es un modelo lógico, con los tipos de PostgreSQL 18 (3.5); cada atributo se define en el diccionario de datos (4.4).
+
+La notación es la pata de gallo del diagrama entidad-relación de Mermaid, *erDiagram* (Mermaid contributors, s. f.-b): en cada extremo, el símbolo junto a la entidad indica el máximo (raya, uno; pata, muchos) y el más alejado, el mínimo (anillo, cero; raya, uno). Como en IDEF1X (National Institute of Standards and Technology, 1993), la línea continua es una relación identificadora, cuya llave foránea forma parte de la llave primaria de la hija, y la punteada, una no identificadora. Mermaid se aparta de IDEF1X en cinco puntos: su documentación asocia la línea continua a la dependencia de existencia, que aquí no basta (la relación entre portafolio y transacción es punteada); no tiene subtipos, y la emisión de CETES se dibuja como relación identificadora de uno a cero o uno; no agrupa las llaves compuestas, que nombran los comentarios; no muestra CHECK, valores por omisión ni índices, y decide la disposición y los colores, que no significan nada. PK, FK y UK marcan las llaves primaria, foráneas y únicas, y «?» en el tipo, los atributos con nulos. Las etiquetas se leen de padre a hija («usuario posee portafolio»), y los comentarios dan restricción y regla.
+
+### Diagrama del MVP
+
+```mermaid
+%%{init: {"elk": {"lineHops": false}}}%%
+erDiagram
+  accTitle: Modelo entidad-relación del MVP del Proyecto 077
+  accDescr: Las trece entidades de 3.4.1, con sus atributos, tipos de PostgreSQL 18 y llaves. Cada portafolio, intermediario y consentimiento pertenece a un usuario, y cada consentimiento remite a una versión del aviso. Cada transacción pertenece a un portafolio, a un intermediario y a un instrumento. La emisión de CETES es un subtipo del instrumento y forma la única relación identificadora. Cada precio y cada tasa provienen de una carga, ligada a una fuente y a una versión de su licencia.
+  direction TB
+
+  usuario {
+    bigint id PK
+    text correo UK "índice único con lower y btrim; RD-03"
+    text contrasena_hash "no reversible; RNF-04"
+    text estado "activa o bloqueada; RD-23"
+  }
+  version_aviso {
+    bigint id PK
+    text texto
+    timestamptz vigente_desde UK "RF-12"
+  }
+  consentimiento {
+    bigint id PK
+    bigint usuario_id FK
+    bigint version_aviso_id FK
+    text tipo "otorgamiento o revocacion"
+    timestamptz momento "DEFAULT now(); RD-15"
+    text medio
+  }
+  portafolio {
+    bigint id PK, UK "UK con usuario_id; RD-02"
+    bigint usuario_id FK, UK "UK con id y con nombre"
+    text nombre UK "índice único con usuario_id, lower y btrim; RD-03"
+    text divisa_base "MXN; RD-08"
+  }
+  intermediario {
+    bigint id PK, UK "UK con usuario_id; RD-02"
+    bigint usuario_id FK, UK "UK con id y con nombre"
+    text nombre UK "índice único con usuario_id, lower y btrim; RD-03"
+  }
+  instrumento {
+    bigint id PK, UK "UK con clave y clase_activo ⟦decidir⟧"
+    text clave UK "BI y AAMMDD si es cetes; RD-04"
+    text nombre
+    text divisa "MXN; RD-08"
+    text clase_activo UK "accion, etf, fibra o cetes"
+    boolean de_demostracion "verdadero si y solo si no es cetes; RF-04"
+  }
+  emision_cetes {
+    bigint instrumento_id PK, FK "FK con clave y clase_activo ⟦decidir⟧"
+    text clave FK "BI y vencimiento en AAMMDD; RD-04"
+    text clase_activo FK "igual a cetes; 3.4.2"
+    date vencimiento UK "RD-04"
+    numeric valor_nominal "igual a 10.00; RD-13"
+  }
+  transaccion {
+    bigint id PK
+    bigint usuario_id FK "en las dos FK compuestas; RD-01 y RD-02"
+    bigint portafolio_id FK "con usuario_id; RD-02"
+    bigint intermediario_id FK "con usuario_id; RD-02"
+    bigint instrumento_id FK
+    text tipo "compra o venta"
+    date fecha_concertacion "no posterior al registro; RD-07"
+    integer cantidad "mayor que 0; RD-06"
+    numeric precio "mayor que 0 y menor que 10¹¹, escala ≤ 7; RD-06 y RD-13"
+    numeric importe_comisiones "0 o más y menor que 10¹⁶, escala ≤ 2 ⟦decidir⟧; RF-05"
+    timestamptz registrada_en "DEFAULT now(); RD-15"
+  }
+  fuente_datos {
+    bigint id PK
+    text nombre UK
+    text? direccion
+    boolean de_demostracion
+  }
+  version_licencia {
+    bigint id PK, UK "UK con fuente_id; RF-31"
+    bigint fuente_id FK, UK "UK con id y con version"
+    text version UK
+    text usos_permitidos
+    text? obligacion_suprimir
+    text? atribucion
+  }
+  carga_datos {
+    bigint id PK, UK "UK con fuente_id; RD-19"
+    bigint fuente_id FK, UK "UK con id; FK con version_licencia_id"
+    bigint version_licencia_id FK "de la misma fuente; RF-31"
+    text origen "semilla en el MVP"
+    timestamptz obtenida_en "⟦decidir⟧ P-34"
+    timestamptz incorporada_en "DEFAULT now(); RD-15"
+    date fecha_inicial
+    date fecha_final
+    text resultado
+    integer observaciones_incorporadas
+    integer observaciones_omitidas "RD-18 y RD-20"
+    jsonb valores_sustituidos "RD-21 ⟦decidir⟧"
+  }
+  precio_cierre {
+    bigint id PK
+    bigint instrumento_id FK, UK "UK con fecha y fuente_id; RD-19"
+    date fecha UK
+    numeric precio "mayor que 0 y menor que 10¹¹, escala ≤ 7; RD-06 y RD-13"
+    bigint carga_id FK "con fuente_id; RD-17"
+    bigint fuente_id FK, UK "la de su carga"
+  }
+  tasa_referencia {
+    bigint id PK
+    integer plazo_nominal UK "UK con fecha_colocacion; RD-19"
+    date fecha_colocacion UK
+    numeric valor "escala ≤ ⟦5⟧ ⟦confirmar en la API⟧; RD-13"
+    text unidad
+    integer plazo_efectivo "mayor que 0; RD-06 y RD-18"
+    bigint carga_id FK "RD-17"
+  }
+
+  usuario ||..o{ portafolio : "posee"
+  usuario ||..o{ intermediario : "registra"
+  usuario ||..|{ consentimiento : "otorga o revoca"
+  version_aviso ||..o{ consentimiento : "se cita en"
+  portafolio ||..o{ transaccion : "contiene"
+  intermediario ||..o{ transaccion : "interviene en"
+  instrumento ||..o{ transaccion : "se negocia en"
+  instrumento ||--o| emision_cetes : "se detalla como"
+  instrumento ||..o{ precio_cierre : "cierra con"
+  fuente_datos ||..o{ version_licencia : "se rige por"
+  fuente_datos ||..o{ carga_datos : "origina"
+  version_licencia ||..o{ carga_datos : "ampara"
+  carga_datos ||..o{ precio_cierre : "incorpora"
+  carga_datos ||..o{ tasa_referencia : "incorpora"
+```
+
+El diagrama refleja tres decisiones de diseño:
+
+- Llaves primarias sustitutas (bigint GENERATED ALWAYS AS IDENTITY), porque los nombres pueden cambiar (RF-03) y, con RF-33, la llave natural del precio tendrá un atributo con nulos; las naturales se declaran únicas.
+- Números exactos (RD-12) ⟦decidir: recomendado⟧: integer para títulos, plazos y conteos, y numeric sin precisión ni escala, con la escala de RD-13 y el tamaño en un CHECK, porque numeric(p,s) redondearía sin avisar lo que RD-14 manda rechazar (PostgreSQL Global Development Group, s. f.-c). Las escalas son 7 en precios (P-07) y 2 en el valor nominal; la del importe, 2, sigue ⟦decidir⟧ (RF-05, crit. 2), y la de las tasas, ⟦5⟧, ⟦confirmar en la API⟧. Con ese tamaño, títulos × precio ± importe cabe en los 28 dígitos del motor (4.2; RD-12; P-13), que solo redondea por RD-16.
+- Redundancia controlada: transaccion.usuario_id, carga_datos.fuente_id, precio_cierre.fuente_id y, en emision_cetes, clave y clase_activo ⟦decidir⟧ repiten datos de otra tabla para que las FK compuestas cumplan RD-02, RF-31, RD-19 y RD-04 e impidan que diverjan. valores_sustituidos es jsonb, fuera de la primera forma normal, porque una tabla aparte sería una entidad nueva.
+
+### Relaciones
+
+| Relación | Cardinalidad | Regla | Al eliminar |
+|---|---|---|---|
+| usuario – portafolio | 1 : 0..* | RD-01 | CASCADE (RD-23) |
+| usuario – intermediario | 1 : 0..* | RD-01 | CASCADE (RD-23) |
+| usuario – consentimiento | 1 : 1..* (mínimo, por la aplicación) | RD-01; RD-11 | CASCADE (RD-23) |
+| version_aviso – consentimiento | 1 : 0..* | RF-12 (crit. 1) | NO ACTION |
+| portafolio – transaccion | 1 : 0..* | RD-01; RD-02 | CASCADE (RD-10) |
+| intermediario – transaccion | 1 : 0..* | RD-02; RD-09 | NO ACTION |
+| instrumento – transaccion | 1 : 0..* | 3.4.2 | NO ACTION |
+| instrumento – emision_cetes (identificadora) | 1 : 0..1 (1 si es CETES, por la aplicación) | 3.4.2; RD-04 | NO ACTION |
+| instrumento – precio_cierre | 1 : 0..* (0 si es emisión, por la aplicación) | RD-04 | NO ACTION |
+| fuente_datos – version_licencia | 1 : 0..* | 3.4.1 | NO ACTION |
+| fuente_datos – carga_datos | 1 : 0..* | 3.4.2 | NO ACTION |
+| version_licencia – carga_datos | 1 : 0..* | RF-31 (crit. 1) | NO ACTION |
+| carga_datos – precio_cierre | 1 : 0..* | RD-17; RD-19 | CASCADE (RD-24) |
+| carga_datos – tasa_referencia | 1 : 0..* | RD-17 | CASCADE (RD-24) |
+
+Solo hay cascadas en las excepciones de RD-02 (RD-10, RD-23 y RD-24); las demás FK usan NO ACTION. Al concluir el bloqueo ⟦confirmar el plazo con la empresa⟧, la supresión de RD-23 eliminará primero los portafolios, con sus transacciones, y después el usuario, porque la transacción apunta sin cascada al intermediario; ningún componente de 4.2 la ejecuta ⟦decidir: recomendado, un *script* del administrador⟧.
+
+### Restricciones e índices
+
+| Restricción | Entidad | Qué garantiza | Regla |
+|---|---|---|---|
+| Índices únicos sobre lower(btrim(correo)) y sobre (usuario_id, lower(btrim(nombre))); CHECK (btrim(nombre) <> '') | usuario; portafolio; intermediario | Correo único en el sistema, y nombre no vacío y único en la cuenta, sin distinguir mayúsculas ni espacios iniciales o finales. | RD-03; RF-01, RF-03 y RF-25 (crit. 2) |
+| UNIQUE (usuario_id, id) en portafolio e intermediario, y FK (usuario_id, portafolio_id) y (usuario_id, intermediario_id) desde transaccion | portafolio; intermediario; transaccion | Portafolio e intermediario del mismo usuario, también con RF-39. | RD-01; RD-02 |
+| UNIQUE (clave) y CHECK (clase_activo <> 'cetes' OR clave ~ '^BI[0-9]{6}$'); en emision_cetes, UNIQUE (vencimiento) y CHECK (valor_nominal = 10.00) | instrumento; emision_cetes | Clave única, con formato de emisión en los CETES; una emisión por vencimiento, de valor nominal 10.00. | RD-04; RD-06; RF-04 (crit. 2) |
+| ⟦decidir⟧ UNIQUE (id, clave, clase_activo) en instrumento, FK desde emision_cetes a esa llave, CHECK (clase_activo = 'cetes') y CHECK (clave = concat('BI', to_char(vencimiento, 'YYMMDD'))) | instrumento; emision_cetes | Solo un CETES tiene emisión, y su clave corresponde al vencimiento. | RD-04; 3.4.2 |
+| CHECK de lista cerrada | usuario.estado; consentimiento.tipo; instrumento.clase_activo; transaccion.tipo; carga_datos.origen; tasa_referencia.plazo_nominal | Solo los valores de 3.4.1 y RF-30, sin tabla de catálogo (sería una entidad nueva) ni enum (no admite quitar valores); medio y resultado, ⟦decidir⟧. | 3.4.1; RF-30; P-15 |
+| CHECK (… > 0) | transaccion.cantidad y precio; precio_cierre.precio; tasa_referencia.plazo_efectivo | Cantidades, precios y plazos positivos; el sentido lo da el tipo. | RD-06 |
+| ⟦decidir⟧ CHECK (min_scale(…) <= escala) y límites de tamaño | transaccion; precio_cierre; emision_cetes; tasa_referencia | La base rechaza sin redondear el exceso de decimales, que antes rechazan con su motivo las Rutas de la API (FastAPI) y el Adaptador de la semilla. | RD-13; RD-14 |
+| CHECK (importe_comisiones >= 0) y CHECK (tipo = 'compra' OR importe_comisiones < cantidad * precio), ambos ⟦decidir⟧ | transaccion | Importe no negativo y, en una venta, menor que títulos × precio. | RF-05 (crit. 2) |
+| CHECK (divisa_base = 'MXN'), CHECK (divisa = 'MXN') y CHECK (de_demostracion = (clase_activo <> 'cetes')) | portafolio; instrumento | Todo en pesos, la divisa base; marca de demostración si y solo si no es CETES. | RD-08; P-02; RF-04 (crit. 3); P-14; P-21 |
+| Tipos date y timestamptz; DEFAULT now() en registrada_en, momento e incorporada_en; CHECK (fecha_concertacion <= (registrada_en AT TIME ZONE 'America/Mexico_City')::date) | transaccion; consentimiento; carga_datos | La base fija los momentos de registro y carga; la concertación no es posterior al registro, en la Ciudad de México. | RD-07; RD-15; RF-12 (crit. 1) |
+| UNIQUE (fuente_id, id) en version_licencia, FK (fuente_id, version_licencia_id) a esa llave, CHECK (fecha_inicial <= fecha_final) y conteos >= 0 | version_licencia; carga_datos | Licencia de la misma fuente que la carga; intervalo y conteos válidos. | RF-31 (crit. 1); 3.4.1 |
+| UNIQUE (instrumento_id, fecha, fuente_id); UNIQUE (id, fuente_id) en carga_datos y FK (carga_id, fuente_id) a esa llave | precio_cierre; carga_datos | Un precio por instrumento, fecha y fuente, la de su carga. | RD-17; RD-19 |
+| UNIQUE (plazo_nominal, fecha_colocacion); valor y plazo_efectivo NOT NULL; ningún CHECK contra la carga | tasa_referencia | Una tasa por plazo y colocación, con valor y plazo efectivo, aunque se coloque después de su carga. | RD-18; RD-19; RD-20 |
+| UNIQUE (vigente_desde), (nombre) y (fuente_id, version) | version_aviso; fuente_datos; version_licencia | Cada vigencia del aviso termina al empezar la siguiente; fuentes y versiones sin repetir. | RF-12 (crit. 1); RF-31 |
+| Índices (usuario_id, portafolio_id, fecha_concertacion), (usuario_id), (carga_id, fuente_id) y (carga_id) | transaccion; consentimiento; precio_cierre; tasa_referencia | Lectura hasta la fecha de corte y cascadas sin recorrer las tablas. | 3.4.8; RD-23; RD-24 |
+| ⟦decidir⟧ Privilegios de app_077: solo SELECT en catálogo, datos de mercado y aviso; UPDATE solo de portafolio.nombre, usuario.estado y usuario.contrasena_hash; DELETE solo de portafolio; INSERT sin id ni momentos | todas | La base impide lo que la aplicación no ofrece; las cascadas no exigen DELETE en las hijas (comprobado en PostgreSQL 18.6). | RD-07; RD-09; RD-11; RD-22; P-06 |
+| Aplicación: Vistas de portafolio y Portafolios e intermediarios | portafolio | Confirmación expresa antes de eliminar. | RD-10; RF-03 (crit. 3) |
+| Aplicación: Autorización por propietario y Transacciones | transaccion | Propiedad comprobada antes de escribir (lo ajeno, como inexistente); fecha dentro del intervalo de las semillas ⟦decidir con 5.2⟧ y del límite de RD-05 ⟦decidir⟧, y anterior al vencimiento de la emisión; saldo no negativo por intermediario, con SELECT … FOR UPDATE del portafolio. | RD-02; RD-05; RD-07; RF-26a (crit. 2); RF-28; RNF-03 |
+| Aplicación: Catálogo de instrumentos e Instalación de semillas | instrumento; emision_cetes | Cada instrumento de clase CETES tiene su emisión. | RD-04 |
+| Aplicación: Cargas de datos de mercado | precio_cierre; tasa_referencia; carga_datos | Rechaza precios de emisiones y de días sin operaciones de 2026, cuenta como omitidas las observaciones N/E ⟦confirmar cómo llegan⟧ y sustituye registrando el valor anterior ⟦decidir (P-34)⟧, salvo en el intervalo de la semilla. | RD-04; RD-20; RD-21; RF-07 (crit. 2) |
+| Aplicación: Cuentas, sesión y consentimiento, y Autorización por propietario | usuario; consentimiento | Alta y otorgamiento con el aviso vigente en una misma transacción de la base de datos; revocación y bloqueo irreversible en otra; rechazo de lo que pida una cuenta bloqueada; otorgamiento de las cuentas de prueba que siembre la Instalación de semillas ⟦decidir con 4.2⟧. | RD-11; RD-23; RF-12 (crit. 1 y 3) |
+
+### Cambios de los requisitos diferidos
+
+| Requisito | Cambio en el modelo |
+|---|---|
+| RF-32 y RF-23 (FIX) | Tabla tipo_cambio (3.4.1; P-27): par, fecha, valor numeric ⟦escala por confirmar⟧ y carga_id (RD-17), con UNIQUE (par, fecha) (RD-19). RF-23 sustituye los CHECK de divisa y reescribe RD-08; su ficha dirá si la transacción guarda el tipo de cambio. Con los privilegios propuestos, la tarea escribe con un rol propio ⟦decidir⟧. |
+| RF-33 | precio_cierre.autor_id, con nulos y FK a usuario en cascada (RD-23), y la llave de RD-19 con UNIQUE NULLS NOT DISTINCT (PostgreSQL Global Development Group, s. f.-a). Las cargas de origen captura también son del autor (RD-23; 3.4.7): llevarán su autor o se localizarán por sus precios ⟦decidir con su ficha⟧. app_077 necesitaría escribir cargas y precios. |
+| RF-34 | Sin cambio de estructura: la Tarea diaria del SIE inserta instrumento y emisión en una misma transacción de la base de datos, y la FK del subtipo valida la clave. |
+| RF-39 | UPDATE y DELETE en transaccion para Modificación y eliminación de transacciones; las FK compuestas mantienen RD-02, y RF-28 se revalida con el portafolio bloqueado. |
+
+Toda entidad o atributo nuevos de un diferido, como las composiciones de RF-22 si se guardan ⟦decidir (P-34)⟧, se agregan antes a 3.4.1.
+
+### Verificación contra 3.4.1
+
+Conforme a 3.4, el modelo solo contiene entidades de 3.4.1: Usuario (cuenta) es usuario; Consentimiento y versión del aviso de privacidad, consentimiento y version_aviso; Fuente de datos y licencia (por versión), fuente_datos y version_licencia; Emisión de CETES, emision_cetes, y las otras siete, tablas de nombre equivalente. Cada dato de 3.4.1 tiene su atributo; la fecha de obtención, si P-34 la adopta ⟦decidir⟧, es obligatoria. Son técnicos los atributos que 3.4.1 no nombra: llaves id, transaccion.usuario_id (RD-01), precio_cierre.fuente_id (RD-19), emision_cetes.clase_activo (RD-04), version_licencia.version y la forma del intervalo y los conteos de la carga. Conforme a 3.4.3, no se guardan posiciones, saldos, importes calculados (el de comisiones se captura), costos, valores, indicadores, valuación ni liquidación de los CETES, ni lo derivable: el fin de cada vigencia del aviso, el inicio del bloqueo y el intervalo de las semillas.
 
 ## 4.4 Diccionario de datos
+
+Este apartado define cada columna de las trece tablas de 4.3: tipo de PostgreSQL 18, nulos, valor por omisión, dominio y restricciones, significado para el negocio y origen. Se deriva de 4.3, 3.4 y las fuentes que cita cada fila, sin agregar tablas, columnas ni reglas. Las relaciones, el comportamiento al eliminar y los índices están en 4.3 («Relaciones» y «Restricciones e índices»).
+
+### Convenciones
+
+- Nombres: minúsculas, sin acentos ni eñe, con guion bajo entre palabras; los valores de los dominios son los literales de 4.3.
+- Llaves: toda llave primaria es sustituta, bigint GENERATED ALWAYS AS IDENTITY, salvo la de emision_cetes, que es la del instrumento (4.3); la asigna la base, sin significado para el negocio, y puede saltar valores.
+- Números: integer en títulos, plazos y conteos, y numeric sin precisión ni escala en los demás, con la escala de RD-13 y el tamaño en un CHECK ⟦decidir⟧, porque numeric(p,s) redondearía sin avisar lo que RD-14 manda rechazar (PostgreSQL Global Development Group, s. f.-c). Esta elección sigue ⟦decidir: recomendado⟧ (4.3).
+- Fechas: date, sin hora ni zona horaria; los momentos de registro y carga y el inicio de vigencia del aviso, timestamptz, comparados en America/Mexico_City (RD-15).
+- Texto: text, sin longitud máxima; todo dato aceptado, salvo la contraseña (RNF-04), se recupera sin alteración (RD-14).
+- Nulos: toda columna es NOT NULL, salvo las que dicen «Sí».
+- API: las cifras viajan como cadenas, no como números JSON, en ambos sentidos (RD-12; 4.2, Cliente de la API).
+- Origen: «4.3 (llave sustituta)» y «Técnico (4.3)» señalan lo que la «Verificación contra 3.4.1» de 4.3 declara técnico.
+
+### Dominios
+
+Cada dominio se exige con un CHECK en cada columna, sin tabla de catálogo ni enum (4.3). Si consentimiento.medio y carga_datos.resultado son listas cerradas, y con qué valores, sigue ⟦decidir⟧ (4.3).
+
+| Dominio | Valores | Regla |
+|---|---|---|
+| clase_activo | 'accion', 'etf', 'fibra', 'cetes' | Clases excluyentes entre sí, en instrumento.clase_activo; en emision_cetes.clase_activo, que existe si se adopta la FK del subtipo ⟦decidir⟧, solo 'cetes', con CHECK ⟦decidir⟧. 3.4.1; RF-04 (crit. 1); P-14 |
+| divisa | 'MXN' | CHECK (divisa_base = 'MXN') en portafolio y CHECK (divisa = 'MXN') en instrumento; RF-23, diferido, sustituirá esos CHECK y reescribirá RD-08 (4.3). RD-08; P-02 |
+| estado_usuario | 'activa', 'bloqueada' | En usuario.estado. Al darse de alta, 'activa' (CU-01); pasa a 'bloqueada' en la misma transacción de la base de datos que registra la revocación y no vuelve a 'activa' (4.3). 3.4.1; RD-23 |
+| origen_carga | 'semilla' | En carga_datos.origen; es el único valor del MVP. Los demás orígenes de 3.4.1 (tarea diaria, carga única del FIX histórico y captura) llegan con RF-32, RF-23 y RF-33, y 4.3 no fija sus literales. 3.4.1 |
+| plazo_nominal | 28, 91, 182, 364, 728 (días) | En tasa_referencia.plazo_nominal. RF-30; P-15; D-02 |
+| tipo_consentimiento | 'otorgamiento', 'revocacion' | En consentimiento.tipo. 3.4.1; RF-12 (crit. 1 y 3); RD-11 |
+| tipo_transaccion | 'compra', 'venta' | En transaccion.tipo; ampliable por S-07 ⟦decidir⟧. 3.4.1; RF-05; RD-06 |
+
+### Tablas
+
+#### usuario — Usuario (cuenta)
+
+Guarda cada cuenta con su correo, su contraseña en forma no reversible y su estado, sin otro dato de identificación (LFPDPPP, 2025, art. 12); la usan RF-01, RF-02 y RF-12.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK. | Identificador sustituto de la cuenta. | 4.3 (llave sustituta) |
+| correo | text | No | — | Índice único sobre lower(btrim(correo)): único en el sistema, sin distinguir mayúsculas ni espacios iniciales o finales. Sin CHECK de sintaxis en 4.3: el sistema rechaza al registrar un correo sin sintaxis válida (RF-01, crit. 3; CU-01, paso 4). | Correo con el que la persona se registra e inicia sesión, tal como lo capturó; es el único dato de identificación de la cuenta. | 3.4.1; RD-03; RD-14; RF-01 (crit. 2 y 3) |
+| contrasena_hash | text | No | — | Distinto por cuenta aunque la contraseña coincida, con un costo de cálculo no menor que el mínimo que verifica RNF-04; lo calcula la aplicación con Argon2id mediante pwdlib (P-06). | Valor no reversible de la contraseña, que permite verificarla al iniciar sesión sin conservarla. | 3.4.1; RNF-04; RD-14; P-06 |
+| estado | text | No | — | Dominio estado_usuario. El inicio del bloqueo no se guarda, porque se deriva (4.3). | Situación de la cuenta: activa, o bloqueada y sin sesión posible desde que se revoca el consentimiento hasta su supresión. | 3.4.1; RD-23; RF-12 (crit. 3) |
+
+#### version_aviso — Consentimiento y versión del aviso de privacidad
+
+Guarda cada versión del aviso de privacidad, con su texto (P-05) y el momento desde el que rige; la usan RF-12 y CU-01, que exige una versión vigente ⟦decidir: quién la carga⟧.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK. | Identificador sustituto de la versión; no es un número de versión publicado, porque la base puede saltar valores. | 4.3 (llave sustituta) |
+| texto | text | No | — | Texto libre. | Texto íntegro del aviso (en el MVP, el de demostración; P-20) tal como se puso a disposición en esa versión, que prueba qué aceptó cada usuario. | 3.4.1; RF-12 (crit. 1 y 2); RD-14; P-05 |
+| vigente_desde | timestamptz | No | — | UNIQUE (vigente_desde). Cada vigencia termina al empezar la siguiente, y ese fin no se guarda (4.3). | Momento desde el que rige la versión, que la identifica ⟦decidir: o un atributo version⟧; en un momento dado rige la de mayor vigente_desde no posterior a él. | 3.4.1; RF-12 (crit. 1) |
+
+#### consentimiento — Consentimiento y versión del aviso de privacidad
+
+Guarda cada otorgamiento y revocación del consentimiento, que no se modifican ni se eliminan salvo por RD-23 (RD-11); la usan RF-01 y RF-12.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK. | Identificador sustituto del registro de consentimiento. | 4.3 (llave sustituta) |
+| usuario_id | bigint | No | — | FK a usuario (id). | Cuenta que otorga o revoca el consentimiento; ninguna existe sin su otorgamiento. | 3.4.2; RD-01; RD-11 |
+| version_aviso_id | bigint | No | — | FK a version_aviso (id). En el otorgamiento del alta, la aplicación registra la versión vigente en ese momento, en la misma transacción de la base de datos que crea la cuenta (4.3, «Restricciones e índices»). | Versión del aviso a la que remite el otorgamiento o la revocación. | 3.4.1; 3.4.2; RF-12 (crit. 1) |
+| tipo | text | No | — | Dominio tipo_consentimiento. | Indica si el registro otorga o revoca el consentimiento. | 3.4.1; RF-12 (crit. 1 y 3); RD-11 |
+| momento | timestamptz | No | now() | Lo fija la base al insertar. | Momento en que se otorgó o se revocó el consentimiento. | 3.4.1; RD-15; RF-12 (crit. 1) |
+| medio | text | No | — | Si es una lista cerrada y con qué valores, ⟦decidir⟧ (4.3). | Medio por el que se otorgó o se revocó el consentimiento. | 3.4.1; RF-12 (crit. 1) |
+
+#### portafolio — Portafolio
+
+Guarda los portafolios de cada usuario, sin efectivo (P-09), posiciones ni indicadores (3.4.3); la usan RF-02, RF-03 y RF-05.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK; parte de UNIQUE (usuario_id, id), a la que remite la FK compuesta de transaccion. | Identificador sustituto del portafolio, que no cambia al renombrarlo. | 4.3 (llave sustituta); RD-02; RF-03 |
+| usuario_id | bigint | No | — | FK a usuario (id); parte de UNIQUE (usuario_id, id) y del índice único del nombre. | Usuario dueño del portafolio, el único que puede consultarlo y operarlo. | 3.4.1; RD-01; RF-02 |
+| nombre | text | No | — | CHECK (btrim(nombre) <> ''); índice único sobre (usuario_id, lower(btrim(nombre))): único en la cuenta, sin distinguir mayúsculas ni espacios iniciales o finales. | Nombre con que el usuario identifica el portafolio, tal como lo capturó; es el único dato del portafolio que puede modificar. | 3.4.1; RF-03 (crit. 1 y 2); RD-03; RD-14; P-05 |
+| divisa_base | text | No | — | Dominio divisa; no cambia mientras haya transacciones (RD-08), lo que en el MVP asegura el CHECK del dominio. | Divisa del portafolio, que debe ser la del instrumento de cada una de sus transacciones; en el MVP, solo el peso mexicano. | 3.4.1; RF-03 (crit. 1); RD-08; P-02 |
+
+#### intermediario — Intermediario
+
+Guarda los intermediarios de cada usuario, que no puede modificar ni eliminar (RD-09) y solo se suprimen con su cuenta (RD-23); la usan RF-02, RF-05 y RF-25.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK; parte de UNIQUE (usuario_id, id), a la que remite la FK compuesta de transaccion. | Identificador sustituto del intermediario. | 4.3 (llave sustituta); RD-02 |
+| usuario_id | bigint | No | — | FK a usuario (id); parte de UNIQUE (usuario_id, id) y del índice único del nombre. | Usuario que registró el intermediario, el único que puede consultarlo y usarlo en sus transacciones. | 3.4.1; RD-01; RD-02; RF-02 |
+| nombre | text | No | — | CHECK (btrim(nombre) <> ''); índice único sobre (usuario_id, lower(btrim(nombre))): único en la cuenta, sin distinguir mayúsculas ni espacios iniciales o finales. No se modifica. | Nombre con que el usuario identifica al intermediario, tal como lo capturó. | 3.4.1; RF-25; RD-03; RD-09; RD-14; P-05 |
+
+#### instrumento — Instrumento
+
+Guarda el catálogo común, una fila por acción, ETF, FIBRA o emisión de CETES, que nadie modifica (RD-09); la usan RF-04, RF-05, RF-07, RF-08 y RF-13.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK; parte de UNIQUE (id, clave, clase_activo) ⟦decidir⟧. | Identificador sustituto del instrumento; el inversionista lo reconoce por su clave. | 4.3 (llave sustituta); RD-04 |
+| clave | text | No | — | UNIQUE (clave); en un CETES, «BI» y seis dígitos: CHECK (clase_activo <> 'cetes' OR clave ~ '^BI[0-9]{6}$'); parte de UNIQUE (id, clave, clase_activo) ⟦decidir⟧. | Clave con que el catálogo identifica el instrumento: en un CETES, su clave de emisión, «BI» más el vencimiento en AAMMDD (12/11/2026: BI261112), y en las demás clases, una clave ficticia. | 3.4.1; RF-04 (crit. 1 a 3); RD-04; P-14 |
+| nombre | text | No | — | Texto libre. | Nombre que el catálogo muestra junto a la clave. | 3.4.1; RF-04 |
+| divisa | text | No | — | Dominio divisa. | Divisa del instrumento, que debe ser la divisa base del portafolio de cada transacción en que se negocia; en el MVP, solo el peso mexicano. | 3.4.1; RD-08; P-02 |
+| clase_activo | text | No | — | Dominio clase_activo; parte de UNIQUE (id, clave, clase_activo) ⟦decidir⟧. | Clase de activo del instrumento, una sola de cuatro excluyentes, que determina si tiene emisión de CETES o marca de demostración. | 3.4.1; RF-04 (crit. 1); RF-13; P-14 |
+| de_demostracion | boolean | No | — | CHECK (de_demostracion = (clase_activo <> 'cetes')): verdadero si y solo si el instrumento no es CETES. | Marca que señala el instrumento como de demostración, con clave ficticia, para que no se confunda con uno real. | 3.4.1; RF-04 (crit. 3); P-14; P-21 |
+
+#### emision_cetes — Emisión de CETES
+
+Guarda, como subtipo del instrumento de clase CETES, vencimiento y valor nominal de cada emisión, sin fecha de colocación (3.4.1); la usan RF-04, RF-26a y RF-26b.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| instrumento_id | bigint | No | — | PK; FK a instrumento (id) que, si se adopta la FK del subtipo ⟦decidir⟧, incluye clave y clase_activo: (instrumento_id, clave, clase_activo) a instrumento (id, clave, clase_activo). | Instrumento de clase CETES que la fila detalla como emisión; identifica también la emisión. | 3.4.2; RD-04 |
+| clave | text | No | — | Existe solo si se adopta la FK del subtipo ⟦decidir⟧ (4.3, «Redundancia controlada»), y entonces es obligatoria; parte de esa FK; CHECK (clave = concat('BI', to_char(vencimiento, 'YYMMDD'))) ⟦decidir⟧. | Clave de emisión del instrumento, repetida para que la base compruebe que es la del instrumento y corresponde al vencimiento. | 3.4.1; RF-04 (crit. 2); RD-04 |
+| clase_activo | text | No | — | Existe solo si se adopta la FK del subtipo ⟦decidir⟧ (4.3, «Redundancia controlada»), y entonces es obligatoria; dominio clase_activo, solo 'cetes': CHECK (clase_activo = 'cetes') ⟦decidir⟧; parte de esa FK. | Clase de activo del instrumento, repetida para que la base impida dar emisión a un instrumento que no es CETES. | Técnico (4.3); 3.4.2; RD-04 |
+| vencimiento | date | No | — | UNIQUE (vencimiento): una emisión por vencimiento. | Fecha en que se liquidan a su valor nominal los títulos de la emisión que siguen en posición; desde ella se rechazan sus transacciones (RF-26a), y con ella se cuentan los días por vencer de RF-26b. | 3.4.1; RF-04 (crit. 2); RF-26a; RF-26b; RD-04; RD-15 |
+| valor_nominal | numeric | No | — | CHECK (valor_nominal = 10.00), que cumple RD-06; escala ≤ 2, con CHECK de escala ⟦decidir⟧. | Valor nominal de cada título, en pesos, que se paga al vencimiento (RF-26a) y es VN en la fórmula de RF-26b. | 3.4.1; RF-04 (crit. 2); RD-06; RD-12; RD-13; RF-26a; RF-26b |
+
+#### transaccion — Transacción
+
+Guarda cada compra o venta con los datos que captura RF-05, sin el costo o el ingreso por título, que se calculan (3.4.3); la usan RF-05, RF-06, RF-08 a RF-10, RF-26a y RF-28.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK. | Identificador sustituto de la transacción. | 4.3 (llave sustituta) |
+| usuario_id | bigint | No | — | Parte de las FK compuestas (usuario_id, portafolio_id) a portafolio (usuario_id, id) y (usuario_id, intermediario_id) a intermediario (usuario_id, id); no remite por sí sola a usuario. | Usuario del portafolio, repetido para que la base exija que el portafolio y el intermediario sean de ese mismo usuario. | Técnico (4.3); RD-01; RD-02 |
+| portafolio_id | bigint | No | — | Con usuario_id, FK a portafolio (usuario_id, id). | Portafolio en que se registró la transacción. | 3.4.1; RD-01; RD-02; RD-10 |
+| intermediario_id | bigint | No | — | Con usuario_id, FK a intermediario (usuario_id, id). | Intermediario con el que se realizó la operación; con él se deriva, dentro del portafolio, el saldo de cada instrumento. | 3.4.1; 3.4.3; RF-02 (crit. 2); RF-25; RF-28; RD-02 |
+| instrumento_id | bigint | No | — | FK a instrumento (id); su divisa debe ser la divisa base del portafolio, lo que en el MVP aseguran los CHECK del dominio divisa. | Instrumento del catálogo que se compró o vendió. | 3.4.1; 3.4.2; RF-04; RD-08 |
+| tipo | text | No | — | Dominio tipo_transaccion. | Sentido de la operación: la compra aumenta el saldo del instrumento con el intermediario, y la venta lo disminuye. | 3.4.1; RF-05; RD-06; S-07 |
+| fecha_concertacion | date | No | — | CHECK (fecha_concertacion <= (registrada_en AT TIME ZONE 'America/Mexico_City')::date). La aplicación exige además que caiga en el intervalo de las semillas ⟦decidir con 5.2⟧ y, en una emisión de CETES, que sea anterior a su vencimiento y respete el límite de RD-05 ⟦decidir⟧. | Fecha en que se pactó la operación, no la de su liquidación; con ella el motor ordena el historial y deriva las posiciones a una fecha de corte, incluida esa fecha. | 3.4.1; RF-05 (crit. 2 y 3); RF-26a (crit. 2); RD-05; RD-07; RD-14; RD-15; P-09 |
+| cantidad | integer | No | — | CHECK (cantidad > 0); integer la limita a 2,147,483,647. La aplicación rechaza la transacción que deje negativo, en alguna fecha, el saldo del instrumento con el intermediario dentro del portafolio. | Número de títulos comprados o vendidos. | 3.4.1; RF-05 (crit. 2); RF-28; RD-06; RD-13; P-07 |
+| precio | numeric | No | — | CHECK (precio > 0); escala ≤ 7 y menor que 10¹¹, con CHECK de escala y de tamaño ⟦decidir⟧. | Precio pactado por título, en la divisa base y sin comisiones. | 3.4.1; RF-05 (crit. 2); RD-06; RD-12; RD-13; RD-14; P-07 |
+| importe_comisiones | numeric | No | — | 0 o más: CHECK (importe_comisiones >= 0) ⟦decidir⟧; escala ≤ 2 ⟦decidir⟧ y menor que 10¹⁶, con CHECK de escala y de tamaño ⟦decidir⟧; en una venta, menor que cantidad × precio: CHECK (tipo = 'compra' OR importe_comisiones < cantidad * precio) ⟦decidir⟧. | Importe total de las comisiones de la operación, con su IVA, que se suma al costo de una compra y se resta del ingreso de una venta. | 3.4.1; RF-05 (crit. 1 y 2); RD-12; RD-13; RD-14; S-08; P-16 |
+| registrada_en | timestamptz | No | now() | Lo fija la base al insertar. | Momento en que el sistema registró la transacción, que limita su fecha de concertación. | 3.4.1; RD-07; RD-15 |
+
+#### fuente_datos — Fuente de datos y licencia (por versión)
+
+Guarda cada fuente de los precios y las tasas; la usan RF-07 (crit. 3) y RF-31.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK. | Identificador sustituto de la fuente. | 4.3 (llave sustituta) |
+| nombre | text | No | — | UNIQUE (nombre). | Nombre con que se presenta la fuente junto a cada dato, como «Banco de México». | 3.4.1; RF-31; R-05 |
+| direccion | text | Sí | — | Texto libre; significado del nulo ⟦decidir⟧. | Dirección de Internet de la fuente, que acompaña su nombre en la atribución, como https://www.banxico.org.mx. | 3.4.1; RF-31 (crit. 2); R-05; D-03 |
+| de_demostracion | boolean | No | — | — | Indica si los datos de la fuente son de demostración, como los precios de la semilla sintética, que la interfaz señala así. | 3.4.1; RF-07 (crit. 3); RF-31 (crit. 3) |
+
+#### version_licencia — Fuente de datos y licencia (por versión)
+
+Guarda cada versión de los términos de uso de una fuente, que ampara las cargas ⟦decidir: licencia de la semilla sintética⟧; la usan RF-31 (crit. 1), R-05 y RD-24.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK; parte de UNIQUE (fuente_id, id), a la que remite la FK compuesta de carga_datos. | Identificador sustituto de la versión. | 4.3 (llave sustituta); RF-31 (crit. 1) |
+| fuente_id | bigint | No | — | FK a fuente_datos (id); parte de UNIQUE (fuente_id, id) y de UNIQUE (fuente_id, version). | Fuente cuyos términos describe la versión. | 3.4.1; RF-31 |
+| version | text | No | — | Parte de UNIQUE (fuente_id, version). | Identificador de la versión de los términos, que no se repite dentro de su fuente. | Técnico (4.3); RF-31 |
+| usos_permitidos | text | No | — | Texto libre. | Usos que permiten los términos de la versión, que deben admitir el uso de los datos en una aplicación desarrollada para una empresa (R-05). | 3.4.1; R-05 |
+| obligacion_suprimir | text | Sí | — | Texto libre; nulo si la versión no impone obligación de suprimir ⟦confirmar⟧. | Obligación de suprimir los datos que imponen los términos, que limita su conservación. | 3.4.1; RD-24; R-05 |
+| atribucion | text | Sí | — | Texto libre; nulo si la versión no exige atribución ⟦confirmar⟧. | Atribución que exigen los términos al mostrar los datos, como mencionar la fuente y su dirección de Internet en el caso del Banco de México. | 3.4.1; R-05; RF-31 (crit. 2); D-03 |
+
+#### carga_datos — Carga de datos
+
+Guarda cada carga de precios o tasas, que da a cada dato externo fuente, fecha de carga y licencia (RD-17; RF-31, crit. 1); la usan RF-07, RF-30 y RF-31.
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK; parte de UNIQUE (id, fuente_id), a la que remite la FK compuesta de precio_cierre. | Identificador sustituto de la carga. | 4.3 (llave sustituta); RD-19 |
+| fuente_id | bigint | No | — | FK a fuente_datos (id); con version_licencia_id, FK a version_licencia (fuente_id, id); parte de UNIQUE (id, fuente_id). | Fuente de la que provienen los datos de la carga, la misma de su versión de licencia. | 3.4.1; RF-31 (crit. 1); RD-19 |
+| version_licencia_id | bigint | No | — | Con fuente_id, FK a version_licencia (fuente_id, id): una versión de la misma fuente. | Versión de los términos de la fuente que ampara la carga. | 3.4.1; RF-31 (crit. 1) |
+| origen | text | No | — | Dominio origen_carga. | Vía por la que llegaron los datos de la carga. | 3.4.1; RF-07; RF-30 |
+| obtenida_en | timestamptz | No | — | Existe solo si P-34 adopta la fecha de obtención, y entonces es obligatoria ⟦decidir⟧. | Momento en que se obtuvieron de la fuente los datos de la carga. | 3.4.1; RD-15; P-34 |
+| incorporada_en | timestamptz | No | now() | Lo fija la base al insertar. | Momento en que la carga incorporó sus datos a la base; es la fecha de carga de RF-31. | 3.4.1; RD-15; RF-31 (crit. 1) |
+| fecha_inicial | date | No | — | CHECK (fecha_inicial <= fecha_final). | Primera fecha del intervalo de datos que cubre la carga. | 3.4.1; Técnico (4.3); RD-15 |
+| fecha_final | date | No | — | El mismo CHECK. | Última fecha del intervalo de datos que cubre la carga. | 3.4.1; Técnico (4.3); RD-15 |
+| resultado | text | No | — | Si es una lista cerrada y con qué valores, ⟦decidir⟧ (4.3). | Resultado con que terminó la carga. | 3.4.1 |
+| observaciones_incorporadas | integer | No | — | CHECK (observaciones_incorporadas >= 0). | Número de observaciones de la fuente que la carga incorporó como precios o tasas. | 3.4.1; Técnico (4.3); RNF-09 |
+| observaciones_omitidas | integer | No | — | CHECK (observaciones_omitidas >= 0). | Número de observaciones que la carga contó como omitidas, entre ellas las publicadas sin dato (N/E) ⟦confirmar cómo llegan⟧ y, en las tasas, las que no tienen plazo efectivo. | 3.4.1; Técnico (4.3); RD-18; RD-20; RF-30 (crit. 2) |
+| valores_sustituidos | jsonb | No | — | ⟦decidir⟧ (RD-21; P-34). Sin CHECK sobre su forma (4.3): la aplicación escribe cada cifra como cadena JSON y no como número, porque psycopg lee por omisión los números JSON con decimales en punto flotante binario (Varrazzo y The Psycopg Team, s. f.), que RD-12 prohíbe. En el intervalo de la semilla, una carga posterior no sustituye valores, porque ese intervalo solo cambia con una versión nueva de 5.2 (RD-21). | Valores anteriores de los datos que la carga sustituyó al traer otro valor para la misma serie y fecha. | 3.4.1; RD-12; RD-21; P-34 |
+
+#### precio_cierre — Precio de cierre
+
+Guarda el cierre de cada instrumento por fecha y fuente, en el MVP solo de la semilla sintética; la usan RF-07, RF-08 (crit. 4) y RF-31 (crit. 3).
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK. | Identificador sustituto del precio. | 4.3 (llave sustituta) |
+| instrumento_id | bigint | No | — | FK a instrumento (id); parte de UNIQUE (instrumento_id, fecha, fuente_id); nunca una emisión de CETES, lo que comprueba la aplicación. | Instrumento al que corresponde el precio. | 3.4.1; RD-04; RD-19 |
+| fecha | date | No | — | Parte de UNIQUE (instrumento_id, fecha, fuente_id); la aplicación rechaza los días sin operaciones de 2026. | Fecha del cierre; el motor usa el último cierre igual o anterior a cada valuación, y su fecha se muestra junto a cada precio usado en vez de la fecha de valuación. | 3.4.1; 3.4.8; RD-15; RD-19; RF-07 (crit. 2); RF-08 (crit. 4); RF-31 (crit. 3) |
+| precio | numeric | No | — | CHECK (precio > 0); escala ≤ 7 y menor que 10¹¹, con CHECK de escala y de tamaño ⟦decidir⟧. | Precio de cierre por título del instrumento en esa fecha. | 3.4.1; RD-06; RD-12; RD-13; RD-14; P-07 |
+| carga_id | bigint | No | — | Con fuente_id, FK a carga_datos (id, fuente_id). | Carga de la que proviene el precio. | 3.4.1; RD-17; RD-24 |
+| fuente_id | bigint | No | — | Con carga_id, FK a carga_datos (id, fuente_id); parte de UNIQUE (instrumento_id, fecha, fuente_id). | Fuente del precio, la de su carga, que distingue los precios de un instrumento en una misma fecha. | Técnico (4.3); RD-19; RF-31 |
+
+#### tasa_referencia — Tasa de referencia
+
+Guarda las tasas de las subastas primarias de CETES que publica el CF107 del SIE (D-02), con su plazo efectivo; la usan RF-26b, RF-30 y RF-31 (crit. 2).
+
+| Columna | Tipo | Nulo | Por omisión | Dominio y restricciones | Descripción | Origen |
+|---|---|---|---|---|---|---|
+| id | bigint | No | GENERATED ALWAYS AS IDENTITY | PK. | Identificador sustituto de la tasa. | 4.3 (llave sustituta) |
+| plazo_nominal | integer | No | — | Dominio plazo_nominal; parte de UNIQUE (plazo_nominal, fecha_colocacion). | Plazo de la subasta, en días, que identifica la serie de la tasa. | 3.4.1; RF-30; RD-18; RD-19; P-15 |
+| fecha_colocacion | date | No | — | Parte de UNIQUE (plazo_nominal, fecha_colocacion); puede ser posterior a su carga, sin CHECK contra ella. | Fecha de colocación, posterior a la subasta, con que el SIE fecha la tasa; en cada valuación rige la última de cada plazo igual o anterior a la de valuación. | 3.4.1; RD-15; RD-19; RD-20; R-14; RF-26b (crit. 3) |
+| valor | numeric | No | — | Escala ≤ ⟦5⟧ ⟦confirmar en la API⟧, con CHECK de escala ⟦decidir⟧. | Tasa de rendimiento de la colocación, en por ciento anual, tal como se publica. | 3.4.1; RD-12; RD-13; RD-14; RNF-09; RF-26b |
+| unidad | text | No | — | Texto libre; en el CF107, por ciento anual. | Unidad en que la fuente publica el valor. | 3.4.1; RNF-09; D-02 |
+| plazo_efectivo | integer | No | — | CHECK (plazo_efectivo > 0); sin él la tasa no se carga. | Plazo en días de la colocación, que publica la serie de plazo del CF107 y con el que RF-26b interpola. | 3.4.1; RD-06; RD-13; RD-18; P-11 |
+| carga_id | bigint | No | — | FK a carga_datos (id). | Carga de la que proviene la tasa. | 3.4.1; RD-17; RD-24 |
+
+### Cambios de los diferidos
+
+Según 4.3, RF-32 y RF-23 agregan la tabla tipo_cambio y, si la ficha de RF-23 lo dispone, el tipo de cambio de la transacción; RF-33, precio_cierre.autor_id y, ⟦decidir con su ficha⟧, el autor de sus cargas, y RF-22, sus composiciones si se guardan ⟦decidir (P-34)⟧. Se definirán aquí con sus fichas, tras agregarlas a 3.4.1.
 
 ## 4.5 Elementos visuales
 
@@ -836,7 +1516,7 @@ Solo CU-01, CU-05 y CU-07 tienen ficha; sus pasos remiten a 3.2 y 3.4 en lugar d
 
 | Requisito | Objetivo | Caso de uso | Entidades | Prueba | Método |
 |---|---|---|---|---|---|
-| RF-01 | OE-3 | CU-01; CU-02 | | CPF-01 | |
+| RF-01 | OE-3 | CU-01; CU-02 | usuario; consentimiento; version_aviso | CPF-01 | |
 
 ---
 
@@ -891,7 +1571,11 @@ Ley Federal de Protección de Datos Personales en Posesión de los Particulares.
 
 MDN contributors. (2026, 7 de septiembre). *Making PWAs installable*. MDN Web Docs. https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable
 
-Mermaid contributors. (s. f.). *Use case diagrams (12.0.0+)*. Mermaid. Recuperado el 14 de octubre de 2026, de https://mermaid.js.org/syntax/usecase.html
+Mermaid contributors. (s. f.-a). *Class diagrams*. Mermaid. Recuperado el 14 de octubre de 2026, de https://mermaid.js.org/syntax/classDiagram.html
+
+Mermaid contributors. (s. f.-b). *Entity relationship diagrams*. Mermaid. Recuperado el 15 de octubre de 2026, de https://mermaid.js.org/syntax/entityRelationshipDiagram.html
+
+Mermaid contributors. (s. f.-c). *Use case diagrams (12.0.0+)*. Mermaid. Recuperado el 14 de octubre de 2026, de https://mermaid.js.org/syntax/usecase.html
 
 Microsoft. (2025a, 2 de julio). *Hardware requirements for Windows Server*. Microsoft Learn. https://learn.microsoft.com/en-us/windows-server/get-started/hardware-requirements
 
@@ -900,6 +1584,8 @@ Microsoft. (2025b, 23 de mayo). *Instalar Hyper-V en Windows y Windows Server*. 
 Microsoft. (2026, 14 de julio). *Windows 11 requirements*. Microsoft Learn. https://learn.microsoft.com/en-us/windows/whats-new/windows-11-requirements
 
 Mozilla. (s. f.). *firefox_versions.json* [Conjunto de datos]. Product Details. Recuperado el 13 de octubre de 2026, de https://product-details.mozilla.org/1.0/firefox_versions.json
+
+National Institute of Standards and Technology. (1993). *Integration definition for information modeling (IDEF1X)* (FIPS PUB 184). U.S. Department of Commerce. https://doi.org/10.6028/NIST.FIPS.184
 
 Node.js contributors. (s. f.). *Building Node.js* [Archivo BUILDING.md, rama v24.x]. GitHub. Recuperado el 13 de octubre de 2026, de https://github.com/nodejs/node/blob/v24.x/BUILDING.md
 
@@ -911,17 +1597,21 @@ OWASP Foundation. (s. f.). *Password storage cheat sheet*. OWASP Cheat Sheet Ser
 
 Portal ISO 25000. (s. f.). *ISO/IEC 25010*. Recuperado el 6 de octubre de 2026, de https://iso25000.com/index.php/normas-iso-25000/iso-25010
 
-PostgreSQL Global Development Group. (s. f.-a). *Linux downloads (Ubuntu)*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/download/linux/ubuntu/
+PostgreSQL Global Development Group. (s. f.-a). Constraints (secc. 5.5). En *PostgreSQL 18 documentation*. Recuperado el 15 de octubre de 2026, de https://www.postgresql.org/docs/18/ddl-constraints.html
 
-PostgreSQL Global Development Group. (s. f.-b). Requirements (secc. 17.1). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/install-requirements.html
+PostgreSQL Global Development Group. (s. f.-b). *Linux downloads (Ubuntu)*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/download/linux/ubuntu/
 
-PostgreSQL Global Development Group. (s. f.-c). Resource consumption (secc. 19.4). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/runtime-config-resource.html
+PostgreSQL Global Development Group. (s. f.-c). Numeric types (secc. 8.1). En *PostgreSQL 18 documentation*. Recuperado el 15 de octubre de 2026, de https://www.postgresql.org/docs/18/datatype-numeric.html
 
-PostgreSQL Global Development Group. (s. f.-d). *Versioning policy*. Recuperado el 6 de octubre de 2026, de https://www.postgresql.org/support/versioning/
+PostgreSQL Global Development Group. (s. f.-d). Requirements (secc. 17.1). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/install-requirements.html
 
-PostgreSQL Global Development Group. (s. f.-e). *Windows installers*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/download/windows/
+PostgreSQL Global Development Group. (s. f.-e). Resource consumption (secc. 19.4). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/runtime-config-resource.html
 
-PostgreSQL Global Development Group. (s. f.-f). Write ahead log (secc. 19.5). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/runtime-config-wal.html
+PostgreSQL Global Development Group. (s. f.-f). *Versioning policy*. Recuperado el 6 de octubre de 2026, de https://www.postgresql.org/support/versioning/
+
+PostgreSQL Global Development Group. (s. f.-g). *Windows installers*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/download/windows/
+
+PostgreSQL Global Development Group. (s. f.-h). Write ahead log (secc. 19.5). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/runtime-config-wal.html
 
 Python Software Foundation. (s. f.). *Status of Python versions*. Python Developer's Guide. Recuperado el 6 de octubre de 2026, de https://devguide.python.org/versions/
 
@@ -930,6 +1620,8 @@ Reitz, K. (2026). *certifi* (Versión 2026.7.22) [Software]. Python Package Inde
 Secretaría de Hacienda y Crédito Público. (2026, 25 de septiembre). *Programa de subastas de valores gubernamentales cuarto trimestre de 2026* (Comunicado núm. 75). Gobierno de México. https://www.gob.mx/shcp/prensa/comunicado-no-75-programa-de-subastas-de-valores-gubernamentales-cuarto-trimestre-de-2026
 
 Varrazzo, D. (2026). *psycopg* (Versión 3.3.6) [Software]. Python Package Index. https://pypi.org/project/psycopg/3.3.6/
+
+Varrazzo, D., & The Psycopg Team. (s. f.). Adapting basic Python types. En *Psycopg 3 documentation*. Recuperado el 15 de octubre de 2026, de https://www.psycopg.org/psycopg3/docs/basic/adapt.html
 
 Vite contributors. (s. f.). *Build options* (Versión 8). Vite. Recuperado el 13 de octubre de 2026, de https://vite.dev/config/build-options
 
