@@ -79,6 +79,7 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | CETES | Certificados de la Tesorería de la Federación |
 | CNBV | Comisión Nacional Bancaria y de Valores |
 | CPF / CPNF | Caso de prueba funcional / no funcional |
+| CSS | Hojas de estilo en cascada (*Cascading Style Sheets*) |
 | CSV | Valores separados por comas (*comma-separated values*) |
 | ETF | Fondo cotizado en bolsa (*exchange-traded fund*) |
 | FIBRA | Fideicomiso de Infraestructura y Bienes Raíces |
@@ -87,9 +88,11 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | HTTPS | Protocolo seguro de transferencia de hipertexto (*Hypertext Transfer Protocol Secure*) |
 | IPC | Índice de Precios y Cotizaciones (S&P/BMV IPC) |
 | ISR | Impuesto sobre la renta |
+| IVA | Impuesto al valor agregado |
 | JSON | Notación de objetos de JavaScript (*JavaScript Object Notation*) |
 | LFPDPPP | Ley Federal de Protección de Datos Personales en Posesión de los Particulares |
 | LGPL | Licencia Pública General Reducida de GNU (*GNU Lesser General Public License*) |
+| LTS | Soporte a largo plazo (*long-term support*) |
 | MPL | Licencia Pública de Mozilla (*Mozilla Public License*) |
 | MVP | Producto mínimo viable |
 | OE | Objetivo específico |
@@ -104,6 +107,9 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | TWR | Rendimiento ponderado por tiempo (*time-weighted return*) |
 | UDI | Unidad de inversión |
 | VN | Valor nominal |
+| WAL | Registro de escritura anticipada de PostgreSQL (*write-ahead log*) |
+| WCAG | Pautas de Accesibilidad para el Contenido Web (*Web Content Accessibility Guidelines*) |
+| WSL | Subsistema de Windows para Linux (*Windows Subsystem for Linux*) |
 | XIRR | Rendimiento ponderado por dinero, calculado como tasa interna de retorno con fechas irregulares |
 
 ---
@@ -177,7 +183,7 @@ Este apartado describe, en términos generales, los elementos externos que limit
 
 | ID | Restricción | Origen | Requisitos relacionados |
 |---|---|---|---|
-| R-07 | El desarrollo, las pruebas y la demostración del sistema se realizan, durante toda la estadía y sin servidor de producción (S-03), en el equipo personal del estudiante: Windows 11 Home Single Language, edición que no admite Hyper-V (Microsoft, 2025), con 16 GB de RAM y espacio libre en disco limitado. | Recursos materiales disponibles: el proyecto no cuenta con presupuesto para equipo ni para servicios en la nube. | 3.5; 3.6.3; RNF-06; RNF-12 |
+| R-07 | El desarrollo, las pruebas y la demostración del sistema se realizan, durante toda la estadía y sin servidor de producción (S-03), en el equipo personal del estudiante: Windows 11 Home Single Language, edición que no admite Hyper-V (Microsoft, 2025b), con 16 GB de RAM y espacio libre en disco limitado. | Recursos materiales disponibles: el proyecto no cuenta con presupuesto para equipo ni para servicios en la nube. | 3.5; 3.6.3; RNF-06; RNF-12 |
 
 ### 2.4.3 Interfaces con otras aplicaciones
 
@@ -241,7 +247,7 @@ Este apartado enumera los factores que afectan a los requisitos de este document
 | ID | Suposición | Consecuencia si no se cumple | Requisitos o apartados afectados |
 |---|---|---|---|
 | S-07 | Se asume que el usuario puede registrar cada posición desde su primera compra, con el intermediario con el que la mantiene, y que no tiene posiciones de origen irreconstruible ni traspasos de títulos entre intermediarios, de modo que las compras y las ventas bastan para describir cada posición. | Si hay posiciones sin historial, RF-28 rechazará sus ventas, y RF-06, RF-08 y RF-09 carecerán de posición, costo y punto de partida; un traspaso registrado como venta y compra altera el costo promedio por intermediario de RF-08. Habrá que agregar tipos de transacción para el saldo inicial y el traspaso, en 3.2 o con fecha en 2.6, o declarar una exclusión en 2.4.7 ⟦decidir⟧. | RF-05; RF-06; RF-08; RF-09; RF-28; 2.4.7; 2.6; 3.2; 3.4; 5.2 |
-| S-08 | Se asume que el usuario obtiene de su comprobante o de su estado de cuenta, para cada operación, la cantidad de títulos, el precio por título y el importe de las comisiones con su IVA que exige RF-05; los comprobantes públicos revisados los presentan por separado y ninguno da el precio con comisiones incluidas (Guía P-16, 8 oct). | Si solo dispone del importe neto cargado o abonado, RF-05 tendría que admitirlo como dato y derivar de él el importe de las comisiones, lo que cambia 3.4 y los datos de entrada de 5.2. | RF-05; 3.4; 5.2 |
+| S-08 | Se asume que el usuario obtiene de su comprobante o de su estado de cuenta, para cada operación, la cantidad de títulos, el precio por título y el importe de las comisiones con su IVA que exige RF-05; los comprobantes públicos revisados los presentan por separado y ninguno da el precio con comisiones incluidas (P-16). | Si solo dispone del importe neto cargado o abonado, RF-05 tendría que admitirlo como dato y derivar de él el importe de las comisiones, lo que cambia 3.4 y los datos de entrada de 5.2. | RF-05; 3.4; 5.2 |
 | S-09 | Se asume que, en el MVP, las transacciones se registran sobre instrumentos del catálogo semilla de RF-04, con fechas dentro del intervalo que cubren las semillas de precios (RF-07) y de tasas (RF-30), y que el usuario no necesita dar de alta instrumentos. Ese intervalo cubre todos los casos del conjunto de referencia (5.2), la semilla de precios sigue el calendario de operaciones de 2026 y la de tasas empieza con una colocación de cada plazo anterior al inicio del intervalo (P-14) ⟦fijar las fechas al congelar 5.2 (P-17)⟧. | Antes del intervalo no hay precio ni tasa con que valuar, y después RF-08 y RF-26b usarían datos cada vez más antiguos, por lo que RF-05 o RF-08 necesitarán un criterio que rechace esas fechas o advierta de ellas. Dar de alta instrumentos sería un requisito nuevo, que 2.3 no asigna a ningún perfil. | RF-04; RF-05; RF-07; RF-08; RF-26b; RF-30; 2.3; 2.6 |
 | S-10 | Se asume que, mientras RF-23 siga diferido, todas las transacciones de un portafolio se pactan y se liquidan en su divisa base, que en el MVP solo puede ser el peso mexicano (MXN; P-02), y que sus precios y tasas están en esa misma divisa. | Si el usuario opera en otra divisa, RF-05 no puede registrarlo sin que él convierta los importes, y RF-08, RF-09, RF-10 y RF-26b mezclarían divisas. Por eso RF-03 limita la divisa base a la de las semillas, y admitir otra exigirá adelantar RF-23 y la carga del tipo de cambio FIX de RF-32. | RF-03; RF-05; RF-08; RF-09; RF-10; RF-23; RF-26b; RF-32; 2.6 |
 | S-11 | Se asume que el usuario final usa una versión estable vigente de un navegador basado en Chromium o de Firefox, que son los que admite el apartado 3.5. | Si usa Safari u otro navegador con motor WebKit, 3.5 debe declarar si lo admite y, en su caso, 5.3 debe incluir sus casos de prueba no funcionales. Lo mismo ocurre en los teléfonos si se conserva la resolución móvil de 3.6.1, que sigue siendo una decisión abierta. | 3.5; 3.6.1; RNF-11; 5.3 |
@@ -268,7 +274,7 @@ Este apartado enumera los factores que afectan a los requisitos de este document
 
 | ID | Dependencia | Consecuencia si falla o cambia | Requisitos o apartados afectados |
 |---|---|---|---|
-| D-05 | Se asume que Python 3.13, PostgreSQL 18 y Node.js 24 seguirán recibiendo correcciones de seguridad durante la estadía y durante el periodo que cubra el plan de mantenimiento ⟦definir ese periodo con la empresa⟧. Python 3.13 ya solo recibe correcciones de seguridad, hasta octubre de 2029 (Python Software Foundation, s. f.); PostgreSQL 18 tiene soporte hasta el 14 de noviembre de 2030 (PostgreSQL Global Development Group, s. f.), y Node.js 24, hasta el 30 de abril de 2028 (Node.js Release Working Group, s. f.). | Si alguna pierde el soporte dentro de ese periodo, 3.5 debe pasar a una versión con soporte y las pruebas de 5.3 deben repetirse; la primera en perderlo es Node.js 24. Las correcciones solo protegen al sistema si se instalan, lo que corresponde al plan de mantenimiento. | 3.5; 3.6.2; 3.6.3; 5.3 |
+| D-05 | Se asume que Python 3.13, PostgreSQL 18 y Node.js 24 seguirán recibiendo correcciones de seguridad durante la estadía y durante el periodo que cubra el plan de mantenimiento ⟦definir ese periodo con la empresa⟧. Python 3.13 ya solo recibe correcciones de seguridad, hasta octubre de 2029 (Python Software Foundation, s. f.); PostgreSQL 18 tiene soporte hasta el 14 de noviembre de 2030 (PostgreSQL Global Development Group, s. f.-d), y Node.js 24, hasta el 30 de abril de 2028 (Node.js Release Working Group, s. f.). | Si alguna pierde el soporte dentro de ese periodo, 3.5 debe pasar a una versión con soporte y las pruebas de 5.3 deben repetirse; la primera en perderlo es Node.js 24. Las correcciones solo protegen al sistema si se instalan, lo que corresponde al plan de mantenimiento. | 3.5; 3.6.2; 3.6.3; 5.3 |
 | D-06 | Se asume que las licencias de las bibliotecas permiten incorporarlas a un producto de código cerrado de la empresa. La biblioteca pwdlib, elegida para el *hash* Argon2id de las contraseñas (RNF-04; P-06), y argon2-cffi, que esta usa para Argon2, tienen licencia MIT al 13 de octubre de 2026. Al 6 de octubre de 2026, las que se ejecutan en el servidor o llegan al navegador son permisivas (MIT, BSD, ISC, Apache-2.0 o PSF-2.0), salvo psycopg 3, con licencia LGPL-3.0 (Varrazzo, 2026), y certifi, que FastAPI instala de forma indirecta, con licencia MPL-2.0 (Reitz, 2026); ninguna es GPL ni AGPL. | Mientras el sistema se ofrezca solo como servicio web, esas dos licencias no imponen obligaciones adicionales, porque no se entrega una copia del programa. Si la empresa entrega el *backend* a sus clientes para que lo instalen ⟦confirmar con la empresa⟧, deberá incluir los avisos de licencia, ofrecer el código fuente de esas bibliotecas y permitir sustituir psycopg (Free Software Foundation, 2007, secc. 4), lo que cambia 3.8. Una dependencia AGPL contradiría la justificación técnica de la Definición del proyecto. | 3.5; 3.8 |
 | D-07 | Se asume que el líder de proyecto (1.2) estará disponible para revisar el MVP después del 18 de octubre, en el repositorio que él indique, y una segunda vez si encuentra inconsistencias o carencias, y que la asesora académica estará disponible para revisar la memoria de estadías y, quizá, el desarrollo o la terminación del proyecto el 20 de noviembre de 2026; el asesor empresarial no revisa el sistema (P-22) ⟦confirmar las fechas y la forma⟧. | Si no lo están, la aceptación del MVP se recorre a la fase de refinamiento y se reduce el margen de 2.6. Si la aceptación la da otra persona de la empresa, cambian 1.2 y 3.9. | 1.2; 2.6; 3.8; 3.9 |
 
@@ -324,7 +330,7 @@ Esta tabla registra las versiones de la especificación: las 0.x son borradores;
 |---|---|---|---|
 | 0.1 | 19/09/2026 | Ramon Ernesto Nieblas Mendivil | Creado el 17 de septiembre ⟦contenido inicial: confirmar⟧. Estructura de seis secciones basada en la plantilla institucional y conciliada con ISO/IEC/IEEE 29148:2018 (ISO et al., 2018). Acrónimos de 1.3, tablas de 3.5, 3.7 y 3.8 (MVP el 5 de octubre) y referencia de la AMIB en 6 ⟦confirmar fecha⟧. |
 | 0.2 | 26/09/2026 | Ramon Ernesto Nieblas Mendivil | Primeros apartados, sobre la Definición de 12 imprescindibles: 2.1, 2.2, 2.3 (del 20 de septiembre) y la introducción de 3.6 con 3.6.1. Fecha de 2.1, 2.2 y 3.6: entre el 19 y el 26 de septiembre ⟦confirmar⟧. Contiene además 1.2 y el enlace al glosario de 1.3 ⟦confirmar desde cuándo⟧. No incorpora los cambios de la Definición de ese día (17 imprescindibles; MVP al 18 de octubre). |
-| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, 3.6.2, 3.6.3, 3.9, 4, 5.2 y 5.3. El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). |
+| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4, 5.2 y 5.3. El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). |
 
 ## 3.2 Requisitos funcionales
 
@@ -386,13 +392,13 @@ Este apartado especifica los requisitos de calidad con el modelo de ISO/IEC 2501
 | RNF-03 | Seguridad — confidencialidad e integridad | Ante una solicitud sobre información de una cuenta, sin sesión o con la sesión de otra cuenta, el sistema deberá rechazarla sin consultar, registrar, modificar ni eliminar nada y sin revelar si esa información existe. | Solicitudes aceptadas: 0, con un intento sin sesión y otro con sesión ajena por operación; respuestas que distinguen lo ajeno de lo inexistente: 0. | Prueba: con dos usuarios sembrados, pytest recorre el esquema OpenAPI sin sesión y con la sesión de uno sobre los identificadores del otro; lo ajeno recibe la respuesta de lo inexistente (404). | CPNF-03 | 18/10/2026 |
 | RNF-04 | Seguridad — confidencialidad | Aun con acceso a la base de datos, sus respaldos, los registros y las respuestas, ninguna contraseña deberá poder leerse: el sistema la conservará solo en forma no reversible, distinta por cuenta y con un costo de cálculo no menor que el mínimo de OWASP Foundation (s. f.). | Contraseñas legibles en esos lugares: 0; cuentas con igual contraseña e igual valor almacenado: 0; parámetros de costo bajo el mínimo: 0. | Prueba: dos cuentas con igual contraseña de prueba; compara sus valores, lee sus parámetros (Argon2id: m ≥ 19 MiB, t ≥ 2, p = 1) y busca la contraseña en respuestas, registro y un respaldo de pg_dump. | CPNF-04 | 18/10/2026 |
 | RNF-05 | Seguridad — confidencialidad | Durante el desarrollo y la operación, ninguna credencial vigente (de la base de datos, el *token* de la fuente de tasas o la clave que firma las sesiones) deberá aparecer en el historial del repositorio, los archivos que recibe el navegador, las direcciones de las solicitudes ni los registros. | Apariciones de una credencial que todavía autentica, por lugar: 0. | Inspección: git grep del valor vigente de cada credencial en todo el historial (git rev-list --all), en la compilación del *frontend* y los registros, con gitleaks como complemento; se comprueba que el *token* esté guardado solo en backend/.env y se envíe en el encabezado Bmx-Token. | CPNF-05 | 18/10/2026 y 30/10/2026 (RF-32) |
-| RNF-06 | Eficiencia de desempeño — comportamiento temporal | Con el volumen de referencia ⟦fijar antes del 23/10/2026⟧, en el equipo de desarrollo (R-07) y un navegador de 3.5, el sistema deberá presentar el tablero completo en a lo más T segundos desde que se solicita. | Percentil ⟦95⟧ del tiempo hasta que el último indicador y la gráfica son visibles, en ⟦30⟧ cargas con caché vacía ⟦decidir⟧. T: por determinar tras medición de línea base; responsable Ramon; fecha 30/10/2026. | Prueba: un *script* siembra el volumen y Playwright carga el tablero ⟦30⟧ veces y cronometra cada carga. | CPNF-06 | 06/11/2026 |
+| RNF-06 | Eficiencia de desempeño — comportamiento temporal | Con el volumen de referencia ⟦fijar antes del 23/10/2026⟧, en el equipo de desarrollo (R-07) y un navegador de 3.5, el sistema deberá presentar el tablero completo en a lo más T segundos desde que se solicita. | Percentil ⟦95⟧ del tiempo hasta que el último indicador y la gráfica son visibles, en ⟦30⟧ cargas con caché vacía ⟦decidir⟧. T: por determinar tras medición de línea base; responsable Ramon; fecha 30/10/2026. | Prueba: un *script* siembra el volumen y Playwright carga el tablero ⟦30⟧ veces y cronometra cada carga; además, con las demás aplicaciones cerradas, se registran por separado el pico de procesador y de memoria del *backend* y de PostgreSQL, y el de memoria del navegador, que fijan los mínimos de 3.6.2 y 3.6.3. | CPNF-06 | 06/11/2026 |
 | RNF-07 | Capacidad de interacción — autodescriptividad | En toda pantalla que presente un indicador, el sistema deberá mostrar junto a él su unidad y su fecha de corte o periodo, y dar acceso, sin salir de ella, a su definición (2.3). | Indicadores con unidad, fecha o periodo y definición, por pantalla: 100 %; definiciones distintas del glosario de 1.3: 0. | Demostración: lista de verificación por indicador y pantalla, en una sesión nueva y con capturas. | CPNF-07 | 23/10/2026 |
 | RNF-08 | Fiabilidad — tolerancia a fallos | Cuando la fuente oficial de tasas falle o bloquee el *token* (R-15), el sistema deberá seguir calculando y presentando los indicadores con las últimas tasas almacenadas. | Pruebas del motor y del tablero aprobadas sin la fuente: 100 %; consultas a la fuente durante un cálculo: 0. | Prueba: CPNF-01 y los casos de RF-11 sin red, con un sustituto de la fuente que falla si se invoca; con RF-32, también error y límite excedido. | CPNF-08 | 30/10/2026 |
 | RNF-09 | Compatibilidad — interoperabilidad | Al incorporar series de la fuente oficial de tasas (R-08), el sistema deberá registrar cada observación con el valor, la unidad y la fecha publicados (en CETES, la de colocación; D-02), sin registrar como valor las observaciones sin dato. | Observaciones distintas de una descarga independiente: 0; observaciones sin dato registradas como valor: 0. | Prueba: compara lo almacenado por RF-30 y RF-32 con la exportación de cada serie del sitio del SIE. | CPNF-09 | 30/10/2026 |
 | RNF-10 | Mantenibilidad — modularidad | Al agregar, activar o desactivar una fuente de precios o de tasas, el sistema deberá admitir el cambio sin modificar el motor de cálculo ni sus pruebas contra 5.2. | Archivos del motor o de sus pruebas modificados: 0; casos de CPNF-01 fallidos: 0. | Análisis: git diff --stat de la carpeta del motor al agregar el adaptador de una fuente ficticia y desactivarlo por configuración (X-07), y CPNF-01 aprobado. | CPNF-10 | 06/11/2026 |
 | RNF-11 | Flexibilidad — adaptabilidad | En cada navegador que admite 3.5 y en cada resolución de 3.6.1, el sistema deberá presentar cada pantalla completa y operable, sin desplazamiento horizontal ni contenido recortado. | Pantallas con desplazamiento horizontal, contenido recortado o funciones incompletas, por navegador y resolución: 0. | Demostración: recorrido de cada pantalla y función en Chromium y Firefox, con su versión, y en el modo adaptable de DevTools; capturas fechadas. | CPNF-11 | 13/11/2026 |
-| RNF-12 | Flexibilidad — instalabilidad | Siguiendo solo el manual técnico, en un equipo limpio con cada sistema operativo de servidor de 3.5, el sistema deberá poder instalarse, restaurar la base entregada (3.8) y reproducir las cifras de 5.2. | Pasos ajenos al manual: 0; cifras distintas de las de 5.2: 0. | Demostración: instalación en Windows y en Linux limpios (en GitHub Actions, si alcanzan los minutos gratuitos ⟦si no, decidir⟧), con registro fechado y CPNF-01. | CPNF-12 | 13/11/2026 |
+| RNF-12 | Flexibilidad — instalabilidad | Siguiendo solo el manual técnico, en un equipo limpio con cada plataforma de 3.6.2, el sistema deberá poder instalarse, restaurar la base entregada (3.8) y reproducir las cifras de 5.2. | Pasos ajenos al manual: 0; cifras distintas de las de 5.2: 0. | Demostración: instalación en Windows Server 2025 y en Ubuntu Server 24.04 LTS limpios (en GitHub Actions, si alcanzan los minutos gratuitos ⟦si no, decidir⟧; como sus imágenes ya traen Python, Node.js y PostgreSQL, en Linux dentro de un contenedor ubuntu:24.04 y en Windows sin esas herramientas en el PATH ⟦decidir⟧), con registro fechado y CPNF-01. | CPNF-12 | 13/11/2026 |
 
 ### Características declaradas no aplicables
 
@@ -484,43 +490,54 @@ El usuario escribe de forma esporádica (2.3). Cada consulta del tablero (RF-11)
 
 ## 3.5 Requisitos de software
 
-<!-- Pendiente: agregar Node.js 24 para construir el frontend (nota c.7 del 2.5 y nota 1.9 del 3.1).
+<!-- Node.js 24 se agregó el 14 oct (nota c.7 del 2.5 y nota 1.9 del 3.1).
      «Vigentes» se definió en la fila «Navegador» (P-24), con la redacción por confirmar. -->
 
 | Elemento | Requisito |
 |---|---|
 | Navegador | Versiones vigentes de navegadores basados en Chromium o Firefox: las dos versiones más estables hasta la fecha de la prueba (P-24) ⟦confirmar si significa «las dos versiones estables más recientes»⟧ |
-| Servidor de aplicación | Python 3.13 |
-| Gestor de base de datos | PostgreSQL 18 |
-| Sistema operativo del servidor | Independiente (Windows, Linux) |
+| Servidor de aplicación | Python 3.13, con su última corrección (D-05) |
+| Entorno y dependencias del *backend* | uv |
+| Gestor de base de datos | PostgreSQL 18, con su última corrección (D-05) |
+| Sistema operativo del servidor | Windows Server o Ubuntu Server, en las versiones de 3.6.2; durante la estadía, el equipo de desarrollo (3.6.3) |
+| Construcción del *frontend* | Node.js 24, con su última corrección (D-05) |
 
 ## 3.6 Requisitos de hardware
 
-Los requisitos se declaran por separado para cada uno de los tres entornos, porque el sistema es cliente-servidor y sus exigencias no son equiparables.
+Los requisitos se separan en tres entornos porque el sistema es cliente-servidor: todo cálculo ocurre en el servidor, con un motor único (2.1), y el cliente solo presenta los resultados. Sin servidor de producción durante la estadía (S-03; P-25), cliente y servidor se ejecutan en el equipo de desarrollo (R-07), y 3.6.2 fija los mínimos de un servidor futuro, cuya red y capacidad solo se verificarán en él. RNF-11 verifica las resoluciones de 3.6.1; RNF-12, las plataformas de 3.6.2, y la inspección (5.1), el equipo de 3.6.3, con su traza en 5.3.
 
 ### 3.6.1 Equipo del usuario final
 
-El sistema no impone requisitos de cómputo al equipo del usuario porque ninguna métrica financiera se calcula en el cliente: el cliente solicita valores ya calculados por el servidor y únicamente los presenta. Es la razón por la que el producto puede operar en equipos de gama baja.
+El sistema no impone requisitos de cómputo al equipo del usuario porque ninguna métrica financiera se calcula en el cliente, que solo presenta valores ya calculados por el servidor.
 
-<!-- Pendientes: los 360 px en móvil son una decisión abierta (RF-24, P-32), y «Conexión a
-     internet activa de cómputo durante el uso» parece tener una palabra de más. -->
-
-| Elemento | Requisito |
-|---|---|
-| Tipo de equipo | Cualquiera capaz de ejecutar un navegador vigente |
-| Procesador y memoria | Sin requisito específico |
-| Resolución mínima | 1280 × 720 px en escritorio; 360 px de ancho en móvil |
-| Conectividad | Conexión a internet activa de cómputo durante el uso |
+| Elemento | Requisito | Fundamento |
+|---|---|---|
+| Tipo de equipo | Cualquiera que ejecute un navegador de 3.5; el sistema no agrega requisitos de procesador, memoria ni sistema operativo. | S-11. Vite 8 compila por omisión para Chrome 111 y Firefox 114 o posteriores (Vite contributors, s. f.), y vite.config.js no lo cambia; Chrome pide desde Windows 10, macOS 13 o Android 10 (Google, s. f.). |
+| Resolución mínima en escritorio | Pantalla de 1280 × 720 px CSS o mayor (resolución entre escalado), con el navegador maximizado al 100 % de *zoom*. | Decisión de diseño de la versión 0.2. RNF-11 la reproduce en DevTools con 1280 px CSS de ancho y el alto visible de esa pantalla, por medir; responsable Ramon; fecha ⟦30/10/2026⟧. |
+| Resolución mínima en móvil | 360 px de ancho ⟦decidir (P-32): recomendado, quitarla salvo que entre RF-24; si entra, 320 px CSS⟧. | Sin servidor, el teléfono solo llega con RF-24 (P-32; S-11). 360 px no tiene fuente; WCAG 2.2 fija el reajuste a 320 px CSS (World Wide Web Consortium, 2024, criterio 1.4.10). |
+| Conectividad | Red hasta el servidor; durante la estadía, navegador y servidor comparten equipo y no se requiere Internet. Con RF-24, el teléfono usará la red local, con HTTPS. | S-03; RF-24. Solo el servidor usa Internet, para el SIE desde RF-32 (3.6.2). |
 
 ### 3.6.2 Servidor de aplicación y base de datos
 
-<!-- Mientras no haya servidor de producción (S-03; P-25, opción A), describe los requisitos mínimos de un
-     servidor futuro. -->
+Fija los mínimos de un servidor futuro. PostgreSQL 18 no publica mínimos de *hardware* (PostgreSQL Global Development Group, s. f.-b): rige el piso del sistema operativo (Canonical Ltd., s. f.; Microsoft, 2025a) más el pico de memoria y el pico de procesador, expresado en núcleos lógicos ocupados, del *backend* y PostgreSQL en la prueba de RNF-06.
+
+| Elemento | Requisito | Fundamento |
+|---|---|---|
+| Plataforma | x86-64, con Windows Server 2025 o Ubuntu Server 24.04 LTS y sus correcciones de seguridad ⟦decidir otras versiones: recomendado, solo las que instale RNF-12⟧. | Son las más recientes de cada familia con mínimos publicados, y PostgreSQL 18, uv y Node.js 24 las admiten (Astral Software Inc., s. f.; Node.js contributors, s. f.; PostgreSQL Global Development Group, s. f.-a, s. f.-e). |
+| Procesador y memoria | Los del sistema operativo (Windows Server 2025: 1.4 GHz y 2 GB; Ubuntu Server 24.04 desde ISO: 1.5 GB) más el consumo del *backend* y PostgreSQL, por determinar tras medición de línea base (RNF-06); responsable Ramon; fecha ⟦30/10/2026⟧. | PostgreSQL 18 reserva normalmente 128 MB de shared_buffers (PostgreSQL Global Development Group, s. f.-c), y Argon2id, al menos 19 MiB por registro o inicio de sesión simultáneo (RNF-04). |
+| Almacenamiento | El del sistema operativo (32 GB y 5 GB, respectivamente) más el de la aplicación, la base y sus respaldos, por medir con el volumen de RNF-06; responsable Ramon; fecha ⟦30/10/2026⟧. | En el equipo de desarrollo, PostgreSQL 18 ocupa 992 MB, de ellos 64 MB de datos y 686.5 MB de pgAdmin 4, innecesario en el servidor (13/10/2026); su WAL llega por omisión a 1 GB, o más con carga alta (PostgreSQL Global Development Group, s. f.-f). |
+| Red | Salida HTTPS al SIE (RF-32) y, si RF-14 usa un servicio externo, a este ⟦decidir (P-31): recomendado, sin él⟧; entrada HTTPS desde la red de los usuarios, con el cifrado en tránsito que agregará 3.3 (S-03). | R-08; R-09; R-15; RNF-05. El *token* lo generará quien opere el servidor ⟦confirmar con la empresa (D-01)⟧. |
 
 ### 3.6.3 Equipo de desarrollo
 
-<!-- El equipo personal de R-07: Windows 11 Home Single Language, 16 GB de RAM. Mientras no haya
-     servidor de producción (S-03; P-25, opción A), en él se ejecuta, se prueba y se demuestra el sistema. -->
+Es el equipo personal del estudiante (R-07), que durante la estadía también es el servidor (S-03): desde RF-32 necesita la salida HTTPS de 3.6.2 y, con RF-24, la red local de 3.6.1. Se midió con consultas de solo lectura, en unidades binarias. El mínimo vale también para un sustituto o una instalación local (AC-05).
+
+| Elemento | Requisito mínimo | Equipo actual (13 oct 2026) | Fundamento |
+|---|---|---|---|
+| Sistema operativo | De 64 bits, en el nivel 1 de Node.js 24 y uv (desde Windows 10, macOS 13.5 o Linux con glibc 2.28) y con soporte de seguridad del fabricante. | Windows 11 Home Single Language 25H2 (compilación 26200), de 64 bits; sin WSL; la edición no admite Hyper-V (R-07). | Node.js contributors (s. f.); Astral Software Inc. (s. f.). RNF-12 verificará Linux en GitHub Actions si alcanzan los minutos gratuitos ⟦si no, decidir⟧. |
+| Procesador y memoria | Los del sistema operativo (Windows 11: 1 GHz, dos núcleos y 4 GB; Microsoft, 2026) más la memoria del navegador, el *backend* y PostgreSQL, por determinar tras medición de línea base (RNF-06); responsable Ramon; fecha ⟦30/10/2026⟧. | MSI Thin 15 B13VE; Intel Core i7-13620H (10 núcleos, 16 hilos, 2.4 GHz base reportada); 16 GB de RAM (15.7 GB utilizables). | El valor T de RNF-06 solo vale para este equipo. |
+| Almacenamiento | El del sistema operativo (Windows 11: 64 GB; Microsoft, 2026) más el del proyecto, Playwright, los respaldos y el WAL, por medir al generarlos; responsable Ramon; fecha ⟦30/10/2026⟧. | Disco C: de 453.7 GB con 23.9 GB libres (5.3 %); lo medido del proyecto, sin Node.js ni cachés, ocupa unos 1.1 GB. | PostgreSQL 18 con datos, 992 MB; entorno del *backend*, 53 MB (85 MB antes de recrearse ese mismo día); dependencias del *frontend*, 61 MB; intérprete de Python, 58 MB; repositorio, 1 MB. Limita el espacio libre (R-07). |
+| *Software* | Python 3.13, PostgreSQL 18 y Node.js 24 con su última corrección a la fecha de inspección (D-05); uv y los navegadores de 3.5. | uv 0.12.13; Python 3.13.5; Node.js 24.12.0 con npm 11.6.2; PostgreSQL 18.6; Chrome 155, Edge 155 y Firefox 154. | Python, Node.js y Firefox (vigente: 158; Mozilla, s. f.) deberán actualizarse ⟦antes del 18/10/2026; responsable Ramon⟧. |
 
 ## 3.7 Requisitos de recurso humano
 
@@ -676,6 +693,8 @@ Apple Inc. (s. f.-b). *Xcode* [Aplicación para macOS]. Mac App Store. Recuperad
 
 Asociación Mexicana de Instituciones Bursátiles. (2026). *Valores* (Boletín informativo núm. 62). https://www.amib.com.mx/
 
+Astral Software Inc. (s. f.). *Platform support*. uv. Recuperado el 13 de octubre de 2026, de https://docs.astral.sh/uv/reference/policies/platforms/
+
 Banco de México. (s. f.-a). *Descripción técnica de los Certificados de la Tesorería de la Federación* [Nota técnica]. https://www.banxico.org.mx/mercados/d/%7B0DE0044F-662D-09D2-C8B3-4F1A8E43655F%7D.pdf
 
 Banco de México. (s. f.-b). *Límites de consultas* [Documentación de la API del Sistema de Información Económica]. Recuperado el 5 de octubre de 2026, de https://www.banxico.org.mx/SieAPIRest/service/v1/doc/limiteConsultas
@@ -688,9 +707,13 @@ Bolsa Mexicana de Valores. (s. f.). *Aviso legal*. Recuperado el 5 de octubre de
 
 Bolsa Mexicana de Valores. (2025). *Policies for the use and distribution of Intra Data Feed*. https://www.bmv.com.mx/work/models/Grupo_BMV/Resource/2000/30/images/Market_Data_Policies_2025.pdf
 
+Canonical Ltd. (s. f.). *System requirements*. Ubuntu Server documentation. Recuperado el 13 de octubre de 2026, de https://ubuntu.com/server/docs/reference/installation/system-requirements/
+
 Comisión Nacional Bancaria y de Valores. (s. f.). *Otros participantes*. Recuperado el 5 de octubre de 2026, de https://www.cnbv.gob.mx/SECTORES-SUPERVISADOS/BURS%C3%81TIL/Preguntas-Frecuentes/Paginas/Otros-Participantes.aspx
 
 Free Software Foundation. (2007). *GNU Lesser General Public License* (Versión 3). https://www.gnu.org/licenses/lgpl-3.0.html
+
+Google. (s. f.). *Chrome browser system requirements*. Chrome Enterprise and Education Help. Recuperado el 13 de octubre de 2026, de https://support.google.com/chrome/a/answer/7100626?hl=en
 
 Google. (2026, 28 de agosto). *Network security configuration*. Android Developers. https://developer.android.com/privacy-and-security/security-config
 
@@ -708,7 +731,15 @@ Ley Federal de Protección de Datos Personales en Posesión de los Particulares.
 
 MDN contributors. (2026, 7 de septiembre). *Making PWAs installable*. MDN Web Docs. https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable
 
-Microsoft. (2025, 23 de mayo). *Instalar Hyper-V en Windows y Windows Server*. Microsoft Learn. https://learn.microsoft.com/es-mx/windows-server/virtualization/hyper-v/get-started/install-hyper-v?pivots=windows
+Microsoft. (2025a, 2 de julio). *Hardware requirements for Windows Server*. Microsoft Learn. https://learn.microsoft.com/en-us/windows-server/get-started/hardware-requirements
+
+Microsoft. (2025b, 23 de mayo). *Instalar Hyper-V en Windows y Windows Server*. Microsoft Learn. https://learn.microsoft.com/es-mx/windows-server/virtualization/hyper-v/get-started/install-hyper-v?pivots=windows
+
+Microsoft. (2026, 14 de julio). *Windows 11 requirements*. Microsoft Learn. https://learn.microsoft.com/en-us/windows/whats-new/windows-11-requirements
+
+Mozilla. (s. f.). *firefox_versions.json* [Conjunto de datos]. Product Details. Recuperado el 13 de octubre de 2026, de https://product-details.mozilla.org/1.0/firefox_versions.json
+
+Node.js contributors. (s. f.). *Building Node.js* [Archivo BUILDING.md, rama v24.x]. GitHub. Recuperado el 13 de octubre de 2026, de https://github.com/nodejs/node/blob/v24.x/BUILDING.md
 
 Node.js Release Working Group. (s. f.). *Release schedule* [Repositorio nodejs/Release]. GitHub. Recuperado el 6 de octubre de 2026, de https://github.com/nodejs/Release
 
@@ -716,7 +747,17 @@ OWASP Foundation. (s. f.). *Password storage cheat sheet*. OWASP Cheat Sheet Ser
 
 Portal ISO 25000. (s. f.). *ISO/IEC 25010*. Recuperado el 6 de octubre de 2026, de https://iso25000.com/index.php/normas-iso-25000/iso-25010
 
-PostgreSQL Global Development Group. (s. f.). *Versioning policy*. Recuperado el 6 de octubre de 2026, de https://www.postgresql.org/support/versioning/
+PostgreSQL Global Development Group. (s. f.-a). *Linux downloads (Ubuntu)*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/download/linux/ubuntu/
+
+PostgreSQL Global Development Group. (s. f.-b). Requirements (secc. 17.1). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/install-requirements.html
+
+PostgreSQL Global Development Group. (s. f.-c). Resource consumption (secc. 19.4). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/runtime-config-resource.html
+
+PostgreSQL Global Development Group. (s. f.-d). *Versioning policy*. Recuperado el 6 de octubre de 2026, de https://www.postgresql.org/support/versioning/
+
+PostgreSQL Global Development Group. (s. f.-e). *Windows installers*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/download/windows/
+
+PostgreSQL Global Development Group. (s. f.-f). Write ahead log (secc. 19.5). En *PostgreSQL 18 documentation*. Recuperado el 13 de octubre de 2026, de https://www.postgresql.org/docs/18/runtime-config-wal.html
 
 Python Software Foundation. (s. f.). *Status of Python versions*. Python Developer's Guide. Recuperado el 6 de octubre de 2026, de https://devguide.python.org/versions/
 
@@ -725,3 +766,7 @@ Reitz, K. (2026). *certifi* (Versión 2026.7.22) [Software]. Python Package Inde
 Secretaría de Hacienda y Crédito Público. (2026, 25 de septiembre). *Programa de subastas de valores gubernamentales cuarto trimestre de 2026* (Comunicado núm. 75). Gobierno de México. https://www.gob.mx/shcp/prensa/comunicado-no-75-programa-de-subastas-de-valores-gubernamentales-cuarto-trimestre-de-2026
 
 Varrazzo, D. (2026). *psycopg* (Versión 3.3.6) [Software]. Python Package Index. https://pypi.org/project/psycopg/3.3.6/
+
+Vite contributors. (s. f.). *Build options* (Versión 8). Vite. Recuperado el 13 de octubre de 2026, de https://vite.dev/config/build-options
+
+World Wide Web Consortium. (2024, 12 de diciembre). *Web Content Accessibility Guidelines (WCAG) 2.2* (Recomendación del W3C). https://www.w3.org/TR/WCAG22/
