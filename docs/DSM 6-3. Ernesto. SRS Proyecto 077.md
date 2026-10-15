@@ -81,6 +81,7 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | CPF / CPNF | Caso de prueba funcional / no funcional |
 | CSS | Hojas de estilo en cascada (*Cascading Style Sheets*) |
 | CSV | Valores separados por comas (*comma-separated values*) |
+| CU | Caso de uso (apartado 4.1) |
 | ETF | Fondo cotizado en bolsa (*exchange-traded fund*) |
 | FIBRA | Fideicomiso de Infraestructura y Bienes Raíces |
 | FIX | Tipo de cambio peso-dólar que determina y publica el Banco de México |
@@ -106,6 +107,7 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | SRS | Software Requirements Specification — Especificación de Requisitos de Software |
 | TWR | Rendimiento ponderado por tiempo (*time-weighted return*) |
 | UDI | Unidad de inversión |
+| UML | Lenguaje Unificado de Modelado (*Unified Modeling Language*) |
 | VN | Valor nominal |
 | WAL | Registro de escritura anticipada de PostgreSQL (*write-ahead log*) |
 | WCAG | Pautas de Accesibilidad para el Contenido Web (*Web Content Accessibility Guidelines*) |
@@ -172,7 +174,7 @@ Este apartado describe, en términos generales, los elementos externos que limit
 
 | ID | Restricción | Origen | Requisitos relacionados |
 |---|---|---|---|
-| R-01 | El sistema no deberá emitir recomendaciones de inversión individualizadas, ni generar o sugerir composiciones de portafolio. | Ley del Mercado de Valores (2005), art. 225: quien otorga de manera habitual y profesional asesoría de inversión en valores, análisis y emisión de recomendaciones de inversión de manera individualizada tiene el carácter de asesor en inversiones y debe registrarse ante la Comisión Nacional Bancaria y de Valores (CNBV). | RF-12 (aviso de no asesoría); RF-14 (la explicación describe los indicadores y no sugiere comprar, vender ni recomponer el portafolio); RF-21 (los escenarios son hipotéticos y no sugieren operaciones); RF-22 (simulación solo de composiciones definidas por el usuario) |
+| R-01 | El sistema no deberá emitir recomendaciones de inversión individualizadas, ni generar o sugerir composiciones de portafolio. | Ley del Mercado de Valores (2005), art. 225: quien otorga de manera habitual y profesional asesoría de inversión en valores, análisis y emisión de recomendaciones de inversión de manera individualizada tiene el carácter de asesor en inversiones y debe registrarse ante la Comisión Nacional Bancaria y de Valores (CNBV). | RF-12 (aviso de no asesoría); RF-14 (la explicación describe los indicadores sin emitir juicios sobre la conveniencia de una inversión y no sugiere comprar, vender ni recomponer el portafolio; P-29); RF-21 (los escenarios son hipotéticos y no sugieren operaciones); RF-22 (simulación solo de composiciones definidas por el usuario); S-15 (si la empresa cuenta con una opinión jurídica sobre el art. 225, RF-14, RF-21 y RF-22 deberán ajustarse a ella; P-29) |
 | R-02 | El sistema no deberá recibir, transmitir ni ejecutar órdenes de compra o venta de valores por cuenta del usuario; solo registra operaciones que el usuario ya realizó con su intermediario. | Ley del Mercado de Valores (2005), art. 9, primer párrafo, y art. 2, fr. XV, incisos a) y b): la intermediación con valores inscritos en el Registro Nacional de Valores, que incluye poner en contacto la oferta y la demanda y celebrar operaciones por cuenta de terceros de manera habitual y profesional, solo pueden prestarla las entidades autorizadas como intermediarios del mercado de valores que enumera el art. 113. | RF-05 (captura manual de transacciones) |
 | R-03 | La ley exige el consentimiento expreso y revocable del titular para tratar sus datos financieros y patrimoniales, y obliga a poner a su disposición el aviso de privacidad, en el que debe describirse el mecanismo para revocar el consentimiento. | Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP, 2025): art. 7 (consentimiento expreso y revocable), art. 15 (contenido del aviso de privacidad) y art. 16, fr. II (aviso en medios electrónicos). | RF-12 |
 | R-04 | Durante el desarrollo no deberán usarse datos reales de clientes ni información interna de la empresa. Los datos de prueba serán sintéticos o provendrán de fuentes cuya licencia permita reutilizarlos (R-05). | Convenio de confidencialidad entre el estudiante y PluriOne S.A. de C.V. | RF-07 y RF-30 (conjunto de datos semilla); 5.2 |
@@ -189,8 +191,8 @@ Este apartado describe, en términos generales, los elementos externos que limit
 
 | ID | Restricción | Origen | Requisitos relacionados |
 |---|---|---|---|
-| R-08 | El sistema no se conecta con los intermediarios (R-02, X-01) ni con proveedores comerciales de datos de mercado (R-05, X-07). La única interfaz externa es la API del Sistema de Información Económica (SIE) del Banco de México: en el MVP se usa para construir el conjunto semilla de tasas, y a partir de la fase de refinamiento el *backend*, que durante la estadía se ejecuta en el equipo de desarrollo (R-07), la consulta una vez al día. Es una interfaz REST, con respuestas en JSON, que exige un *token* de consulta. Si RF-14 se implementa con un servicio externo, ese servicio será una segunda interfaz, sujeta a R-09. | Según el análisis de fuentes del 5 de octubre de 2026, el SIE es la única fuente oficial sin costo y con API cuya política de uso permite reutilizar los datos (Banco de México, s. f.-c). | RF-30; RF-32; RNF-05 (confidencialidad del *token*); RNF-09 |
-| R-09 | Si RF-14 se implementa con un servicio externo de inteligencia artificial, la comunicación de datos personales a ese servicio estará sujeta a la LFPDPPP. | LFPDPPP (2025), art. 2, fr. XII y XX, y arts. 35 y 36: si el proveedor trata los datos por cuenta del responsable, es persona encargada y la comunicación no es una transferencia; si los usa para fines propios, es un tercero, la comunicación sí es una transferencia y debe comunicársele el aviso de privacidad. Los datos disociados no requieren consentimiento (art. 2, fr. IX, y art. 9, fr. III). | RF-14 (para no depender de esa calificación, solo se le enviarán cifras disociadas; criterio por definir en 3.2) |
+| R-08 | El sistema no se conecta con los intermediarios (R-02, X-01) ni con proveedores comerciales de datos de mercado (R-05, X-07). La única interfaz externa es la API del Sistema de Información Económica (SIE) del Banco de México: en el MVP se usa para construir el conjunto semilla de tasas, y a partir de la fase de refinamiento el *backend*, que durante la estadía se ejecuta en el equipo de desarrollo (R-07), la consulta una vez al día (RF-32). Además, al desarrollar RF-23, se consulta una sola vez para cargar el tipo de cambio FIX histórico (P-27). Es una interfaz REST, con respuestas en JSON, que exige un *token* de consulta. RF-14 genera la explicación con plantillas, sin un servicio externo, por lo que no agrega una segunda interfaz (P-31). | Según el análisis de fuentes del 5 de octubre de 2026, el SIE es la única fuente oficial sin costo y con API cuya política de uso permite reutilizar los datos (Banco de México, s. f.-c). | RF-23 (FIX histórico); RF-30; RF-32; RNF-05 (confidencialidad del *token*); RNF-09 |
+| R-09 | Retirada (P-31): RF-14 genera la explicación con plantillas, sin un servicio externo de inteligencia artificial, por lo que no comunica datos personales ni cifras del usuario a terceros. | — | — |
 
 ### 2.4.4 Criticidad de la aplicación
 
@@ -210,8 +212,8 @@ Este apartado describe, en términos generales, los elementos externos que limit
 | ID | Restricción | Origen | Requisitos relacionados |
 |---|---|---|---|
 | R-13 | No se dispone de datos de mercado en tiempo real. | La BMV considera de tiempo real todo dato con menos de 20 minutos de retraso, y licencia sus datos con contrato y pago, incluso los de cierre (BMV, 2025). El proyecto no cuenta con presupuesto para esas licencias. | RF-07 (precios de cierre diarios del conjunto semilla); RF-08; RF-31 (fecha de cada dato en la interfaz) |
-| R-14 | Las tasas de las subastas primarias de CETES solo se generan en cada subasta, y el SIE las fecha en su fecha de colocación, posterior a la subasta. En el cuarto trimestre de 2026, las de 28, 91 y 182 días son semanales, y las de 1 y 2 años, quincenales. El calendario cambia cada trimestre. | Programa trimestral de subastas de la Secretaría de Hacienda y Crédito Público (SHCP, 2026); el Banco de México emite las convocatorias y publica los resultados en el cuadro CF107 del SIE (Banco de México, s. f.-d). | RF-26b (rige la última colocación de cada plazo con fecha igual o anterior a la de valuación, aunque el SIE ya haya publicado la siguiente); RF-30; RF-32 |
-| R-15 | La API del SIE limita a 10,000 diarias las consultas históricas de cada *token* y, si se rebasa el límite, bloquea el *token* hasta el fin del día. | Límites de consulta del SIE (Banco de México, s. f.-b). | RF-30; RF-32 (una sola consulta diaria de hasta 20 series; los cálculos leen de la base de datos, nunca del API); RNF-08 |
+| R-14 | Las tasas de las subastas primarias de CETES solo se generan en cada subasta, y el SIE las fecha en su fecha de colocación, posterior a la subasta. En el cuarto trimestre de 2026, las de 28, 91 y 182 días son semanales, y las de 1 y 2 años, quincenales. El calendario cambia cada trimestre. | Programa trimestral de subastas de la Secretaría de Hacienda y Crédito Público (SHCP, 2026); el Banco de México emite las convocatorias y publica los resultados en el cuadro CF107 del SIE (Banco de México, s. f.-d). | RF-26b (rige la última colocación de cada plazo con fecha igual o anterior a la de valuación, aunque el SIE ya haya publicado la siguiente); RF-30; RF-32; RF-34 |
+| R-15 | La API del SIE limita a 10,000 diarias las consultas históricas de cada *token* y, si se rebasa el límite, bloquea el *token* hasta el fin del día. | Límites de consulta del SIE (Banco de México, s. f.-b). | RF-23 (carga única del FIX histórico; P-27); RF-30; RF-32 (una sola consulta diaria de hasta 20 series; los cálculos leen de la base de datos, nunca del API); RNF-08 |
 
 ### 2.4.7 Exclusiones de alcance
 
@@ -236,7 +238,7 @@ Este apartado enumera los factores que afectan a los requisitos de este document
 | ID | Suposición | Consecuencia si no se cumple | Requisitos o apartados afectados |
 |---|---|---|---|
 | S-01 | Se asume que la delimitación MoSCoW de la Definición del proyecto (18 requisitos imprescindibles, requisitos diferidos con fecha y exclusiones) es el alcance del proyecto, que el estudiante definió con la libertad que el líder de proyecto dio para fijar el alcance funcional y las tecnologías; el líder solo fijó la entrega del MVP a más tardar el 18 de octubre de 2026 y que la carpeta docs/ contenga dos archivos Markdown, uno del MVP y otro del documento de requisitos del producto (PRD; P-19) ⟦confirmar cuándo y por qué medio⟧. Por esa misma libertad, también se asume que la empresa no espera servicios en la nube ni tecnologías distintas de las del apartado 3.5, salvo las decisiones que siguen abiertas. | Si el alcance cambia, se rehacen 3.2, 2.6, 2.4.7 y 5.3, y se registra una versión nueva en 3.1. Si se exigen otros servicios o tecnologías, cambian 3.5 y 3.6.2, su costo choca con R-07, y lo que deba entrar antes del 18 de octubre desplazará requisitos imprescindibles a la fase de refinamiento. | 2.4.7; 2.6; 3.1; 3.2; 3.5; 3.6.2; 5.3; R-07 |
-| S-02 | Se asume que una sola persona, en los cuatro roles del apartado 3.7, puede completar los 18 requisitos imprescindibles a más tardar el domingo 18 de octubre de 2026, y los requisitos de 2.6 en las fechas que este fija, antes de la semana del 16 de noviembre, reservada para la capacitación, la entrega y el cierre. | Si los imprescindibles no caben, se acuerda con el líder de proyecto cuáles pasan a la fase de refinamiento, y cambian 3.2, 2.6 y 3.8. Si los diferidos no caben, 2.6 los pasa a una fase posterior a la estadía; un retraso en RF-20 arrastra a RF-17, que depende de él. | 2.6; 3.2; 3.8; 5.3; RF-13 a RF-24; RF-27; RF-32; RF-33; RF-39 |
+| S-02 | Se asume que una sola persona, en los cuatro roles del apartado 3.7, puede completar los 18 requisitos imprescindibles a más tardar el domingo 18 de octubre de 2026, y los requisitos de 2.6 en las fechas que este fija, antes de la semana del 16 de noviembre, reservada para la capacitación, la entrega y el cierre. | Si los imprescindibles no caben, se acuerda con el líder de proyecto cuáles pasan a la fase de refinamiento, y cambian 3.2, 2.6 y 3.8. Si los requisitos de 2.6 no caben, 2.6.3 los pasa a una fase posterior a la estadía en orden MoSCoW estricto, que conserva RF-14 (P-26); un retraso en RF-20 arrastra a RF-17 y a RF-21, que dependen de él (P-28). | 2.6; 3.2; 3.8; 5.3; RF-13 a RF-24; RF-27; RF-32 a RF-34; RF-39 |
 | S-03 | Se asume que durante la estadía no habrá servidor de producción (P-25). Por ello, el sistema se ejecuta, se prueba y se demuestra en el equipo de desarrollo (R-07), 3.6.2 describe los requisitos de un servidor futuro y 3.8 entrega el código, la base de datos y el manual técnico, no un sistema en operación. | Si hay servidor, 3.5 y 3.6.2 lo describen, 3.8 agrega un hito de despliegue y la aceptación de 3.9 se hace sobre él. 3.3 incorporará requisitos de cifrado en tránsito y de respaldo, y RF-32 deja de depender de que el equipo de desarrollo esté encendido. | 3.5; 3.6.2; 3.8; 3.9; RF-32; R-07; R-08; RNF-03 a RNF-06; RNF-12 |
 | S-04 | Se asume, conforme a P-20, que durante la estadía solo habrá cuentas de prueba, con correos y datos ficticios, creadas por el estudiante, los evaluadores o quienes reciban la capacitación, y que ningún inversionista registrará datos reales ⟦confirmar con la empresa, incluida la capacitación⟧. Por ello, RF-12 se verifica con un aviso de privacidad de demostración. | Si se registran datos reales, aunque sea solo el correo de un evaluador, el aviso de RF-12 debe indicar la identidad y el domicilio del responsable del tratamiento (LFPDPPP, 2025, art. 15, fr. I) ⟦confirmar con la empresa quién lo sería⟧, y R-04 deja de bastar, porque solo cubre el desarrollo. Además, las medidas de R-12 deben dimensionarse para una operación real, y es probable que RF-01 tenga que recuperar la contraseña por correo electrónico, lo que agrega una interfaz externa (R-08). | RF-01; RF-12; R-03; R-04; R-08; R-12; RNF-03 a RNF-05; 3.6.2 |
 | S-05 | Se asume que quienes revisan y aceptan el sistema (D-07) admiten que se demuestre y se valide con precios de cierre sintéticos, señalados como datos de demostración (RF-07), y con tasas reales de CETES (RF-30), como decidió el estudiante (P-21) ⟦confirmar con ellos⟧. La corrección del valor de mercado, del TWR y de la máxima caída no depende de que los precios sean reales, así que la aceptación de 3.9 evalúa el cálculo contra 5.2. | Si se exigen precios reales de acciones, ETF o FIBRA, RF-07 debe cambiar de fuente, lo que choca con R-05 y X-07 mientras la empresa no contrate una licencia. Adelantar RF-33 no lo resuelve, porque durante la estadía no hay usuarios con estados de cuenta reales (S-04) y no pueden tomarse precios del sitio de la BMV (R-05). | RF-07; RF-30; RF-31; RF-33; R-04; R-05; X-07; 3.9; 5.2 |
@@ -248,8 +250,8 @@ Este apartado enumera los factores que afectan a los requisitos de este document
 |---|---|---|---|
 | S-07 | Se asume que el usuario puede registrar cada posición desde su primera compra, con el intermediario con el que la mantiene, y que no tiene posiciones de origen irreconstruible ni traspasos de títulos entre intermediarios, de modo que las compras y las ventas bastan para describir cada posición. | Si hay posiciones sin historial, RF-28 rechazará sus ventas, y RF-06, RF-08 y RF-09 carecerán de posición, costo y punto de partida; un traspaso registrado como venta y compra altera el costo promedio por intermediario de RF-08. Habrá que agregar tipos de transacción para el saldo inicial y el traspaso, en 3.2 o con fecha en 2.6, o declarar una exclusión en 2.4.7 ⟦decidir⟧. | RF-05; RF-06; RF-08; RF-09; RF-28; 2.4.7; 2.6; 3.2; 3.4; 5.2 |
 | S-08 | Se asume que el usuario obtiene de su comprobante o de su estado de cuenta, para cada operación, la cantidad de títulos, el precio por título y el importe de las comisiones con su IVA que exige RF-05; los comprobantes públicos revisados los presentan por separado y ninguno da el precio con comisiones incluidas (P-16). | Si solo dispone del importe neto cargado o abonado, RF-05 tendría que admitirlo como dato y derivar de él el importe de las comisiones, lo que cambia 3.4 y los datos de entrada de 5.2. | RF-05; 3.4; 5.2 |
-| S-09 | Se asume que, en el MVP, las transacciones se registran sobre instrumentos del catálogo semilla de RF-04, con fechas dentro del intervalo que cubren las semillas de precios (RF-07) y de tasas (RF-30), y que el usuario no necesita dar de alta instrumentos. Ese intervalo cubre todos los casos del conjunto de referencia (5.2), la semilla de precios sigue el calendario de operaciones de 2026 y la de tasas empieza con una colocación de cada plazo anterior al inicio del intervalo (P-14) ⟦fijar las fechas al congelar 5.2 (P-17)⟧. | Antes del intervalo no hay precio ni tasa con que valuar, y después RF-08 y RF-26b usarían datos cada vez más antiguos, por lo que RF-05 o RF-08 necesitarán un criterio que rechace esas fechas o advierta de ellas. Dar de alta instrumentos sería un requisito nuevo, que 2.3 no asigna a ningún perfil. | RF-04; RF-05; RF-07; RF-08; RF-26b; RF-30; 2.3; 2.6 |
-| S-10 | Se asume que, mientras RF-23 siga diferido, todas las transacciones de un portafolio se pactan y se liquidan en su divisa base, que en el MVP solo puede ser el peso mexicano (MXN; P-02), y que sus precios y tasas están en esa misma divisa. | Si el usuario opera en otra divisa, RF-05 no puede registrarlo sin que él convierta los importes, y RF-08, RF-09, RF-10 y RF-26b mezclarían divisas. Por eso RF-03 limita la divisa base a la de las semillas, y admitir otra exigirá adelantar RF-23 y la carga del tipo de cambio FIX de RF-32. | RF-03; RF-05; RF-08; RF-09; RF-10; RF-23; RF-26b; RF-32; 2.6 |
+| S-09 | Se asume que, en el MVP, las transacciones se registran sobre instrumentos del catálogo semilla de RF-04, con fechas dentro del intervalo que cubren las semillas de precios (RF-07) y de tasas (RF-30), y que el usuario no necesita dar de alta instrumentos. Ese intervalo cubre todos los casos del conjunto de referencia (5.2), la semilla de precios sigue el calendario de operaciones de 2026 y la de tasas empieza con una colocación de cada plazo anterior al inicio del intervalo (P-14) ⟦fijar las fechas al congelar 5.2 (P-17)⟧. | Antes del intervalo no hay precio ni tasa con que valuar, y después RF-08 y RF-26b usarían datos cada vez más antiguos, por lo que RF-05 o RF-08 necesitarán un criterio que rechace esas fechas o advierta de ellas. Dar de alta instrumentos sería un requisito nuevo, que 2.3 no asigna a ningún perfil; las emisiones de CETES colocadas después de la semilla las incorpora RF-34, no el usuario (P-27). | RF-04; RF-05; RF-07; RF-08; RF-26b; RF-30; RF-34; 2.3; 2.6 |
+| S-10 | Se asume que, mientras RF-23 siga diferido, todas las transacciones de un portafolio se pactan y se liquidan en su divisa base, que en el MVP solo puede ser el peso mexicano (MXN; P-02), y que sus precios y tasas están en esa misma divisa. | Si el usuario opera en otra divisa, RF-05 no puede registrarlo sin que él convierta los importes, y RF-08, RF-09, RF-10 y RF-26b mezclarían divisas. Por eso RF-03 limita la divisa base a la de las semillas, y admitir otra exigirá adelantar RF-23, que carga una sola vez desde el SIE el FIX histórico (P-27), y la carga diaria del tipo de cambio FIX de RF-32. | RF-03; RF-05; RF-08; RF-09; RF-10; RF-23; RF-26b; RF-32; 2.6 |
 | S-11 | Se asume que el usuario final usa una versión estable vigente de un navegador basado en Chromium o de Firefox, que son los que admite el apartado 3.5. | Si usa Safari u otro navegador con motor WebKit, 3.5 debe declarar si lo admite y, en su caso, 5.3 debe incluir sus casos de prueba no funcionales. Lo mismo ocurre en los teléfonos si se conserva la resolución móvil de 3.6.1, que sigue siendo una decisión abierta. | 3.5; 3.6.1; RNF-11; 5.3 |
 
 ### 2.5.3 Suposiciones sobre el dominio financiero y el marco normativo
@@ -259,15 +261,15 @@ Este apartado enumera los factores que afectan a los requisitos de este document
 | S-12 | Se asume que las posiciones en CETES que registre el usuario tienen a lo más 728 días por vencer, el plazo más largo de las tasas de RF-30. Conforme a P-15, RF-30 incluye las series de 728 días del cuadro CF107 (Banco de México, s. f.-d), porque en el cuarto trimestre de 2026 la SHCP también subasta cada quince días CETES a 2 años (SHCP, 2026). | Con más de 728 días por vencer, RF-26b no tiene un plazo mayor con el cual interpolar y aplica la tasa del plazo más largo (P-11). | RF-04; RF-26b; RF-30; RF-32; 5.2 |
 | S-13 | Se asume que la tasa de la subasta primaria más reciente, interpolada al plazo por vencer, aproxima lo suficiente el valor de una posición en CETES para fines informativos, que es la base del método de RF-26b; el estudiante aceptó presentar esa valuación como estimación informativa (P-21) ⟦confirmar con la empresa que la diferencia frente al mercado secundario es aceptable⟧. | Si se exige un valor más cercano al del mercado secundario, RF-26b debe cambiar de método y 5.2 debe recalcularse. En cualquier caso, R-11 obliga a presentar la valuación como una estimación informativa. | RF-26b; R-11; 5.2 |
 | S-14 | Se asume, conforme a P-16, que al usuario le basta que RF-26a liquide cada emisión de CETES a su valor nominal, antes de la retención del impuesto sobre la renta (ISR) que aplique el intermediario, cuya tasa anual en 2026 es de 0.90 % (Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026, 2025, art. 24). También se asume que, si el intermediario reinvierte el importe en automático, el usuario registra la reinversión como una compra (RF-05). | Si el usuario espera que la liquidación coincida con su estado de cuenta, RF-26a tendrá que liquidar por el importe neto de la retención, lo que cambia el TWR de RF-09 y el conjunto de referencia de 5.2. Si no registra la reinversión, la posición desaparece del valor de RF-08 aunque la conserve, y habrá que agregar a RF-05 o a RF-26a una regla para ella. | RF-05; RF-08; RF-09; RF-26a; 5.2 |
-| S-15 | Se asume, sin un dictamen jurídico, que mientras se respeten R-01, R-02 y R-11 quien opere la plataforma no requiere registro ni autorización de la CNBV. En particular, que presentar métricas del portafolio del usuario, explicarlas en lenguaje natural (RF-14), simular escenarios (RF-21) y simular composiciones que él define (RF-22) no es asesoría de inversión, análisis ni emisión de recomendaciones individualizadas en los términos de la Ley del Mercado de Valores (2005), art. 225 ⟦confirmar con la empresa si cuenta con una opinión jurídica⟧. | Si una opinión jurídica o la CNBV concluyen lo contrario, RF-14 y RF-22 deben eliminarse o rediseñarse, y R-01 y la advertencia de RF-12 se reescriben; la alternativa es que quien opere la plataforma se registre como asesor en inversiones. RF-14 es el más expuesto, porque el artículo menciona el análisis, así que su criterio de aceptación deberá impedir juicios sobre la conveniencia de una inversión. | RF-12; RF-14; RF-21; RF-22; R-01; 2.6 |
+| S-15 | Se asume, sin un dictamen jurídico, que mientras se respeten R-01, R-02 y R-11 quien opere la plataforma no requiere registro ni autorización de la CNBV. En particular, que presentar métricas del portafolio del usuario, explicarlas en lenguaje natural (RF-14), simular escenarios (RF-21) y simular composiciones que él define (RF-22) no es asesoría de inversión, análisis ni emisión de recomendaciones individualizadas en los términos de la Ley del Mercado de Valores (2005), art. 225 ⟦confirmar con la empresa si cuenta con una opinión jurídica⟧. | Si la empresa cuenta con una opinión jurídica sobre ese artículo, RF-14, RF-21 y RF-22 se ajustarán a ella (P-29); si esa opinión o la CNBV concluyen lo contrario, deben eliminarse o rediseñarse, y R-01 y la advertencia de RF-12 se reescriben; la alternativa es que quien opere la plataforma se registre como asesor en inversiones. RF-14 es el más expuesto, porque el artículo menciona el análisis, así que su criterio de aceptación deberá impedir juicios sobre la conveniencia de una inversión (P-29). | RF-12; RF-14; RF-21; RF-22; R-01; 2.6 |
 
 ### 2.5.4 Dependencias de fuentes de datos y normas externas
 
 | ID | Dependencia | Consecuencia si falla o cambia | Requisitos o apartados afectados |
 |---|---|---|---|
-| D-01 | Se asume que la API del SIE del Banco de México seguirá disponible en su versión 1, sin costo y sin cambios incompatibles, y que seguirá habilitado el *token* de consulta que genera el estudiante (R-08, R-15). | Si falla antes de congelar 5.2, la semilla de RF-30 se construye con la exportación del cuadro CF107 desde el sitio del SIE, que RF-30 admite porque no exige la API. Después solo se afecta RF-32, cuyas tasas nuevas se cargarían a mano mientras tanto; los cálculos no se interrumpen, porque leen de la base de datos (R-15). Si el sistema pasa a un servidor de la empresa, el *token* lo generará quien lo opere ⟦confirmar con la empresa⟧. | RF-30; RF-32; R-08; R-15; RNF-08; 3.6.2; 5.2 |
-| D-02 | Se asume que el Banco de México mantiene, con la misma clave, definición, unidad y convención de fechas, las series de tasas de las subastas de CETES (SF43936, SF43939, SF43942, SF43945 y SF349785, esta de 728 días; P-15), que hoy se expresan en por ciento anual, y las de su plazo en días, que dan el plazo efectivo de cada colocación (SF43935, SF43938, SF43941, SF43944 y SF349778; P-11); unas y otras se fechan en la fecha de colocación, posterior a la subasta (Banco de México, s. f.-d). Lo mismo se asume de las series del FIX y de la UDI que cargará RF-32. | Si una serie se descontinúa o cambia de clave, RF-30 y RF-32 dejan de cargarla, RF-26b pierde un plazo de interpolación y RF-17 o RF-23 se quedan sin tasa o sin tipo de cambio. Si cambian la unidad o la convención de fechas, cambian RF-26b, la fecha que muestra RF-31 y el conjunto de referencia de 5.2. | RF-17; RF-23; RF-26b; RF-30; RF-31; RF-32; RNF-09; 3.4; 5.2 |
-| D-03 | Se asume que el Banco de México mantiene su autorización general para reproducir y utilizar la información que publica, con la sola condición de mencionar la fuente y su dirección de Internet (Banco de México, s. f.-c). | Si exige una licencia o restringe el uso comercial, RF-30 y RF-32 deben revisarse conforme a R-05, y puede cambiar la atribución de RF-31. Si las tasas reales dejan de poder usarse, RF-30 se construirá con otra fuente cuya licencia lo permita o con tasas sintéticas ⟦decidir⟧. | RF-26b; RF-30; RF-31; RF-32; R-05 |
+| D-01 | Se asume que la API del SIE del Banco de México seguirá disponible en su versión 1, sin costo y sin cambios incompatibles, y que seguirá habilitado el *token* de consulta que genera el estudiante (R-08, R-15). | Si falla antes de congelar 5.2, la semilla de RF-30 se construye con la exportación del cuadro CF107 desde el sitio del SIE, que RF-30 admite porque no exige la API. Después se afectan RF-32, cuyas tasas y plazos nuevos se cargarían a mano mientras tanto, RF-34, que usa los plazos que carga RF-32, y la carga única del FIX histórico de RF-23 (P-27); los cálculos no se interrumpen, porque leen de la base de datos (R-15). Si el sistema pasa a un servidor de la empresa, el *token* lo generará quien lo opere ⟦confirmar con la empresa⟧. | RF-23; RF-30; RF-32; RF-34; R-08; R-15; RNF-08; 3.6.2; 5.2 |
+| D-02 | Se asume que el Banco de México mantiene, con la misma clave, definición, unidad y convención de fechas, las series de tasas de las subastas de CETES (SF43936, SF43939, SF43942, SF43945 y SF349785, esta de 728 días; P-15), que hoy se expresan en por ciento anual, y las de su plazo en días, que dan el plazo efectivo de cada colocación (SF43935, SF43938, SF43941, SF43944 y SF349778; P-11); unas y otras, que cargan RF-30 y RF-32 (P-27), se fechan en la fecha de colocación, posterior a la subasta (Banco de México, s. f.-d). Lo mismo se asume de la serie del FIX, que cargarán RF-32, a diario, y RF-23, una sola vez para las fechas pasadas (P-27). | Si una serie se descontinúa o cambia de clave, RF-30 y RF-32 dejan de cargarla, RF-26b pierde un plazo de interpolación, RF-34 no puede derivar el vencimiento de las emisiones nuevas de ese plazo y RF-17 o RF-23 se quedan sin tasa o sin tipo de cambio. Si cambian la unidad o la convención de fechas, cambian RF-26b, el vencimiento que deriva RF-34, la fecha que muestra RF-31 y el conjunto de referencia de 5.2. | RF-17; RF-23; RF-26b; RF-30; RF-31; RF-32; RF-34; RNF-09; 3.4; 5.2 |
+| D-03 | Se asume que el Banco de México mantiene su autorización general para reproducir y utilizar la información que publica, con la sola condición de mencionar la fuente y su dirección de Internet (Banco de México, s. f.-c). | Si exige una licencia o restringe el uso comercial, RF-30, RF-32, RF-34 y la carga del FIX histórico de RF-23 (P-27) deben revisarse conforme a R-05, y puede cambiar la atribución de RF-31. Si las tasas reales dejan de poder usarse, RF-30 se construirá con otra fuente cuya licencia lo permita o con tasas sintéticas ⟦decidir⟧. | RF-23; RF-26b; RF-30; RF-31; RF-32; RF-34; R-05 |
 | D-04 | Se asume que durante la estadía no se expide un reglamento de la LFPDPPP (2025) ni se reforman los artículos en que se basan R-03 y R-12 de modo que cambien el aviso de privacidad, la revocación del consentimiento o las medidas de seguridad. Para comprobarlo, el estudiante revisa el Diario Oficial de la Federación antes del 18 de octubre y antes del 20 de noviembre de 2026 (P-23). | Si ocurre, deben revisarse los criterios de aceptación de RF-12, las restricciones R-03 y R-12, los RNF-03 a RNF-05 y las referencias de la sección 6. | RF-12; R-03; R-12; RNF-03 a RNF-05; 3.2; 6 |
 
 ### 2.5.5 Dependencias de *software* y de personas
@@ -286,37 +288,38 @@ Los enunciados resumen los de la Definición sin cambiar su alcance; al entrar e
 
 ### 2.6.1 Requisitos diferidos con fecha
 
-La Definición del proyecto fija la fecha de nueve de estos diez requisitos; la de RF-39, que se agregó al limitar RF-28 al registro (P-01), se fijará en el plan de la fase de refinamiento.
+La Definición del proyecto fija la fecha de diez de estos once requisitos, entre ellos RF-34, que se agregó con la fecha de RF-32 para incorporar los CETES colocados después de la semilla (P-27); la de RF-39, que se agregó al limitar RF-28 al registro (P-01), se fijará en el plan de la fase de refinamiento.
 
 | ID | Requisito | Prioridad | Fecha objetivo | Depende de | Condiciones |
 |---|---|---|---|---|---|
-| RF-19 | Calcular el rendimiento ponderado por dinero (XIRR) del portafolio. | Diferido | Semana del 19 de octubre | RF-05, RF-08, RF-26a (cada vencimiento es un retiro), RF-26b (CETES al inicio y al final) y los flujos externos de RF-09. | S-07 (sin saldos iniciales ni traspasos); S-14 (la reinversión se registra como compra); X-05. |
-| RF-20 | Calcular la volatilidad anualizada del portafolio. | Diferido | Semana del 19 de octubre | La serie de rendimientos de RF-09, con la frecuencia que fije 3.2 ⟦decidir⟧, y la valuación de RF-08 y RF-26b. | S-09 (cobertura de la semilla); X-05; S-02 (su retraso arrastra a RF-17). |
-| RF-32 | Actualizar a diario y de forma automática, desde el SIE del Banco de México, las tasas de CETES, el tipo de cambio FIX y la UDI, en una sola consulta de hasta 20 series; los cálculos leen siempre de la base de datos, nunca del API. | Diferido | Semana del 19 de octubre | RF-30 (series de CETES; el FIX y la UDI son nuevas) y RF-31. | R-08, R-14 y R-15; S-12; D-01 a D-03; S-03 y P-25 (sin servidor, solo se ejecuta con el equipo encendido). |
-| RF-17 | Calcular el índice de Sharpe del portafolio con la tasa de CETES a 28 días como tasa libre de riesgo. | Diferido | Semana del 26 de octubre | RF-20, RF-30 y la serie de RF-09; RF-32 solo si el periodo rebasa la semilla de tasas. | R-14 (en días sin subasta, la última tasa publicada); D-02; S-05. |
-| RF-21 | Simular escenarios del portafolio por el método Monte Carlo. | Diferido | Semana del 26 de octubre | RF-08 y la serie de rendimientos de RF-09, o RF-20 si el modelo es paramétrico ⟦decidir⟧; RF-26a y RF-26b si el horizonte incluye CETES. | R-01 y S-15 (escenario hipotético, no recomendación); R-11; S-05. |
-| RF-33 | Permitir que el usuario capture precios de cierre o los importe de un archivo CSV, por ejemplo los de sus estados de cuenta. | Diferido | Semana del 26 de octubre | RF-04, RF-07 (convivencia con la semilla), RF-31 y RF-02, si esos precios solo valúan los portafolios de su autor ⟦decidir⟧. | X-01 (solo precios); X-07; R-05; R-12; S-04 y S-05 (solo archivos ficticios). |
-| RF-22 | Simular composiciones alternativas del portafolio definidas por el usuario y compararlas con el portafolio real por rendimiento y riesgo, sin que el sistema genere ni sugiera composiciones. | Diferido | Semana del 2 de noviembre | RF-04, RF-08 a RF-10, RF-26a y RF-26b. | R-01 y S-15 (si resulta asesoría, se elimina o se rediseña); R-11; S-05; X-06. |
-| RF-23 | Registrar transacciones en más de una divisa. | Diferido | Semana del 2 de noviembre | RF-03, RF-05, RF-08 a RF-10 y un FIX histórico que hoy no carga ningún requisito ⟦decidir⟧. | S-10, que deja de aplicarse; D-02; X-03; 5.2, que se amplía con operaciones en otra divisa. Parte de un MVP que solo admite pesos (P-02), y con el FIX solo cubre el dólar. |
-| RF-24 | Ofrecer una aplicación móvil con paridad de indicadores. | Diferido | Semanas del 2 y del 9 de noviembre | Los indicadores entregados hasta entonces (lista por fijar ⟦decidir⟧), RF-01, RF-02, RF-12 y RF-31. | S-06 y R-07 (solo Android o aplicación web progresiva); S-11 y 3.6.1 (resolución móvil abierta). Sin servidor (S-03 y P-25), el teléfono usa la red local, donde instalar una aplicación web progresiva exige HTTPS (MDN contributors, 2026) y una aplicación nativa de Android bloquea por omisión el tráfico sin cifrar (Google, 2026). |
+| RF-19 | Calcular el rendimiento ponderado por dinero (XIRR) del portafolio. | Diferido | Semana del 19 de octubre | RF-05, RF-08, RF-26a (cada vencimiento es un retiro), RF-26b (CETES al inicio y al final) y los flujos externos de RF-09. | S-07 (sin saldos iniciales ni traspasos); S-14 (la reinversión se registra como compra); X-05. Usa una base de 365 días y, en periodos de menos de un año, presenta el rendimiento del periodo sin anualizar (CFA Institute, 2019/2025, disposición 2.A.12); su ficha fijará qué se muestra si el cálculo no converge y la tolerancia frente a 5.2 (P-28). |
+| RF-20 | Calcular la volatilidad anualizada del portafolio. | Diferido | Semana del 19 de octubre | La serie diaria de rendimientos de RF-09 y la valuación de RF-08 y RF-26b. | S-09 (cobertura de la semilla); X-05; S-02 (su retraso arrastra a RF-17 y RF-21). Usa la desviación estándar muestral de la serie diaria y la anualiza con un factor de 252 días, como declarará su ficha (P-28). |
+| RF-32 | Actualizar a diario y de forma automática, desde el SIE del Banco de México, las tasas de CETES, las series de plazo del CF107 y el tipo de cambio FIX, en una sola consulta de hasta 20 series; los cálculos leen siempre de la base de datos, nunca del API. | Diferido | Semana del 19 de octubre | RF-30 (series de tasas y de plazo de CETES; la del FIX es nueva) y RF-31. | R-08, R-14 y R-15; S-12; D-01 a D-03; S-03 y P-25 (sin servidor, solo se ejecuta con el equipo encendido). |
+| RF-34 | Incorporar al catálogo de RF-04 las emisiones de CETES colocadas después de la semilla, con el vencimiento que resulta de su colocación y su plazo publicados en el SIE ⟦confirmar con una emisión real cómo se deriva la clave⟧. | Diferido | Semana del 19 de octubre | RF-32 (fecha de colocación y plazo de cada emisión) y RF-04 (clave de emisión y vencimiento). | S-09 y S-14 (sin él no se registran compras ni reinversiones de CETES colocados después de la semilla; P-27); S-12; D-01 a D-03; R-14. |
+| RF-17 | Calcular el índice de Sharpe del portafolio con la tasa de CETES a 28 días como tasa libre de riesgo. | Diferido | Semana del 26 de octubre | RF-20, RF-30 y la serie de RF-09; RF-32 solo si el periodo rebasa la semilla de tasas. | R-14 (en días sin subasta, la última tasa publicada); D-02; S-05. Se calcula con los rendimientos excedentes de cada subperiodo sobre la tasa libre de riesgo (P-28). |
+| RF-21 | Simular escenarios del portafolio por el método Monte Carlo. | Diferido | Semana del 26 de octubre | RF-08 y RF-20, porque el modelo es paramétrico (P-28); RF-26a y RF-26b si el horizonte incluye CETES. | R-01 y S-15 (escenario hipotético, no recomendación; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-21 se ajustará a ella; P-29); R-11; S-05. |
+| RF-33 | Permitir que el usuario capture precios de cierre o los importe de un archivo CSV, por ejemplo los de sus estados de cuenta. | Diferido | Semana del 26 de octubre | RF-04, RF-07 (convivencia con la semilla: en los portafolios de su autor prevalece el precio capturado, que se distingue del de la semilla por su fuente; RD-19), RF-31 y RF-02, porque esos precios son privados de su autor y solo valúan sus portafolios (P-28). | X-01 (solo precios); X-07; R-05; R-12; S-04 y S-05 (solo archivos ficticios). |
+| RF-22 | Simular composiciones alternativas del portafolio definidas por el usuario y compararlas con el portafolio real por rendimiento y riesgo, sin que el sistema genere ni sugiera composiciones. | Diferido | Semana del 2 de noviembre | RF-04, RF-08 a RF-10, RF-26a y RF-26b. | R-01 y S-15 (si la empresa cuenta con la opinión jurídica que menciona S-15, RF-22 se ajustará a ella, y si resulta asesoría, se elimina o se rediseña; P-29); R-11; S-05; X-06. |
+| RF-23 | Registrar transacciones en más de una divisa. | Diferido | Semana del 2 de noviembre | RF-03, RF-05, RF-08 a RF-10, RF-32 (FIX diario) y el FIX histórico, que se carga una sola vez desde el SIE al desarrollar RF-23 (P-27). | S-10, que deja de aplicarse; D-01 a D-03, R-08 y R-15 (carga única del FIX histórico desde el SIE; P-27); X-03; 5.2, que se amplía con operaciones en otra divisa. Parte de un MVP que solo admite pesos (P-02), y con el FIX solo cubre el dólar. |
+| RF-24 | Ofrecer una aplicación móvil con paridad de indicadores. | Diferido | Semanas del 2 y del 9 de noviembre | Los indicadores entregados al 1 de noviembre (P-28), RF-01, RF-02, RF-12 y RF-31. | S-06 y R-07 (solo Android o aplicación web progresiva); S-11 y 3.6.1 (resolución móvil abierta). Sin servidor (S-03 y P-25), el teléfono usa la red local, donde instalar una aplicación web progresiva exige HTTPS (MDN contributors, 2026) y una aplicación nativa de Android bloquea por omisión el tráfico sin cifrar (Google, 2026). |
 | RF-39 | Permitir que el usuario modifique y elimine transacciones registradas, y rechazar la modificación o la eliminación que deje negativo, en cualquier fecha, el saldo de un instrumento con un intermediario dentro del portafolio, como hace RF-28 con el registro. | Diferido | Por fijar ⟦decidir⟧ | RF-05 (las transacciones que se modifican o eliminan) y RF-28 (la regla que se revalida). | X-04 (sin ventas en corto); RD-09 y RD-10 (mientras no entre, un error de captura solo se corrige eliminando el portafolio con todas sus transacciones). |
 
 ### 2.6.2 Requisitos que deberían incluirse y opcionales
 
-La Definición del proyecto clasifica estos seis requisitos como «Debería incluirse» (S) u «Opcional» (C) sin asignarles fecha; las fechas son propuestas.
+La Definición del proyecto clasifica estos seis requisitos como «Debería incluirse» (S) u «Opcional» (C) sin asignarles fecha; la de RF-14 está decidida (P-31) y las demás son propuestas.
 
 | ID | Requisito | Prioridad | Fecha objetivo | Depende de | Condiciones |
 |---|---|---|---|---|---|
 | RF-27 | Presentar, a una fecha de corte, la cantidad de títulos y el valor de mercado de cada instrumento desglosados por intermediario, de modo que su suma coincida con la posición y el valor consolidados. | S | Semana del 19 de octubre ⟦propuesta: decidir⟧ | RF-06, RF-08, RF-25 y RF-26b. | X-05 (sin rendimiento ni riesgo por intermediario); S-07; R-11; X-06. |
 | RF-13 | Presentar la distribución del portafolio por clase de activo. | S | Semana del 19 de octubre ⟦propuesta: decidir⟧ | RF-04 (clase de activo), RF-06, RF-08 y RF-26b. | S-09; S-10; R-11 (el peso de los CETES es estimado); X-06. |
-| RF-15 | Exportar el portafolio y sus transacciones a un archivo. | S | Semana del 26 de octubre ⟦propuesta: decidir⟧ | RF-03, RF-05 y RF-25; RF-07, RF-08, RF-26b y RF-31 si incluye valores, precios o tasas. | R-12; R-05 y D-03 (atribución de las tasas y marca de demostración); X-03. |
-| RF-14 | Generar una explicación en lenguaje natural de los indicadores calculados. | S | Semana del 2 de noviembre ⟦propuesta: decidir⟧ | Los indicadores ya entregados que explica (RF-08 a RF-10, RF-26b y los diferidos disponibles), sin recalcularlos, y RF-12. | R-01 y S-15 (sin juicios sobre la conveniencia de una inversión); R-07 a R-09 si usa un servicio externo de inteligencia artificial ⟦decidir⟧. |
+| RF-15 | Exportar el portafolio y sus transacciones a un archivo. | S | Semana del 26 de octubre ⟦propuesta: decidir⟧ | RF-03, RF-05 y RF-25; RF-07, RF-08, RF-26b y RF-31 si incluye valores, precios o tasas. | R-12; R-05 y D-03 (atribución de las tasas y marca de demostración); X-03. Al redactar su ficha se agregará a 3.3 un RNF de integridad que neutralice fórmulas en el archivo exportado (P-28). |
+| RF-14 | Generar una explicación en lenguaje natural de los indicadores calculados. | S | Semana del 2 de noviembre (P-31) | Los indicadores ya entregados que explica (RF-08 a RF-10, RF-26b y los diferidos disponibles), sin recalcularlos, y RF-12. | R-01 y S-15 (su criterio de aceptación deberá impedir juicios sobre la conveniencia de una inversión y, si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14 se ajustará a ella; P-29). La explicación se genera con plantillas, sin servicio externo de inteligencia artificial (P-31), por lo que no tiene costo (R-07), no agrega una segunda interfaz (R-08) ni envía cifras a terceros (R-09, retirada). |
 | RF-16 | Calcular el valor en riesgo histórico del portafolio. | C | Semana del 9 de noviembre si hay margen; si no, posterior a la estadía ⟦propuesta: decidir⟧ | La serie de rendimientos de RF-09 y la valuación de RF-08 y RF-26b. | S-09 (cobertura de la ventana); S-05; R-10; X-05. |
 | RF-18 | Comparar el rendimiento del portafolio contra un índice de referencia sintético o propio. | C | Igual que RF-16 ⟦propuesta: decidir⟧ | RF-09 (mismo periodo y convención), RF-31, y RF-07 o RF-30 para el índice. | R-05 y R-06 (el histórico del S&P/BMV IPC requiere licencia de S&P Dow Jones Indices); R-01. |
 
 ### 2.6.3 Orden de prioridad y requisitos posteriores a la estadía
 
-En la fase de refinamiento, la misma persona (S-02) realiza también las pruebas y, en las semanas del 2 y del 9 de noviembre, la documentación técnica, el manual de usuario y el plan de mantenimiento. Los imprescindibles que S-02 pase a esta fase, la revisión del MVP (D-07) y, si el líder de proyecto encuentra inconsistencias o carencias, su corrección antes de la segunda revisión (P-22) van antes que este apartado. Si la capacidad no alcanza, sus requisitos pasan a la fase posterior a la estadía en este orden: RF-24, RF-23, RF-22, RF-21, RF-33, RF-16, RF-18, RF-32, RF-14 y RF-19; se conservan RF-27, RF-13, RF-20, RF-15, RF-17 y RF-39 ⟦propuesta: decidir⟧. El orden considera las dependencias, la prioridad, el esfuerzo y la contribución al objetivo general, y se revisa al cierre de cada semana. La fase posterior a la estadía no tiene fecha; su responsable y su calendario dependen de la empresa ⟦confirmar con la empresa⟧.
+En la fase de refinamiento, la misma persona (S-02) realiza también las pruebas y, en las semanas del 2 y del 9 de noviembre, la documentación técnica, el manual de usuario y el plan de mantenimiento. Los imprescindibles que S-02 pase a esta fase, la revisión del MVP (D-07) y, si el líder de proyecto encuentra inconsistencias o carencias, su corrección antes de la segunda revisión (P-22) van antes que este apartado. Si la capacidad no alcanza, sus requisitos pasan a la fase posterior a la estadía en un orden MoSCoW estricto (P-26): de los de 2.6.2, se recortan primero los opcionales (C), RF-16 y RF-18; los que deberían incluirse (S), RF-27, RF-13, RF-15 y RF-14, forman el compromiso que se conserva. Los diferidos de 2.6.1 (RF-17, RF-19 a RF-24, RF-32 a RF-34 y RF-39) no tienen categoría MoSCoW en la Definición, así que su lugar en ese orden y el orden entre ellos están por fijar ⟦decidir⟧; con cada uno pasan los que dependen de él, como RF-17 y RF-21 con RF-20, y RF-23 y RF-34 con RF-32. El orden se revisa al cierre de cada semana. La fase posterior a la estadía no tiene fecha; su responsable y su calendario dependen de la empresa ⟦confirmar con la empresa⟧.
 
 ---
 
@@ -330,7 +333,7 @@ Esta tabla registra las versiones de la especificación: las 0.x son borradores;
 |---|---|---|---|
 | 0.1 | 19/09/2026 | Ramon Ernesto Nieblas Mendivil | Creado el 17 de septiembre ⟦contenido inicial: confirmar⟧. Estructura de seis secciones basada en la plantilla institucional y conciliada con ISO/IEC/IEEE 29148:2018 (ISO et al., 2018). Acrónimos de 1.3, tablas de 3.5, 3.7 y 3.8 (MVP el 5 de octubre) y referencia de la AMIB en 6 ⟦confirmar fecha⟧. |
 | 0.2 | 26/09/2026 | Ramon Ernesto Nieblas Mendivil | Primeros apartados, sobre la Definición de 12 imprescindibles: 2.1, 2.2, 2.3 (del 20 de septiembre) y la introducción de 3.6 con 3.6.1. Fecha de 2.1, 2.2 y 3.6: entre el 19 y el 26 de septiembre ⟦confirmar⟧. Contiene además 1.2 y el enlace al glosario de 1.3 ⟦confirmar desde cuándo⟧. No incorpora los cambios de la Definición de ese día (17 imprescindibles; MVP al 18 de octubre). |
-| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4, 5.2 y 5.3. El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). |
+| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4.2 a 4.5, 5.2 y 5.3. El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). Ese mismo día se integra 4.1 (diagramas de casos de uso en Mermaid y fichas de CU-01, CU-05 y CU-07), con sus referencias en 6; 5.3 agrega la columna del caso de uso y 1.3 agrega CU y UML. También se aplican las decisiones P-26 a P-31: 2.6 incorpora RF-34 (emisiones de CETES colocadas después de la semilla) y un orden de recorte MoSCoW estricto; RF-32 deja la UDI y carga las series de plazo del CF107; el FIX histórico se carga una sola vez con RF-23; 2.6 fija los métodos de RF-17, RF-19 (con su referencia en 6), RF-20 y RF-21, que pasa a depender de RF-20, y los indicadores de RF-24; RD-19 hace privados de su autor los precios que capture RF-33, que prevalecen en sus portafolios; RF-14 se hará en la semana del 2 de noviembre con plantillas, sin servicio externo, por lo que se retira R-09, y su explicación no emitirá juicios sobre la conveniencia de una inversión; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14, RF-21 y RF-22 se ajustarán a ella. |
 
 ## 3.2 Requisitos funcionales
 
@@ -422,15 +425,15 @@ Este apartado especifica, conforme a la cláusula 9.6.15 de ISO/IEC/IEEE 29148:2
 | Emisión de CETES | Instrumento con clave de emisión, vencimiento y valor nominal de 10.00 pesos (Banco de México, s. f.-a); sin fecha de colocación, porque se coloca varias veces. | RF-04; RF-26a; RF-26b |
 | Transacción | Portafolio, intermediario, instrumento, tipo (compra o venta; ampliable por S-07 ⟦decidir⟧), fecha de concertación (P-09), cantidad de títulos, precio por título, importe de las comisiones de la operación con su IVA y momento de registro; el costo o el ingreso por título se calcula (RF-05) y no se guarda. | RF-05; S-07; S-08 |
 | Fuente de datos y licencia (por versión) | Nombre, dirección y si sus datos son de demostración; por versión de sus términos, usos permitidos, obligación de suprimir y atribución. | RF-07; RF-31; R-05; D-03 |
-| Carga de datos | Fuente, versión de la licencia, origen (semilla, tarea diaria o captura), fechas de obtención ⟦decidir⟧ e incorporación, intervalo, resultado, observaciones incorporadas y omitidas, y valores sustituidos. | RF-30; RF-31; RNF-09 |
+| Carga de datos | Fuente, versión de la licencia, origen (semilla, tarea diaria, carga única del FIX histórico o captura), fechas de obtención ⟦decidir⟧ e incorporación, intervalo, resultado, observaciones incorporadas y omitidas, y valores sustituidos. | RF-30; RF-31; RNF-09 |
 | Precio de cierre | Instrumento, fecha, precio por título y carga; en el MVP, de la semilla sintética. | RF-07; RF-08; R-13 |
 | Tasa de referencia | Plazo nominal, fecha de colocación, valor y unidad publicados (por ciento anual), plazo efectivo en días, que publica el CF107 (Banco de México, s. f.-d), y carga. | RF-26b; RF-30; RNF-09; D-02 |
 
-Los diferidos agregan el tipo de cambio FIX (RF-32), con su histórico para RF-23 ⟦decidir⟧; el precio que captura el usuario (RF-33), privado de su autor ⟦decidir⟧, y, si se guardan, las composiciones de RF-22 ⟦decidir⟧. No se guardan la UDI ni eventos corporativos ⟦decidir⟧.
+Los diferidos agregan el tipo de cambio FIX (RF-32), con el histórico que necesita RF-23, cargado una sola vez desde el SIE al hacer ese requisito (P-27); las emisiones de CETES colocadas después de la semilla (RF-34; P-27), con el vencimiento que resulta de su colocación y su plazo publicados en el SIE ⟦confirmar con una emisión real cómo se deriva la clave⟧; el precio que captura el usuario (RF-33), privado de su autor (P-28), y, si se guardan, las composiciones de RF-22 ⟦decidir⟧. RF-32 carga también las series de plazo del CF107, para que cada tasa nueva tenga su plazo efectivo (RD-18; P-27). No se guardan eventos corporativos ⟦decidir⟧.
 
 ### 3.4.2 Relaciones
 
-Cada consentimiento, portafolio e intermediario pertenece a un usuario; cada transacción, a un portafolio, un intermediario y un instrumento, y portafolio e intermediario no se relacionan directamente. Cada otorgamiento o revocación remite a una versión del aviso. El catálogo y los datos de mercado son comunes; cada emisión de CETES es un instrumento, y cada precio, tasa y tipo de cambio proviene de una carga ligada a una fuente y a una versión de su licencia.
+Cada consentimiento, portafolio e intermediario pertenece a un usuario; cada transacción, a un portafolio, un intermediario y un instrumento, y portafolio e intermediario no se relacionan directamente. Cada otorgamiento o revocación remite a una versión del aviso. El catálogo y los datos de mercado son comunes, salvo los precios que capture un usuario (RF-33), privados de su autor (P-28); cada emisión de CETES es un instrumento, y cada precio, tasa y tipo de cambio proviene de una carga ligada a una fuente y a una versión de su licencia.
 
 ### 3.4.3 Información derivada
 
@@ -469,8 +472,8 @@ El vencimiento de los CETES (RF-26a) y el saldo no negativo (RF-28) se rigen por
 | ID | Regla | Origen |
 |---|---|---|
 | RD-17 | Cada precio, tasa y tipo de cambio deberá provenir de una sola carga. | RF-31; R-05 |
-| RD-18 | Cada tasa deberá guardarse con su plazo nominal y el efectivo de su colocación; una tasa sin plazo efectivo no deberá cargarse. | RF-26b; RF-30 |
-| RD-19 | Deberá existir a lo más un precio de cierre por instrumento, fecha y fuente (desde RF-33, también por autor), una tasa por plazo nominal y fecha de colocación, y un tipo de cambio por par y fecha. | RF-07; RF-30; RF-33; RNF-02 |
+| RD-18 | Cada tasa deberá guardarse con su plazo nominal y el efectivo de su colocación; una tasa sin plazo efectivo no deberá cargarse. | RF-26b; RF-30; RF-32 |
+| RD-19 | Deberá existir a lo más un precio de cierre por instrumento, fecha y fuente (desde RF-33, también por autor), una tasa por plazo nominal y fecha de colocación, y un tipo de cambio por par y fecha. Desde RF-33, cada precio capturado deberá ser privado de su autor y, en los portafolios de este, prevalecer sobre el de la semilla del mismo instrumento y fecha, del que se distingue por su fuente (RF-31; P-28). | RF-02; RF-07; RF-30; RF-31; RF-33; RNF-02 |
 | RD-20 | Una observación publicada sin dato (N/E en el CF107) deberá contarse como omitida en su carga, no guardarse como valor ⟦confirmar cómo llega por la API⟧, y una tasa no deberá rechazarse por tener fecha de colocación posterior a su carga. | RNF-09; R-14 |
 | RD-21 | Si una carga posterior trae otro valor para la misma serie y fecha, este deberá sustituir al almacenado, y la carga, registrar el anterior ⟦decidir: o guardar versiones⟧, salvo en el intervalo de la semilla, que solo cambiará con una versión nueva de 5.2. | RNF-09; RF-31; RNF-01 |
 
@@ -486,7 +489,7 @@ La base entregada (3.8) solo contendrá semillas y cuentas de prueba con datos f
 
 ### 3.4.8 Frecuencia de uso y acceso
 
-El usuario escribe de forma esporádica (2.3). Cada consulta del tablero (RF-11) lee las transacciones hasta la fecha de corte y el último precio o tasa con fecha igual o anterior a cada valuación, así que el acceso dominante es por portafolio, instrumento o plazo y fecha (volumen de RNF-06). Las semillas se cargan al instalar (RNF-12) y, desde RF-32, las tasas y tipos de cambio, a diario; solo las cargas escriben datos de mercado, y los cálculos nunca leen la fuente externa (R-15; RNF-08).
+El usuario escribe de forma esporádica (2.3). Cada consulta del tablero (RF-11) lee las transacciones hasta la fecha de corte y el último precio o tasa con fecha igual o anterior a cada valuación, así que el acceso dominante es por portafolio, instrumento o plazo y fecha (volumen de RNF-06). Las semillas se cargan al instalar (RNF-12); desde RF-32, las tasas, con su plazo efectivo, y los tipos de cambio, a diario, y el histórico del FIX, una sola vez al hacer RF-23 (P-27); solo las cargas escriben datos de mercado, y los cálculos nunca leen la fuente externa (R-15; RNF-08).
 
 ## 3.5 Requisitos de software
 
@@ -526,7 +529,7 @@ Fija los mínimos de un servidor futuro. PostgreSQL 18 no publica mínimos de *h
 | Plataforma | x86-64, con Windows Server 2025 o Ubuntu Server 24.04 LTS y sus correcciones de seguridad ⟦decidir otras versiones: recomendado, solo las que instale RNF-12⟧. | Son las más recientes de cada familia con mínimos publicados, y PostgreSQL 18, uv y Node.js 24 las admiten (Astral Software Inc., s. f.; Node.js contributors, s. f.; PostgreSQL Global Development Group, s. f.-a, s. f.-e). |
 | Procesador y memoria | Los del sistema operativo (Windows Server 2025: 1.4 GHz y 2 GB; Ubuntu Server 24.04 desde ISO: 1.5 GB) más el consumo del *backend* y PostgreSQL, por determinar tras medición de línea base (RNF-06); responsable Ramon; fecha ⟦30/10/2026⟧. | PostgreSQL 18 reserva normalmente 128 MB de shared_buffers (PostgreSQL Global Development Group, s. f.-c), y Argon2id, al menos 19 MiB por registro o inicio de sesión simultáneo (RNF-04). |
 | Almacenamiento | El del sistema operativo (32 GB y 5 GB, respectivamente) más el de la aplicación, la base y sus respaldos, por medir con el volumen de RNF-06; responsable Ramon; fecha ⟦30/10/2026⟧. | En el equipo de desarrollo, PostgreSQL 18 ocupa 992 MB, de ellos 64 MB de datos y 686.5 MB de pgAdmin 4, innecesario en el servidor (13/10/2026); su WAL llega por omisión a 1 GB, o más con carga alta (PostgreSQL Global Development Group, s. f.-f). |
-| Red | Salida HTTPS al SIE (RF-32) y, si RF-14 usa un servicio externo, a este ⟦decidir (P-31): recomendado, sin él⟧; entrada HTTPS desde la red de los usuarios, con el cifrado en tránsito que agregará 3.3 (S-03). | R-08; R-09; R-15; RNF-05. El *token* lo generará quien opere el servidor ⟦confirmar con la empresa (D-01)⟧. |
+| Red | Salida HTTPS al SIE (RF-32), única interfaz externa del sistema, porque RF-14 usará plantillas (P-31); entrada HTTPS desde la red de los usuarios, con el cifrado en tránsito que agregará 3.3 (S-03). | R-08; R-15; RNF-05. El *token* lo generará quien opere el servidor ⟦confirmar con la empresa (D-01)⟧. |
 
 ### 3.6.3 Equipo de desarrollo
 
@@ -623,9 +626,164 @@ Como nadie aprueba esta especificación por separado (3.9.1), la versión 1.0 de
 
 ## 4.1 Diagrama de casos de uso
 
-<!-- Un diagrama, tres actores, ocho elipses. Y sólo TRES fichas de caso de uso:
-     CU-01 Registrar cuenta (con el paso de consentimiento), CU-05 Registrar transacción,
-     CU-07 Consultar indicadores. No ocho fichas: son horas y dicen lo mismo que 3.2. -->
+Este apartado presenta los actores de la plataforma y los casos de uso en que participan. Se deriva de la sección 3 y no agrega funciones: el actor principal es el perfil único de 2.3, y los casos cubren los 18 imprescindibles de 3.2, con las reglas de 3.4; un segundo diagrama muestra los de 2.6.
+
+La notación es la de la cláusula 18 de UML 2.5.1 (Object Management Group, 2017), escrita con el tipo de diagrama de casos de uso de Mermaid, *usecase-beta*, disponible desde su versión 12 (Mermaid contributors, s. f.). Los actores quedan fuera del límite del sistema, y cada caso es una elipse con su identificador CU-nn y, si lo extienden, su punto de extensión. La línea continua asocia un actor con un caso; las flechas punteadas son las relaciones «include», del caso base al incluido, y «extend», del caso que extiende al caso base. Mermaid se aparta de UML en dos detalles: rotula esas flechas sin comillas angulares y las dibuja con punta rellena, no abierta.
+
+Los diagramas se leen de izquierda a derecha: el actor participa en los casos unidos a él; el caso base siempre ejecuta el incluido, y el extendido puede ejecutar, en su punto de extensión, el que lo extiende.
+
+### Casos de uso del MVP
+
+El diagrama reúne los doce casos del MVP.
+
+```mermaid
+usecase-beta
+accTitle: Casos de uso del MVP del Proyecto 077
+accDescr: El inversionista se asocia con diez casos de uso y el instalador con uno. Registrar transacción incluye Validar saldo por intermediario, y Consultar aviso de privacidad extiende Registrar cuenta en su punto de extensión aviso.
+direction LR
+actor INV("Inversionista")
+actor INS("Instalador")
+systemBoundary SIS["Plataforma 077 (MVP)"]
+  CU01("`CU-01 Registrar cuenta
+punto de extensión: aviso`")
+  CU02("CU-02 Iniciar sesión")
+  CU03("CU-03 Gestionar portafolios")
+  CU04("CU-04 Registrar y consultar intermediarios")
+  CU05("CU-05 Registrar transacción")
+  CU06("CU-06 Consultar transacciones y posiciones")
+  CU07("CU-07 Consultar indicadores")
+  CU08("CU-08 Consultar catálogo de instrumentos")
+  CU09("CU-09 Consultar aviso de privacidad")
+  CU10("CU-10 Revocar consentimiento")
+  CU11("CU-11 Cargar datos semilla")
+  CU12("CU-12 Validar saldo por intermediario")
+end
+INV -- CU01
+INV -- CU02
+INV -- CU03
+INV -- CU04
+INV -- CU05
+INV -- CU06
+INV -- CU07
+INV -- CU08
+INV -- CU09
+INV -- CU10
+INS -- CU11
+CU09 ..> : extend CU01
+CU05 ..> : include CU12
+```
+
+| CU | Nombre | Actor | Requisitos |
+|---|---|---|---|
+| CU-01 | Registrar cuenta | Inversionista | RF-01; RF-12 (crit. 1) |
+| CU-02 | Iniciar sesión | Inversionista | RF-01; RF-12 (crit. 3) |
+| CU-03 | Gestionar portafolios | Inversionista | RF-03; RF-02 |
+| CU-04 | Registrar y consultar intermediarios | Inversionista | RF-25; RF-02 |
+| CU-05 | Registrar transacción | Inversionista | RF-05 (registro); RF-26a (crit. 2 y 3); RF-04; RF-02 |
+| CU-06 | Consultar transacciones y posiciones | Inversionista | RF-05 (consulta); RF-06; RF-08; RF-26a; RF-26b; RF-02; RF-07, RF-12 y RF-31 (avisos y procedencia) |
+| CU-07 | Consultar indicadores | Inversionista | RF-11; RF-06; RF-08 a RF-10; RF-26a; RF-26b; RF-02; RF-07, RF-12 y RF-31 (avisos y procedencia) |
+| CU-08 | Consultar catálogo de instrumentos | Inversionista | RF-04 |
+| CU-09 | Consultar aviso de privacidad | Inversionista | RF-12 (crit. 2) |
+| CU-10 | Revocar consentimiento | Inversionista | RF-12 (crit. 3) |
+| CU-11 | Cargar datos semilla | Instalador ⟦decidir⟧ | RF-07 (crit. 1 y 2); RF-30; RF-31 (crit. 1); RF-04 (catálogo semilla; S-09) |
+| CU-12 | Validar saldo por intermediario | Ninguno; lo incluye CU-05 | RF-28 |
+
+La tabla cubre los 18 imprescindibles. Salvo CU-01, CU-02 y CU-09, los casos del inversionista exigen sesión iniciada ⟦decidir si CU-08 la exige (CPF-04)⟧, y en CU-03 a CU-07 lo ajeno se responde como inexistente y sin efecto (RF-02, crit. 2; RNF-03). CU-12 se separa de CU-05 porque RF-39 reutilizará su regla (2.6), y CU-09 extiende CU-01 porque el aviso se lee antes del registro y, además, con sesión (RF-12, crit. 2).
+
+El instalador, rol técnico sin cuenta ni pantallas y no un perfil de 2.3, carga las semillas (RF-07 y RF-30, crit. 1; AC-05) ⟦decidir: mostrarlo o tratar la carga como precondición⟧. El SIE no es actor del MVP: solo sirve para construir la semilla de tasas antes de instalar (R-08; D-01). Tampoco son casos la liquidación de los CETES, que el motor hace en CU-06 y CU-07 (RF-26a), ni el cierre de sesión, que ningún requisito incluye.
+
+### Casos de uso de la fase de refinamiento
+
+El segundo diagrama muestra con borde punteado los casos de 2.6; CU-07 y CU-12, del MVP, aparecen con borde continuo por su relación con ellos.
+
+```mermaid
+usecase-beta
+accTitle: Casos de uso de la fase de refinamiento del Proyecto 077
+accDescr: El inversionista se asocia con siete casos de uso diferidos y con CU-07; el SIE, con uno. Modificar o eliminar transacción incluye Validar saldo por intermediario, y Consultar explicación de los indicadores extiende Consultar indicadores en su punto de extensión resultados.
+direction LR
+actor INV("Inversionista")
+actor SIE("SIE del Banco de México")
+systemBoundary SIS["Plataforma 077 (fase de refinamiento)"]
+  CU07("`CU-07 Consultar indicadores
+punto de extensión: resultados`")
+  CU12("CU-12 Validar saldo por intermediario")
+  CU13("CU-13 Modificar o eliminar transacción"):::diferido
+  CU14("CU-14 Actualizar series del SIE"):::diferido
+  CU15("CU-15 Capturar o importar precios de cierre"):::diferido
+  CU16("CU-16 Consultar desglose por intermediario"):::diferido
+  CU17("CU-17 Consultar distribución por clase de activo"):::diferido
+  CU18("CU-18 Exportar portafolio y transacciones"):::diferido
+  CU19("CU-19 Consultar explicación de los indicadores"):::diferido
+  CU20("CU-20 Simular escenarios por Monte Carlo"):::diferido
+  CU21("CU-21 Simular composiciones alternativas"):::diferido
+end
+INV -- CU07
+INV -- CU13
+INV -- CU15
+INV -- CU16
+INV -- CU17
+INV -- CU18
+INV -- CU20
+INV -- CU21
+SIE -- CU14
+CU13 ..> : include CU12
+CU19 ..> : extend CU07
+classDef diferido stroke-dasharray:5 5
+```
+
+| CU | Nombre | Actor | Requisitos |
+|---|---|---|---|
+| CU-13 | Modificar o eliminar transacción | Inversionista | RF-39 |
+| CU-14 | Actualizar series del SIE | SIE, secundario; lo inicia la tarea diaria | RF-32; RF-34 (emisiones de CETES posteriores a la semilla; P-27) |
+| CU-15 | Capturar o importar precios de cierre | Inversionista | RF-33 ⟦decidir: la importación frente a 2.3⟧; RF-02 y RF-31 (precios privados de su autor, que se distinguen de la semilla por su fuente; P-28) |
+| CU-16 | Consultar desglose por intermediario | Inversionista | RF-27 |
+| CU-17 | Consultar distribución por clase de activo | Inversionista | RF-13 |
+| CU-18 | Exportar portafolio y transacciones | Inversionista | RF-15 |
+| CU-19 | Consultar explicación de los indicadores | Ninguno; extiende CU-07 | RF-14 (con plantillas, sin servicio externo; P-31) |
+| CU-20 | Simular escenarios por Monte Carlo | Inversionista | RF-21 |
+| CU-21 | Simular composiciones alternativas | Inversionista | RF-22 |
+
+CU-19 extiende CU-07 en su punto «resultados» (paso 5 de su ficha), porque la explicación acompaña a los resultados (2.1). No tienen caso propio los indicadores de RF-16 a RF-20, que se presentarán en CU-07 ⟦decidir⟧, ni RF-23, que amplía CU-03 y CU-05, ni RF-24, otro canal para los mismos casos.
+
+### Fichas de casos de uso
+
+Solo CU-01, CU-05 y CU-07 tienen ficha; sus pasos remiten a 3.2 y 3.4 en lugar de repetirlos.
+
+#### CU-01 — Registrar cuenta
+
+| Campo | Contenido |
+|---|---|
+| Actor principal | Inversionista sin cuenta ni sesión. |
+| Requisitos | RF-01; RF-12 (crit. 1; el 2, por CU-09). |
+| Precondiciones | Existe una versión vigente del aviso de privacidad de demostración (3.4.1) ⟦decidir: quién la carga⟧. |
+| Flujo principal | 1. El inversionista elige registrarse.<br>2. El sistema presenta los campos de correo y contraseña y la casilla de consentimiento sin marcar (RF-12, crit. 1), con acceso al aviso (CU-09).<br>3. El inversionista captura sus datos, marca la casilla y envía.<br>4. El sistema valida el correo (RD-03), la contraseña ⟦decidir: política⟧ y el consentimiento (RD-11).<br>5. En una sola operación (RD-11), crea la cuenta activa, con la contraseña no reversible (RNF-04), y registra el consentimiento (RF-12, crit. 1).<br>6. Confirma el registro ⟦decidir: abrir la sesión o pasar a CU-02⟧. |
+| Flujos alternos | Entre los pasos 2 y 3 (punto de extensión «aviso»): consulta el aviso (CU-09) y vuelve.<br>Si abandona antes de enviar, no se crea nada. |
+| Excepciones | Paso 4: se rechazan, sin crear nada, los registros que excluyen RF-01 (crit. 2 y 3), RD-03 y RD-11 ⟦decidir: motivo o mensaje único (CPF-01)⟧. |
+| Postcondiciones | Éxito: cuenta activa con correo único y consentimiento registrado, inalterable salvo por RD-23 (RD-11).<br>Fallo: nada nuevo. |
+
+#### CU-05 — Registrar transacción
+
+| Campo | Contenido |
+|---|---|
+| Actor principal | Inversionista. |
+| Requisitos | RF-05 (registro); RF-28, por CU-12; RF-26a (crit. 2 y 3); RF-04; RF-02 (crit. 2). |
+| Precondiciones | Sesión iniciada; al menos un portafolio (CU-03) y un intermediario (CU-04) propios; semillas cargadas (CU-11). |
+| Flujo principal | 1. El inversionista elige un portafolio propio para registrar una transacción.<br>2. El sistema presenta el formulario guiado (2.3), con los intermediarios del inversionista y el catálogo (RF-04).<br>3. El inversionista captura los datos y los envía.<br>4. El sistema valida la propiedad (RD-02), la divisa (RD-08), cada dato sin redondearlo (RD-06, RD-13 y RD-14) y la fecha (RD-07).<br>5. En una emisión de CETES, valida la fecha contra su vencimiento (RF-26a, crit. 2; RD-05).<br>6. Ejecuta CU-12 (RF-28).<br>7. Registra la transacción con su momento (RD-15) y la muestra como se capturó, con su costo o ingreso por título (RF-05, crit. 1). |
+| Flujos alternos | Si cancela antes de enviar, no se registra nada. |
+| Excepciones | Paso 4: lo ajeno se responde como inexistente (RF-02, crit. 2); se rechazan datos y fechas inválidos (RF-05, crit. 2 y 3).<br>Paso 5: se rechaza la fecha igual o posterior al vencimiento (RF-26a, crit. 2) o que exceda el límite de RD-05 ⟦decidir el límite⟧.<br>Paso 6: se rechaza la transacción que deje negativo el saldo en alguna fecha (RF-28, crit. 1 a 3).<br>En todos, nada se registra; salvo en lo ajeno (RNF-03), se informa el motivo. |
+| Postcondiciones | Éxito: la transacción queda registrada, sin que el sistema cree otras (RF-26a, crit. 3); en el MVP solo se elimina con su portafolio (RD-09; RD-10). Posiciones e indicadores se derivan sin guardarse (3.4.3).<br>Fallo: nada se registra. |
+
+#### CU-07 — Consultar indicadores
+
+| Campo | Contenido |
+|---|---|
+| Actor principal | Inversionista. |
+| Requisitos | RF-11; RF-06; RF-08 a RF-10; RF-26a; RF-26b; RF-02; RF-07, RF-12 y RF-31 (avisos y procedencia). |
+| Precondiciones | Sesión iniciada; al menos un portafolio propio; semillas cargadas (CU-11). |
+| Flujo principal | 1. El inversionista abre el tablero (F-5 de 2.2) y elige uno de sus portafolios.<br>2. Indica la fecha de corte y el periodo ⟦decidir: valores por omisión y si el corte es siempre el fin del periodo⟧.<br>3. El sistema valida las fechas (RF-09, crit. 3).<br>4. El motor único deriva y valúa las posiciones (RF-06; RF-08; RF-26b), liquida las emisiones vencidas (RF-26a, crit. 1) y calcula el TWR y la máxima caída (RF-09; RF-10), sin consultar fuentes externas (3.4.8).<br>5. El sistema presenta los cuatro indicadores con unidad, fecha de corte o periodo y definición (RNF-07), y la gráfica del valor (RF-11, crit. 1 y 2).<br>6. Muestra la fuente y la fecha de cada precio y tasa (RF-31, crit. 2 y 3), la marca de demostración (RF-07, crit. 3) y los avisos de RF-12 (crit. 4). |
+| Flujos alternos | Paso 4: sin transacciones, el tablero abre sin error (RF-11, crit. 3) ⟦decidir: «sin datos»⟧.<br>Al cambiar de portafolio, vuelve al paso 1; al cambiar la fecha o el periodo, al paso 3. |
+| Excepciones | Paso 1: un portafolio ajeno se responde como inexistente (RF-02, crit. 2).<br>Paso 3: se rechazan, sin calcular, una fecha final anterior a la inicial y, ⟦decidir⟧, las fechas fuera de las semillas (RF-09, crit. 3). |
+| Postcondiciones | Ningún dato cambia ni se guardan cifras (3.4.3); cada cifra coincide en CU-06 y en consultas repetidas (RNF-02) y cumple RNF-01 sobre 5.2. |
 
 ## 4.2 Diagrama de componentes
 
@@ -676,9 +834,9 @@ Como nadie aprueba esta especificación por separado (3.9.1), la versión 1.0 de
 
 ## 5.3 Matriz de trazabilidad
 
-| Requisito | Objetivo | Entidades | Prueba | Método |
-|---|---|---|---|---|
-| RF-01 | OE-3 | | CPF-01 | |
+| Requisito | Objetivo | Caso de uso | Entidades | Prueba | Método |
+|---|---|---|---|---|---|
+| RF-01 | OE-3 | CU-01; CU-02 | | CPF-01 | |
 
 ---
 
@@ -709,6 +867,8 @@ Bolsa Mexicana de Valores. (2025). *Policies for the use and distribution of Int
 
 Canonical Ltd. (s. f.). *System requirements*. Ubuntu Server documentation. Recuperado el 13 de octubre de 2026, de https://ubuntu.com/server/docs/reference/installation/system-requirements/
 
+CFA Institute. (2025). *Normas internacionales de presentación de rendimientos de gestión de inversiones (GIPS®) para entidades 2020* (CFA Society Spain, Trad.). https://www.gipsstandards.org/wp-content/uploads/2025/05/translation_spanish_spain_2020_gips_standards_firms.pdf (Trabajo original publicado en 2019)
+
 Comisión Nacional Bancaria y de Valores. (s. f.). *Otros participantes*. Recuperado el 5 de octubre de 2026, de https://www.cnbv.gob.mx/SECTORES-SUPERVISADOS/BURS%C3%81TIL/Preguntas-Frecuentes/Paginas/Otros-Participantes.aspx
 
 Free Software Foundation. (2007). *GNU Lesser General Public License* (Versión 3). https://www.gnu.org/licenses/lgpl-3.0.html
@@ -727,9 +887,11 @@ Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026. (2025, 7 de 
 
 Ley del Mercado de Valores. (2005, 30 de diciembre). Congreso General de los Estados Unidos Mexicanos. Diario Oficial de la Federación (última reforma publicada el 14 de noviembre de 2025). Artículos 2, 9, 113, 225, 322 y 323. https://www.diputados.gob.mx/LeyesBiblio/pdf/LMV.pdf
 
-Ley Federal de Protección de Datos Personales en Posesión de los Particulares. (2025, 20 de marzo). Congreso General de los Estados Unidos Mexicanos. Diario Oficial de la Federación (última reforma publicada el 14 de noviembre de 2025). Artículos 2, 7, 9, 10, 12, 15, 16, 18, 21, 24, 35 y 36. https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf
+Ley Federal de Protección de Datos Personales en Posesión de los Particulares. (2025, 20 de marzo). Congreso General de los Estados Unidos Mexicanos. Diario Oficial de la Federación (última reforma publicada el 14 de noviembre de 2025). Artículos 2, 7, 10, 12, 15, 16, 18, 21 y 24. https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf
 
 MDN contributors. (2026, 7 de septiembre). *Making PWAs installable*. MDN Web Docs. https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable
+
+Mermaid contributors. (s. f.). *Use case diagrams (12.0.0+)*. Mermaid. Recuperado el 14 de octubre de 2026, de https://mermaid.js.org/syntax/usecase.html
 
 Microsoft. (2025a, 2 de julio). *Hardware requirements for Windows Server*. Microsoft Learn. https://learn.microsoft.com/en-us/windows-server/get-started/hardware-requirements
 
@@ -742,6 +904,8 @@ Mozilla. (s. f.). *firefox_versions.json* [Conjunto de datos]. Product Details. 
 Node.js contributors. (s. f.). *Building Node.js* [Archivo BUILDING.md, rama v24.x]. GitHub. Recuperado el 13 de octubre de 2026, de https://github.com/nodejs/node/blob/v24.x/BUILDING.md
 
 Node.js Release Working Group. (s. f.). *Release schedule* [Repositorio nodejs/Release]. GitHub. Recuperado el 6 de octubre de 2026, de https://github.com/nodejs/Release
+
+Object Management Group. (2017). *OMG Unified Modeling Language (OMG UML)* (Versión 2.5.1; documento formal/17-12-05). https://www.omg.org/spec/UML/2.5.1/PDF
 
 OWASP Foundation. (s. f.). *Password storage cheat sheet*. OWASP Cheat Sheet Series. Recuperado el 6 de octubre de 2026, de https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
 

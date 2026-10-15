@@ -124,7 +124,8 @@ Del lunes 19 de octubre al viernes 20 de noviembre de 2026. La semana del 16 de 
 |----|-----------|----------------|
 | RF-19 | Rendimiento ponderado por dinero (XIRR). | Semana del 19 oct |
 | RF-20 | Volatilidad anualizada. | Semana del 19 oct |
-| RF-32 | Actualización diaria y automática de las tasas de CETES, el tipo de cambio FIX y la UDI desde el SIE del Banco de México, en una sola consulta de hasta 20 series; los cálculos leen siempre de la base de datos, nunca del API. | Semana del 19 oct |
+| RF-32 | Actualización diaria y automática, desde el SIE del Banco de México, de las tasas de CETES, las series de plazo del CF107 y el tipo de cambio FIX, en una sola consulta de hasta 20 series; los cálculos leen siempre de la base de datos, nunca del API. | Semana del 19 oct |
+| RF-34 | Incorporación al catálogo de RF-04 de las emisiones de CETES colocadas después de la semilla, con el vencimiento que resulta de su colocación y su plazo publicados en el SIE ⟦confirmar con una emisión real cómo se deriva la clave⟧. | Semana del 19 oct |
 | RF-17 | Índice de Sharpe con la tasa de CETES a 28 días como tasa libre de riesgo; depende de RF-20 y RF-30. | Semana del 26 oct |
 | RF-21 | Simulación de escenarios por método Monte Carlo. | Semana del 26 oct |
 | RF-33 | Captura o importación, por el propio usuario, de precios de cierre en un archivo CSV, por ejemplo los de sus estados de cuenta. | Semana del 26 oct |
