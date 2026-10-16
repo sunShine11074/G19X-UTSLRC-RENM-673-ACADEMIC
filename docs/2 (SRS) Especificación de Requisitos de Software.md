@@ -60,7 +60,7 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 <!-- Pendiente: un término canónico por concepto, con los sinónimos que NO se usan. Términos que
      usan 2.4 a 3.4: transacción (no «operación»), saldo, posición, emisión, colocación, plazo
      nominal y plazo efectivo, carga de datos, portafolio en su conjunto, valor de mercado, resultado no realizado, TWR,
-     máxima caída. Términos que agregan 4.3 y 4.4: dominio (de valores) y llave sustituta. -->
+     máxima caída. Términos que agregan 4.3 y 4.4: dominio (de valores) y llave sustituta. Término que agrega 5.2: conjunto de referencia (oráculo). -->
 
 | Término | Definición |
 |---|---|
@@ -340,7 +340,7 @@ Esta tabla registra las versiones de la especificación: las 0.x son borradores;
 |---|---|---|---|
 | 0.1 | 19/09/2026 | Ramon Ernesto Nieblas Mendivil | Creado el 17 de septiembre ⟦contenido inicial: confirmar⟧. Estructura de seis secciones basada en la plantilla institucional y conciliada con ISO/IEC/IEEE 29148:2018 (ISO et al., 2018). Acrónimos de 1.3, tablas de 3.5, 3.7 y 3.8 (MVP el 5 de octubre) y referencia de la AMIB en 6 ⟦confirmar fecha⟧. |
 | 0.2 | 26/09/2026 | Ramon Ernesto Nieblas Mendivil | Primeros apartados, sobre la Definición de 12 imprescindibles: 2.1, 2.2, 2.3 (del 20 de septiembre) y la introducción de 3.6 con 3.6.1. Fecha de 2.1, 2.2 y 3.6: entre el 19 y el 26 de septiembre ⟦confirmar⟧. Contiene además 1.2 y el enlace al glosario de 1.3 ⟦confirmar desde cuándo⟧. No incorpora los cambios de la Definición de ese día (17 imprescindibles; MVP al 18 de octubre). |
-| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4.5, 5.2 y 5.3. El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). Ese mismo día se integra 4.1 (diagramas de casos de uso en Mermaid y fichas de CU-01, CU-05 y CU-07), con sus referencias en 6; 5.3 agrega la columna del caso de uso y 1.3 agrega CU y UML. También se aplican las decisiones P-26 a P-31: 2.6 incorpora RF-34 (emisiones de CETES colocadas después de la semilla) y un orden de recorte MoSCoW estricto; RF-32 deja la UDI y carga las series de plazo del CF107; el FIX histórico se carga una sola vez con RF-23; 2.6 fija los métodos de RF-17, RF-19 (con su referencia en 6), RF-20 y RF-21, que pasa a depender de RF-20, y los indicadores de RF-24; RD-19 hace privados de su autor los precios que capture RF-33, que prevalecen en sus portafolios; RF-14 se hará en la semana del 2 de noviembre con plantillas, sin servicio externo, por lo que se retira R-09, y su explicación no emitirá juicios sobre la conveniencia de una inversión; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14, RF-21 y RF-22 se ajustarán a ella. El 15 de octubre se integran 4.2 (diagramas de componentes del MVP y de la fase de refinamiento), 4.3 (modelo entidad-relación de las 13 entidades de 3.4.1, con sus relaciones y restricciones) y 4.4 (diccionario de datos); 5.3 registra las entidades de RF-01; 1.3 agrega FK, HTTP, IDEF1X, MXN, PK, SQL y UK, y 6 agrega las referencias de Mermaid (diagramas de clases y entidad-relación), IDEF1X, PostgreSQL (restricciones y tipos numéricos) y la documentación de psycopg, y reetiqueta las de Mermaid contributors (s. f.-a a s. f.-c) y PostgreSQL Global Development Group (s. f.-a a s. f.-h). |
+| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4.5 y 5.3 (salvo la fila de RF-01). El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). Ese mismo día se integra 4.1 (diagramas de casos de uso en Mermaid y fichas de CU-01, CU-05 y CU-07), con sus referencias en 6; 5.3 agrega la columna del caso de uso y 1.3 agrega CU y UML. También se aplican las decisiones P-26 a P-31: 2.6 incorpora RF-34 (emisiones de CETES colocadas después de la semilla) y un orden de recorte MoSCoW estricto; RF-32 deja la UDI y carga las series de plazo del CF107; el FIX histórico se carga una sola vez con RF-23; 2.6 fija los métodos de RF-17, RF-19 (con su referencia en 6), RF-20 y RF-21, que pasa a depender de RF-20, y los indicadores de RF-24; RD-19 hace privados de su autor los precios que capture RF-33, que prevalecen en sus portafolios; RF-14 se hará en la semana del 2 de noviembre con plantillas, sin servicio externo, por lo que se retira R-09, y su explicación no emitirá juicios sobre la conveniencia de una inversión; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14, RF-21 y RF-22 se ajustarán a ella. El 15 de octubre se integran 4.2 (diagramas de componentes del MVP y de la fase de refinamiento), 4.3 (modelo entidad-relación de las 13 entidades de 3.4.1, con sus relaciones y restricciones) y 4.4 (diccionario de datos); 5.3 registra las entidades de RF-01; 1.3 agrega FK, HTTP, IDEF1X, MXN, PK, SQL y UK, y 6 agrega las referencias de Mermaid (diagramas de clases y entidad-relación), IDEF1X, PostgreSQL (restricciones y tipos numéricos) y la documentación de psycopg, y reetiqueta las de Mermaid contributors (s. f.-a a s. f.-c) y PostgreSQL Global Development Group (s. f.-a a s. f.-h). Ese mismo día se integra 5.2 (conjunto de referencia: ubicación, construcción por dos caminos, escenario y cobertura, reglas, tolerancias y congelamiento con el *commit* 11097f8), y 6 agrega la referencia de la CNBV sobre los días inhábiles de 2026. |
 
 ## 3.2 Requisitos funcionales
 
@@ -1506,11 +1506,53 @@ Según 4.3, RF-32 y RF-23 agregan la tabla tipo_cambio y, si la ficha de RF-23 l
 
 ## 5.2 Conjunto de datos de referencia
 
-<!-- El oráculo, calculado A MANO en hoja de cálculo y CONGELADO con un commit antes de programar
-     el motor. OE-5 exige al menos un instrumento en dos intermediarios y una emisión de CETES que
-     venza en el periodo; conviene agregar un día sin cierre, una caída con recuperación y una
-     venta parcial. Guarda las cifras con al menos 4 decimales en pesos y 6 en por ciento, más que la tolerancia de RNF-01, y compáralas sin redondear (P-13). Documenta
-     aquí su ubicación y cómo se construyó. -->
+Este apartado describe el conjunto de referencia (oráculo): un escenario cuyas entradas se cargan en la base de 4.3 y 4.4, y las cifras que el motor único deberá reproducir. Es el valor resuelto de forma independiente que exige OE-5, con el que CPNF-01 verifica RNF-01 y CPNF-02, RNF-02.
+
+### Ubicación
+
+Vive en la carpeta backend/tests/oraculo/, cuyo README.md explica cómo regenerarlo:
+
+| Ruta | Contenido |
+|---|---|
+| oraculo_5_2.xlsx | Primer camino: libro de Excel con fórmulas visibles. |
+| calcula_oraculo.py | Segundo camino: Python con decimal. |
+| entradas/ | Filas de las tablas de 4.4, más parámetros (intervalo y serie), cortes, periodos, calendario de 2026 y candidatos a rechazo. |
+| esperados/; rechazos_rf28.csv; casos_positivos.csv | Cifras esperadas sin redondear, rechazos esperados y el caso positivo C1. |
+| genera_libro.py; compara_vias.py; comparacion_vias.csv; scripts/; datos/; diseno/; fuentes/ | Generación y comparación de los caminos, con su resultado; construcción de entradas, tasas y calendario, y copias de las fuentes, salvo la de la BMV (R-05). |
+
+### Construcción
+
+Se resolvió antes de programar el motor, por dos caminos que no comparten código con él ni entre sí. En el libro, un *script* escribe solo entradas, rótulos y fórmulas, y Excel calcula cada cifra; 44 comprobaciones internas lo validan. Python recalcula cada cifra con decimal a 28 dígitos y otros algoritmos, tras validar las entradas contra 4.3 y 4.4. Los caminos difieren a lo más 1.6 × 10⁻¹¹ pesos en importes y 4.2 × 10⁻¹⁴ puntos porcentuales en TWR y máxima caída, y coinciden en fechas, títulos y precios de CETES. Se elaboró con apoyo de Claude Code, de Anthropic, y lo revisó el estudiante ⟦confirmar; P-39⟧.
+
+Los precios son sintéticos de demostración (R-04; RF-07) y solo existen en días con operaciones de 2026 (CNBV, 2025). Las tasas son las 32 colocaciones reales de 28 a 728 días, con su plazo efectivo, fechadas del 27/08 al 15/10/2026 en el cuadro CF107 (Banco de México, s. f.-d), consultado el 5, el 6 y el 15 de octubre de 2026; de las 12 con una sola fuente, solo la de 28 días del 10/09 afecta las cifras ⟦confirmar con una segunda⟧.
+
+### Escenario y cobertura
+
+Un usuario ficticio (S-04) tiene dos portafolios en MXN (Principal y Secundario) y dos intermediarios (Casa A y Casa B). Registra 16 transacciones (T01 a T16), del 10/09 al 08/10/2026, de tres instrumentos de demostración y cuatro emisiones de CETES, compradas en mercado secundario al precio de RF-26b del día ⟦confirmar⟧. El intervalo de las semillas va del 10/09 al 14/10/2026 (S-09), con cuatro cortes y seis periodos.
+
+| Caso | Requisito | Datos |
+|---|---|---|
+| Instrumento en dos intermediarios | OE-5; RF-06 | DEMOACC y BI261008, con Casa A y Casa B |
+| CETES que vence en el periodo | OE-5; RF-26a | BI261008, el 08/10: retiro de 20,000.00 y posición 0 |
+| Día sin cierre | RF-08 | Cortes del 13/09 (domingo) y 16/09 (festivo); DEMOFIB, el 08/10 |
+| Caída con recuperación; serie que no baja | RF-10 | Principal: pico el 16/09, valle el 23/09 y nuevo máximo el 30/09; sin caídas del 09/10 al 12/10 |
+| Venta parcial y costo que se reinicia | RF-08; RF-26a | Tres ventas parciales; DEMOFIB vendida y recomprada |
+| Compras antes que ventas | RF-08; RF-28 | Compra y venta de DEMOETF el 25/09 (C1) |
+| Tasa interpolada, del extremo inferior y vigente | RF-26b | 91 valuaciones diarias de CETES |
+| TWR con flujos, sin ellos y con denominador 0 | RF-09 | Principal; Secundario, en octubre y del 11/09 al 13/09 |
+| Rechazos | RF-05; RF-09; RF-26a; RF-28 | N1 a N8 |
+
+### Reglas aplicadas
+
+Las cifras aplican las reglas de cálculo de 3.2 y RD-12 a RD-16, con las decisiones P-09 a P-11, P-13 y P-16: portafolio sin efectivo, costo promedio ponderado por intermediario, vencimiento como retiro de títulos × 10.00 sin ISR, y ningún redondeo salvo el de P, a 7 decimales. Aplican también las recomendaciones de 3.2 en RF-04 (prefijo DEMO), RF-05 (importe con 2 decimales que admite 0) y RF-09 (días naturales, factor 1 con denominador 0 y rechazo de periodos inválidos) ⟦decidir: recomendado⟧. Además, la serie parte del cierre previo al inicio, I = 1 es el primer máximo ⟦decidir⟧ y, con empates, el pico es la fecha más antigua; si la máxima caída es 0, pico y valle quedan vacíos ⟦decidir con la ficha de RF-10⟧.
+
+### Comparación y tolerancias
+
+CPNF-01 carga en la base las filas de entradas/ de las tablas de 4.4, salvo las transacciones; registra en orden T01 a T16, que deberán aceptarse, y compara cada renglón de esperados/ con la cifra del motor de igual llave. Los esperados, sin redondear, tienen 4 decimales o más en pesos y 6 o más en por ciento; se leen como Decimal y la salida del motor no se redondea (P-13). La diferencia deberá ser de 0.01 o menos en importes y de 0.001 puntos porcentuales o menos en TWR y máxima caída (RNF-01); títulos deberán coincidir (RF-06), igual que fechas y precios de CETES ⟦decidir: recomendado⟧, y cada candidato N1 a N8, rechazarse con su motivo y sin cambiar ninguna cifra.
+
+### Congelamiento
+
+Se congeló con el *commit* 11097f8, del 15 de octubre de 2026, anterior al primero del motor, evidencia de AC-03. Solo cambiará con una versión nueva de este apartado, registrada en 3.1 (RD-21), que regenere las cifras por los dos caminos.
 
 ## 5.3 Matriz de trazabilidad
 
@@ -1550,6 +1592,8 @@ Canonical Ltd. (s. f.). *System requirements*. Ubuntu Server documentation. Recu
 CFA Institute. (2025). *Normas internacionales de presentación de rendimientos de gestión de inversiones (GIPS®) para entidades 2020* (CFA Society Spain, Trad.). https://www.gipsstandards.org/wp-content/uploads/2025/05/translation_spanish_spain_2020_gips_standards_firms.pdf (Trabajo original publicado en 2019)
 
 Comisión Nacional Bancaria y de Valores. (s. f.). *Otros participantes*. Recuperado el 5 de octubre de 2026, de https://www.cnbv.gob.mx/SECTORES-SUPERVISADOS/BURS%C3%81TIL/Preguntas-Frecuentes/Paginas/Otros-Participantes.aspx
+
+Comisión Nacional Bancaria y de Valores. (2025, 10 de diciembre). Disposiciones de carácter general que señalan los días del año 2026 en que las entidades financieras sujetas a la supervisión de la Comisión Nacional Bancaria y de Valores deberán cerrar sus puertas y suspender sus operaciones. Diario Oficial de la Federación. Artículo 1. https://dof.gob.mx/nota_detalle.php?codigo=5775684&fecha=10/12/2025
 
 Free Software Foundation. (2007). *GNU Lesser General Public License* (Versión 3). https://www.gnu.org/licenses/lgpl-3.0.html
 
