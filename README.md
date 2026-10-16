@@ -61,6 +61,32 @@ frontend/    Aplicación web
 
 ---
 
+## Base de datos local
+
+Los scripts de `backend/` se ejecutan en orden con `psql`, como el superusuario `postgres`.
+Ninguno contiene contraseñas.
+
+1. `01_crear_base.sql`, conectado a la base `postgres`: crea la base `proyecto077` y el rol
+   `app_077`. Después se fija la contraseña de `app_077` con `\password app_077` y se anota
+   solo en `backend/.env`.
+2. `02_crear_esquema.sql`, conectado a `proyecto077`: crea las 13 tablas del SRS (4.3 y 4.4),
+   elimina la tabla de prueba `ping`, fija la zona `America/Mexico_City` y deja a `app_077`
+   solo con los privilegios del 4.3. Corre en una sola transacción y una sola vez; antes
+   comprueba que la configuración regional de la base pase a minúsculas las letras acentuadas
+   (RD-03).
+3. `03_probar_esquema.sql`, conectado a `proyecto077` y con las tablas vacías: prueba cada
+   restricción y cada privilegio dentro de una transacción que se deshace.
+
+```
+psql -U postgres -d proyecto077 -v ON_ERROR_STOP=1 -f backend/02_crear_esquema.sql
+psql -U postgres -d proyecto077 -v ON_ERROR_STOP=1 -f backend/03_probar_esquema.sql
+```
+
+Las marcas `⟦decidir⟧` de `02_crear_esquema.sql` señalan las decisiones del SRS que siguen
+abiertas y dicen qué cambiar en cada caso.
+
+---
+
 ## Avisos
 
 - Los precios utilizados durante el desarrollo son **sintéticos** y están marcados en la interfaz
