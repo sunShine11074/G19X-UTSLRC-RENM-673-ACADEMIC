@@ -1,0 +1,6 @@
+parametro,valor,descripcion
+intervalo_semillas_inicio,2026-09-10,"Primer dia del intervalo de las semillas de precios (S-09, P-14); dia de las primeras compras"
+intervalo_semillas_fin,2026-10-14,"Ultimo dia del intervalo de las semillas de precios (S-09, P-14)"
+serie_inicio,2026-09-10,"Cierre base de la serie diaria: V(10/09), I = 1"
+serie_fin,2026-10-14,Ultimo dia de la serie diaria
+usuario_correo,oraculo@example.com,Usuario de prueba con datos ficticios (S-04)

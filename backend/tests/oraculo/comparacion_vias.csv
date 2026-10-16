@@ -1,0 +1,17 @@
+tipo_de_cifra,cifras_comparadas,diferencia_maxima,diferencia_maxima_en_pp,donde,criterio,estado
+importe (pesos),662,1.604E-11,,serie_diaria 2026-09-26/Principal [valor],1e-6,ok
+precio o costo por título (pesos),297,7.246E-15,,transacciones T07 [costo_por_titulo],1e-6,ok
+P de CETES a 7 decimales,91,8.879E-16,,valuacion_cetes 2026-10-13/BI261105 [p],exacta,ok
+P de CETES sin redondear,91,1.862E-15,,valuacion_cetes 2026-09-18/BI261008 [p_sin_redondear],1e-6,ok
+tasa r de RF-26b (% anual),353,7.613E-16,,valuacion_cetes 2026-10-04/BI261217 [r_por_ciento_anual],1e-6,ok
+r(t) (fracción),190,3.661E-16,3.661E-14,serie_diaria 2026-09-26/Principal [r],1e-6,ok
+r(t) (%),70,3.661E-14,,serie_diaria 2026-09-26/Principal [r_por_ciento],1e-6,ok
+índice I(t) y máximo,380,6.653E-16,6.653E-14,serie_diaria 2026-09-22/Principal [indice],1e-6,ok
+caída I/máx − 1 (fracción),190,4.312E-16,4.312E-14,serie_diaria 2026-09-22/Principal [caida],1e-6,ok
+TWR (fracción),6,4.165E-16,4.165E-14,indicadores P1-B [twr],1e-6,ok
+TWR (%),6,4.165E-14,,indicadores P1-B [twr_por_ciento],1e-6,ok
+máxima caída (fracción),6,1.524E-16,1.524E-14,indicadores P1-A [maxima_caida],1e-6,ok
+máxima caída (%),6,1.568E-14,,indicadores P1-A [maxima_caida_por_ciento],1e-6,ok
+"entero (títulos, días, plazos, saldos)",634,coincidencia exacta,,,exacta,ok
+fecha,1122,coincidencia exacta,,,exacta,ok
+texto,1052,coincidencia exacta,,,exacta,ok

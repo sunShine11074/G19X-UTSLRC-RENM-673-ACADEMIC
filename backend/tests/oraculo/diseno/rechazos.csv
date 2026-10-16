@@ -1,0 +1,5 @@
+id,criterio,portafolio,intermediario,instrumento,tipo,fecha_concertacion,cantidad,precio,importe_comisiones,motivo_esperado
+N1,RF-28 crit. 1,Principal,Casa B,DEMOACC,venta,2026-09-18,150,98.50,42.85,saldo con Casa B = 100 aunque la posicion consolidada sea 300
+N2,RF-28 crit. 2,Principal,Casa A,DEMOFIB,venta,2026-09-15,100,25.40,7.37,el 15/09 quedaria 300 y el 14/10 quedaria 200 pero el 22/09 (T10) el saldo seria -100
+N3,RF-28 crit. 3 y X-06,Principal,Casa A,DEMOACC,venta,2026-10-09,150,109.00,47.42,saldo del Principal con Casa A = 120; los 150 del Secundario con Casa A no cuentan
+N4,RF-26a crit. 2,Principal,Casa B,BI261008,venta,2026-10-08,100,10.0000000,0.00,fecha igual al vencimiento de la emision

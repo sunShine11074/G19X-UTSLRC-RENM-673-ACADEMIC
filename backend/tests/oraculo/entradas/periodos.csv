@@ -1,0 +1,7 @@
+periodo,portafolio_nombre,inicio,fin,proposito
+P1-A,Principal,2026-09-11,2026-10-14,Periodo completo (base V(10/09))
+P1-B,Principal,2026-09-11,2026-09-30,Primer tramo; encadenamiento con P1-C
+P1-C,Principal,2026-10-01,2026-10-14,"Segundo tramo (base V(30/09)); r(01/10) < 0, el maximo es I = 1"
+P1-D,Principal,2026-10-09,2026-10-12,Serie que no baja: maxima caida 0 (criterio 2 de RF-10)
+P2-A,Secundario,2026-09-11,2026-10-14,Factor 1 con denominador 0 del 11/09 al 13/09; comprobacion por dos caminos
+P2-C,Secundario,2026-10-01,2026-10-14,Sin flujos (criterio 1 de RF-09)

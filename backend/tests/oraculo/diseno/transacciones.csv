@@ -1,0 +1,17 @@
+id,portafolio,intermediario,instrumento,tipo,fecha_concertacion,cantidad,precio,importe_comisiones,regla_del_precio
+T01,Principal,Casa A,DEMOACC,compra,2026-09-10,200,99.95,57.97,sintetico; importe = ROUND(0.0029 x monto; 2)
+T02,Principal,Casa B,DEMOETF,compra,2026-09-10,100,50.05,14.51,sintetico; importe = ROUND(0.0029 x monto; 2)
+T03,Principal,Casa A,BI261008,compra,2026-09-10,1500,9.9516240,0.00,P de RF-26b del 10/09 (d = 28; nodo: tasa a 28 dias del 10/09 = 6.25 con efectivo 28): ROUND(10/(1+6.25/100*28/360);7)
+T04,Principal,Casa B,BI261008,compra,2026-09-10,1000,9.9516240,0.00,P de RF-26b del 10/09 (d = 28; nodo: tasa a 28 dias del 10/09 = 6.25 con efectivo 28): ROUND(10/(1+6.25/100*28/360);7)
+T05,Principal,Casa A,DEMOFIB,compra,2026-09-11,400,24.9825,28.98,sintetico; importe = ROUND(0.0029 x monto; 2)
+T06,Principal,Casa B,DEMOACC,compra,2026-09-14,100,103.10,29.90,sintetico; importe = ROUND(0.0029 x monto; 2)
+T07,Secundario,Casa A,DEMOACC,compra,2026-09-14,150,103.60,45.07,sintetico; importe = ROUND(0.0029 x monto; 2)
+T08,Principal,Casa A,BI261217,compra,2026-09-17,1000,9.8344372,0.00,P de RF-26b del 17/09 (d = 91; nodo: tasa a 91 dias del 17/09 = 6.66 con efectivo 91): ROUND(10/(1+6.66/100*91/360);7)
+T09,Principal,Casa B,BI270318,compra,2026-09-17,500,9.6629250,0.00,P de RF-26b del 17/09 (d = 182; nodo: tasa a 182 dias del 17/09 = 6.90 con efectivo 182): ROUND(10/(1+6.90/100*182/360);7)
+T10,Principal,Casa A,DEMOFIB,venta,2026-09-22,400,23.2075,26.92,sintetico; venta total (saldo 0)
+T11,Principal,Casa B,DEMOETF,compra,2026-09-25,60,47.90,8.33,sintetico; mismo dia que T12 (compras antes que ventas)
+T12,Principal,Casa B,DEMOETF,venta,2026-09-25,120,48.10,16.74,sintetico; 120 > saldo previo 100
+T13,Principal,Casa A,BI261008,venta,2026-10-01,500,9.9883275,0.00,P de RF-26b del 01/10 (d=7; tasa 28 dias del 01/10 = 6.01): ROUND(10/(1+6.01/100*7/360);7)
+T14,Principal,Casa A,DEMOACC,venta,2026-10-02,80,104.20,24.17,sintetico; venta parcial
+T15,Principal,Casa A,DEMOFIB,compra,2026-10-05,300,24.4125,21.24,sintetico; recompra tras saldo 0
+T16,Principal,Casa B,BI261105,compra,2026-10-08,1000,9.9528566,0.00,reinversion; P de RF-26b del 08/10 (d = 28; nodo: tasa a 28 dias del 08/10 = 6.09 con efectivo 28): ROUND(10/(1+6.09/100*28/360);7)

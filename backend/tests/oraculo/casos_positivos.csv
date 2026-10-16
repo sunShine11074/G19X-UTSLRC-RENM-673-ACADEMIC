@@ -1,0 +1,2 @@
+id,criterio,refs,portafolio_nombre,intermediario_nombre,instrumento_clave,fecha_concertacion,saldo_previo,compras_del_dia,ventas_del_dia,saldo_resultante,saldo_si_ventas_antes_que_compras,resultado_esperado,regla,motivo_esperado
+C1,RF-08 crit. 3 y RF-28 (caso positivo),T11 y T12,Principal,Casa B,DEMOETF,2026-09-25,100,60,120,40,-20,aceptar,compras antes que ventas el mismo dia,T11 y T12 (ya cargadas) se aceptan: 100 + 60 - 120 = 40; un validador que aplique la venta antes que la compra veria 100 - 120 = -20 y rechazaria T12

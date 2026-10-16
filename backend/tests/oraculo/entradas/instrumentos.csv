@@ -1,0 +1,8 @@
+clave,nombre,clase_activo,divisa,de_demostracion,vencimiento,valor_nominal
+DEMOACC,Acción de demostración,accion,MXN,true,,
+DEMOETF,ETF de demostración,etf,MXN,true,,
+DEMOFIB,FIBRA de demostración,fibra,MXN,true,,
+BI261008,CETES con vencimiento el 08/10/2026,cetes,MXN,false,2026-10-08,10.00
+BI261105,CETES con vencimiento el 05/11/2026,cetes,MXN,false,2026-11-05,10.00
+BI261217,CETES con vencimiento el 17/12/2026,cetes,MXN,false,2026-12-17,10.00
+BI270318,CETES con vencimiento el 18/03/2027,cetes,MXN,false,2027-03-18,10.00
