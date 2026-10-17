@@ -76,10 +76,20 @@ Ninguno contiene contraseñas.
    (RD-03).
 3. `03_probar_esquema.sql`, conectado a `proyecto077` y con las tablas vacías: prueba cada
    restricción y cada privilegio dentro de una transacción que se deshace.
+4. `04_cargar_semillas.sql`, conectado a `proyecto077`: carga el aviso de privacidad de
+   demostración, las fuentes y sus licencias, el catálogo, los precios sintéticos y las tasas
+   reales de CETES del Banco de México. Volver a ejecutarlo no duplica nada; si lo que ya hay en
+   la base no coincide con las semillas, se detiene y no cambia nada. Lo genera
+   `backend/semillas/genera_semillas.py` a partir de las entradas del conjunto de referencia
+   (`backend/tests/oraculo/entradas`); si cambian, se regenera con
+   `python backend/semillas/genera_semillas.py`. Si cambias el texto del aviso
+   (`backend/semillas/aviso_privacidad_demo.md`), cambia también `AVISO_VIGENTE_DESDE` en el
+   generador: cada texto es una versión nueva (RF-12).
 
 ```
 psql -U postgres -d proyecto077 -v ON_ERROR_STOP=1 -f backend/02_crear_esquema.sql
 psql -U postgres -d proyecto077 -v ON_ERROR_STOP=1 -f backend/03_probar_esquema.sql
+psql -U postgres -d proyecto077 -v ON_ERROR_STOP=1 -f backend/04_cargar_semillas.sql
 ```
 
 Las marcas `⟦decidir⟧` de `02_crear_esquema.sql` señalan las decisiones del SRS que siguen
