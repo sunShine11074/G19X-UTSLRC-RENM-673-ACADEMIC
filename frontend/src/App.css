@@ -1,7 +1,7 @@
 :root {
   --tinta: #16211f;
   --tinta-2: #4a5a57;
-  --tenue: #6d7c79;
+  --tenue: #647370; /* 4.97:1 sobre --superficie (WCAG 2.2, 1.4.3) */
   --linea: #d5dedb;
   --superficie: #ffffff;
   --acento: #1c5b52;

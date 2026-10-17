@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "cds-code": {
+      "source": "coinbase/cds",
+      "sourceType": "github",
+      "skillPath": "skills/cds-code/SKILL.md",
+      "computedHash": "44d995fd6b3992239bf5b39ad96d34927b100bfbc3268c4e18189e36f4f14f56"
+    },
+    "cds-docs": {
+      "source": "coinbase/cds",
+      "sourceType": "github",
+      "skillPath": "skills/cds-docs/SKILL.md",
+      "computedHash": "08973a95752007e00e347e28a229bb84fd2239a63d13a30b3a8fe15a2d346983"
+    }
+  }
+}
