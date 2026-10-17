@@ -175,6 +175,37 @@ def test_rf08_crit3_compras_antes_que_ventas() -> None:
     assert corte.resultado_no_realizado != D("-218.56")
 
 
+def test_rf08_costo_total_en_medio_centavo_redondea_alejandose_de_cero() -> None:
+    """El costo total es el acumulado del par, no títulos × costo unitario redondeado a 28 dígitos.
+
+    Con 3 títulos y 32.005 de costo, 3 × (32.005 / 3) da 32.00499…9 y se presentaría «32.00».
+    """
+    m = mercado({1: "10.00"})
+    corte = motor.posiciones(historial(tx("compra", 1, 1, "12.005"), tx("compra", 2, 2, "10.00")), m, dia(2))
+    assert corte.costo_total == D("32.005") and corte.resultado_no_realizado == D("-2.005")
+    assert motor.presentar_importe(corte.costo_total) == "32.01"
+    assert motor.presentar_importe(corte.resultado_no_realizado) == "-2.01"
+    assert corte.pares[0].costo_unitario == D("32.005") / 3
+
+    # Precios de 2 decimales: tras vender la mitad (588.23 → 294.115) y comprar 150 más.
+    m = mercado({1: "32.70"})
+    h = historial(
+        tx("compra", 1, 10, "58.65", "1.73"), tx("venta", 2, 5, "84.34", "3.62"), tx("compra", 3, 150, "36.85", "7.73")
+    )
+    corte = motor.posiciones(h, m, dia(3))
+    assert (corte.costo_total, corte.valor, corte.resultado_no_realizado) == (
+        D("5829.345"),
+        D("5068.50"),
+        D("-760.845"),
+    )
+    assert motor.presentar_importe(corte.costo_total) == "5829.35"
+    assert motor.presentar_importe(corte.resultado_no_realizado) == "-760.85"
+    # Una venta posterior deja el costo total en proporción a los títulos (P-10).
+    corte = motor.posiciones(historial(*h.transacciones, tx("venta", 4, 31, "40.00")), m, dia(4))
+    assert corte.costo_total == D("5829.345") * 124 / 155
+    assert corte.pares[0].costo_unitario == D("5829.345") / 155
+
+
 def test_rf08_crit4_sin_cierre_rige_el_ultimo_anterior() -> None:
     m = mercado({1: "58.00", 3: "59.00"})
     h = historial(tx("compra", 1, 10, "58.00"))
@@ -283,6 +314,30 @@ def test_rf10_crit2_serie_que_no_baja() -> None:
 def test_rf10_empate_conserva_el_pico_mas_antiguo() -> None:
     resultado = motor.caida_maxima(dia(1), _indices("1.10", "1.10", "1.00"))
     assert (resultado.fecha_pico, resultado.fecha_valle) == (dia(2), dia(4))
+
+
+def test_rf10_empate_en_el_valle_es_la_primera_fecha() -> None:
+    # Un viernes de valle y un fin de semana sin cierres: el índice no cambia y empata (D-20).
+    resultado = motor.caida_maxima(dia(1), _indices("0.90", "0.90", "0.90", "0.95"))
+    assert (resultado.fecha_pico, resultado.fecha_valle, resultado.maxima_caida) == (dia(1), dia(2), D("-0.10"))
+
+
+def test_rf10_empates_del_indice_encadenado() -> None:
+    """D-20 con índices calculados, no literales: el ruido del dígito 28 no rompe un empate exacto."""
+
+    def indicadores(*cierres: str) -> motor.Indicadores:
+        precios = {n + 1: p for n, p in enumerate(cierres)}
+        return motor.indicadores(historial(tx("compra", 1, 100, cierres[0])), mercado(precios), dia(2), dia(len(cierres)))
+
+    # I exacto: 1, 1.16, 1.10, 1.16, 0.60. El 16 % se alcanza dos veces: el pico es el más antiguo.
+    ind = indicadores("50.00", "58.00", "55.00", "58.00", "30.00")
+    assert (ind.fecha_pico, ind.fecha_valle) == (dia(2), dia(5))
+    assert motor.presentar_por_ciento(ind.maxima_caida) == "-48.28"
+    assert [d.maximo for d in ind.serie[2:4]] == [ind.serie[1].indice] * 2
+    # Dos caídas exactas de −10 %: el valle es la primera.
+    ind = indicadores("100.00", "90.00", "100.00", "90.00")
+    assert (ind.fecha_pico, ind.fecha_valle) == (dia(1), dia(2))
+    assert motor.presentar_por_ciento(ind.maxima_caida) == "-10.00"
 
 
 def test_rf10_el_indice_inicial_es_el_primer_maximo() -> None:

@@ -98,9 +98,14 @@ def aviso_vigente(sesion: Session) -> Aviso:
 
 
 def _correo_valido(correo: str) -> bool:
-    """Solo la sintaxis, sin entregabilidad ni red (D-03); el valor guardado no se normaliza."""
+    """Solo la sintaxis, sin entregabilidad ni red (D-03); el valor guardado no se normaliza.
+
+    El límite de D-44 se aplica al valor que se guarda (RD-14), con sus espacios.
+    """
+    if len(correo) > LARGO_MAXIMO_CORREO:
+        return False
     recortado = correo.strip(" ")  # equivale a btrim
-    if not recortado or len(recortado) > LARGO_MAXIMO_CORREO:
+    if not recortado:
         return False
     try:
         validate_email(recortado, check_deliverability=False)

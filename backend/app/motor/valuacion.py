@@ -93,7 +93,7 @@ def valuar(kardex: Kardex, fecha: date, indice: IndiceMercado) -> Corte:
         for par in pares_instrumento:
             titulos = kardex.saldo(par)
             costo_unitario = kardex.costo_unitario(par)
-            costo_total = Decimal(titulos) * costo_unitario
+            costo_total = kardex.costo_total(par)  # = títulos × costo unitario, sin su redondeo
             valor = Decimal(titulos) * precio if titulos > 0 and precio is not None else CERO
             con_precio = precio is not None and (titulos > 0 or not instrumento.es_cetes)
             tiene = kardex.tiene_transacciones(par)

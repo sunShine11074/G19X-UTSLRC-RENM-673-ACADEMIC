@@ -46,3 +46,21 @@ def calculo(funcion: Callable[_P, _R]) -> Callable[_P, _R]:
             return funcion(*args, **kwargs)
 
     return envoltura
+
+
+_COMPARACION = Context(
+    prec=20,
+    rounding=ROUND_HALF_UP,
+    traps=[InvalidOperation, DivisionByZero, Overflow],
+)
+
+
+@calculo
+def para_comparar(valor: Decimal) -> Decimal:
+    """`valor` a 20 dígitos significativos, solo para comparar I(t) y caídas (D-20).
+
+    El índice se encadena a 28 dígitos, así que un empate exacto (el valor vuelve a un nivel
+    anterior) puede diferir en el último dígito. Comparar a 20 dígitos conserva el empate. El
+    resultado nunca se guarda ni se presenta: las cifras siguen sin redondear (RD-16).
+    """
+    return _COMPARACION.plus(valor)

@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 import re
 import secrets
+import unicodedata
+from types import SimpleNamespace
 from typing import Any
 
 import psycopg
@@ -200,6 +202,20 @@ def test_crit3_401_identico_en_todos_los_casos(
         return verificar_original(contrasena_nfkc, hash_guardado)
 
     monkeypatch.setattr(contrasenas, "verificar", espia)
+    # Y el cálculo de Argon2 mismo: con un correo inexistente también se verifica (contra HASH_FICTICIO).
+    argon2: list[str] = []
+    hasher = contrasenas.HASHER
+
+    class EspiaHasher:
+        def verify(self, *args: Any, **kwargs: Any) -> Any:
+            argon2.append("verify")
+            return hasher.verify(*args, **kwargs)
+
+        def verify_and_update(self, *args: Any, **kwargs: Any) -> Any:
+            argon2.append("verify_and_update")
+            return hasher.verify_and_update(*args, **kwargs)
+
+    monkeypatch.setattr(contrasenas, "HASHER", EspiaHasher())
 
     casos = {
         "correo inexistente": ("nadie@example.com", contrasena_ana),
@@ -219,6 +235,7 @@ def test_crit3_401_identico_en_todos_los_casos(
         assert "set-cookie" not in respuesta.headers, nombre
     # Los correos y contraseñas demasiado largos dan 401 sin calcular el hash; el inexistente usa el ficticio.
     assert verificaciones == [True, False, False, False]
+    assert argon2 == ["verify", "verify_and_update", "verify_and_update", "verify_and_update"]
     assert NOMBRE_COOKIE not in cliente.cookies
 
 
@@ -280,6 +297,59 @@ def test_rehash_y_hash_desconocido(cliente: ClientePrueba, dueno: psycopg.Connec
     assert dueno.execute("SELECT contrasena_hash FROM usuario WHERE correo = 'beto@example.com'").fetchone() == (
         "no-es-un-hash",
     )
+
+
+def test_entradas_enormes_no_se_normalizan(
+    cliente: ClientePrueba, dueno: psycopg.Connection[Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """NFKC tarda un tiempo cuadrático con U+FDFA repetido y no suelta el GIL: congelaría la API.
+
+    Ningún texto de más de LARGO_MAXIMO_CRUDO (4 × 128) puntos de código pasa por NFKC, que junta
+    a lo más 4 en 1, así que aun normalizado excedería los 128; se rechaza igual que antes.
+    """
+    contrasena = contrasena_nueva()
+    assert registrar(cliente, "ana@example.com", contrasena).status_code == 201
+    largos: list[int] = []
+
+    def normalize(forma: str, texto: str) -> str:
+        largos.append(len(texto))
+        return unicodedata.normalize(forma, texto)
+
+    monkeypatch.setattr(contrasenas, "unicodedata", SimpleNamespace(normalize=normalize))
+    bomba = "ﷺ" * 20_000
+    primera = iniciar(cliente, "nadie@example.com", contrasena)
+    for correo, clave in (("ana@example.com", bomba), (bomba, contrasena), (bomba, bomba)):
+        respuesta = iniciar(cliente, correo, clave)
+        assert (respuesta.status_code, respuesta.content) == (401, primera.content)
+    alta = registrar(cliente, "beto@example.com", bomba)
+    assert alta.status_code == 422
+    assert alta.json()["errores"] == [
+        {"campo": "contrasena", "regla": "RF-01", "mensaje": "La contraseña admite a lo más 128 caracteres."}
+    ]
+    alta = registrar(cliente, bomba, contrasena_nueva())
+    assert alta.status_code == 422
+    assert alta.json()["errores"] == [{"campo": "correo", "regla": "RF-01", "mensaje": MENSAJE_CORREO}]
+    assert largos and max(largos) <= 4 * contrasenas.LARGO_MAXIMO, max(largos)
+    assert contrasenas.LARGO_MAXIMO_CRUDO == 4 * contrasenas.LARGO_MAXIMO
+    assert conteos(dueno) == (1, 1)
+    # Una contraseña de más de 128 puntos de código que NFKC deja en 128 o menos sigue valiendo.
+    compuesta = "ᾂ" * 30  # 120 puntos de código; NFKC la deja en 30 (U+1F82)
+    assert unicodedata.normalize("NFKC", compuesta) == "ᾂ" * 30
+    assert registrar(cliente, "carla@example.com", compuesta * 4).status_code == 201  # 480 → 120
+    assert iniciar(cliente, "carla@example.com", "ᾂ" * 120).status_code == 200
+
+
+def test_correo_de_mas_de_254_con_espacios_se_rechaza(cliente: ClientePrueba, dueno: psycopg.Connection[Any]) -> None:
+    """D-44: el límite de 254 se aplica al valor que se guarda (RD-14), con sus espacios."""
+    for correo in (" " * 300 + "pad@example.com", "pad@example.com" + " " * 240):
+        respuesta = registrar(cliente, correo, contrasena_nueva())
+        assert respuesta.status_code == 422
+        assert respuesta.json()["errores"] == [{"campo": "correo", "regla": "RF-01", "mensaje": MENSAJE_CORREO}]
+    assert conteos(dueno) == (0, 0)
+    justo = "pad@example.com" + " " * 239
+    assert len(justo) == 254
+    assert registrar(cliente, justo, contrasena_nueva()).status_code == 201
+    assert dueno.execute("SELECT length(correo) FROM usuario").fetchall() == [(254,)]
 
 
 def test_caracteres_que_no_se_pueden_guardar(cliente: ClientePrueba, dueno: psycopg.Connection[Any]) -> None:

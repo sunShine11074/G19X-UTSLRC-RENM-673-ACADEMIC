@@ -190,3 +190,63 @@ def test_ventas_concurrentes_solo_una_pasa(
     assert dueno.execute(
         "SELECT count(*) FILTER (WHERE tipo = 'venta'), count(*) FROM transaccion"
     ).fetchone() == (1, 2)
+
+
+def test_ventas_concurrentes_leen_el_saldo_despues_del_bloqueo(
+    app_pruebas: FastAPI,
+    cluster_pg: ClusterPg,
+    dueno: psycopg.Connection[Any],
+    nueva_cuenta: Callable[..., CuentaPrueba],
+) -> None:
+    """R-12 sin depender de la velocidad de los hilos: el dueño detiene los INSERT, no las lecturas.
+
+    `LOCK TABLE transaccion IN SHARE MODE` frena el INSERT de la primera venta pero deja leer el
+    historial. Con `FOR UPDATE OF portafolio`, la segunda venta espera ese bloqueo y lee el saldo
+    después del commit de la primera; con un bloqueo compartido, las dos leerían el saldo de 100.
+    """
+    e = Escenario(nueva_cuenta())
+    _id(e.registrar("compra", "2026-09-11", 100, e.casa_a))
+    cookie = e.c.cookies.get(NOMBRE_COOKIE)
+    assert cookie
+    venta = e.cuerpo("venta", "2026-09-15", 80, e.casa_a)
+    resultados: list[httpx.Response] = []
+    fallas: list[BaseException] = []
+    candado = threading.Lock()
+
+    def vender() -> None:
+        try:
+            with ClientePrueba(app_pruebas) as cliente:
+                respuesta = cliente.post(e.ruta(), json=venta, headers={"Cookie": f"{NOMBRE_COOKIE}={cookie}"})
+            with candado:
+                resultados.append(respuesta)
+        except BaseException as exc:  # se revisa en el hilo principal
+            fallas.append(exc)
+
+    hilos = [threading.Thread(target=vender, daemon=True) for _ in range(2)]
+    with psycopg.connect(cluster_pg.conninfo_dueno) as bloqueo:
+        bloqueo.execute("SET lock_timeout = '30s'")
+        bloqueo.execute("LOCK TABLE transaccion IN SHARE MODE")
+        try:
+            for hilo in hilos:
+                hilo.start()
+            limite = time.monotonic() + 30
+            esperando = 0
+            while time.monotonic() < limite:
+                fila = dueno.execute(
+                    "SELECT count(*) FROM pg_stat_activity WHERE usename = 'app_077' AND wait_event_type = 'Lock'"
+                ).fetchone()
+                esperando = int(fila[0]) if fila else 0
+                if esperando >= 2 or fallas or resultados:
+                    break
+                time.sleep(0.05)
+            assert esperando == 2, f"Esperaban un bloqueo {esperando} de 2 solicitudes"
+        finally:
+            bloqueo.rollback()  # suelta el bloqueo de la tabla
+            for hilo in hilos:
+                hilo.join(timeout=60)
+    assert not fallas
+    assert sorted(r.status_code for r in resultados) == [201, 409]
+    _saldo_negativo(next(r for r in resultados if r.status_code == 409), "2026-09-15", "-60", "Casa A")
+    assert dueno.execute(
+        "SELECT sum(CASE tipo WHEN 'compra' THEN cantidad ELSE -cantidad END) FROM transaccion"
+    ).fetchone() == (20,)

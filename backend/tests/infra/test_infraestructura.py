@@ -21,7 +21,7 @@ from fastapi import Depends, FastAPI, Request, Response
 from fastapi.testclient import TestClient
 from psycopg.conninfo import conninfo_to_dict
 from pydantic import BaseModel, SecretStr, StrictBool, ValidationError
-from sqlalchemy import Engine, delete, insert, select, update
+from sqlalchemy import Engine, delete, event, insert, select, update
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.exc import DBAPIError
 from sqlalchemy.orm import Session
@@ -39,7 +39,7 @@ from app.api.tipos import (
     Titulos,
     como_texto,
 )
-from app.config import Settings, config_actual
+from app.config import Settings, cargar_config, config_actual
 from app.datos.integridad import traducir
 from app.datos.modelos import (
     MODELOS,
@@ -64,10 +64,10 @@ from app.errores import (
     SaldoNegativo,
     SesionRequerida,
     errores_de_validacion,
-    importar_si_existe,
     sobre,
 )
 from app.main import crear_app
+from app.motor import errores as errores_motor
 from app.reloj import ahora_epoch, epoch_iso, hoy_cdmx, momento_iso
 from tests.conftest import (
     PUERTOS_PROHIBIDOS,
@@ -172,6 +172,18 @@ def test_settings_valida_sin_repetir_secretos(monkeypatch: pytest.MonkeyPatch) -
     assert clave not in repr(config) and "app_077:x@" not in repr(config)
 
 
+def test_env_que_no_esta_en_utf8_da_un_mensaje_claro(monkeypatch: pytest.MonkeyPatch, tmp_path: Any) -> None:
+    """Un .env escrito en ANSI (Set-Content de PowerShell 5.1) con acentos no se puede leer."""
+    clave = secrets.token_urlsafe(32)
+    archivo = tmp_path / ".env"
+    archivo.write_bytes(f"# Clave de la sesión\nSESION_CLAVE={clave}\n".encode("cp1252"))
+    monkeypatch.setitem(Settings.model_config, "env_file", archivo)
+    with pytest.raises(RuntimeError, match="no está guardado en UTF-8") as info:
+        cargar_config()
+    assert info.value.__cause__ is None and info.value.__suppress_context__
+    assert clave not in str(info.value)
+
+
 def test_modelos_insertan_sin_id_ni_momentos() -> None:
     dialecto = postgresql.dialect()
     momentos = {"momento", "registrada_en", "incorporada_en", "valores_sustituidos"}
@@ -188,11 +200,6 @@ def test_modelos_insertan_sin_id_ni_momentos() -> None:
             assert "id" not in insertadas, tabla.name
             assert tabla.c.id.identity is not None and tabla.c.id.identity.always
     assert Transaccion.__table__.c.cantidad.type.__class__.__name__ == "Integer"
-
-
-def test_bloqueo_del_portafolio_lleva_of() -> None:
-    sentencia = select(Portafolio).where(Portafolio.id == 1).with_for_update(of=Portafolio)
-    assert "FOR UPDATE OF portafolio" in str(sentencia.compile(dialect=postgresql.dialect()))
 
 
 class _CuerpoCifras(BaseModel):
@@ -403,6 +410,65 @@ def test_health_404_405_y_cache(cliente: ClientePrueba) -> None:
 
 @pytest.mark.bd
 @pytest.mark.usefixtures("bd_limpia")
+def test_bloqueos_que_emite_la_api(app_pruebas: FastAPI, nueva_cuenta: Any) -> None:
+    """§3.2 y §4.3 E18: el POST de transacciones bloquea la cuenta (FOR SHARE) y el portafolio
+    (FOR UPDATE OF portafolio), y ningún FOR UPDATE va sin OF. Se revisan las sentencias reales."""
+    c = nueva_cuenta().cliente
+    portafolio = c.post("/api/portafolios", json={"nombre": "Principal"}).json()["id"]
+    casa = c.post("/api/intermediarios", json={"nombre": "Casa A"}).json()["id"]
+    demoacc = next(i["id"] for i in c.get("/api/instrumentos").json() if i["clave"] == "DEMOACC")
+    sentencias: list[str] = []
+
+    def anotar(conn: Any, cursor: Any, sentencia: str, *args: Any) -> None:
+        sentencias.append(" ".join(sentencia.split()))
+
+    event.listen(app_pruebas.state.engine, "before_cursor_execute", anotar)
+    try:
+        respuesta = c.post(
+            f"/api/portafolios/{portafolio}/transacciones",
+            json={
+                "intermediario_id": casa,
+                "instrumento_id": demoacc,
+                "tipo": "compra",
+                "fecha_concertacion": "2026-09-15",
+                "cantidad": "1",
+                "precio": "100.00",
+                "importe_comisiones": "0.00",
+            },
+        )
+    finally:
+        event.remove(app_pruebas.state.engine, "before_cursor_execute", anotar)
+    assert respuesta.status_code == 201, respuesta.json()
+    assert any(s.startswith("SELECT correo, estado FROM usuario") and s.endswith("FOR SHARE") for s in sentencias)
+    assert any("FROM portafolio" in s and s.endswith("FOR UPDATE OF portafolio") for s in sentencias)
+    assert not [s for s in sentencias if "FOR UPDATE" in s and "FOR UPDATE OF" not in s]
+
+
+@pytest.mark.bd
+@pytest.mark.usefixtures("bd_limpia")
+def test_barra_final_da_404_y_el_405_lista_todos_los_metodos(cliente: ClientePrueba) -> None:
+    """§4.1: rutas sin barra final; una ruta inexistente da 404 con el sobre, nunca un 307."""
+    no_existe = {"codigo": "no_encontrado", "regla": "RF-02", "mensaje": "No existe el recurso."}
+    for metodo, ruta in (("GET", "/api/portafolios/"), ("POST", "/api/portafolios/"), ("GET", "/api/portafolios/1/")):
+        respuesta = cliente.request(metodo, ruta, json={"nombre": "Principal"}, follow_redirects=False)
+        assert (respuesta.status_code, respuesta.json()) == (404, no_existe), (metodo, ruta)
+        assert "location" not in respuesta.headers
+
+    # RFC 9110 §15.5.6: Allow lista todos los métodos de la ruta, no solo los de la primera que coincide.
+    for ruta, metodos in (
+        ("/api/portafolios/1", "DELETE, GET, PATCH"),
+        ("/api/intermediarios", "GET, POST"),
+        ("/api/sesion", "DELETE, POST"),
+        ("/api/cuenta/revocacion", "POST"),
+        ("/health", "GET"),
+    ):
+        respuesta = cliente.put(ruta, json={})
+        assert respuesta.status_code == 405, ruta
+        assert respuesta.headers["allow"] == metodos, ruta
+
+
+@pytest.mark.bd
+@pytest.mark.usefixtures("bd_limpia")
 def test_superusuario_falla_al_arrancar(cluster_pg: ClusterPg, config_pruebas: Settings) -> None:
     clave = conninfo_to_dict(cluster_pg.conninfo_dueno)["password"]
     config = config_pruebas.model_copy(update={"database_url": SecretStr(_url_dueno(cluster_pg))})
@@ -487,17 +553,14 @@ def app_con_pruebas(config_pruebas: Settings) -> Iterator[FastAPI]:
     def ver_config(config: Settings = Depends(config_actual)) -> dict[str, list[str]]:
         return {"origenes": config.lista_origenes}
 
-    errores_motor = importar_si_existe("app.motor.errores")
-    if errores_motor is not None:
-
-        @app.get("/api/prueba/motor/{codigo}")
-        def error_motor(codigo: str) -> None:
-            intervalo = SimpleNamespace(inicio=date(2026, 9, 10), fin=date(2026, 10, 14))
-            if codigo == "cifra":
-                raise errores_motor.CifraNoCalculable(7, date(2026, 10, 8), "sin precio")
-            if codigo == "historial":
-                raise errores_motor.HistorialInvalido("motivo")
-            raise errores_motor.PeriodoInvalido(codigo, "RF-09", intervalo)
+    @app.get("/api/prueba/motor/{codigo}")
+    def error_motor(codigo: str) -> None:
+        intervalo = SimpleNamespace(inicio=date(2026, 9, 10), fin=date(2026, 10, 14))
+        if codigo == "cifra":
+            raise errores_motor.CifraNoCalculable(7, date(2026, 10, 8), "sin precio")
+        if codigo == "historial":
+            raise errores_motor.HistorialInvalido("motivo")
+        raise errores_motor.PeriodoInvalido(codigo, "RF-09", intervalo)
 
     yield app
 
@@ -517,8 +580,6 @@ def test_config_actual(cliente_pruebas: ClientePrueba) -> None:
 @pytest.mark.bd
 @pytest.mark.usefixtures("bd_limpia")
 def test_errores_del_motor(cliente_pruebas: ClientePrueba) -> None:
-    if importar_si_existe("app.motor.errores") is None:
-        pytest.skip("El motor (WP2) aún no existe.")
     esperados = {
         "periodo_invertido": (422, "La fecha final no puede ser anterior a la inicial."),
         "periodo_fuera_de_intervalo": (
@@ -846,8 +907,6 @@ def test_bd_limpia_vacia_las_cuentas_y_conserva_semillas(dueno: psycopg.Connecti
 @pytest.mark.bd
 @pytest.mark.usefixtures("bd_limpia")
 def test_nueva_cuenta(nueva_cuenta: Any) -> None:
-    if importar_si_existe("app.api.rutas_cuentas") is None:
-        pytest.skip("Las rutas de cuentas (WP3) aún no existen.")
     ana = nueva_cuenta("ana@example.com")
     beto = nueva_cuenta()
     assert ana.usuario_id != beto.usuario_id

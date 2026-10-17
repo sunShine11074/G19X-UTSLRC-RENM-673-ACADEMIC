@@ -130,6 +130,16 @@ def test_operar_sobre_lo_ajeno_da_el_mismo_404_que_lo_inexistente(
     assert con_ajeno.status_code == 404
     assert con_ajeno.content == con_inexistente.content
     assert con_ajeno.json()["mensaje"] == "No existe el intermediario."
+    # Lo mismo con una venta. A la compra la rechazaría también la llave foránea compuesta de la
+    # base; a la venta, sin la revisión del propietario, la regla de saldo respondería 409 con el
+    # nombre del intermediario ajeno.
+    venta = {**a.cuerpo(b.casa), "tipo": "venta"}
+    con_ajeno = a.c.post(f"/api/portafolios/{a.portafolio}/transacciones", json=venta)
+    con_inexistente = a.c.post(
+        f"/api/portafolios/{a.portafolio}/transacciones", json={**venta, "intermediario_id": INEXISTENTE}
+    )
+    assert con_ajeno.status_code == 404, con_ajeno.json()
+    assert con_ajeno.content == con_inexistente.content
 
     assert huella(dueno) == antes
     # B sigue intacto.

@@ -17,17 +17,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.concurrency import run_in_threadpool
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
+from app.api import rutas_consultas, rutas_cuentas, rutas_portafolios, rutas_transacciones
 from app.config import Settings, cargar_config
+from app.cuentas.dependencias import verificar_origen
 from app.db import comprobar_base, crear_fabrica, crear_motor_bd
-from app.errores import importar_si_existe, registrar_manejadores
+from app.errores import registrar_manejadores
 
-# Cada módulo expone `router: APIRouter`; si aún no existe, se omite.
-MODULOS_DE_RUTAS = (
-    "app.api.rutas_cuentas",
-    "app.api.rutas_portafolios",
-    "app.api.rutas_transacciones",
-    "app.api.rutas_consultas",
-)
+# Cada módulo expone `router: APIRouter`.
+MODULOS_DE_RUTAS = (rutas_cuentas, rutas_portafolios, rutas_transacciones, rutas_consultas)
 
 
 def _bajo_api(ruta: str) -> bool:
@@ -69,17 +66,12 @@ def crear_app(config: Settings | None = None) -> FastAPI:
         finally:
             engine.dispose()
 
-    # Comprobación de Origin en todo método que escribe (D-41); la define WP3.
-    dependencias: list[Any] = []
-    dependencias_cuentas = importar_si_existe("app.cuentas.dependencias")
-    if dependencias_cuentas is not None:
-        dependencias.append(Depends(dependencias_cuentas.verificar_origen))
-
     app = FastAPI(
         title="Proyecto 077 — Plataforma de Gestión de Activos Financieros",
         version="0.1.0",
         lifespan=ciclo_de_vida,
-        dependencies=dependencias,
+        dependencies=[Depends(verificar_origen)],  # Origin en todo método que escribe (D-41)
+        redirect_slashes=False,  # sin barra final (§4.1): /api/portafolios/ da 404, no un 307
     )
     app.state.config = config
     app.state.engine = engine
@@ -100,10 +92,8 @@ def crear_app(config: Settings | None = None) -> FastAPI:
         """Comprueba que la API responde, sin tocar la base de datos."""
         return {"estado": "ok"}
 
-    for nombre in MODULOS_DE_RUTAS:
-        modulo = importar_si_existe(nombre)
-        if modulo is not None:
-            app.include_router(modulo.router)
+    for modulo in MODULOS_DE_RUTAS:
+        app.include_router(modulo.router)
 
     return app
 

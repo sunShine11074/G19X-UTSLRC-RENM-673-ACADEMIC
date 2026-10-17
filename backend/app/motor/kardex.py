@@ -69,6 +69,7 @@ class Kardex:
         self.fecha: date | None = None
         self._saldo: dict[Par, int] = {par: 0 for par in self.pares}
         self._costo: dict[Par, Decimal] = {par: CERO for par in self.pares}
+        self._costo_total: dict[Par, Decimal] = {par: CERO for par in self.pares}
 
     @calculo
     def avanzar_hasta(self, fecha: date) -> dict[date, Flujos]:
@@ -99,6 +100,15 @@ class Kardex:
         return self._costo[par]
 
     @calculo
+    def costo_total(self, par: Par) -> Decimal:
+        """Costo total del par: el acumulado de sus compras, en proporción a los títulos (RF-08).
+
+        Es igual a títulos × costo unitario, pero no arrastra el redondeo a 28 dígitos del costo
+        unitario, que haría presentar 32.00499…9 como «32.00» en lugar de 32.005 → «32.01» (RD-16).
+        """
+        return self._costo_total[par]
+
+    @calculo
     def tiene_transacciones(self, par: Par) -> bool:
         """Si existe una transacción del par con fecha ≤ la fecha procesada."""
         return self.fecha is not None and self._primera_fecha[par] <= self.fecha
@@ -114,6 +124,7 @@ class Kardex:
                 retiros_vencimientos += Decimal(self._saldo[par]) * valor_nominal
                 self._saldo[par] = 0
                 self._costo[par] = CERO
+                self._costo_total[par] = CERO
 
         # Agregación por par: Q = Σ cantidad; K = Σ importe de efectivo.
         compras: dict[Par, tuple[int, Decimal]] = {}
@@ -134,7 +145,9 @@ class Kardex:
                 continue
             q, k = compras[par]
             saldo = self._saldo[par]
-            self._costo[par] = (Decimal(saldo) * self._costo[par] + k) / Decimal(saldo + q)
+            costo_total = self._costo_total[par] + k
+            self._costo_total[par] = costo_total
+            self._costo[par] = costo_total / Decimal(saldo + q)  # = (S × c + K) / (S + Q)
             self._saldo[par] = saldo + q
             aportaciones += k
 
@@ -144,12 +157,16 @@ class Kardex:
             if par not in ventas:
                 continue
             q, ingreso = ventas[par]
-            saldo = self._saldo[par] - q
+            anterior = self._saldo[par]
+            saldo = anterior - q
             if saldo < 0:  # Historial ya lo impide (RF-28)
                 raise HistorialInvalido(f"El saldo del par {par} queda negativo el {dia.isoformat()}.")
             self._saldo[par] = saldo
             if saldo == 0:
                 self._costo[par] = CERO
+                self._costo_total[par] = CERO
+            else:  # el costo unitario no cambia; el total queda en proporción (multiplica antes de dividir)
+                self._costo_total[par] = self._costo_total[par] * Decimal(saldo) / Decimal(anterior)
             retiros_ventas += ingreso
 
         return Flujos(

@@ -7,7 +7,6 @@
 
 from __future__ import annotations
 
-import importlib.util
 from collections.abc import Callable
 from datetime import date
 from typing import Any
@@ -25,7 +24,6 @@ VENCIDA = {
     "regla": "RF-26a",
     "mensaje": "La emisión BI261008 vence el 08/10/2026: no se registran transacciones en esa fecha ni después.",
 }
-HAY_CONSULTAS = importlib.util.find_spec("app.api.rutas_consultas") is not None  # E19 y E20 (WP5)
 
 
 def _id(respuesta: httpx.Response, estado: int = 201) -> int:
@@ -99,7 +97,6 @@ def test_crit2_en_el_vencimiento_o_despues_se_rechaza(
     assert despues[2][4:7] == ("venta", date(2026, 10, 7), 100)
 
 
-@pytest.mark.skipif(not HAY_CONSULTAS, reason="E19 y E20 son de WP5 y todavía no existen")
 def test_crit3_consultar_el_08_10_no_crea_transacciones(
     nueva_cuenta: Callable[..., CuentaPrueba], dueno: psycopg.Connection[Any], reloj: Any
 ) -> None:

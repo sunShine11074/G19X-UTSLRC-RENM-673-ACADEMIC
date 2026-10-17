@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from datetime import date, timedelta
 from decimal import Decimal
 
-from .contexto import CERO, UNO, calculo
+from .contexto import CERO, UNO, calculo, para_comparar
 from .errores import PeriodoInvalido
 from .kardex import FLUJOS_CERO, Kardex
 from .mercado import DatosMercado, IndiceMercado
@@ -43,7 +43,8 @@ def caida_maxima(fecha_base: date, indices: Sequence[tuple[date, Decimal]]) -> C
 
     Empieza con M = 1 en la fecha base. Las comparaciones son estrictas: con un empate se
     conserva el pico más antiguo, y el valle es la primera fecha con la caída mínima. Con
-    caída 0, pico y valle quedan en None.
+    caída 0, pico y valle quedan en None. Se compara con `para_comparar`, para que el ruido
+    del dígito 28 del índice encadenado no rompa un empate exacto.
     """
     maximo = UNO
     fecha_maximo = fecha_base
@@ -51,11 +52,11 @@ def caida_maxima(fecha_base: date, indices: Sequence[tuple[date, Decimal]]) -> C
     pico: date | None = None
     valle: date | None = None
     for fecha, indice in indices:
-        if indice > maximo:
+        if para_comparar(indice) > para_comparar(maximo):
             maximo = indice
             fecha_maximo = fecha
         caida = indice / maximo - UNO
-        if caida < minima:
+        if para_comparar(caida) < para_comparar(minima):
             minima = caida
             valle = fecha
             pico = fecha_maximo
@@ -90,7 +91,7 @@ def _recorrer(h: Historial, m: DatosMercado, fecha_base: date, fin: date) -> _Re
         else:
             r = rendimiento_diario(v_anterior, corte.valor, flujos.aportaciones, retiros)
             indice = indice * (UNO + r)
-            if indice > maximo:
+            if para_comparar(indice) > para_comparar(maximo):  # como en caida_maxima (D-20)
                 maximo = indice
             caida = indice / maximo - UNO
         dias.append(

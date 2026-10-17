@@ -8,15 +8,12 @@ la excepción y la ruta, sin cuerpo, parámetros ni cookies (RNF-04; RNF-05).
 
 from __future__ import annotations
 
-import importlib
-import importlib.util
 import logging
 import os
 import traceback
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import date, timedelta
-from types import ModuleType
 from typing import Any, Protocol
 
 from fastapi import FastAPI, Request
@@ -24,6 +21,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import DataError, DBAPIError, IntegrityError
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.routing import Match
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 registro = logging.getLogger("app.errores")
@@ -378,18 +376,6 @@ def errores_de_validacion(errores: Iterable[Mapping[str, Any]]) -> list[ErrorCam
 # ---------------------------------------------------------------------------
 
 
-def importar_si_existe(nombre: str) -> ModuleType | None:
-    """Importa un módulo de otro paquete solo si su archivo existe.
-
-    Si el archivo existe y falla al importarse, el error se propaga: no se oculta un módulo roto.
-    """
-    partes = nombre.split(".")
-    for i in range(1, len(partes) + 1):
-        if importlib.util.find_spec(".".join(partes[:i])) is None:
-            return None
-    return importlib.import_module(nombre)
-
-
 async def _manejar_dominio(request: Request, exc: Exception) -> JSONResponse:
     assert isinstance(exc, ErrorDominio)
     return respuesta_error(exc)
@@ -400,13 +386,28 @@ async def _manejar_validacion(request: Request, exc: Exception) -> JSONResponse:
     return respuesta_error(DatosInvalidos(errores_de_validacion(exc.errors())))
 
 
+_METODOS_HTTP = ("DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT")
+
+
+def _metodos_de_la_ruta(request: Request) -> list[str]:
+    """Métodos con que la ruta pedida coincide por completo (Starlette solo da los de la primera ruta)."""
+    rutas = request.app.router.routes
+    return [
+        metodo
+        for metodo in _METODOS_HTTP
+        if any(ruta.matches({**request.scope, "method": metodo})[0] is Match.FULL for ruta in rutas)
+    ]
+
+
 async def _manejar_http(request: Request, exc: Exception) -> JSONResponse:
     assert isinstance(exc, StarletteHTTPException)
     error: ErrorDominio
     if exc.status_code == 404:
         error = NoEncontrado("recurso")
     elif exc.status_code == 405:
-        error = MetodoNoPermitido(cabeceras=exc.headers)
+        metodos = _metodos_de_la_ruta(request)
+        # RFC 9110 §15.5.6: Allow lista todos los métodos de la ruta.
+        error = MetodoNoPermitido(cabeceras={"Allow": ", ".join(metodos)} if metodos else exc.headers)
     else:
         error = ErrorDominio(
             exc.status_code, "error_http", None, "La solicitud no se pudo atender.", cabeceras=exc.headers
@@ -442,10 +443,8 @@ async def _manejar_excepcion(request: Request, exc: Exception) -> JSONResponse:
 
 
 def _registrar_errores_motor(app: FastAPI) -> None:
-    """Traduce los errores del motor (§5.9) si el paquete app.motor ya existe."""
-    modulo = importar_si_existe("app.motor.errores")
-    if modulo is None:
-        return
+    """Traduce los errores del motor (§5.9)."""
+    from app.motor import errores as modulo  # aquí, para no importar el motor al cargar este módulo
 
     async def _periodo(request: Request, exc: Exception) -> JSONResponse:
         codigo = getattr(exc, "codigo", None)

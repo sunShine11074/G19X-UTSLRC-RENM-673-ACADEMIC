@@ -72,7 +72,14 @@ class Settings(BaseSettings):
 
 def cargar_config() -> Settings:
     """Lee la configuración del entorno y de backend/.env. Solo la usa la `app` perezosa de main.py."""
-    return Settings()  # type: ignore[call-arg]
+    try:
+        return Settings()  # type: ignore[call-arg]
+    except UnicodeDecodeError:
+        # Pasa si .env se escribió en ANSI (Set-Content de PowerShell 5.1) y tiene acentos.
+        raise RuntimeError(
+            "backend/.env no está guardado en UTF-8. Créalo con «Copy-Item .env.example .env» o "
+            "guárdalo en UTF-8 desde el editor; no lo reescribas con Set-Content de PowerShell 5.1."
+        ) from None
 
 
 def config_actual(request: Request) -> Settings:

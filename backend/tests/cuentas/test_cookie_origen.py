@@ -253,6 +253,23 @@ def test_origen_en_los_metodos_que_escriben(
         ("DELETE", "/api/sesion", None),
         ("POST", "/api/cuenta/revocacion", {"confirmo": True}),  # antes que la sesión
     ]
+    portafolio = ana.cliente.post("/api/portafolios", json={"nombre": "Principal"}).json()["id"]
+    escrituras += [
+        ("POST", "/api/portafolios", {"nombre": "Otro"}),
+        ("PATCH", f"/api/portafolios/{portafolio}", {"nombre": "Robado"}),
+        ("DELETE", f"/api/portafolios/{portafolio}", {"confirmacion": "Principal"}),
+        ("POST", "/api/intermediarios", {"nombre": "Casa A"}),
+        ("POST", f"/api/portafolios/{portafolio}/transacciones", {"cantidad": "1"}),
+    ]
+    # Están todas las operaciones de OpenAPI que no son GET.
+    operaciones = {
+        (metodo.upper(), ruta)
+        for ruta, metodos in app_pruebas.openapi()["paths"].items()
+        for metodo in metodos
+        if metodo != "get"
+    }
+    probadas = {(metodo, re.sub(r"/[0-9]+", "/{portafolio_id}", ruta)) for metodo, ruta, _ in escrituras}
+    assert operaciones == probadas
     origenes_malos: list[str | None] = [
         None,
         "http://localhost:5174",
@@ -281,8 +298,11 @@ def test_origen_en_los_metodos_que_escriben(
         assert sin_origen.get("/api/aviso-privacidad").status_code == 200
         assert sin_origen.get("/api/cuenta", headers=con_cookie(valor)).status_code == 200
 
-    # Nada cambió: la cuenta sigue activa y beto no existe.
+    # Nada cambió: la cuenta sigue activa, beto no existe y el portafolio sigue igual.
     assert ana.cliente.get("/api/cuenta").json()["estado"] == "activa"
+    assert [p["nombre"] for p in ana.cliente.get("/api/portafolios").json()] == ["Principal"]
+    assert ana.cliente.get("/api/intermediarios").json() == []
+    assert ana.cliente.get(f"/api/portafolios/{portafolio}/transacciones").json() == []
     assert iniciar(cliente, "beto@example.com", contrasena).status_code == 401
 
 

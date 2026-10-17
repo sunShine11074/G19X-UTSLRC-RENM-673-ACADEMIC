@@ -16,6 +16,9 @@ from app.errores import ErrorCampo
 
 LARGO_MINIMO = 15  # recomendado de RF-01 crit. 1
 LARGO_MAXIMO = 128  # D-02
+# NFKC junta a lo más 4 puntos de código en 1 (p. ej., U+1F82): un texto más largo que esto
+# excede LARGO_MAXIMO aun después de normalizarlo.
+LARGO_MAXIMO_CRUDO = 4 * LARGO_MAXIMO
 REGLA = "RF-01"
 
 HASHER = PasswordHash((Argon2Hasher(time_cost=2, memory_cost=19456, parallelism=1),))
@@ -25,7 +28,14 @@ HASH_FICTICIO: str = HASHER.hash(secrets.token_urlsafe(32))
 
 
 def normalizar(contrasena: str) -> str:
-    """Forma NFKC, al registrarse y al iniciar sesión (D-02). No recorta ni trunca."""
+    """Forma NFKC, al registrarse y al iniciar sesión (D-02). No recorta ni trunca.
+
+    Un texto de más de LARGO_MAXIMO_CRUDO puntos de código se devuelve sin normalizar: aun
+    normalizado excedería LARGO_MAXIMO, así que se rechaza igual. NFKC tarda un tiempo
+    cuadrático con algunas entradas (U+FDFA repetido) y no suelta el GIL: congelaría la API.
+    """
+    if len(contrasena) > LARGO_MAXIMO_CRUDO:
+        return contrasena
     return unicodedata.normalize("NFKC", contrasena)
 
 
