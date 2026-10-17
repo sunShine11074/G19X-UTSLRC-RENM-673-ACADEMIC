@@ -5,6 +5,26 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard]>=0.141.1",
     "psycopg[binary]>=3.3.6",
+    "pwdlib[argon2]>=0.3.1",
     "pydantic-settings>=2.15.0",
     "sqlalchemy>=2.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+norecursedirs = [".*", "__pycache__", "oraculo", "resultados"]
+addopts = "-ra --strict-markers --import-mode=importlib -m 'not inspeccion'"
+markers = [
+    "motor: sin base de datos",
+    "bd: usa el clúster temporal",
+    "api",
+    "referencia: CPNF-01 y CPNF-02",
+    "no_funcional",
+    "inspeccion: la ejecuta Ramon a mano",
 ]
