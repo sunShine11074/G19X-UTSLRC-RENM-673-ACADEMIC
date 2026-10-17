@@ -14,14 +14,14 @@ motor único de cálculo. **No emite recomendaciones de inversión.**
 | Documento | Estado | Ubicación | Entregable de empresa que alimenta |
 |---|---|---|---|
 | Definición del proyecto | ✅ v1 | [docs/](docs/) | Documento de requerimientos |
-| Glosario del dominio financiero | 🔶 hecho, por integrar | `docs/glosario.md` | Manual técnico |
-| SRS — Especificación de Requisitos | 🔄 esqueleto creado | [docs/](docs/) | Documento de requerimientos |
-| Modelo E-R y diccionario de datos | ⏳ | SRS §4.3 y §4.4 | Documento de arquitectura |
+| Glosario del dominio financiero | ✅ hecho | Documento aparte, enlazado en SRS §1.3 | Manual técnico |
+| SRS — Especificación de Requisitos | 🔄 v0.3: §1 a §4.4 y §5.2; pendientes §4.5 y §5.3 | [docs/](docs/) | Documento de requerimientos |
+| Modelo E-R y diccionario de datos | ✅ en el SRS e implementado en `backend/02_crear_esquema.sql` | SRS §4.3 y §4.4 | Documento de arquitectura |
 | Wireframes y guía de estilo | ⏳ | SRS §4.5 | Documento de arquitectura |
 | Registros de decisión (ADR) | ⏳ | `docs/adr/` | Documento de arquitectura |
 | Matriz de riesgos | ⏳ | `docs/riesgos.md` | Plan del proyecto |
 | Cronograma | ⏳ | `docs/cronograma.md` | Plan del proyecto |
-| Conjunto de referencia (oráculo) | ⏳ | `backend/tests/fixtures/` | Reporte de QA |
+| Conjunto de referencia (oráculo) | ✅ congelado (commit 11097f8) | [backend/tests/oraculo/](backend/tests/oraculo/) · SRS §5.2 | Reporte de QA |
 | Consideraciones legales | ⏳ | `docs/legal.md` | Informe final |
 
 ---
@@ -41,10 +41,10 @@ motor único de cálculo. **No emite recomendaciones de inversión.**
 
 | Capa | Tecnología |
 |---|---|
-| Backend | Python 3.13 · FastAPI · SQLAlchemy 2.x · Alembic (gestionado con `uv`) |
-| Base de datos | PostgreSQL 18 |
-| Frontend | React 19 · Vite · Apache ECharts |
-| Cálculo financiero | NumPy · Pandas |
+| Backend | Python 3.13 · FastAPI · SQLAlchemy 2 · psycopg 3 (gestionado con `uv`) |
+| Base de datos | PostgreSQL 18; esquema y semillas con scripts de `psql` (ver «Base de datos local») |
+| Frontend | React 19 · Vite 8 · Recharts 3 (se construye con Node.js 24) |
+| Cálculo financiero | `decimal` de Python con 28 dígitos; nunca punto flotante binario (RD-12) |
 
 Principio de arquitectura: **una sola fuente de cálculo.** Los indicadores se calculan en el backend
 y se exponen como JSON; ningún cliente recalcula.
