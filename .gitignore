@@ -9,6 +9,9 @@
 # ---- Material confidencial del cliente (NDA) ----
 confidencial/
 
+# ---- Documentos personales y de la estadía (borradores, notas, cartas, Develop/) ----
+/6th quarter (Estadías)/
+
 # ---- Python ----
 __pycache__/
 *.py[cod]
