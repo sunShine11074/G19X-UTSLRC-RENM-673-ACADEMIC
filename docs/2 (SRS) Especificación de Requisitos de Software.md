@@ -76,17 +76,22 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | API | Interfaz de programación de aplicaciones (*application programming interface*) |
 | ARCO | Derechos de acceso, rectificación, cancelación y oposición |
 | BMV | Bolsa Mexicana de Valores |
+| CDS | Sistema de diseño de Coinbase (*Coinbase Design System*) |
 | CETES | Certificados de la Tesorería de la Federación |
+| CLDR | Repositorio común de datos de configuración regional de Unicode (*Common Locale Data Repository*) |
 | CNBV | Comisión Nacional Bancaria y de Valores |
 | CPF / CPNF | Caso de prueba funcional / no funcional |
 | CSS | Hojas de estilo en cascada (*Cascading Style Sheets*) |
 | CSV | Valores separados por comas (*comma-separated values*) |
 | CU | Caso de uso (apartado 4.1) |
+| DOM | Modelo de objetos del documento (*Document Object Model*) |
+| ELK | Núcleo de distribución de diagramas de Eclipse (*Eclipse Layout Kernel*) |
 | ETF | Fondo cotizado en bolsa (*exchange-traded fund*) |
 | FIBRA | Fideicomiso de Infraestructura y Bienes Raíces |
 | FIX | Tipo de cambio peso-dólar que determina y publica el Banco de México |
 | FK | Llave foránea (*foreign key*) |
 | GPL | Licencia Pública General de GNU (*GNU General Public License*) |
+| HTML | Lenguaje de marcado de hipertexto (*HyperText Markup Language*) |
 | HTTP | Protocolo de transferencia de hipertexto (*Hypertext Transfer Protocol*) |
 | HTTPS | Protocolo seguro de transferencia de hipertexto (*Hypertext Transfer Protocol Secure*) |
 | IDEF1X | Definición de integración para el modelado de información (*Integration Definition for Information Modeling*) |
@@ -100,6 +105,7 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | MPL | Licencia Pública de Mozilla (*Mozilla Public License*) |
 | MVP | Producto mínimo viable |
 | MXN | Peso mexicano (código ISO 4217) |
+| NVDA | Lector de pantalla libre para Windows (*NonVisual Desktop Access*) |
 | OE | Objetivo específico |
 | PK | Llave primaria (*primary key*) |
 | PRD | Documento de requisitos del producto (*product requirements document*) |
@@ -116,6 +122,7 @@ El glosario del dominio financiero se mantiene en un documento aparte: <https://
 | UK | Llave única (*unique key*) |
 | UML | Lenguaje Unificado de Modelado (*Unified Modeling Language*) |
 | VN | Valor nominal |
+| W3C | Consorcio de la World Wide Web (*World Wide Web Consortium*) |
 | WAL | Registro de escritura anticipada de PostgreSQL (*write-ahead log*) |
 | WCAG | Pautas de Accesibilidad para el Contenido Web (*Web Content Accessibility Guidelines*) |
 | WSL | Subsistema de Windows para Linux (*Windows Subsystem for Linux*) |
@@ -340,7 +347,7 @@ Esta tabla registra las versiones de la especificación: las 0.x son borradores;
 |---|---|---|---|
 | 0.1 | 19/09/2026 | Ramon Ernesto Nieblas Mendivil | Creado el 17 de septiembre ⟦contenido inicial: confirmar⟧. Estructura de seis secciones basada en la plantilla institucional y conciliada con ISO/IEC/IEEE 29148:2018 (ISO et al., 2018). Acrónimos de 1.3, tablas de 3.5, 3.7 y 3.8 (MVP el 5 de octubre) y referencia de la AMIB en 6 ⟦confirmar fecha⟧. |
 | 0.2 | 26/09/2026 | Ramon Ernesto Nieblas Mendivil | Primeros apartados, sobre la Definición de 12 imprescindibles: 2.1, 2.2, 2.3 (del 20 de septiembre) y la introducción de 3.6 con 3.6.1. Fecha de 2.1, 2.2 y 3.6: entre el 19 y el 26 de septiembre ⟦confirmar⟧. Contiene además 1.2 y el enlace al glosario de 1.3 ⟦confirmar desde cuándo⟧. No incorpora los cambios de la Definición de ese día (17 imprescindibles; MVP al 18 de octubre). |
-| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4.5 y 5.3 (salvo la fila de RF-01). El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). Ese mismo día se integra 4.1 (diagramas de casos de uso en Mermaid y fichas de CU-01, CU-05 y CU-07), con sus referencias en 6; 5.3 agrega la columna del caso de uso y 1.3 agrega CU y UML. También se aplican las decisiones P-26 a P-31: 2.6 incorpora RF-34 (emisiones de CETES colocadas después de la semilla) y un orden de recorte MoSCoW estricto; RF-32 deja la UDI y carga las series de plazo del CF107; el FIX histórico se carga una sola vez con RF-23; 2.6 fija los métodos de RF-17, RF-19 (con su referencia en 6), RF-20 y RF-21, que pasa a depender de RF-20, y los indicadores de RF-24; RD-19 hace privados de su autor los precios que capture RF-33, que prevalecen en sus portafolios; RF-14 se hará en la semana del 2 de noviembre con plantillas, sin servicio externo, por lo que se retira R-09, y su explicación no emitirá juicios sobre la conveniencia de una inversión; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14, RF-21 y RF-22 se ajustarán a ella. El 15 de octubre se integran 4.2 (diagramas de componentes del MVP y de la fase de refinamiento), 4.3 (modelo entidad-relación de las 13 entidades de 3.4.1, con sus relaciones y restricciones) y 4.4 (diccionario de datos); 5.3 registra las entidades de RF-01; 1.3 agrega FK, HTTP, IDEF1X, MXN, PK, SQL y UK, y 6 agrega las referencias de Mermaid (diagramas de clases y entidad-relación), IDEF1X, PostgreSQL (restricciones y tipos numéricos) y la documentación de psycopg, y reetiqueta las de Mermaid contributors (s. f.-a a s. f.-c) y PostgreSQL Global Development Group (s. f.-a a s. f.-h). Ese mismo día se integra 5.2 (conjunto de referencia: ubicación, construcción por dos caminos, escenario y cobertura, reglas, tolerancias y congelamiento con el *commit* 11097f8), y 6 agrega la referencia de la CNBV sobre los días inhábiles de 2026. El 16 de octubre, 4.2 adopta Recharts 3.10.1 para la gráfica del tablero y las que presenten RF-13, RF-16 a RF-22 y RF-27, y D-06 (2.5.5) registra su licencia y las de sus dependencias, con su referencia en 6, y advierte que el código del navegador sí se entrega a cada usuario, con los avisos de licencia que eso exige (P-33). |
+| 0.3 (en elaboración) | 07/10/2026 | Ramon Ernesto Nieblas Mendivil | Incorpora 2.4 (restricciones y exclusiones), 2.5 (suposiciones y dependencias), 2.6 (requisitos futuros), este apartado, 3.3 (requisitos no funcionales) y 3.4 (requisitos lógicos de datos), con sus referencias en 6; en 3.2, los 18 imprescindibles de la Definición vigente, entre ellos el RF-12 ampliado y los del diseño híbrido de datos (RF-07, RF-30 y RF-31), todavía sin criterios de aceptación; RF-22, RF-32 y RF-33 quedan en 2.6. También corrige la universidad y la carrera de la portada y amplía las siglas de 1.3. Se cerrará cuando 3.2 tenga sus criterios de aceptación y sus fichas, y se resuelvan las decisiones pendientes que afectan al MVP. Siguen vacíos 1.1, la tabla de términos de 1.3, las fichas de 3.2, 4.5.3, 4.5.4 y 5.3 (salvo la fila de RF-01). El 13 de octubre cambian los enunciados de RF-05 (precio por título e importe de comisiones con IVA; P-16), RF-12 (aviso de valuación estimada; P-12), RF-28 (solo al registrar y dentro del portafolio; P-01) y RF-30 (CETES a 728 días y plazo efectivo; P-15 y P-11). Ese mismo día se agregan los criterios de aceptación de 3.2 y el apartado 3.9, se aplican las decisiones P-01 a P-25 y 2.6 incorpora RF-39 (edición y eliminación de transacciones; P-01); 1.2 precisa las responsabilidades (P-22). El 14 de octubre se integra 3.6, con los mínimos oficiales citados y las mediciones del equipo de desarrollo; 3.5 se ajusta a él y agrega uv; RNF-06 registra el pico de procesador y memoria, y RNF-12 remite a las plataformas de 3.6.2; 1.3 agrega CSS, IVA, LTS, WAL, WCAG y WSL, y se reetiquetan las referencias de Microsoft (2025a y 2025b) y de PostgreSQL Global Development Group (s. f.-a a s. f.-f). Ese mismo día se integra 4.1 (diagramas de casos de uso en Mermaid y fichas de CU-01, CU-05 y CU-07), con sus referencias en 6; 5.3 agrega la columna del caso de uso y 1.3 agrega CU y UML. También se aplican las decisiones P-26 a P-31: 2.6 incorpora RF-34 (emisiones de CETES colocadas después de la semilla) y un orden de recorte MoSCoW estricto; RF-32 deja la UDI y carga las series de plazo del CF107; el FIX histórico se carga una sola vez con RF-23; 2.6 fija los métodos de RF-17, RF-19 (con su referencia en 6), RF-20 y RF-21, que pasa a depender de RF-20, y los indicadores de RF-24; RD-19 hace privados de su autor los precios que capture RF-33, que prevalecen en sus portafolios; RF-14 se hará en la semana del 2 de noviembre con plantillas, sin servicio externo, por lo que se retira R-09, y su explicación no emitirá juicios sobre la conveniencia de una inversión; si la empresa cuenta con la opinión jurídica que menciona S-15, RF-14, RF-21 y RF-22 se ajustarán a ella. El 15 de octubre se integran 4.2 (diagramas de componentes del MVP y de la fase de refinamiento), 4.3 (modelo entidad-relación de las 13 entidades de 3.4.1, con sus relaciones y restricciones) y 4.4 (diccionario de datos); 5.3 registra las entidades de RF-01; 1.3 agrega FK, HTTP, IDEF1X, MXN, PK, SQL y UK, y 6 agrega las referencias de Mermaid (diagramas de clases y entidad-relación), IDEF1X, PostgreSQL (restricciones y tipos numéricos) y la documentación de psycopg, y reetiqueta las de Mermaid contributors (s. f.-a a s. f.-c) y PostgreSQL Global Development Group (s. f.-a a s. f.-h). Ese mismo día se integra 5.2 (conjunto de referencia: ubicación, construcción por dos caminos, escenario y cobertura, reglas, tolerancias y congelamiento con el *commit* 11097f8), y 6 agrega la referencia de la CNBV sobre los días inhábiles de 2026. El 16 de octubre, 4.2 adopta Recharts 3.10.1 para la gráfica del tablero y las que presenten RF-13, RF-16 a RF-22 y RF-27, y D-06 (2.5.5) registra su licencia y las de sus dependencias, con su referencia en 6, y advierte que el código del navegador sí se entrega a cada usuario, con los avisos de licencia que eso exige (P-33). El 18 de octubre se integran 4.5.1 (guía de estilo, basada en CDS con tema propio, la opción B) y 4.5.2 (mapa de navegación); 1.3 agrega CDS, CLDR, DOM, ELK, HTML, NVDA y W3C, y 6 agrega las referencias de CDS, Inter, CLDR, Machado et al. (2009), el criterio 2.2.1 de WCAG y los diagramas de flujo de Mermaid, y reetiqueta la de casos de uso de Mermaid (s. f.-d). |
 
 ## 3.2 Requisitos funcionales
 
@@ -635,7 +642,7 @@ Como nadie aprueba esta especificación por separado (3.9.1), la versión 1.0 de
 
 Este apartado presenta los actores de la plataforma y los casos de uso en que participan. Se deriva de la sección 3 y no agrega funciones: el actor principal es el perfil único de 2.3, y los casos cubren los 18 imprescindibles de 3.2, con las reglas de 3.4; un segundo diagrama muestra los de 2.6.
 
-La notación es la de la cláusula 18 de UML 2.5.1 (Object Management Group, 2017), escrita con el tipo de diagrama de casos de uso de Mermaid, *usecase-beta*, disponible desde su versión 12 (Mermaid contributors, s. f.-c). Los actores quedan fuera del límite del sistema, y cada caso es una elipse con su identificador CU-nn y, si lo extienden, su punto de extensión. La línea continua asocia un actor con un caso; las flechas punteadas son las relaciones «include», del caso base al incluido, y «extend», del caso que extiende al caso base. Mermaid se aparta de UML en dos detalles: rotula esas flechas sin comillas angulares y las dibuja con punta rellena, no abierta.
+La notación es la de la cláusula 18 de UML 2.5.1 (Object Management Group, 2017), escrita con el tipo de diagrama de casos de uso de Mermaid, *usecase-beta*, disponible desde su versión 12 (Mermaid contributors, s. f.-d). Los actores quedan fuera del límite del sistema, y cada caso es una elipse con su identificador CU-nn y, si lo extienden, su punto de extensión. La línea continua asocia un actor con un caso; las flechas punteadas son las relaciones «include», del caso base al incluido, y «extend», del caso que extiende al caso base. Mermaid se aparta de UML en dos detalles: rotula esas flechas sin comillas angulares y las dibuja con punta rellena, no abierta.
 
 Los diagramas se leen de izquierda a derecha: el actor participa en los casos unidos a él; el caso base siempre ejecuta el incluido, y el extendido puede ejecutar, en su punto de extensión, el que lo extiende.
 
@@ -1478,10 +1485,505 @@ Según 4.3, RF-32 y RF-23 agregan la tabla tipo_cambio y, si la ficha de RF-23 l
 
 ### 4.5.1 Guía de estilo
 
-<!-- Paleta con valores hexadecimales, escala tipográfica, espaciado, iconografía y
-     estilo de navegación. Se deriva de tu sistema de diseño existente: no la rehagas. -->
+Este apartado fija las reglas visuales y de texto de todas las pantallas del cliente web: colores, tipografía, formato de cifras y fechas, espacios, iconos, navegación y componentes. No dibuja pantallas: su orden de recorrido lo da 4.5.2, y su distribución, 4.5.3 y 4.5.4, que se apoyan en esta guía. Como el resto de la sección 4, se deriva de la sección 3 y de la decisión de diseño de «Alcance y origen», sin agregar funciones: cada regla remite, en su columna Origen, al requisito, la decisión o el criterio de WCAG 2.2 (World Wide Web Consortium, 2024) del que sale. Los criterios se citan por su número. Como los criterios 2.4.1 a 2.4.7 y 2.5.3 coinciden con apartados de este documento, en las columnas Origen y Accesibilidad todo número de tres niveles es un criterio de WCAG 2.2, salvo 3.6.1 y 4.5.2, que son apartados.
+
+La meta de accesibilidad, el nivel AA de WCAG 2.2, es una meta de diseño del estudiante y no un requisito verificable: la sección 3 aún no tiene un requisito no funcional de accesibilidad, y 3.6.1 solo cita el criterio 1.4.10 ⟦decidir: agregarlo en 3.3⟧.
+
+Los datos de CDS se tomaron el 17 de octubre de 2026 del código publicado de su versión 9.29.0 y de su documentación; si difieren, rige el código. Los colores del tema propio son una propuesta, medidos con la fórmula de contraste de WCAG pero aún no vistos en un navegador ⟦confirmar⟧.
+
+#### Alcance y origen
+
+CDS (Coinbase Design System) es el sistema de diseño público de Coinbase. Su paquete para web, @coinbase/cds-web (Coinbase, 2026b), reúne componentes de React y temas definidos por tokens: nombres de color, espacio y tipografía con un valor para el modo claro y otro para el oscuro. La decisión de diseño que esta guía y sus columnas Origen llaman «opción B», elegida entre las alternativas analizadas para el cliente web ⟦registrar la decisión y su fecha en 3.1⟧, adopta CDS como base de las vistas con un tema propio: la estructura y los nombres de los tokens son de CDS, y los valores, del Proyecto 077. Así, las pantallas ganan componentes ya resueltos y una apariencia coherente, sin parecer un producto de Coinbase.
+
+| Elemento de CDS | En el 077 | Origen |
+|---|---|---|
+| Estructura del tema: espectros de color, 43 colores semánticos y escalas de espacio, radios, bordes, tipografía, sombras y tamaños de control | Se adopta con valores propios (Paleta) | Opción B |
+| Nombres de los tokens (fg, fgMuted, bg, bgPrimary y los demás) | Se adoptan, también en los componentes propios del MVP | Opción B |
+| Escala de espacio de base 8 px, radios y puntos de corte | Se adoptan sin cambios | 3.6.1; RNF-11 |
+| Escala tipográfica de 13 tokens | Se adopta con Inter autoalojada | 2.3 |
+| Subconjunto sobrio de componentes | Se adopta, con todos sus textos en español (Componentes) | 2.3; criterios 3.1.1 y 3.1.2 |
+| Temas incluidos (defaultTheme, coinbaseTheme y sus variantes) y su paleta, cuyo primario es el azul #0052FF de Coinbase | No se usan: el tema propio parte de la estructura de defaultTheme con colores propios | Marca |
+| Logotipos, ilustraciones y glifos de marca de Coinbase o de terceros | No se usan | Marca; Apache-2.0, secc. 6 |
+| Gráficas de CDS | No se usan: se usa Recharts 3.10.1 | 4.2; D-06 |
+| Componentes de venta, de atracción o de tiempo real: FloatingAssetCard, ContainedAssetCard, UpsellCard y NudgeCard (obsoletos), MediaCard y MessagingCard (sus sustitutos), Coachmark, Tour, RollingNumber y PeriodSelector | No se usan | R-01; R-02; R-13; 2.3 |
+| Toast, Calendar y DatePicker | No se usan: Toast se oculta a los 5 segundos, y el calendario tiene textos fijos en inglés y empieza la semana en domingo | Criterios 2.2.1 y 3.1.2 |
+| Fuente de iconos CoinbaseIcons | Con B se carga siempre, porque los componentes de CDS dibujan con ella sus iconos internos; si también la usan las vistas, o se sustituye por otra fuente, ⟦decidir (P-48)⟧ (Iconografía) | P-48; D-06 |
+
+Marca. El tema propio lleva su propio identificador ⟦decidir: por ejemplo, «proyecto-077»⟧ y la paleta del cliente web (frontend/src/App.css), ampliada en «Paleta» ⟦decidir: o la identidad visual de PluriOne, si existe⟧. Coinbase solo se nombra en la página de avisos de licencias.
+
+Licencias. El repositorio de CDS declara la licencia Apache-2.0, aunque el paquete publicado en npm no trae el campo de licencia ni el archivo LICENSE; la sección 6 de esa licencia no concede el uso de las marcas de Coinbase. La tipografía Inter tiene licencia SIL Open Font License 1.1 (The Inter Project Authors, s. f.). Ambas se registran en D-06, y sus avisos van en la página de avisos de licencias del cliente ⟦decidir cómo (P-33)⟧.
+
+Condiciones de instalación. CDS no está instalado. Su versión 9.29.0 admite React 18 o React 19.1 desde la 19.1.2 y pide framer-motion 10.18, que solo declara compatibilidad con React 18 y que CDS carga siempre, aunque no se anime nada. El cliente fija React 19.3.0. Para adoptar B falta:
+
+- bajar React, React DOM y react-is a la 19.1.10, la última de la serie 19.1 ⟦confirmar⟧;
+- que npm resuelva las dependencias sin forzarlas ⟦confirmar en una rama, a más tardar el 23/10/2026⟧ o, si no, aceptar una sustitución declarada de versiones para framer-motion ⟦decidir⟧, que se registraría en 3.5 y en D-06;
+- que compile con Vite 8 ⟦confirmar⟧;
+- retirar del cliente las reglas que dejó la plantilla de Vite, que agrandarían un 12.5 % el texto de CDS ⟦confirmar⟧.
+
+Mientras tanto, las vistas del MVP se escriben sobre componentes propios delgados, con HTML nativo y los mismos nombres de tokens, que después se reemplazan por los de CDS sin tocar cada pantalla. Esta guía rige igual para ambos, salvo en la fuente (Tipografía).
+
+#### Paleta
+
+El tema propio define los colores semánticos de CDS en los dos modos como valores hexadecimales, porque CDS no admite variables en ellos (Coinbase, s. f.). El modo sigue la preferencia del sistema operativo del usuario. La tabla muestra los colores que usan las vistas; los demás tokens (bgInverse, bgTertiary, bgPositive, bgPositiveWash, bgLinePrimarySubtle y los de acento) también se redefinen con tonos del 077, para que no quede ningún azul de Coinbase.
+
+La columna Contraste da el peor par medido en cada modo, claro / oscuro: para un color de texto o de borde, contra el fondo más desfavorable en que se usa; para un fondo, con el texto o el borde más desfavorable que lleva. Los mínimos son 4.5:1 para texto (criterio 1.4.3) y 3:1 para bordes, iconos, foco y líneas de las gráficas (criterio 1.4.11). La columna Origen indica la variable de App.css de la que sale cada color; los demás son nuevos, solo medidos.
+
+| Token de CDS | Uso en el 077 | Claro | Oscuro | Contraste | Origen |
+|---|---|---|---|---|---|
+| fg | Texto principal, cifras, celdas y títulos; texto de avisos y diálogos | #16211F | #E6ECEA | 13.55:1 / 10.90:1 | --tinta; 1.4.3 |
+| fgMuted | Etiquetas de campo, ayudas, unidad, fecha de corte o periodo, línea de fuente, marcas de los ejes y texto de ejemplo (marcador) de los campos, que CDS ya pinta con este token y los campos nativos del MVP declaran con ::placeholder, porque Firefox lo atenúa por omisión (3.66:1 sobre bg en modo claro) | #5E6D6A | #8A9794 | 4.62:1 / 4.51:1 | --tenue, más oscuro en modo claro (#647370 da 4.23:1 sobre bgSecondary); RNF-07; RF-31; 1.4.3 |
+| fgInverse | Texto de los botones primario y negativo; marca de la casilla | #FFFFFF | #161E1D | 7.59:1 / 7.26:1 | --superficie; 1.4.3; 1.4.11 |
+| fgPrimary | Enlaces, siempre subrayados; pestaña y elemento del menú activos; icono de los avisos | #1C5B52 | #6FBDAF | 6.46:1 / 5.94:1 | --acento; 1.4.3 |
+| fgPositive | Ganancia, siempre con signo ⟦decidir si se colorea⟧ | #1E6B2E | #7CC98A | 5.99:1 / 7.72:1 | Nuevo; 1.4.3; 1.4.1 |
+| fgNegative | Pérdida, con signo ⟦decidir si se colorea⟧; texto e icono del error de un campo; icono del aviso de error | #93342B | #E0978D | 6.23:1 / 6.23:1 | --alerta; RF-05; RF-28; 1.4.3 |
+| fgWarning | Icono del aviso de advertencia | #8A5A00 | #E5B567 | 5.29:1 / 7.60:1 | Nuevo; 1.4.11 |
+| bg | Fondo de página, tablas, campos y casillas | #FFFFFF | #161E1D | 3.33:1 / 3.78:1, con el borde de los campos | --superficie |
+| bgAlternate | Tarjeta de indicador y filas alternas | #F2F5F4 | #1D2726 | 3.04:1 / 3.41:1, con el borde de los campos | Nuevo; RNF-07 |
+| bgSecondary | Botón secundario y avisos permanentes | #E8EEEC | #24302E | 4.62:1 / 4.51:1, con fgMuted | Nuevo; RF-12 (crit. 4) |
+| bgElevation1 | Menús y listas desplegadas ⟦confirmar: el desplegable del Select alfa usa elevation 2, que pinta bgElevation2, con borde bgLine⟧ | #FFFFFF | #1B2423 | 5.42:1 / 5.24:1, con fgMuted | --superficie y nuevo |
+| bgElevation2 | Diálogos de confirmación e información emergente de la gráfica | #FFFFFF | #212B29 | 3.33:1 / 3.24:1, con el borde de los campos | --superficie y nuevo |
+| bgPrimary | Botón primario, anillo de foco, borde del campo con foco, casilla marcada e indicador de la pestaña activa | #1C5B52 | #6FBDAF | 6.46:1 / 5.94:1 | --acento; 1.4.11; 2.4.7 |
+| bgPrimaryWash | Fondo del elemento activo del menú | #E4F1EE | #1E3532 | 6.79:1 / 5.94:1, con fgPrimary | Nuevo |
+| bgNegative | Botón negativo (eliminar un portafolio, revocar el consentimiento) y borde del campo con error | #93342B | #E0978D | 6.23:1 / 6.23:1 | --alerta; RF-03 (crit. 3); RF-12 (crit. 3); 1.4.11 |
+| bgNegativeWash | Fondo del aviso de error con el motivo de un rechazo | #F6E5E2 | #34211E | 6.23:1 / 6.50:1, con el icono de error | --alerta-fondo; RF-05; RF-28 |
+| bgWarning | Franja del aviso de advertencia, que Banner solo dibuja en su variante global | #A86A00 | #E5B567 | 3.96:1 / 7.60:1 | Nuevo; 1.4.11 |
+| bgWarningWash | Fondo del aviso de advertencia, del mismo tono que la etiqueta de demostración | #FBF1DE | #33290F | 5.29:1 / 6.54:1, con el icono o el enlace | Nuevo |
+| bgLine | Divisores, reglas de tabla y cuadrícula de la gráfica, todos decorativos | #D5DEDB | #2C3835 | 1.37:1 / 1.39:1; no exigible | --linea |
+| bgLineHeavy | Borde de campos, listas y casillas sin marcar, y de la información emergente | #858F8C | #6F7976 | 3.04:1 / 3.24:1 | Nuevo, más claro en modo oscuro (#68726F da 2.93:1 en los diálogos); 1.4.11 |
+| yellow0 y yellow70 (espectro) | Fondo y texto de la etiqueta «Datos de demostración» | #FBF1DE y #6E4A00 | #33290F y #F0C878 | 7.09:1 / 9.04:1 | Nuevo; RF-07 (crit. 3); RF-31 (crit. 3); 1.4.3 |
+| --serie-1 (propio) | Gráfica: línea del valor y punto del corte | #1C5B52 | #6FBDAF | 7.18:1 / 6.99:1 | --acento; RF-11 (crit. 2); 1.4.11 |
+| --serie-2 (propio) | Gráfica de la fase de refinamiento: segunda serie, con trazo discontinuo | #B76B1C | #BE7125 | 3.73:1 / 4.07:1 | Nuevo; RF-18; RF-22; 1.4.11 |
+| --serie-3 (propio) | Gráfica de la fase de refinamiento: tercera serie, con trazo punteado | #8557C8 | #956ED2 | 4.56:1 / 3.97:1 | Nuevo; RF-22; 1.4.11 |
+
+Tres pares cumplen con un margen menor del 5 %: fgMuted sobre bgSecondary (4.62:1 y 4.51:1) y el borde de los campos sobre bgAlternate en modo claro (3.04:1). Por eso ningún campo va sobre bgSecondary, donde su borde daría 2.83:1, y todo cambio de superficie obliga a medir de nuevo. La variable --tinta-2 de App.css no tiene equivalente en CDS ⟦decidir: fg, fgMuted o un token extendido⟧.
+
+Algunos componentes de CDS leen el espectro, no los colores semánticos: la etiqueta (Tag), cuyo esquema por omisión es azul; el resaltado de filas de la tabla, y el marcador de carga. Por eso la etiqueta de demostración siempre declara su esquema, y el tema reemplaza los pasos del espectro que usa ⟦decidir: reemplazar también las rampas gris y azul completas⟧.
+
+Las series de la gráfica evitan los tonos azules de Coinbase y se distinguen también con visión deficiente del color, según la simulación de Machado et al. (2009). La gráfica no usa más de tres series: con cuatro o más, se divide en varias, porque agruparlas en «Otros» obligaría al cliente a sumar cifras (2.1; «Formato de cifras y fechas»).
+
+Ningún dato se distingue solo por el color (criterio 1.4.1). Estas parejas, de colores demasiado parecidos para depender de ellos, llevan además la señal indicada:
+
+| Pareja | Contraste entre ambas, claro / oscuro | Señal además del color | Origen |
+|---|---|---|---|
+| Ganancia y pérdida | 1.16:1 / 1.18:1 | Signo de la cifra; si se colorea, «+» en la ganancia ⟦decidir⟧ | RD-16; 1.4.1 |
+| Ganancia y enlace | 1.20:1 / 1.10:1 | Enlace subrayado; la ganancia lleva signo | 1.4.1 |
+| Enlace y texto que lo rodea | 2.10:1 / 1.83:1 | Subrayado siempre, porque CDS no lo pone por omisión | 1.4.1 |
+| Elemento activo del menú y los demás | Fondo: 1.16:1 / 1.30:1; texto: 2.10:1 / 1.83:1 | Marca de pantalla actual para el lector de pantalla, que SidebarItem ya pone (aria-current), y una barra propia de 3 px en bgPrimary ⟦decidir⟧. El peso no los distingue: SidebarItem dibuja todos en headline, de peso 600 | 1.4.1; 1.3.1 |
+| Pestaña activa e inactiva | 2.10:1 / 1.83:1 | Indicador de 2 px y estado seleccionado | 1.4.1; 4.1.2 |
+| Campo con error y campo normal | 2.28:1 / 1.92:1 | Texto del motivo con icono y estado inválido | 1.4.1; 3.3.1 |
+| Error y advertencia | 1.28:1 / 1.24:1 | Icono y título distintos | 1.4.1 |
+| Etiqueta de demostración y aviso de advertencia | Mismo fondo | El texto «Datos de demostración» | RF-07 (crit. 3); 1.4.1 |
+| Series de una gráfica | De 1.03:1 a 1.92:1 | Trazo continuo, discontinuo o punteado, leyenda y etiqueta junto a cada línea | 1.4.1 |
+| Punto del corte y resto de la serie | Mismo color | Punto más grande, con anillo del color de fondo y la etiqueta «(corte)» | RF-11 (crit. 2) |
+
+#### Tipografía
+
+La familia es Inter, autoalojada con el cliente, sin descargarla de otro sitio (3.6.1, «Conectividad»), en los dos pesos del tema, 400 y 600 ⟦confirmar⟧. Autoalojarla agrega archivos de fuente o una dependencia, que se registran en D-06; por eso, en el MVP las vistas usan la fuente del sistema, como hoy el cliente, y reciben Inter con la prueba de B ⟦decidir: o agregarla ya⟧. CDS declara la familia como «'Inter', sans-serif» sin traer el archivo de la fuente, así que el tema propio la redefine para que, mientras Inter no cargue, el navegador use la fuente del sistema (system-ui y Segoe UI) y no una genérica, y la regla @font-face del cliente usa font-display: swap para mostrar el texto desde el primer momento (RNF-06) ⟦confirmar⟧. Las cifras usan la misma familia con números de ancho fijo, activados de forma explícita en cada cifra para alinearse en columnas; no se usa fuente monoespaciada.
+
+Los tamaños están en rem sobre una raíz de 16 px, de modo que crecen con el *zoom* del navegador (criterio 1.4.4). La escala es la de CDS, con el uso de cada token en el 077:
+
+| Token | Tamaño | Interlineado | Peso | Uso en el 077 | Origen |
+|---|---|---|---|---|---|
+| display1, display2 y display3 | 64, 48 y 40 px | 72, 56 y 48 px | 400 | No se usan | 2.3 |
+| title1 | 28 px (1.75 rem) | 36 px | 600 | Título de la pantalla (h1) | 2.4.6 |
+| title2 | 28 px (1.75 rem) | 36 px | 400 | Cifra de la tarjeta de indicador | RF-11 (crit. 1) |
+| title3 | 20 px (1.25 rem) | 28 px | 600 | Título de sección (h2) y de tabla | 1.3.1 |
+| title4 | 20 px (1.25 rem) | 28 px | 400 | No se usa | — |
+| headline | 16 px (1 rem) | 24 px | 600 | Nombre del indicador (h3), botones, encabezados de columna y pestañas | 1.3.1 |
+| body | 16 px (1 rem) | 24 px | 400 | Texto, celdas, avisos y campos | 1.4.3 |
+| label1 | 14 px (0.875 rem) | 20 px | 600 | Etiqueta de demostración y unidad junto a un campo | RF-07 (crit. 3) |
+| label2 | 14 px (0.875 rem) | 20 px | 400 | Etiqueta y ayuda de los campos; unidad y fecha o periodo de la tarjeta | RNF-07 |
+| caption | 13 px (0.8125 rem) | 16 px | 600, en mayúsculas | No se usa: las mayúsculas dificultan la lectura | 2.3 |
+| legal | 13 px (0.8125 rem) | 16 px | 400 | Línea de fuente y fecha del dato | RF-31 |
+
+Reglas:
+
+- Cada pantalla tiene un solo h1; las secciones usan h2 y h3 sin saltar niveles (criterio 1.3.1).
+- Solo los tokens de 28 px o más cuentan como texto grande; los de 20 px se tratan como texto normal y exigen 4.5:1 (criterio 1.4.3).
+- No se transforma el texto que captura el usuario: los nombres de portafolios e intermediarios se muestran como se guardaron, sin cambiar mayúsculas (RF-25; RD-14).
+- Ningún contenedor de texto tiene altura fija, para que admita el espaciado ajustado por el usuario (criterio 1.4.12).
+
+#### Formato de cifras y fechas
+
+Toda cifra llega de la API como texto, ya calculada y redondeada por el motor único (4.2). El cliente no redondea, suma, promedia ni convierte una cifra a número para mostrarla (RNF-02; RD-12; RD-16): solo agrega a ese texto los separadores de miles, el símbolo de pesos y la unidad, y reordena las fechas. La gráfica tiene la única excepción, descrita en «Componentes». El separador de miles lo pone el cliente con una función común a todas las vistas ⟦decidir (decisión 3 de la gráfica): o que la API lo envíe ya puesto⟧.
+
+| Dato | Llega como | Se presenta como | Origen |
+|---|---|---|---|
+| Importe calculado (valor de mercado, resultado no realizado, costo, totales y puntos de la serie) | "566.94", "-218.56", "0.00" | $566.94 · -$218.56 · $0.00, con «MXN» junto a la cifra o en el encabezado de la columna | RD-13; RD-16; RNF-07 |
+| Por ciento (TWR y máxima caída) | "1.00", "-10.00" | 1.00 % · -10.00 % | RD-13; RF-09; RF-10 |
+| Títulos | "1000" | 1,000 | RD-13; RF-26a |
+| Precio por título capturado o precio de cierre | "50.00", "50.1234567" | $50.00 · $50.1234567, con los decimales con que se guardó | RD-13; RD-14 |
+| Importe de comisiones capturado | "14.50", "14.5", "0" | $14.50 ⟦decidir: «14.5» y «0» se completan a $14.50 y $0.00 (RD-13) o se muestran como se guardaron (RD-14)⟧ | RF-05; RD-13; RD-14 |
+| Costo o ingreso por título | "50.145", "54.8405" | $50.145 · $54.8405, de 2 a 7 decimales | RF-05 (crit. 1) |
+| Precio estimado de un CETES | "9.9027626" | $9.9027626 | RF-26b; RD-16 |
+| Valor nominal | "10.00" | $10.00 | RF-04 (crit. 2) |
+| Tasa publicada o aplicada | "7.00000", "7.06984" | 7.00000 % anual · 7.06984 % anual | RD-13; RF-26b |
+| Días y plazos | "50", "28" | 50 días · 28 días; «1 día» en singular | RD-13 |
+| Fecha | "2026-10-14" | 14/10/2026; en el eje de la gráfica, 14/10 | RD-15; RF-04 (crit. 2) |
+| Momento de registro o de carga | "2026-10-16T00:00:00-06:00" | 16/10/2026 00:00, hora de la Ciudad de México ⟦decidir si se muestra y dónde⟧ | RD-15 |
+
+Reglas:
+
+- Separadores: coma para los miles, solo en la parte entera, y punto decimal, como escribe el SRS («10,000.00»).
+- Signo: el negativo lleva el guion que envía la API, antes del símbolo de pesos (-$218.56); el cero, sin signo. Los positivos llevan «+» ⟦decidir⟧, obligatorio si la ganancia se colorea (Paleta).
+- Por ciento: con un espacio que no se separa de la cifra («1.00 %»), como escribe el SRS ⟦decidir: o sin espacio, como la convención de es-MX en CLDR (Unicode Consortium, s. f.)⟧.
+- Unidad: cada indicador muestra la suya (RNF-07); en las tablas va en el encabezado de la columna. La cifra y su unidad no se separan al cortar la línea.
+- No se usa notación abreviada («58.9 k»), ni siquiera en los ejes.
+- Las fechas se obtienen reordenando el texto AAAA-MM-DD, sin interpretarlo como fecha con hora, porque en la Ciudad de México eso las recorrería un día (RD-15).
+- En los campos de captura, las cifras se escriben sin separadores de miles y con punto decimal, como indica la ayuda del campo; el cliente no quita comas ni redondea lo que se escribe (RD-14).
+
+Textos de los valores fijos que envía la API:
+
+| Dato | Valor de la API | Texto |
+|---|---|---|
+| Clase de activo | accion, etf, fibra, cetes | Acción, ETF, FIBRA, CETES |
+| Tipo de transacción | compra, venta | Compra, Venta |
+| Caso de la tasa de un CETES | nodo, interpolación, extremo inferior, extremo superior | tasa de un solo plazo; interpolada entre dos plazos; tasa del plazo más corto; tasa del plazo más largo (RF-26b) |
+| Estado de la cuenta | activa, bloqueada | Activa, Bloqueada |
+| Registro de consentimiento | otorgamiento, revocacion; web | Otorgado, Revocado; sitio web |
+
+#### Espaciado, retícula y puntos de corte
+
+El espacio usa la escala de CDS, de base 8 px; además de los pasos de la tabla, CDS define 0, 7 (56 px) y 9 (72 px), que el 077 no usa:
+
+| Token | 0.25 | 0.5 | 0.75 | 1 | 1.5 | 2 | 3 | 4 | 5 | 6 | 8 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| px | 2 | 4 | 6 | 8 | 12 | 16 | 24 | 32 | 40 | 48 | 64 | 80 |
+
+| Medida | Valor | Origen |
+|---|---|---|
+| Margen lateral del contenido | 24 px (3) en escritorio y tableta; 16 px (2) en teléfono | RNF-11 |
+| Separación entre tarjetas y entre campos | 24 px (3) y 16 px (2) | — |
+| Separación entre secciones | 32 a 48 px (4 a 6) | 1.3.1 |
+| Ancho del contenido | Todo el disponible hasta 1200 px ⟦decidir⟧; párrafos largos, como el aviso de privacidad, hasta unos 70 caracteres por línea | 1.4.10 |
+| Radio de las esquinas | 8 px en campos y tarjetas; 16 px en avisos; 4 px en la etiqueta de demostración; los botones conservan los de CDS | Opción B |
+| Bordes | 1 px; el campo con foco cambia a bgPrimary | 1.4.11 |
+| Anillo de foco | 2 px, sólido, en bgPrimary; separado 2 px en botones y componentes propios, 1 px en casillas y 0 px en enlaces; los campos cambian su borde a bgPrimary con una sombra de 1 px (Navegación) | 2.4.7; 1.4.11 |
+| Objetivos táctiles y de clic | Al menos 24 × 24 px, o con la separación que admite la excepción del criterio; las casillas de 20 px amplían su objetivo con su etiqueta | 2.5.8 |
+| Alto de la gráfica | 300 px; ningún otro contenedor tiene alto fijo | 1.4.4; 1.4.12 |
+
+Los puntos de corte son los de CDS, que no pueden cambiarse sin recompilarlo; el de escritorio coincide con la resolución mínima de 3.6.1:
+
+| Intervalo de CDS | Ancho | Disposición en el 077 | Origen |
+|---|---|---|---|
+| Escritorio (desktop) | 1280 px o más | Menú lateral de 240 px a la izquierda; las cuatro tarjetas en una fila; tablas completas | 3.6.1; RNF-11 |
+| Tableta (tablet) | 768 a 1279 px | Menú tras el botón «Menú»; tarjetas en dos columnas; tablas completas | RNF-11 |
+| Teléfono (phone) | Hasta 767 px | Menú tras el botón «Menú»; una sola columna; cada fila de una tabla, como ficha con pares rótulo y valor ⟦decidir con RNF-11⟧ | RNF-11; 1.4.10 |
+
+Reglas:
+
+- Se diseña a 1280 × 720 px CSS con el navegador maximizado (3.6.1). Inferencia: a ese ancho, aunque la barra de desplazamiento ocupe unos 17 px, rige el intervalo de escritorio ⟦confirmar en las herramientas del navegador⟧.
+- Con cualquier respuesta a P-32, cada pantalla funciona a 320 px CSS de ancho, equivalentes a 1280 px con *zoom* de 400 % (criterio 1.4.10). Si 3.6.1 conserva los 360 px, también se verifica ahí ⟦decidir (P-32)⟧.
+- RNF-11 no admite desplazamiento horizontal; el criterio 1.4.10 lo permite en tablas y gráficas ⟦decidir si RNF-11 las exceptúa⟧. Si las exceptúa, la tabla queda en una región con desplazamiento propio, alcanzable con el teclado; si no, se presenta en fichas.
+- No se bloquea la orientación de la pantalla (criterio 1.3.4).
+
+#### Iconografía
+
+Se usan pocos iconos, siempre junto a un texto. El icono decorativo se oculta al lector de pantalla; el botón con solo un icono, como el de cerrar un diálogo, lleva siempre un nombre accesible en español (criterio 4.1.2). Los iconos miden 24 px (m) en el menú y 16 px (s) junto al texto; toman el color del texto que acompañan, salvo el de los avisos, que lleva el de su variante (fgPrimary, fgWarning o fgNegative), y su variante activa solo se usa en estados seleccionados.
+
+El juego de iconos está por decidir (P-48). La opción de CDS es su fuente CoinbaseIcons, del paquete @coinbase/cds-icons (Coinbase, 2026a). Ese paquete no declara licencia en npm ni trae el archivo, por lo que se rige por la del repositorio de CDS; además, sus 274,616 bytes se cargan de modo que los iconos no se ven hasta que termina la descarga. Con B, esa fuente se carga con cualquier elección, porque los componentes de CDS dibujan con ella sus propios iconos, como el obligatorio de Banner, la marca de Checkbox, el de cerrar de ModalHeader y la flecha de Select. La alternativa es otro juego, como el que recomienda P-48, pero solo sustituye esos iconos internos si es una fuente con los glifos asignados a los mismos nombres y conectada con IconGlyphSourceProvider ⟦decidir (P-48)⟧. El paquete se registra en D-06 en todos los casos, porque cds-web depende de él, y su efecto en la carga del tablero, que ya muestra iconos en los avisos y en el selector, se mide para RNF-06 ⟦confirmar⟧.
+
+| Función | Icono en CoinbaseIcons | Dónde | Origen |
+|---|---|---|---|
+| Tablero | chartLine | Menú | 4.5.2 |
+| Posiciones | briefcase | Menú | 4.5.2 |
+| Transacciones | document | Menú | 4.5.2 |
+| Portafolios | portfolio | Menú | 4.5.2 |
+| Intermediarios | bank | Menú | 4.5.2 |
+| Catálogo | search | Menú | 4.5.2 |
+| Cuenta | profile | Menú | 4.5.2 |
+| Aviso de privacidad | lock | Menú | RF-12 (crit. 2) |
+| Cerrar sesión | logout | Pie del menú | 4.5.2 |
+| Menú | hamburger | Encabezado, por debajo de 1280 px | RNF-11 |
+| Registrar transacción | add | Botón | RF-05 |
+| Información, advertencia y error | info, warning, error | Avisos y mensajes de error | RF-12 (crit. 4); RF-05; 1.4.1 |
+| Cerrar un diálogo | close | Diálogo | 4.1.2 |
+| Abrir o cerrar un desplegable | caretDown, caretUp | Definiciones y listas | RNF-07 |
+| Mostrar u ocultar la contraseña | eye, hiddenEye | Campo de contraseña | RF-01; 3.3.8 |
+| Cambiar el nombre y eliminar | pencil, trashCan | Lista de portafolios | RF-03 |
+| Orden de una columna | sortUp, sortDown | Encabezado de tabla ⟦decidir⟧ | 1.3.1 |
+
+No se usan los glifos de marca de la fuente (coinbase, base y sus variantes, ni los logotipos de Apple, Google, PayPal, X, Discord, GitHub, Instagram o LinkedIn), ni el de billetera (wallet), que evoca las criptomonedas.
+
+#### Navegación
+
+El orden de las pantallas y el contenido del menú los fija 4.5.2; su forma, este apartado.
+
+| Elemento | Regla | Componente | Origen |
+|---|---|---|---|
+| Menú principal | Lista vertical de enlaces con icono y texto siempre visibles, en el mismo orden en todas las pantallas con sesión. Desde 1280 px, a la izquierda; por debajo, tras un botón «Menú» que muestra la misma lista y anuncia si está abierta (4.1.2); si la lista abierta cubre el contenido, Esc la cierra y el foco vuelve al botón (2.4.3; 2.4.11) ⟦decidir con P-32⟧. No se usa el modo contraído de CDS, que deja solo iconos | Sidebar y SidebarItem, dibujados como enlaces ⟦confirmar⟧; en el MVP, nav propio | 2.2 (F-5); 2.3; 3.2.3 |
+| Nombre del menú | «Menú principal», en lugar del «Sidebar» que CDS pone por omisión | Sidebar | 3.1.2; 4.1.2 |
+| Pantalla actual | Marcada para el lector de pantalla y con fondo bgPrimaryWash, texto fgPrimary y barra de 3 px ⟦decidir⟧; todos los elementos llevan peso 600, como los dibuja SidebarItem | SidebarItem activo; la barra, propia | 1.4.1; 1.3.1 |
+| Salto al contenido | Primer enlace de cada pantalla, «Saltar al contenido», visible al recibir el foco | Propio: CDS no lo tiene | 2.4.1 |
+| Regiones | Encabezado, menú, contenido principal y pie, cada uno con su región para el lector de pantalla; el encabezado de página de CDS no se declara como encabezado del sitio dentro del contenido ⟦confirmar⟧ | Box; PageHeader | 1.3.1 |
+| Título y foco tras navegar | Título de documento propio, con la forma «Pantalla · Proyecto 077»; tras cada navegación, el foco pasa al h1 | Propio | 2.4.2; 2.4.3 |
+| Foco visible | Todo elemento que recibe el foco del teclado lo muestra en bgPrimary. CDS dibuja el contorno y, en los campos, cambia el borde (medidas en la fila «Anillo de foco» de «Espaciado, retícula y puntos de corte»); los componentes propios y la gráfica usan el de los botones | Reglas de CDS; propio | 2.4.7; 1.4.11 |
+| Foco no oculto | Ni el encabezado ni los avisos quedan fijos al desplazarse; si alguno se fijara, el desplazamiento reserva su alto para que no tape el elemento con foco | — | 2.4.11 |
+| Pestañas dentro de una pantalla | Solo en la fase de refinamiento: enlaces con marca de pantalla actual ⟦decidir: o las pestañas de CDS⟧ | Tabs (TabNavigation está obsoleto en la 9.29.0) | 4.5.2 |
+| Pie | Enlace «Avisos de licencias» ⟦decidir (P-33)⟧ | Link | D-06 |
+
+#### Componentes
+
+Las pantallas usan un subconjunto sobrio de componentes de CDS y piezas propias donde CDS no tiene una adecuada. Mientras CDS no esté instalado, cada pieza es un componente propio delgado con el elemento HTML nativo indicado y los mismos tokens. Select y Combobox son los de la versión alfa (@coinbase/cds-web/alpha), porque el Select de la raíz está obsoleto en la 9.29.0 ⟦confirmar en la prueba de B⟧.
+
+Reglas de los textos de la interfaz:
+
+- Español de México, trato de tú y lenguaje llano, para un usuario no técnico (2.3).
+- Un solo término por concepto, el de 1.3: transacción, no «operación»; posición, valor de mercado, resultado no realizado, TWR y máxima caída.
+- Cada sigla se desarrolla en su primera aparición en cada pantalla, por ejemplo «Rendimiento ponderado por tiempo (TWR)».
+- Los botones dicen la acción con un verbo, y el nombre accesible contiene el texto visible (criterio 2.5.3).
+- Nunca se muestran códigos internos de error, identificadores de requisitos ni nombres de campos de la API.
+- Ningún texto, color o icono califica una inversión o sugiere operar, y no hay indicadores «en vivo», contadores animados ni recarga automática (R-01; R-02; R-13).
+
+| Pieza del 077 | Componente de CDS o propio (MVP) | Origen | Accesibilidad | Textos en español |
+|---|---|---|---|---|
+| Plantilla de pantalla | Sidebar y SidebarItem; Box como encabezado, contenido y pie; Text como h1. Propios: salto al contenido y botón «Menú». MVP: header, nav, main y footer | 2.2 (F-5); 4.5.2 | Navegación | «Saltar al contenido», «Menú», «Menú principal», «Cerrar sesión» |
+| Selector de portafolio, periodo y corte | Select para el portafolio; DateInput en formato es-MX, sin calendario, para el inicio y el fin; Button «Consultar». MVP: select e input con label | RF-11 (crit. 1); CU-07; RF-09 (crit. 3); X-06 | Etiqueta visible en cada control; los cambios se aplican al pulsar «Consultar», no al cambiar cada control (3.2.2); el resultado se anuncia (4.1.3) | «Portafolio», «Inicio del periodo», «Fin del periodo y fecha de corte» ⟦decidir (CU-07, paso 2)⟧, «Consultar»; el formato «DD/MM/AAAA» como ayuda visible bajo cada fecha, no solo como marcador, que desaparece al escribir (3.3.2); sin opción «Todos» (X-06). Encabezado: «Principal · Del 11/09/2026 al 14/10/2026 · Corte: 14/10/2026» |
+| Tarjeta de indicador | Propio (no existe en CDS): Box sobre bgAlternate, Text con números de ancho fijo y la definición desplegable. MVP: section con encabezado y lista de definición (dl) | RF-11 (crit. 1); RNF-07; 2.3 | Nombre como h3; cifra, unidad y fecha o periodo juntos y en ese orden (1.3.1); la misma estructura en las cuatro, en el orden de RF-11 (3.2.4) | «Valor de mercado» y «Resultado no realizado», con «MXN» y «Al 14/10/2026»; «Rendimiento ponderado por tiempo (TWR)», con «%», «sin anualizar» (RF-09, crit. 1) y «Del 11/09/2026 al 14/10/2026»; «Máxima caída», con el periodo y «Del pico del 16/09/2026 al valle del 23/09/2026», o «No hubo caídas en el periodo» ⟦decidir texto⟧ |
+| Definición del indicador | Collapsible con un botón propio, o AccordionItem; no Tooltip, que aparece con el puntero o el foco y se cierra al perderlos, sin dejar la definición en la página, y funciona mal en pantallas táctiles. MVP: details y summary | RNF-07; 2.3; 1.3 | El botón anuncia si está abierto (4.1.2) y mide 24 × 24 px o cumple la excepción de espaciado (2.5.8); el contenido no desaparece al mover el puntero (1.4.13) | «¿Qué es el valor de mercado?» y equivalentes; texto idéntico al de 1.3 ⟦completar el glosario antes del 23/10/2026⟧ |
+| Tabla de posiciones, de transacciones y del catálogo | Table con título (TableCaption), encabezado, filas y celdas, que asocia cada encabezado con su columna o fila; ordenar por columna ⟦decidir⟧. MVP: table, caption y th con scope | RF-06; RF-08; RF-26a; RF-26b; RF-05; RF-04; CU-06; CU-08 | Título con la fecha de corte; cifras alineadas a la derecha con números de ancho fijo; fila de totales; fichas por debajo de 768 px ⟦decidir con RNF-11⟧ (1.3.1; 1.4.10) | «Posiciones al 14/10/2026»; columnas «Instrumento», «Títulos», «Costo (MXN)», «Valor de mercado (MXN)», «Resultado no realizado (MXN)»; CETES vigente: valor con el rótulo «estimado» (R-11); vencido: «Vencida el 08/10/2026; liquidada a su valor nominal» ⟦decidir texto⟧; sin títulos: «Sin títulos al corte» |
+| Formulario guiado de transacción | Select para el intermediario; Combobox para el instrumento; dos opciones para Compra o Venta ⟦decidir: ControlGroup con role="radiogroup" y Radio, o SegmentedTabs, que se anuncia como pestañas; RadioGroup y SegmentedControl están obsoletos en la 9.29.0⟧; DateInput; TextInput; Button que envía. MVP: form con label, select e input | RF-05; CU-05; 2.3; RD-07; RD-14; R-02 | Campos en el orden de RF-05, con etiqueta e instrucción visibles (3.3.2); las cifras, en campo de texto con teclado numérico; se conservan portafolio e intermediario para la siguiente captura (3.3.7); el resultado se anuncia (4.1.3) | «Número entero»; «Hasta 7 decimales, con punto decimal y sin comas»; «Hasta 2 decimales; puede ser 0»; «Entre el 10/09/2026 y el 14/10/2026»; botón «Registrar transacción», nunca «Comprar» ni «Vender» (R-02); al aceptarse, «Transacción registrada» con la fila tal como se capturó (CU-05, paso 7) |
+| Mensaje de error del formulario | TextInput en variante negativa con texto de ayuda; Banner de error para el resumen, con el ancho mínimo anulado como en los avisos; AccessibilityAnnouncer para anunciarlo; no Toast. MVP: resumen con role="alert" y campos con aria-invalid y aria-describedby | RF-05 (crit. 2 y 3); RF-28 (crit. 3); RF-01 (crit. 3); CU-05 | Resumen sobre el formulario que recibe el foco o se anuncia (3.3.1; 4.1.3); cada motivo junto a su campo, con texto e icono (1.4.1) y cómo corregirlo cuando se sabe (3.3.3). La API solo indica el campo en los 422 «datos_invalidos»; los demás rechazos (409 por saldo negativo; 422 por fechas, divisa, vencimiento o plazo; 404 por intermediario o instrumento) llegan sin campo, y el cliente los asocia a uno por su código ⟦decidir: o los muestra solo en el resumen⟧; se conservan los valores capturados; borde del campo con error de 6.23:1 o más (1.4.11) | El mensaje de la API tal como llega; los mensajes técnicos del servidor, como el que pide una fecha AAAA-MM-DD, se sustituyen ⟦decidir: en el cliente o en el servidor⟧ |
+| Formularios de registro e inicio de sesión | TextInput para el correo y la contraseña, con IconButton para mostrarla; Checkbox de consentimiento; Link al aviso, que se abre en un diálogo. MVP: nativos | RF-01; RF-12 (crit. 1 y 2); CU-01; CU-02; CU-09 | Casilla sin marcar al cargar y con su etiqueta asociada (RF-12, crit. 1; 2.5.8); autocompletado del correo y la contraseña, y se puede pegar (1.3.5; 3.3.8); sin pruebas de reconocimiento | «Correo», «Contraseña», «Al menos 15 caracteres» ⟦decidir (RF-01, crit. 1)⟧, «Mostrar contraseña», texto de la casilla ⟦decidir⟧, «Leer el aviso de privacidad», «Crear cuenta», «Iniciar sesión» |
+| Etiqueta de demostración | Tag informativo de bajo énfasis con esquema amarillo ⟦decidir: o gris⟧, nunca con el azul por omisión. MVP: span con su clase | RF-07 (crit. 3); RF-04 (crit. 3); RF-31 (crit. 3) | Texto, no solo color (1.4.1); 7.09:1 / 9.04:1 (1.4.3); no se puede cerrar; va en la misma celda o el mismo encabezado que la cifra que marca (1.3.1) | «Datos de demostración» ⟦decidir texto, y si va una por tarjeta o una por bloque en las cifras calculadas⟧ |
+| Línea de fuente | Text en el token legal y en fgMuted, con Link subrayado. MVP: p con enlace | RF-31 (crit. 2 y 3); R-05 | Texto pequeño con 4.5:1 o más (1.4.3); enlace subrayado (1.4.1) cuyo texto es la dirección (2.4.4) | CETES: «Fuente: Banco de México, https://www.banxico.org.mx», «Tasa aplicada: 7.06984 % anual» y «Tasa de 28 días colocada el DD/MM/AAAA». Precio: «Cierre: $50.00 del DD/MM/AAAA» y la atribución de la fuente, «Datos de demostración: precios sintéticos, no son precios reales» |
+| Avisos permanentes | Banner informativo en variante contextual, con el icono info y sin botón de cerrar. MVP: section con encabezado | RF-12 (crit. 4); R-11 | Estáticos y antes de las cifras del tablero, las posiciones y las transacciones ⟦decidir ubicación⟧; sin región viva, porque no son mensajes de estado; no tapan el foco (2.4.11); caben en 320 px (1.4.10): Banner fija un ancho mínimo de 320 px y, con márgenes laterales de 16 px, a ese ancho solo quedan 288 px, así que con B cada Banner lleva minWidth={0}, que según su código sustituye ese mínimo ⟦confirmar en el navegador, en la prueba de B⟧ | «La información de este sistema no constituye asesoría de inversión.» y «Las valuaciones son estimaciones informativas, no precios oficiales, y no sustituyen el estado de cuenta de tu intermediario.» ⟦decidir textos⟧ |
+| Confirmación expresa | Modal con ModalHeader y ModalFooter, o Alert con la acción preferida en variante negativa. MVP: dialog nativo abierto como modal | RF-03 (crit. 3); RD-10; RF-12 (crit. 3); RD-23 | El foco entra al diálogo y no sale mientras está abierto; Esc cancela; al cerrar, el foco vuelve al botón que lo abrió (2.1.2; 2.4.3); el botón de cierre tiene nombre (4.1.2) | Título con la acción; consecuencias en texto; «Escribe el nombre del portafolio para confirmar»; botones «Eliminar portafolio» o «Revocar mi consentimiento», y «Cancelar»; cierre: «Cerrar» |
+| Gráfica de evolución del valor | Recharts 3.10.1, igual con B y en el MVP; no las gráficas de CDS | RF-11 (crit. 2); 4.2; RD-12; RD-16; RNF-06 | Resumen textual visible y tabla alterna (1.1.1); recorrido con las flechas y anuncio de cada punto; foco visible; la información emergente se oculta con Esc (1.4.13); sin animación; líneas de 3:1 o más (1.4.11) | «Valor de mercado del portafolio»; «Pesos mexicanos (MXN) · Del DD/MM/AAAA al DD/MM/AAAA · Fecha de corte DD/MM/AAAA»; «Ver los datos de la gráfica como tabla»; «(corte)» |
+| Mensajes de estado y estado sin datos | AccessibilityAnnouncer; estado sin datos con VStack, Text y Button, sin ilustraciones; no Spinner, porque anima. MVP: p con role="status" | RF-11 (crit. 3); RNF-06; CU-05 (paso 7) | Se anuncian sin mover el foco (4.1.3); sin animación (2.2.2) | «Consultando…»; «Este portafolio no tiene transacciones hasta el 14/10/2026.» ⟦decidir texto⟧, con el botón «Registrar transacción» |
+| Botones | Button en sus variantes primaria, secundaria y negativa; IconButton, siempre con nombre accesible. MVP: button | 2.3 | Objetivo de 24 × 24 px o más (2.5.8); foco visible (2.4.7) | Un verbo por acción; en espera, «Guardando…» o «Consultando…» |
+| Pantalla del aviso de privacidad | Text con párrafos y encabezados. MVP: article | RF-12 (crit. 2); CU-09 | El texto de la API se muestra en párrafos, nunca como HTML; reajuste a 320 px (1.4.10) y espaciado ajustable (1.4.12) | «Aviso de privacidad», «Vigente desde el DD/MM/AAAA» |
+
+Reglas de la gráfica:
+
+- Una sola línea, con un punto por día de la serie, desde el cierre previo al periodo hasta la fecha de corte, sin suavizar, muestrear ni sumar (RF-11, crit. 2).
+- Eje horizontal con la fecha como texto y marcas DD/MM. El eje vertical se ajusta al rango de la serie ⟦decidir (decisión 7 de la gráfica): o empieza en cero⟧, y sus marcas se forman en el cliente ⟦decidir (decisión 2): o se ocultan, o las envía la API⟧, sin notación abreviada.
+- La altura de cada punto es la única conversión de una cifra a número que hace el cliente ⟦decidir (decisión 5): excepción documentada de RD-12⟧. Todo lo que se lee (información emergente, etiqueta del corte, resumen y tabla) sale del texto de la API, así que la etiqueta del corte, la tarjeta de valor de mercado y la última fila de la tabla muestran la misma cifra (RNF-02).
+- El punto del corte se resalta con un radio de 6 px, frente a 2.5 px, un anillo del color de fondo y la etiqueta «$58,940.88 · 14/10/2026 (corte)». A 320 px, si la etiqueta tapa la línea, va fuera del área de la gráfica.
+- Colores: línea en --serie-1; cuadrícula en bgLine; marcas en fgMuted; información emergente con fondo bgElevation2, borde bgLineHeavy y texto fg.
+- Sin animación (isAnimationActive={false}), *zoom* ni selección por arrastre (criterio 2.5.7). Quitar la animación es decisión de diseño, no exigencia del criterio 2.2.2, que rige los movimientos de más de 5 segundos: la de Recharts dura 1.5 segundos por omisión.
+- Arriba de la gráfica, en texto: título, unidad, periodo y fecha de corte, y la definición desplegable (RNF-07).
+- Resumen visible, que no calcula nada: «Gráfica de líneas del valor de mercado diario del portafolio «Principal», en pesos mexicanos, del DD/MM/AAAA (cierre previo al periodo) al DD/MM/AAAA, fecha de corte; empieza en $X y termina en $Y.». El valor máximo solo se menciona si la API lo envía ⟦decidir⟧.
+- Tabla alterna en un desplegable «Ver los datos de la gráfica como tabla», con las columnas Fecha y Valor (MXN); la fila del corte dice «(corte)».
+- Con el teclado, ← y → recorren los días, y Enter muestra u oculta la información emergente; Recharts 3.10.1 no atiende otras teclas. Como esa información aparece con el puntero o el foco y tapa parte de la gráfica, un manejador propio la oculta con Esc sin moverlos, y no se oculta sola mientras sigan en la gráfica (criterio 1.4.13). De la gráfica se sale con Tab ⟦confirmar con NVDA y con el ratón⟧.
+- Sin transacciones, en lugar de la gráfica aparece el estado sin datos.
+
+Los textos que CDS trae en inglés se sustituyen: la mayoría, una sola vez para toda la aplicación con su configuración por componente (ComponentConfigProvider); los demás, en cada uso:
+
+| Componente | Texto de CDS | Texto del 077 |
+|---|---|---|
+| Sidebar y NavigationBar | «Sidebar», «main navigation» | «Menú principal» |
+| ModalHeader | Botones de cerrar y volver sin nombre | «Cerrar», «Volver» |
+| Banner | «close» | «Cerrar» (el botón no se muestra) |
+| TextInput | «error», en el icono del error | «Error» |
+| Select alfa, que también usa Combobox (el Select de la raíz no trae estos textos ni lee ComponentConfigProvider) | «Select all», «No options available», «Clear all», «more», «Remove» | «Seleccionar todo», «No hay opciones», «Borrar todo», «más», «Quitar» |
+| DateInput | «This field is required», «Please enter a valid date», «Date unavailable»; marcador sin letras, solo espacios y barras, y orden MM/DD/AAAA, porque su configuración regional por omisión es en-US (se corrige con LocaleProvider en es-MX) | «Este campo es obligatorio», «Escribe una fecha válida con el formato DD/MM/AAAA», «Fecha no disponible»; «DD/MM/AAAA» |
+| Pagination | «Pagination», «First», «Last»; en accessibilityLabels, «First page», «Previous page», «Next page», «Last page» y «Page N» | «Paginación», «Primera», «Última»; «Primera página», «Página anterior», «Página siguiente», «Última página» y «Página N» |
+| Button e IconButton en espera | «Loading» | En cada uso: «Guardando…» o «Consultando…» |
+
+#### Verificación
+
+| Qué se verifica | Cómo | Cuándo | Origen |
+|---|---|---|---|
+| Contraste de cada par de colores en los dos modos | Análisis con el *script* de contraste, que aplica la fórmula de WCAG; se repite al cambiar un color o una superficie, y se comprueba en el navegador | 17/10/2026 y en la prueba de B ⟦a más tardar el 23/10/2026⟧ | 1.4.3; 1.4.11 |
+| Cifras idénticas en las vistas | Demostración: se comparan como texto la tarjeta, la etiqueta del corte, la última fila de la tabla de la gráfica y los totales de posiciones al mismo corte | 18/10/2026 | RNF-02 (CPNF-02) |
+| Unidad, fecha y definición de cada indicador | Demostración con la lista de verificación por indicador y pantalla | 23/10/2026 | RNF-07 (CPNF-07) |
+| Resoluciones | Demostración en Chromium y Firefox a 1280 × 720 px CSS, a 320 px CSS (o 1280 px con *zoom* de 400 %) y, si se conserva, a 360 px ⟦decidir (P-32)⟧, con capturas fechadas | 13/11/2026 | RNF-11 (CPNF-11); 3.6.1; 1.4.10 |
+| Teclado | Demostración solo con Tab, Mayús + Tab, Esc y flechas: orden lógico, foco siempre visible y nunca tapado, sin trampas, y diálogos que devuelven el foco | ⟦decidir con el requisito de accesibilidad⟧ | 2.1.1; 2.1.2; 2.4.3; 2.4.7; 2.4.11 |
+| Lector de pantalla | Demostración con NVDA en Chromium y Firefox: nombres de los controles, pantalla actual del menú, errores y mensajes de estado anunciados, lectura del signo negativo y recorrido de la gráfica | ⟦decidir con el requisito de accesibilidad⟧ | 1.3.1; 4.1.2; 4.1.3 |
+| Revisión automática | Prueba con axe sobre cada pantalla en un navegador real | ⟦decidir con el requisito de accesibilidad⟧ | — |
+| Idioma y marca | Inspección de la página generada: ningún texto en inglés; ningún logotipo, ilustración ni glifo de marca, ni color del espectro azul de Coinbase | En la prueba de B | 3.1.1; 3.1.2; «Alcance y origen» |
 
 ### 4.5.2 Mapa de navegación
+
+Este apartado presenta las pantallas del cliente web con su ruta, el menú principal y las transiciones entre ellas. Se deriva de 4.1 y 4.2 sin agregar funciones: cada pantalla atiende casos de uso del MVP o de 2.6, y cada transición usa una operación de la API del *backend* del MVP o ninguna. Las operaciones, la sesión que exigen y sus respuestas se tomaron del código del *backend* (*commit* faf6b32); las rutas del cliente, el menú y el destino de cada transición son una propuesta de diseño ⟦decidir⟧. La forma del menú la fija 4.5.1, y la distribución de cada pantalla, 4.5.3.
+
+La notación es el diagrama de flujo (*flowchart*) de Mermaid 12 (Mermaid contributors, s. f.-c), que desde la versión 12.0.0 se dispone por omisión con ELK. Como en 4.2, la directiva inicial desactiva los arcos con que ELK marca el cruce de dos flechas (lineHops), porque con ellos Mermaid dibuja continuas algunas flechas punteadas. El diagrama se lee de arriba abajo:
+
+- Cada rectángulo es una pantalla con su ruta; el estadio, la entrada a la aplicación, y el hexágono, el menú principal, presente en todas las pantallas con sesión.
+- El grupo «Con sesión» reúne las pantallas que exigen sesión y No encontrado (V-12), que también se muestra sin sesión ante una ruta desconocida; dentro de él, «Portafolio activo» reúne las que llevan en su ruta el identificador del portafolio.
+- Cada flecha continua es una transición del MVP, rotulada con la acción y, si llama a la API, con la operación y su código de respuesta. Una flecha que sale de un grupo vale para todas sus pantallas. Las que llegan al tablero siguen N-02: sin portafolios, llevan a Portafolios; la de Iniciar sesión lleva antes a la ruta guardada, si la hay (N-05).
+- Las pantallas y flechas de la fase de refinamiento (2.6) llevan borde y trazo punteados.
+- Los diálogos no son pantallas: el de eliminar un portafolio se dibuja como una flecha que regresa a la misma pantalla, y los demás aparecen en el rótulo de la flecha que les sigue. Como en el registro el aviso se lee en un diálogo, no hay flecha de Registro a Aviso de privacidad.
+
+#### Diagrama
+
+```mermaid
+%%{init: {"elk": {"lineHops": false}}}%%
+flowchart TB
+  accTitle: Mapa de navegación del cliente web del Proyecto 077
+  accDescr: La entrada lleva al tablero si hay sesión y, si no, al inicio de sesión, desde el que se pasa al registro y al aviso de privacidad; registrarse regresa al inicio de sesión, e iniciarla lleva al tablero. Con sesión, el menú principal lleva al tablero, las posiciones y las transacciones del portafolio activo, y a portafolios, intermediarios, catálogo, cuenta y aviso de privacidad. Abrir o crear un portafolio lleva a su tablero; eliminarlo regresa a la lista de portafolios; registrar una transacción, confirmada o cancelada, regresa a la lista de transacciones. Cerrar sesión, revocar el consentimiento o recibir un 401 regresan al inicio de sesión, y un portafolio ajeno o inexistente muestra la pantalla No encontrado. Con borde y flecha punteados, las pantallas de la fase de refinamiento: modificar transacción, posiciones por intermediario y por clase de activo, escenarios, composiciones y precios de cierre.
+
+  ENT(["Entrada /"])
+
+  subgraph PUB["Pública"]
+    SES["Inicio de sesión<br/>/sesion"]
+    REG["Registro<br/>/registro"]
+    AVI["Aviso de privacidad<br/>/aviso-privacidad"]
+  end
+
+  subgraph CSE["Con sesión"]
+    MEN{{"Menú principal"}}
+    subgraph PAC["Portafolio activo: /portafolios/:id/…"]
+      TAB["Tablero<br/>…/tablero"]
+      POS["Posiciones<br/>…/posiciones"]
+      TRX["Transacciones<br/>…/transacciones"]
+      NUE["Registrar transacción<br/>…/transacciones/nueva"]
+      EDI["Modificar transacción<br/>…/transacciones/:transaccionId/editar"]:::diferido
+      PIN["Posiciones por intermediario<br/>…/posiciones/intermediarios"]:::diferido
+      PCL["Posiciones por clase de activo<br/>…/posiciones/clases"]:::diferido
+      ESC["Escenarios Monte Carlo<br/>…/simulaciones/escenarios"]:::diferido
+      COM["Composiciones alternativas<br/>…/simulaciones/composiciones"]:::diferido
+    end
+    POR["Portafolios<br/>/portafolios"]
+    INT["Intermediarios<br/>/intermediarios"]
+    CAT["Catálogo<br/>/catalogo"]
+    PRE["Precios de cierre<br/>/precios"]:::diferido
+    CTA["Cuenta<br/>/cuenta"]
+    NOE["No encontrado"]
+  end
+
+  ENT -->|"sin sesión (E06: 401)"| SES
+  ENT -->|"con sesión (E06: 200)"| TAB
+  SES -->|"Crear cuenta"| REG
+  SES -->|"Aviso de privacidad"| AVI
+  REG -->|"Registrarse (E03: 201)"| SES
+  SES -->|"Iniciar sesión (E04: 200)"| TAB
+
+  MEN -->|"Tablero"| TAB
+  MEN -->|"Posiciones"| POS
+  MEN -->|"Transacciones"| TRX
+  MEN -->|"Portafolios"| POR
+  MEN -->|"Intermediarios"| INT
+  MEN -->|"Catálogo"| CAT
+  MEN -->|"Cuenta"| CTA
+  MEN -->|"Aviso de privacidad"| AVI
+  MEN -->|"Cerrar sesión (E05: 204)"| SES
+
+  POR -->|"Abrir portafolio"| TAB
+  POR -->|"Crear portafolio (E13: 201)"| TAB
+  POR -->|"Eliminar y confirmar con el nombre (E16: 204)"| POR
+  TAB -->|"Sin datos: Registrar transacción"| NUE
+  TRX -->|"Registrar transacción"| NUE
+  NUE -->|"Confirmar (E18: 201) o Cancelar"| TRX
+  CTA -->|"Revocar y confirmar (E07: 204)"| SES
+  CSE -->|"401: sesión terminada o cuenta bloqueada"| SES
+  PAC -->|"404: ajeno o inexistente"| NOE
+
+  TRX -.->|"Modificar"| EDI
+  EDI -.->|"Guardar o Cancelar"| TRX
+  POS -.->|"Por intermediario"| PIN
+  POS -.->|"Por clase de activo"| PCL
+  MEN -.->|"Simulaciones"| ESC
+  ESC -.->|"Composiciones"| COM
+  MEN -.->|"Precios de cierre"| PRE
+
+  classDef diferido stroke-dasharray:5 5
+```
+
+#### Pantallas
+
+La última columna remite a las operaciones de la API de la tabla siguiente. En 4.2, V-01 a V-03 y V-11 pertenecen al componente «Vistas de cuenta y consentimiento»; V-04, a «Tablero», y las demás, a «Vistas de portafolio»; V-04 a V-06 incluyen además «Avisos y procedencia».
+
+| Id | Pantalla | Ruta del cliente (propuesta) | CU | RF | Sesión | Llamadas a la API |
+|---|---|---|---|---|---|---|
+| V-01 | Inicio de sesión: correo y contraseña, con enlaces a Registro y al aviso | /sesion | CU-02 | RF-01; RF-12 (crit. 3) | No | E04 |
+| V-02 | Registro: correo, contraseña y casilla de consentimiento sin marcar; el aviso vigente se lee en un diálogo sin salir del formulario (punto de extensión «aviso») | /registro | CU-01; CU-09 | RF-01; RF-12 (crit. 1 y 2) | No | E02; E03 |
+| V-03 | Aviso de privacidad: texto vigente y cómo revocar el consentimiento | /aviso-privacidad | CU-09 | RF-12 (crit. 2) | Ambas; el menú, solo con sesión | E02 |
+| V-04 | Tablero: selector de portafolio y periodo, cuatro indicadores con su definición, gráfica con su tabla, procedencia, marca de demostración y avisos; sin transacciones, el estado sin datos | /portafolios/:id/tablero?inicio=AAAA-MM-DD&fin=AAAA-MM-DD | CU-07 | RF-11; RF-06; RF-08 a RF-10; RF-26a; RF-26b; RF-07 (crit. 3); RF-12 (crit. 4); RF-31; RNF-07 | Sí | E12; E09; E20 |
+| V-05 | Posiciones al corte, con selectores de portafolio y de fecha de corte (N-16; N-17): títulos, costo, valor y resultado no realizado; CETES vencidos; valuación con su fuente y fecha; totales y avisos | /portafolios/:id/posiciones?fecha_corte=AAAA-MM-DD | CU-06 | RF-06; RF-08; RF-26a; RF-26b; RF-07 (crit. 3); RF-12 (crit. 4); RF-31 (crit. 2 y 3) | Sí | E12; E09; E19 |
+| V-06 | Transacciones tal como se capturaron, con su costo o ingreso por título; selector de portafolio (N-16); botón Registrar transacción y avisos | /portafolios/:id/transacciones | CU-06 | RF-05 (consulta); RF-12 (crit. 4) | Sí | E12; E17 |
+| V-07 | Registrar transacción: formulario guiado con los intermediarios propios y el catálogo, y el motivo de cada rechazo junto a su campo; un intermediario nuevo se agrega en un diálogo sin perder lo capturado | /portafolios/:id/transacciones/nueva | CU-05; CU-12 | RF-05 (registro); RF-26a (crit. 2 y 3); RF-28; RF-04; RF-25; RF-02 | Sí | E14; E10; E08; E09; E18; E11 |
+| V-08 | Portafolios: lista con enlaces al tablero, las posiciones y las transacciones de cada uno; alta (divisa MXN), cambio de nombre y eliminación en diálogos | /portafolios | CU-03 | RF-03; RF-02 | Sí | E12; E13; E15; E16 |
+| V-09 | Intermediarios: lista y alta, sin modificar ni eliminar (RD-09) | /intermediarios | CU-04 | RF-25; RF-02 | Sí | E10; E11 |
+| V-10 | Catálogo: clave, nombre y clase de activo; vencimiento y valor nominal de los CETES; marca de demostración; solo lectura | /catalogo | CU-08 | RF-04 | Sí, porque la API lo exige ⟦confirmar: 4.1 lo deja por decidir⟧ | E08 |
+| V-11 | Cuenta: correo, estado y registro de consentimiento con la versión del aviso; enlace al aviso; revocación con confirmación | /cuenta | CU-10 | RF-12 (crit. 1, como evidencia, y 3) | Sí | E06; E07 |
+| V-12 | No encontrado: un mismo mensaje para un portafolio ajeno o inexistente, y otro para una ruta desconocida; enlaza a Portafolios o, sin sesión, a Inicio de sesión | La ruta solicitada | — | RF-02 (crit. 2); RNF-03 | Ambas | — |
+
+«/» y «/tablero» son redirecciones, no pantallas (N-01 y N-02). RF-30 no tiene pantalla: sus tasas se ven en la procedencia de V-04 y V-05 (RF-31). CU-11, del instalador, no tiene interfaz (4.1). Los avisos de licencias que enlaza el pie (4.5.1, «Navegación») no son pantalla del mapa mientras P-33 no decida su forma ⟦decidir (P-33): archivo estático generado al compilar o pantalla V-13 con su ruta⟧. Las definiciones de los indicadores se despliegan en la misma pantalla, sin navegar (RNF-07).
+
+| Id | Operación | Sesión | Uso |
+|---|---|---|---|
+| E02 | GET /api/aviso-privacidad | No | Texto y versión vigentes del aviso; responde igual con sesión y sin ella. |
+| E03 | POST /api/cuentas | No | Alta de la cuenta con su consentimiento; responde 201 y no abre la sesión. |
+| E04 | POST /api/sesion | No | Abre la sesión con una *cookie* que el navegador no puede leer y devuelve su vencimiento; ante cualquier fallo, incluida una cuenta bloqueada, responde el mismo 401. |
+| E05 | DELETE /api/sesion | No | Borra la *cookie*; responde 204 aunque no haya sesión. |
+| E06 | GET /api/cuenta | Sí | Cuenta y consentimientos. Como el navegador no lee la *cookie*, el cliente sabe por esta respuesta si hay sesión (200) o no (401). |
+| E07 | POST /api/cuenta/revocacion | Sí | Con la confirmación expresa, registra la revocación, bloquea la cuenta y borra la *cookie* (204). |
+| E08 | GET /api/instrumentos | Sí | Catálogo. |
+| E09 | GET /api/intervalo-datos | Sí | Intervalo de las semillas, fecha de hoy y fechas por omisión. |
+| E10 y E11 | GET y POST /api/intermediarios | Sí | Lista y alta. |
+| E12 y E13 | GET y POST /api/portafolios | Sí | Lista, ordenada por nombre sin distinguir mayúsculas, y alta. |
+| E14 a E16 | GET, PATCH y DELETE /api/portafolios/{id} | Sí | Consulta, cambio de nombre y eliminación confirmada con el nombre del portafolio. |
+| E17 y E18 | GET y POST /api/portafolios/{id}/transacciones | Sí | Lista y registro. |
+| E19 | GET /api/portafolios/{id}/posiciones | Sí | Posiciones a la fecha de corte. |
+| E20 | GET /api/portafolios/{id}/tablero | Sí | Indicadores, serie y procedencia del periodo; el corte es el fin del periodo, y sin transacciones responde 200 con el estado sin datos. |
+
+Toda operación con sesión responde el mismo 401 si la sesión no existe, ya venció o la cuenta está bloqueada, y borra la *cookie*. Lo ajeno recibe el mismo 404 que lo inexistente (RF-02, crit. 2; RNF-03).
+
+#### Menú principal
+
+El menú aparece en todas las pantallas con sesión, siempre en el mismo orden (criterio 3.2.3), y marca la pantalla actual. El orden propuesto ⟦decidir⟧ pone primero el tablero, punto de entrada habitual (2.2, F-5), y las vistas del portafolio activo; después, los registros del usuario, el catálogo y la cuenta.
+
+| Orden | Elemento | Destino | Se marca como actual en |
+|---|---|---|---|
+| 1 | Tablero | /tablero (N-02) | V-04 |
+| 2 | Posiciones | /portafolios/:activo/posiciones | V-05 |
+| 3 | Transacciones | /portafolios/:activo/transacciones | V-06 y V-07 |
+| 4 | Portafolios | /portafolios | V-08 |
+| 5 | Intermediarios | /intermediarios | V-09 |
+| 6 | Catálogo | /catalogo | V-10 |
+| 7 | Cuenta | /cuenta | V-11 |
+| 8 | Aviso de privacidad | /aviso-privacidad | V-03 |
+| Al pie | Correo de la cuenta y Cerrar sesión | E05 y V-01 (N-06) | — |
+
+El portafolio activo es el de la ruta actual; si la ruta no tiene uno, el último que se abrió en la sesión y, si no hay ninguno, el primero de la lista de portafolios. Solo se conserva mientras la pestaña está abierta ⟦decidir: o recordarlo en el navegador⟧. Sin portafolios, los elementos 1 a 3 llevan a V-08, que invita a crear el primero. Transacciones no es una lista global: cada transacción pertenece a un portafolio, y los portafolios no se consolidan (X-06).
+
+#### Reglas de transición
+
+| Id | Situación | Desde | Acción y respuesta | Destino |
+|---|---|---|---|---|
+| N-01 | Entrar | Cualquier ruta | Al cargar, el cliente consulta E06. | Con sesión, «/», /sesion y /registro llevan a /tablero. Sin sesión, «/» y toda ruta que exija sesión llevan a V-01, que guarda la ruta pedida como destino. |
+| N-02 | Abrir el tablero | Menú; N-01; N-05 | — | Con portafolios, V-04 del portafolio activo; sin ellos, V-08. |
+| N-03 | Ir al registro | V-01 | Crear cuenta. | V-02. Sin aviso vigente (E02: 503), el formulario se desactiva y muestra el mensaje de la API. |
+| N-04 | Enviar el registro | V-02 | E03: 201. Con 422, o con 409 por correo registrado o por cambio del aviso, se queda en V-02 con el motivo junto al campo; si cambió el aviso, además lo recarga y desmarca la casilla. | V-01, con «Tu cuenta quedó creada. Inicia sesión.» y el correo ya escrito (criterio 3.3.7). El registro no abre la sesión ⟦confirmar: CU-01, paso 6⟧. |
+| N-05 | Iniciar sesión | V-01 | E04: 200. Con 401, se queda en V-01 con el mensaje único de la API y vacía la contraseña. | El destino guardado o, si no hay, N-02. |
+| N-06 | Cerrar sesión | Menú | E05: 204. El cliente descarta lo que guarda de la cuenta. | V-01, con «Cerraste tu sesión.». Ningún requisito incluye el cierre de sesión ⟦decidir (4.1)⟧. |
+| N-07 | Sesión terminada o cuenta bloqueada | Cualquier pantalla con sesión | Una operación responde 401 porque la sesión venció, se revocó el consentimiento en otra pestaña o cambió la clave que firma las sesiones; la API no distingue el motivo. | V-01, con «Inicia sesión para continuar.» y la ruta actual como destino. Lo capturado y no enviado se pierde ⟦decidir: conservarlo y restaurarlo al volver (criterios 2.2.1 y 3.3.7)⟧. |
+| N-08 | Portafolio ajeno o inexistente | Pantallas con :id; diálogos de V-08 | E14 a E20 responden 404 con «No existe el portafolio.». Si lo que no existe es el intermediario o el instrumento, E18 responde el mismo código, no_encontrado, con otro mensaje; ese caso es de N-14, y el cliente solo puede distinguirlo por el mensaje ⟦decidir: que la API los distinga con un código o un campo⟧. | V-12 en la misma ruta, con «No existe el portafolio.» en ambos casos; desde un diálogo de V-08, V-08 con la lista actualizada; si era el activo, deja de serlo. |
+| N-09 | Revocar el consentimiento | V-11 | Un diálogo explica que la cuenta se bloquea de inmediato, ya no podrá iniciar sesión y, mientras dure el bloqueo (RD-23), el correo no podrá registrarse de nuevo. Al confirmar, E07: 204; cancelar no cambia nada. | V-01, con «Revocaste tu consentimiento; tu cuenta quedó bloqueada.». |
+| N-10 | Crear portafolio | V-08 | Diálogo con el nombre; E13: 201. Con 409 o 422, el motivo junto al campo. | V-04 del nuevo portafolio, que pasa a ser el activo y abre con el estado sin datos (RF-11, crit. 3) ⟦decidir: o ir a V-07⟧. |
+| N-11 | Cambiar el nombre | V-08 | Diálogo; E15: 200. | V-08, con la lista actualizada. |
+| N-12 | Eliminar portafolio | V-08 | Un diálogo pide escribir el nombre del portafolio; E16: 204. Con 422, el motivo aparece en el diálogo. Cancelar no cambia nada (RF-03, crit. 3). | V-08, con «Se eliminaron el portafolio y sus transacciones; tus intermediarios se conservan.» (RD-10). Si era el activo, pasa a serlo el primero que queda. |
+| N-13 | Registrar transacción | V-06; V-04 sin datos | Botón Registrar transacción. | V-07. |
+| N-14 | Enviar la transacción | V-07 | ⟦decidir: diálogo de revisión antes de enviar (4.1). En el MVP, una transacción registrada no se modifica ni se elimina salvo eliminando su portafolio (RD-09; RD-10), así que el criterio 3.3.4 se cumple con esa revisión o, sin ella, con la validación de la API y la oportunidad de corregir antes de registrar⟧. E18: 201. Con 422, 409 por saldo negativo o 404 por intermediario o instrumento, se queda en V-07 con el motivo y no se registra nada (CU-05). Cancelar no registra nada. | V-06, con «Transacción registrada» y la fila nueva tal como se capturó (CU-05, paso 7). «Registrar otra» vuelve a V-07 con el mismo intermediario elegido. |
+| N-15 | Agregar intermediario | V-09; V-07 | E11: 201; en V-07, desde un diálogo. Con 409, el motivo. | La misma pantalla; en V-07, el intermediario nuevo queda elegido. |
+| N-16 | Cambiar de portafolio | V-04 a V-06 | Selector de portafolio. | La misma pantalla del otro portafolio, con el mismo periodo o corte (CU-07, flujos alternos). |
+| N-17 | Cambiar el periodo o el corte | V-04; V-05 | Actualiza las fechas en la ruta y consulta E20 o E19 ⟦decidir: si agrega una entrada al historial del navegador⟧. Con 422 (periodo invertido o fuera del intervalo), muestra el motivo junto a las fechas, sin cifras. | La misma pantalla. |
+| N-18 | Otros errores | Cualquiera | 503 por falta de datos de mercado, 422 por una cifra no calculable en E19 o E20 (RD-24), 403 por el origen de la solicitud o 500. | La misma pantalla, con el mensaje de la API, sin navegar. |
+
+Reglas comunes:
+
+- Las rutas del cliente nunca empiezan con /api, que es de la API, y solo llevan identificadores y fechas AAAA-MM-DD tal como los da la API (4.2, «Cliente de la API»); nunca correos, nombres ni cifras. El correo de N-04 y el destino de N-01 y N-07 viajan en el estado del historial del navegador. El cliente todavía no tiene biblioteca de rutas ⟦decidir⟧.
+- Cada pantalla tiene un título propio con la forma «Pantalla · Proyecto 077» (criterio 2.4.2). Tras cada navegación, el foco pasa al encabezado principal (criterio 2.4.3), y un enlace «Saltar al contenido» va antes del menú (criterio 2.4.1).
+- Tras cada acción (N-04 a N-15), el resultado se anuncia como mensaje de estado (criterio 4.1.3), y cada rechazo se describe junto a su campo o, si la API no lo indica, en el resumen del formulario, con la forma de corregirlo cuando se sabe (criterios 3.3.1 y 3.3.3; 4.5.1, «Componentes»).
+- A cada pantalla se llega de dos formas (criterio 2.4.5): las de un portafolio, por el menú y los enlaces de V-08; V-03, por el menú y los enlaces de V-01 y V-11. V-09, V-10 y V-11 solo están en el menú y necesitan una segunda vía ⟦decidir: por ejemplo, un enlace «Mapa del sitio» en el pie que liste todas las pantallas, o enlaces a ellas desde el tablero⟧. V-02 y V-07 son pasos de un proceso, que el criterio exceptúa.
+- La sesión dura 480 minutos desde que se inicia, sin aviso ni renovación (valor por omisión de la configuración del *backend*, que admite de 5 a 1440). El criterio 2.2.1 pide poder desactivar, ajustar o extender todo límite de tiempo que no pase de 20 horas, y la guía del W3C incluye los límites de sesión (World Wide Web Consortium, 2026) ⟦decidir: avisar antes del vencimiento y permitir extender la sesión, lo que exige una operación nueva; subir la duración a más de 1200 minutos, por ejemplo a 1440, el máximo que admite la configuración; o registrar la excepción⟧.
+
+Se verifica por demostración (5.1): el recorrido de AC-04 sigue, con sesión y sin ella, las reglas de N-01 a N-17 que pueden provocarse con los datos de 5.2, a 1280 px (3.6.1; RNF-11), con capturas fechadas, y comprueba que lo ajeno muestre V-12 igual que lo inexistente (RNF-03). Los criterios de WCAG citados se verificarán con su lista cuando 3.3 tenga un requisito de accesibilidad ⟦decidir⟧.
+
+#### Pantallas de la fase de refinamiento
+
+| Pantalla | Ruta del cliente (propuesta) | CU | RF | Cómo se llega |
+|---|---|---|---|---|
+| Modificar transacción | /portafolios/:id/transacciones/:transaccionId/editar | CU-13 | RF-39 | Acción de cada fila de V-06. Eliminar una transacción no tiene pantalla: es un diálogo de confirmación en V-06. |
+| Posiciones por intermediario | /portafolios/:id/posiciones/intermediarios | CU-16 | RF-27 | Pestaña de V-05. |
+| Posiciones por clase de activo | /portafolios/:id/posiciones/clases | CU-17 | RF-13 | Pestaña de V-05 ⟦decidir: o sección del tablero⟧. |
+| Escenarios Monte Carlo | /portafolios/:id/simulaciones/escenarios | CU-20 | RF-21 | Elemento Simulaciones del menú, después de Transacciones. |
+| Composiciones alternativas | /portafolios/:id/simulaciones/composiciones | CU-21 | RF-22 | Pestaña de Simulaciones. |
+| Precios de cierre | /precios | CU-15 | RF-33 ⟦decidir: importación en CSV (P-49)⟧ | Elemento del menú, después de Catálogo. |
+
+Estos casos y requisitos no agregan pantalla: CU-18 (RF-15) es un botón Exportar de V-06 ⟦decidir: formato⟧; CU-19 (RF-14) es una sección del tablero, en su punto de extensión «resultados»; RF-16 a RF-20 se presentarían en V-04 ⟦decidir (4.1)⟧; RF-23 agrega la divisa a V-07 y V-08; RF-24 sería otro cliente con este mismo mapa (P-32), y CU-14 no tiene interfaz. En la fase de refinamiento el menú pasa de 8 a 10 elementos ⟦decidir: agruparlos o no⟧.
 
 ### 4.5.3 Wireframes
 
@@ -1591,6 +2093,12 @@ Canonical Ltd. (s. f.). *System requirements*. Ubuntu Server documentation. Recu
 
 CFA Institute. (2025). *Normas internacionales de presentación de rendimientos de gestión de inversiones (GIPS®) para entidades 2020* (CFA Society Spain, Trad.). https://www.gipsstandards.org/wp-content/uploads/2025/05/translation_spanish_spain_2020_gips_standards_firms.pdf (Trabajo original publicado en 2019)
 
+Coinbase. (s. f.). *Theming*. Coinbase Design System. Recuperado el 17 de octubre de 2026, de https://cds.coinbase.com/getting-started/theming/
+
+Coinbase. (2026a). *@coinbase/cds-icons* (Versión 5.26.0) [Software]. npm. https://www.npmjs.com/package/@coinbase/cds-icons/v/5.26.0
+
+Coinbase. (2026b). *@coinbase/cds-web* (Versión 9.29.0) [Software]. npm. https://www.npmjs.com/package/@coinbase/cds-web/v/9.29.0
+
 Comisión Nacional Bancaria y de Valores. (s. f.). *Otros participantes*. Recuperado el 5 de octubre de 2026, de https://www.cnbv.gob.mx/SECTORES-SUPERVISADOS/BURS%C3%81TIL/Preguntas-Frecuentes/Paginas/Otros-Participantes.aspx
 
 Comisión Nacional Bancaria y de Valores. (2025, 10 de diciembre). Disposiciones de carácter general que señalan los días del año 2026 en que las entidades financieras sujetas a la supervisión de la Comisión Nacional Bancaria y de Valores deberán cerrar sus puertas y suspender sus operaciones. Diario Oficial de la Federación. Artículo 1. https://dof.gob.mx/nota_detalle.php?codigo=5775684&fecha=10/12/2025
@@ -1613,13 +2121,17 @@ Ley del Mercado de Valores. (2005, 30 de diciembre). Congreso General de los Est
 
 Ley Federal de Protección de Datos Personales en Posesión de los Particulares. (2025, 20 de marzo). Congreso General de los Estados Unidos Mexicanos. Diario Oficial de la Federación (última reforma publicada el 14 de noviembre de 2025). Artículos 2, 7, 10, 12, 15, 16, 18, 21 y 24. https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf
 
+Machado, G. M., Oliveira, M. M., & Fernandes, L. A. F. (2009). A physiologically-based model for simulation of color vision deficiency. *IEEE Transactions on Visualization and Computer Graphics, 15*(6), 1291–1298. https://doi.org/10.1109/TVCG.2009.113
+
 MDN contributors. (2026, 7 de septiembre). *Making PWAs installable*. MDN Web Docs. https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable
 
 Mermaid contributors. (s. f.-a). *Class diagrams*. Mermaid. Recuperado el 14 de octubre de 2026, de https://mermaid.js.org/syntax/classDiagram.html
 
 Mermaid contributors. (s. f.-b). *Entity relationship diagrams*. Mermaid. Recuperado el 15 de octubre de 2026, de https://mermaid.js.org/syntax/entityRelationshipDiagram.html
 
-Mermaid contributors. (s. f.-c). *Use case diagrams (12.0.0+)*. Mermaid. Recuperado el 14 de octubre de 2026, de https://mermaid.js.org/syntax/usecase.html
+Mermaid contributors. (s. f.-c). *Flowcharts - Basic syntax*. Mermaid. Recuperado el 17 de octubre de 2026, de https://mermaid.js.org/syntax/flowchart.html
+
+Mermaid contributors. (s. f.-d). *Use case diagrams (12.0.0+)*. Mermaid. Recuperado el 14 de octubre de 2026, de https://mermaid.js.org/syntax/usecase.html
 
 Microsoft. (2025a, 2 de julio). *Hardware requirements for Windows Server*. Microsoft Learn. https://learn.microsoft.com/en-us/windows-server/get-started/hardware-requirements
 
@@ -1665,6 +2177,10 @@ Reitz, K. (2026). *certifi* (Versión 2026.7.22) [Software]. Python Package Inde
 
 Secretaría de Hacienda y Crédito Público. (2026, 25 de septiembre). *Programa de subastas de valores gubernamentales cuarto trimestre de 2026* (Comunicado núm. 75). Gobierno de México. https://www.gob.mx/shcp/prensa/comunicado-no-75-programa-de-subastas-de-valores-gubernamentales-cuarto-trimestre-de-2026
 
+The Inter Project Authors. (s. f.). *Inter* [Tipografía]. GitHub. Recuperado el 17 de octubre de 2026, de https://github.com/rsms/inter
+
+Unicode Consortium. (s. f.). *numbers.json (es-MX)* [Conjunto de datos]. Unicode CLDR JSON. Recuperado el 17 de octubre de 2026, de https://github.com/unicode-org/cldr-json/blob/main/cldr-json/cldr-numbers-full/main/es-MX/numbers.json
+
 Varrazzo, D. (2026). *psycopg* (Versión 3.3.6) [Software]. Python Package Index. https://pypi.org/project/psycopg/3.3.6/
 
 Varrazzo, D., & The Psycopg Team. (s. f.). Adapting basic Python types. En *Psycopg 3 documentation*. Recuperado el 15 de octubre de 2026, de https://www.psycopg.org/psycopg3/docs/basic/adapt.html
@@ -1672,3 +2188,5 @@ Varrazzo, D., & The Psycopg Team. (s. f.). Adapting basic Python types. En *Psyc
 Vite contributors. (s. f.). *Build options* (Versión 8). Vite. Recuperado el 13 de octubre de 2026, de https://vite.dev/config/build-options
 
 World Wide Web Consortium. (2024, 12 de diciembre). *Web Content Accessibility Guidelines (WCAG) 2.2* (Recomendación del W3C). https://www.w3.org/TR/WCAG22/
+
+World Wide Web Consortium. (2026, 10 de agosto). *Understanding Success Criterion 2.2.1: Timing adjustable*. Web Accessibility Initiative. https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html
