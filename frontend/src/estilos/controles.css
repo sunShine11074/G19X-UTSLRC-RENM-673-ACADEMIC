@@ -1,0 +1,271 @@
+/* Botones, campos, casillas y resumen de errores (4.5.1). Solo tokens. */
+
+.icono {
+  flex: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ---- Botones ---- */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: var(--controlSize-alto);
+  min-width: 24px;
+  padding: var(--space-1) var(--space-3);
+  border: var(--borderWidth-100) solid transparent;
+  border-radius: var(--borderRadius-1000);
+  font-size: var(--fontSize-headline);
+  line-height: var(--lineHeight-headline);
+  font-weight: var(--fontWeight-headline);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:hover {
+  filter: brightness(0.93);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) .boton:hover {
+    filter: brightness(1.12);
+  }
+}
+
+:root[data-tema='oscuro'] .boton:hover {
+  filter: brightness(1.12);
+}
+
+.boton--primario {
+  background: var(--color-bgPrimary);
+  color: var(--color-fgInverse);
+}
+
+.boton--secundario {
+  background: var(--color-bgSecondary);
+  color: var(--color-fg);
+  border-color: var(--color-bgLineHeavy);
+}
+
+.boton--negativo {
+  background: var(--color-bgNegative);
+  color: var(--color-fgInverse);
+}
+
+.boton--enlace {
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--color-fgPrimary);
+  font-weight: var(--fontWeight-body);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.boton--enlace:hover {
+  filter: none;
+  text-decoration-thickness: 2px;
+}
+
+.boton[aria-disabled='true'] {
+  cursor: progress;
+  opacity: 0.75;
+}
+
+.boton:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/* ---- Campos ---- */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0_5);
+  margin: 0 0 var(--space-2);
+  max-width: 32rem;
+}
+
+.campo__etiqueta {
+  font-size: var(--fontSize-label1);
+  line-height: var(--lineHeight-label1);
+  font-weight: var(--fontWeight-label1);
+  color: var(--color-fg);
+}
+
+.campo__ayuda {
+  margin: 0;
+  font-size: var(--fontSize-label2);
+  line-height: var(--lineHeight-label2);
+  color: var(--color-fgMuted);
+}
+
+.campo__control {
+  width: 100%;
+  min-height: var(--controlSize-alto);
+  padding: var(--space-1) var(--space-1_5);
+  border: var(--borderWidth-100) solid var(--color-bgLineHeavy);
+  border-radius: var(--borderRadius-200);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-size: var(--fontSize-body);
+  line-height: var(--lineHeight-body);
+}
+
+.campo__control:focus-visible,
+.campo__control:focus {
+  outline: none;
+  border-color: var(--color-bgPrimary);
+  box-shadow: 0 0 0 1px var(--color-bgPrimary);
+}
+
+.campo__control[aria-invalid='true'] {
+  border-color: var(--color-bgNegative);
+}
+
+.campo__control[aria-invalid='true']:focus {
+  border-color: var(--color-bgPrimary);
+}
+
+.campo__control--select {
+  cursor: pointer;
+}
+
+.campo__control--select option {
+  background: var(--color-bgElevation1);
+  color: var(--color-fg);
+}
+
+.campo--fecha .campo__control {
+  max-width: 12rem;
+}
+
+.campo__con-boton {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: stretch;
+}
+
+.campo__con-boton .campo__control {
+  flex: 1 1 14rem;
+  width: auto;
+}
+
+.campo__boton {
+  flex: none;
+  font-size: var(--fontSize-label1);
+  padding-inline: var(--space-2);
+}
+
+.campo__boton[aria-pressed='true'] {
+  background: var(--color-bgPrimaryWash);
+  color: var(--color-fgPrimary);
+  border-color: var(--color-bgPrimary);
+}
+
+.campo__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-0_5);
+  margin: 0;
+  font-size: var(--fontSize-label2);
+  line-height: var(--lineHeight-label2);
+  color: var(--color-fgNegative);
+}
+
+.campo__error .icono {
+  margin-top: 2px;
+}
+
+/* ---- Casilla y opciones ---- */
+.casilla {
+  margin: 0 0 var(--space-2);
+  max-width: var(--ancho-lectura);
+}
+
+.casilla__fila,
+.opcion {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.casilla__fila input,
+.opcion input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--color-bgPrimary);
+  cursor: pointer;
+}
+
+.casilla__fila label,
+.opcion label {
+  cursor: pointer;
+}
+
+.casilla .campo__error {
+  margin-top: var(--space-0_5);
+}
+
+.grupo-opciones {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.grupo-opciones__lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin-top: var(--space-0_5);
+}
+
+/* ---- Resumen de errores ---- */
+.resumen-error {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--borderRadius-400);
+  background: var(--color-bgNegativeWash);
+  color: var(--color-fg);
+  max-width: var(--ancho-lectura);
+}
+
+.resumen-error__titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0 0 var(--space-0_5);
+  font-size: var(--fontSize-headline);
+  line-height: var(--lineHeight-headline);
+  font-weight: var(--fontWeight-headline);
+}
+
+.resumen-error__icono {
+  display: inline-flex;
+  color: var(--color-fgNegative);
+}
+
+.resumen-error__lista {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.resumen-error__lista a {
+  color: var(--color-fg);
+}

@@ -48,10 +48,15 @@ class Escenario52:
 def _exigir(respuesta: httpx.Response, estado: int, que: str) -> Any:
     if respuesta.status_code != estado:
         try:
-            codigo = respuesta.json().get("codigo")
+            cuerpo = respuesta.json()
         except ValueError:
-            codigo = None
-        raise ErrorCarga(f"{que}: se esperaba {estado} y la API respondió {respuesta.status_code} ({codigo}).")
+            cuerpo = {}
+        # El sobre de error nunca repite lo capturado, así que el motivo se puede mostrar sin la contraseña.
+        motivos = "; ".join(f"{e.get('campo')}: {e.get('mensaje')}" for e in cuerpo.get("errores") or [])
+        detalle = f" Motivo: {motivos}" if motivos else (f" {cuerpo.get('mensaje')}" if cuerpo.get("mensaje") else "")
+        raise ErrorCarga(
+            f"{que}: se esperaba {estado} y la API respondió {respuesta.status_code} ({cuerpo.get('codigo')}).{detalle}"
+        )
     return respuesta.json() if respuesta.content else None
 
 

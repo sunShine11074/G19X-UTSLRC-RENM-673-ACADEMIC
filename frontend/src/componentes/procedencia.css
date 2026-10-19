@@ -1,0 +1,48 @@
+/* Procedencia de una valuación (B4 → P-E; 4.5.1, «Línea de fuente»). Solo tokens. */
+
+.procedencia {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0_5);
+  min-width: 0;
+}
+
+.procedencia p {
+  margin: 0;
+}
+
+.procedencia__dato {
+  color: var(--color-fg);
+  font-size: var(--fontSize-label2);
+  line-height: var(--lineHeight-label2);
+}
+
+/* Rótulo «estimado» de los CETES (RF-26b; R-11): texto, no solo color (1.4.1). */
+.procedencia__estimado {
+  display: inline-block;
+  padding: 0 var(--space-0_75);
+  border: var(--borderWidth-100) solid var(--color-bgLineHeavy);
+  border-radius: var(--borderRadius-100);
+  color: var(--color-fg);
+  font-size: var(--fontSize-label1);
+  line-height: var(--lineHeight-label1);
+  font-weight: var(--fontWeight-label1);
+  white-space: nowrap;
+}
+
+.procedencia__tasas {
+  margin: 0;
+  padding-inline-start: var(--space-3);
+  color: var(--color-fgMuted);
+  font-size: var(--fontSize-legal);
+  line-height: var(--lineHeight-legal);
+}
+
+.procedencia__tasas li + li {
+  margin-top: var(--space-0_25);
+}
+
+.procedencia .linea-fuente {
+  margin: 0;
+  overflow-wrap: anywhere;
+}

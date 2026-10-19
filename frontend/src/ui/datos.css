@@ -1,0 +1,350 @@
+/*
+ * Componentes de datos y diálogos (B3; SRS 4.5.1, «Componentes»).
+ * Solo tokens de color (var(--…)) con los nombres de CDS; sin colores fijos.
+ * Tamaños en rem sobre una raíz de 16 px; espacio en la escala de base 8 px.
+ */
+
+/* Texto solo para el lector de pantalla. */
+.solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Tabla ---------- */
+
+.tabla-region {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: 1rem 1.5rem;
+}
+
+.tabla-region:focus-visible {
+  outline: 2px solid var(--bgPrimary);
+  outline-offset: 2px;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.tabla caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  padding-block-end: 0.5rem;
+}
+
+.tabla th,
+.tabla td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--bgLine);
+}
+
+.tabla thead th {
+  font-weight: 600;
+  border-bottom: 1px solid var(--bgLineHeavy);
+}
+
+.tabla tbody th {
+  font-weight: 400;
+}
+
+.tabla tbody tr:nth-child(even) {
+  background: var(--bgAlternate);
+}
+
+.tabla tfoot th,
+.tabla tfoot td {
+  font-weight: 600;
+  border-top: 1px solid var(--bgLineHeavy);
+  border-bottom: none;
+}
+
+.tabla .cifra,
+.tabla th.cifra,
+.tabla td.cifra {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tabla-vacia {
+  color: var(--fgMuted);
+}
+
+/* ---------- Tarjeta de indicador ---------- */
+
+.tarjeta-indicador {
+  background: var(--bgAlternate);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  min-width: 0;
+}
+
+.tarjeta-indicador h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+.tarjeta-indicador .tarjeta-cifra {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.tarjeta-indicador .tarjeta-unidad,
+.tarjeta-indicador .tarjeta-fecha {
+  color: var(--fgMuted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.tarjeta-indicador .tarjeta-unidad {
+  margin-inline-start: 0.25rem;
+  white-space: nowrap;
+}
+
+.tarjeta-indicador .tarjeta-fecha {
+  margin: 0.25rem 0 0;
+}
+
+/* ---------- Etiqueta de demostración ---------- */
+
+.etiqueta-demo {
+  display: inline-block;
+  background: var(--yellow0);
+  color: var(--yellow70);
+  border-radius: 4px;
+  padding: 0 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+/* ---------- Avisos ---------- */
+
+.aviso {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  margin-block: 0 1rem;
+  color: var(--fg);
+  background: var(--bgSecondary);
+  max-width: 100%;
+  min-width: 0;
+}
+
+.aviso p {
+  margin: 0;
+}
+
+.aviso p + p {
+  margin-top: 0.5rem;
+}
+
+.aviso-icono {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.25rem;
+  color: var(--fgPrimary);
+}
+
+.aviso-cuerpo {
+  min-width: 0;
+}
+
+.aviso-titulo {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+.aviso--advertencia {
+  background: var(--bgWarningWash);
+  border-inline-start: 4px solid var(--bgWarning);
+}
+
+.aviso--advertencia .aviso-icono {
+  color: var(--fgWarning);
+}
+
+.aviso--error {
+  background: var(--bgNegativeWash);
+}
+
+.aviso--error .aviso-icono {
+  color: var(--fgNegative);
+}
+
+.aviso--exito .aviso-icono {
+  color: var(--fgPrimary);
+}
+
+.avisos-permanentes {
+  margin-block: 0 1.5rem;
+}
+
+.avisos-permanentes .aviso {
+  margin: 0;
+}
+
+.linea-fuente {
+  margin: 0.25rem 0;
+  color: var(--fgMuted);
+  font-size: 0.8125rem;
+  line-height: 1rem;
+}
+
+.linea-fuente a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* ---------- Mensajes ---------- */
+
+.mensaje-estado {
+  margin: 0 0 1rem;
+  color: var(--fg);
+}
+
+.mensaje-estado:empty {
+  margin: 0;
+}
+
+.mensaje-estado--error {
+  color: var(--fgNegative);
+}
+
+.estado-sin-datos {
+  background: var(--bgAlternate);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-block: 1rem;
+}
+
+.estado-sin-datos p {
+  margin: 0 0 1rem;
+}
+
+/* ---------- Diálogos ---------- */
+
+.dialogo {
+  background: var(--bgElevation2);
+  color: var(--fg);
+  border: 1px solid var(--bgLineHeavy);
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: min(32rem, calc(100vw - 2rem));
+  max-width: 100%;
+  box-sizing: border-box;
+  box-shadow: var(--sombra-elevacion2);
+}
+
+.dialogo h2:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.dialogo::backdrop {
+  background: var(--bgOverlay);
+}
+
+.dialogo h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.dialogo-cuerpo > :first-child {
+  margin-top: 0;
+}
+
+.dialogo-cuerpo p {
+  margin: 0 0 1rem;
+}
+
+.dialogo-error {
+  background: var(--bgNegativeWash);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0 0 1rem;
+}
+
+.dialogo-botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Selector de portafolio ---------- */
+/* Usa las clases de campo de controles.css (B2); aquí solo su ancho. */
+
+.selector-portafolio {
+  min-width: 12rem;
+}
+
+/* ---------- No encontrado ---------- */
+
+.no-encontrado {
+  padding-block: 1rem;
+}
+
+.no-encontrado .no-encontrado-mensaje {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin: 0 0 1rem;
+}
+
+.no-encontrado a {
+  color: var(--fgPrimary);
+  text-decoration: underline;
+}
+
+/* ---------- Muestra (solo desarrollo) ---------- */
+
+.muestra-rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.5rem;
+  margin-block: 1rem 2rem;
+}
+
+.muestra-seccion {
+  margin-block: 0 2.5rem;
+}
+
+.muestra-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

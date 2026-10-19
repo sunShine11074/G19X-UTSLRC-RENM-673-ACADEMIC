@@ -1,0 +1,216 @@
+/*
+ * Tokens del tema propio del Proyecto 077 (SRS 4.5.1, «Paleta», «Tipografía» y
+ * «Espaciado, retícula y puntos de corte»). Los nombres son los de las variables
+ * que genera el ThemeProvider de CDS (--color-*, --space-*, --fontSize-*…), para
+ * que migrar a CDS no toque las pantallas (nota b.2 del borrador de 4.5).
+ *
+ * Reglas para quien escribe CSS:
+ * - Usa solo var(--…); nunca un color fijo.
+ * - Los nombres cortos (--fg, --fgMuted, --bgAlternate…) son alias de los --color-*
+ *   y valen igual; usa el que prefieras.
+ * - El modo sigue la preferencia del sistema operativo. data-tema="oscuro" o
+ *   "claro" en <html> lo fuerza (solo para revisar en desarrollo).
+ */
+
+:root {
+  /* Color, modo claro (columna «Claro» de la Paleta) */
+  --color-fg: #16211f;
+  --color-fgMuted: #5e6d6a;
+  --color-fgInverse: #ffffff;
+  --color-fgPrimary: #1c5b52;
+  --color-fgPositive: #1e6b2e;
+  --color-fgNegative: #93342b;
+  --color-fgWarning: #8a5a00;
+  --color-bg: #ffffff;
+  --color-bgAlternate: #f2f5f4;
+  --color-bgSecondary: #e8eeec;
+  --color-bgTertiary: #d5dedb;
+  --color-bgElevation1: #ffffff;
+  --color-bgElevation2: #ffffff;
+  --color-bgInverse: #16211f;
+  --color-bgPrimary: #1c5b52;
+  --color-bgPrimaryWash: #e4f1ee;
+  --color-bgPositive: #1e6b2e;
+  --color-bgPositiveWash: #e6f2e8;
+  --color-bgNegative: #93342b;
+  --color-bgNegativeWash: #f6e5e2;
+  --color-bgWarning: #a86a00;
+  --color-bgWarningWash: #fbf1de;
+  --color-bgLine: #d5dedb;
+  --color-bgLineHeavy: #858f8c;
+  --color-bgLinePrimary: #1c5b52;
+  --color-bgLinePrimarySubtle: #a9cfc7;
+  --color-bgOverlay: rgba(22, 33, 31, 0.33);
+  --color-yellow0: #fbf1de;
+  --color-yellow70: #6e4a00;
+  --serie-1: #1c5b52;
+  --serie-2: #b76b1c;
+  --serie-3: #8557c8;
+  --sombra-elevacion2: 0 8px 24px rgba(22, 33, 31, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    --color-fg: #e6ecea;
+    --color-fgMuted: #8a9794;
+    --color-fgInverse: #161e1d;
+    --color-fgPrimary: #6fbdaf;
+    --color-fgPositive: #7cc98a;
+    --color-fgNegative: #e0978d;
+    --color-fgWarning: #e5b567;
+    --color-bg: #161e1d;
+    --color-bgAlternate: #1d2726;
+    --color-bgSecondary: #24302e;
+    --color-bgTertiary: #2c3835;
+    --color-bgElevation1: #1b2423;
+    --color-bgElevation2: #212b29;
+    --color-bgInverse: #e6ecea;
+    --color-bgPrimary: #6fbdaf;
+    --color-bgPrimaryWash: #1e3532;
+    --color-bgPositive: #7cc98a;
+    --color-bgPositiveWash: #1c3022;
+    --color-bgNegative: #e0978d;
+    --color-bgNegativeWash: #34211e;
+    --color-bgWarning: #e5b567;
+    --color-bgWarningWash: #33290f;
+    --color-bgLine: #2c3835;
+    --color-bgLineHeavy: #6f7976;
+    --color-bgLinePrimary: #6fbdaf;
+    --color-bgLinePrimarySubtle: #2f5a53;
+    --color-bgOverlay: rgba(11, 16, 15, 0.33);
+    --color-yellow0: #33290f;
+    --color-yellow70: #f0c878;
+    --serie-1: #6fbdaf;
+    --serie-2: #be7125;
+    --serie-3: #956ed2;
+    --sombra-elevacion2: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Mismo bloque oscuro, forzado con data-tema="oscuro" (solo revisión). */
+:root[data-tema='oscuro'] {
+  --color-fg: #e6ecea;
+  --color-fgMuted: #8a9794;
+  --color-fgInverse: #161e1d;
+  --color-fgPrimary: #6fbdaf;
+  --color-fgPositive: #7cc98a;
+  --color-fgNegative: #e0978d;
+  --color-fgWarning: #e5b567;
+  --color-bg: #161e1d;
+  --color-bgAlternate: #1d2726;
+  --color-bgSecondary: #24302e;
+  --color-bgTertiary: #2c3835;
+  --color-bgElevation1: #1b2423;
+  --color-bgElevation2: #212b29;
+  --color-bgInverse: #e6ecea;
+  --color-bgPrimary: #6fbdaf;
+  --color-bgPrimaryWash: #1e3532;
+  --color-bgPositive: #7cc98a;
+  --color-bgPositiveWash: #1c3022;
+  --color-bgNegative: #e0978d;
+  --color-bgNegativeWash: #34211e;
+  --color-bgWarning: #e5b567;
+  --color-bgWarningWash: #33290f;
+  --color-bgLine: #2c3835;
+  --color-bgLineHeavy: #6f7976;
+  --color-bgLinePrimary: #6fbdaf;
+  --color-bgLinePrimarySubtle: #2f5a53;
+  --color-bgOverlay: rgba(11, 16, 15, 0.33);
+  --color-yellow0: #33290f;
+  --color-yellow70: #f0c878;
+  --serie-1: #6fbdaf;
+  --serie-2: #be7125;
+  --serie-3: #956ed2;
+  --sombra-elevacion2: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+:root {
+  /* Alias cortos de los colores (mismo valor que su --color-*) */
+  --fg: var(--color-fg);
+  --fgMuted: var(--color-fgMuted);
+  --fgInverse: var(--color-fgInverse);
+  --fgPrimary: var(--color-fgPrimary);
+  --fgPositive: var(--color-fgPositive);
+  --fgNegative: var(--color-fgNegative);
+  --fgWarning: var(--color-fgWarning);
+  --bg: var(--color-bg);
+  --bgAlternate: var(--color-bgAlternate);
+  --bgSecondary: var(--color-bgSecondary);
+  --bgTertiary: var(--color-bgTertiary);
+  --bgElevation1: var(--color-bgElevation1);
+  --bgElevation2: var(--color-bgElevation2);
+  --bgInverse: var(--color-bgInverse);
+  --bgPrimary: var(--color-bgPrimary);
+  --bgPrimaryWash: var(--color-bgPrimaryWash);
+  --bgPositive: var(--color-bgPositive);
+  --bgPositiveWash: var(--color-bgPositiveWash);
+  --bgNegative: var(--color-bgNegative);
+  --bgNegativeWash: var(--color-bgNegativeWash);
+  --bgWarning: var(--color-bgWarning);
+  --bgWarningWash: var(--color-bgWarningWash);
+  --bgLine: var(--color-bgLine);
+  --bgLineHeavy: var(--color-bgLineHeavy);
+  --bgLinePrimary: var(--color-bgLinePrimary);
+  --bgOverlay: var(--color-bgOverlay);
+  --yellow0: var(--color-yellow0);
+  --yellow70: var(--color-yellow70);
+
+  /* Espacio: escala de CDS, base 8 px (0_5 = 0.5, 1_5 = 1.5…) */
+  --space-0_25: 2px;
+  --space-0_5: 4px;
+  --space-0_75: 6px;
+  --space-1: 8px;
+  --space-1_5: 12px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+
+  /* Radios y bordes */
+  --borderRadius-100: 4px; /* etiqueta de demostración */
+  --borderRadius-200: 8px; /* campos y tarjetas */
+  --borderRadius-400: 16px; /* avisos */
+  --borderRadius-1000: 9999px; /* botones (como CDS) */
+  --borderWidth-100: 1px;
+  --borderWidth-200: 2px;
+  --ancho-foco: 2px;
+  --barra-menu-activo: 3px;
+
+  /* Tipografía: escala de CDS; en el MVP, la fuente del sistema (4.5.1) */
+  --fontFamily-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --fontSize-title1: 1.75rem;
+  --lineHeight-title1: 2.25rem;
+  --fontWeight-title1: 600;
+  --fontSize-title2: 1.75rem;
+  --lineHeight-title2: 2.25rem;
+  --fontWeight-title2: 400;
+  --fontSize-title3: 1.25rem;
+  --lineHeight-title3: 1.75rem;
+  --fontWeight-title3: 600;
+  --fontSize-headline: 1rem;
+  --lineHeight-headline: 1.5rem;
+  --fontWeight-headline: 600;
+  --fontSize-body: 1rem;
+  --lineHeight-body: 1.5rem;
+  --fontWeight-body: 400;
+  --fontSize-label1: 0.875rem;
+  --lineHeight-label1: 1.25rem;
+  --fontWeight-label1: 600;
+  --fontSize-label2: 0.875rem;
+  --lineHeight-label2: 1.25rem;
+  --fontWeight-label2: 400;
+  --fontSize-legal: 0.8125rem;
+  --lineHeight-legal: 1rem;
+  --fontWeight-legal: 400;
+
+  /* Controles y retícula */
+  --controlSize-alto: 40px;
+  --ancho-maximo: 1200px; /* ancho del contenido (H-7) */
+  --ancho-menu: 240px;
+  --ancho-lectura: 70ch; /* párrafos largos, como el aviso */
+  --margen-lateral: var(--space-3); /* 16 px en teléfono (base.css) */
+  --alto-grafica: 300px;
+}

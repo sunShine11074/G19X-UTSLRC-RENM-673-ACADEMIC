@@ -1,0 +1,105 @@
+/* V-05 Posiciones (P-E; 4.5.1). Solo tokens; nada de colores fijos. */
+
+.v05-encabezado {
+  margin: 0 0 var(--space-3);
+  color: var(--color-fgMuted);
+  font-size: var(--fontSize-body);
+  line-height: var(--lineHeight-body);
+}
+
+.v05-consulta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+
+.v05-consulta .campo {
+  flex: 0 1 24rem;
+  margin: 0;
+  min-width: 0;
+}
+
+/* La ayuda «DD/MM/AAAA · Entre el … y el …» cabe en una línea; el campo conserva sus 14 rem. */
+.v05-consulta .campo--fecha {
+  max-width: 24rem;
+}
+
+.v05-consulta .campo--fecha .campo__control {
+  max-width: 14rem;
+}
+
+/* Celda del instrumento: clave, nombre y clase; debajo, «Vencida…» o «Sin títulos al corte». */
+.v05-instrumento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0_25);
+  text-align: start;
+}
+
+.v05-instrumento__clave {
+  font-weight: var(--fontWeight-headline);
+}
+
+.v05-instrumento__nombre {
+  color: var(--color-fgMuted);
+  font-size: var(--fontSize-label2);
+  line-height: var(--lineHeight-label2);
+  font-weight: var(--fontWeight-label2);
+}
+
+.v05-instrumento__nota {
+  color: var(--color-fg);
+  font-size: var(--fontSize-label2);
+  line-height: var(--lineHeight-label2);
+  font-weight: var(--fontWeight-label2);
+}
+
+/* Rótulo «estimado» del valor de un CETES vigente (RF-26b; R-11): texto, no solo color. */
+.v05-estimado {
+  display: inline-block;
+  padding: 0 var(--space-0_75);
+  border: var(--borderWidth-100) solid var(--color-bgLineHeavy);
+  border-radius: var(--borderRadius-100);
+  color: var(--color-fg);
+  font-size: var(--fontSize-label1);
+  line-height: var(--lineHeight-label1);
+  font-weight: var(--fontWeight-label1);
+  white-space: nowrap;
+}
+
+.v05-procedencias {
+  margin-top: var(--space-5);
+}
+
+.v05-procedencias h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fontSize-title3);
+  line-height: var(--lineHeight-title3);
+  font-weight: var(--fontWeight-title3);
+}
+
+.v05-procedencias__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--space-2);
+}
+
+.v05-procedencias__elemento {
+  min-width: 0;
+  padding: var(--space-2);
+  border: var(--borderWidth-100) solid var(--color-bgLine);
+  border-radius: var(--borderRadius-200);
+  background: var(--color-bg);
+}
+
+.v05-procedencias__instrumento {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fontSize-headline);
+  line-height: var(--lineHeight-headline);
+  font-weight: var(--fontWeight-headline);
+}

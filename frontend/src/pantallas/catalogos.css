@@ -1,0 +1,71 @@
+/*
+ * V-08 Portafolios, V-09 Intermediarios y V-10 Catálogo (P-B).
+ * Solo tokens de color (var(--…)); tamaños en rem y espacio en la escala de base 8 px.
+ */
+
+.catalogos {
+  min-width: 0;
+}
+
+.catalogos-intro {
+  max-width: 70ch;
+  margin: 0 0 1rem;
+  color: var(--fg);
+}
+
+.catalogos-nota {
+  margin: 1rem 0 0;
+  color: var(--fgMuted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.catalogos-cargando {
+  color: var(--fgMuted);
+}
+
+.catalogos-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-block: 1.5rem 1rem;
+}
+
+.catalogos-seccion {
+  margin-block: 2rem;
+}
+
+.catalogos-seccion h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+/* Enlaces y botones dentro de una fila de la tabla. */
+.acciones-fila {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.acciones-fila a,
+.catalogos a {
+  color: var(--fgPrimary);
+  text-decoration: underline;
+}
+
+/* Alta en la misma pantalla (V-09): el campo y, debajo, el botón. */
+.formulario-alta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 32rem;
+}
+
+.formulario-alta > :first-child {
+  align-self: stretch;
+  min-width: 0;
+}

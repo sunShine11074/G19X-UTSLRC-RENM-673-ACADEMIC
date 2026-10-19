@@ -1,0 +1,125 @@
+/* Gráfica de valor (B5 / P-D). Solo tokens de color (4.5.1, «Paleta»); sin colores fijos. */
+
+.grafica-valor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.grafica-encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.grafica-titulo {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.grafica-meta,
+.grafica-resumen {
+  margin: 0;
+  color: var(--fgMuted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.grafica-resumen {
+  color: var(--fg);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  max-width: 70ch;
+}
+
+.grafica-alerta {
+  margin: 0;
+  color: var(--fgNegative);
+}
+
+/* El relleno va en el envoltorio exterior, no en el elemento que mide Recharts (issue #7890). */
+.grafica-marco {
+  min-width: 0;
+}
+
+/* Contenedor de 300 px de alto con min-width: 0 para que mida bien dentro de grid o flex. */
+.grafica {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  min-width: 0;
+}
+
+.grafica :focus-visible {
+  outline: 2px solid var(--bgPrimary);
+  outline-offset: 2px;
+}
+
+.grafica .recharts-surface:focus {
+  outline: none;
+}
+
+.grafica .recharts-surface:focus-visible {
+  outline: 2px solid var(--bgPrimary);
+  outline-offset: 2px;
+}
+
+.grafica-tabla > summary {
+  cursor: pointer;
+  color: var(--fgPrimary);
+  text-decoration: underline;
+  width: fit-content;
+  min-height: 24px;
+}
+
+.grafica-tabla > summary:focus-visible {
+  outline: 2px solid var(--bgPrimary);
+  outline-offset: 2px;
+}
+
+.grafica-tabla table {
+  margin-top: 0.75rem;
+  border-collapse: collapse;
+  min-width: 18rem;
+}
+
+.grafica-tabla caption {
+  text-align: left;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+}
+
+.grafica-tabla th,
+.grafica-tabla td {
+  padding: 0.25rem 0.75rem;
+  border-bottom: 1px solid var(--bgLine);
+  text-align: left;
+}
+
+.grafica-tabla thead th {
+  font-weight: 600;
+}
+
+.grafica-tabla tbody th {
+  font-weight: 400;
+}
+
+.grafica-tabla .cifra {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.grafica-tabla .grafica-fila-corte th,
+.grafica-tabla .grafica-fila-corte td {
+  font-weight: 600;
+}
+
+.grafica-vacia {
+  margin: 0;
+  color: var(--fgMuted);
+}

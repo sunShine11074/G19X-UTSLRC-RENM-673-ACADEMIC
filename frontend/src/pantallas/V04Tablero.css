@@ -1,0 +1,93 @@
+/* V-04 Tablero (B5 / P-D). Solo tokens de color (4.5.1, «Paleta»); sin colores fijos. */
+
+.v04-consulta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.v04-consulta > * {
+  min-width: 0;
+}
+
+/* Mismo ancho para las dos fechas; a 1280 px caben en una fila con el selector y «Consultar». */
+.v04-campo-fecha {
+  width: 16rem;
+  max-width: 100%;
+}
+
+/* El botón se alinea con los campos (etiqueta + ayuda arriba de cada control). */
+.v04-accion {
+  align-self: flex-end;
+}
+
+.v04-resumen {
+  margin: var(--space-3) 0 0;
+  font-weight: var(--fontWeight-headline);
+}
+
+.v04-bloque {
+  margin-top: var(--space-5);
+  min-width: 0;
+}
+
+.v04-encabezado-bloque {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.v04-encabezado-bloque h2 {
+  margin: 0;
+  font-size: var(--fontSize-title3);
+  line-height: var(--lineHeight-title3);
+  font-weight: var(--fontWeight-title3);
+}
+
+/* Cuatro tarjetas en una fila a 1280 px; dos o una en anchos menores (4.5.1, puntos de corte). */
+.v04-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: var(--space-3);
+}
+
+.v04-tarjetas > * {
+  min-width: 0;
+}
+
+.v04-procedencia {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.v04-procedencia > li {
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--bgLine);
+}
+
+.v04-instrumento {
+  margin: 0 0 4px;
+}
+
+.v04-clave {
+  font-weight: var(--fontWeight-headline);
+}
+
+.v04-fuentes {
+  margin-top: var(--space-3);
+}
+
+.v04-fuentes h3 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fontSize-headline);
+  line-height: var(--lineHeight-headline);
+  font-weight: var(--fontWeight-headline);
+}

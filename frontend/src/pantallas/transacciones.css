@@ -1,0 +1,89 @@
+/*
+ * V-06 y V-07 (P-C). Solo tokens (var(--…)); sin colores fijos.
+ */
+
+.transacciones__barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2, 16px);
+  margin-block: 0 var(--space-2, 16px);
+}
+
+.transacciones__portafolio {
+  margin: 0;
+  color: var(--fg);
+}
+
+.transacciones__clave {
+  display: block;
+  font-weight: 600;
+}
+
+.transacciones__nombre {
+  display: block;
+  color: var(--fgMuted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Los encabezados de cifras pueden partirse en dos líneas para que la tabla quepa a 1280 px. */
+.transacciones__tabla .tabla thead th.cifra {
+  white-space: normal;
+}
+
+.transacciones__nota {
+  margin: 0;
+  color: var(--fgMuted);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.transacciones__volver {
+  margin: 0 0 var(--space-2, 16px);
+}
+
+.formulario-transaccion {
+  max-width: 48rem;
+}
+
+.formulario-transaccion__rejilla {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2, 16px) var(--space-3, 24px);
+}
+
+.formulario-transaccion__rejilla > * {
+  min-width: 0;
+}
+
+.formulario-transaccion__ancho {
+  grid-column: 1 / -1;
+}
+
+.formulario-transaccion__intermediario {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-2, 16px);
+}
+
+.formulario-transaccion__intermediario > :first-child {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.formulario-transaccion__demo {
+  margin: var(--space-1, 8px) 0 0;
+}
+
+.formulario-transaccion__acciones {
+  margin-top: var(--space-3, 24px);
+}
+
+@media (max-width: 40rem) {
+  .formulario-transaccion__rejilla {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
