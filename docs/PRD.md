@@ -6,17 +6,17 @@ Plataforma Inteligente de Gestión de Activos Financieros: documento de requisit
 |---|---|
 | Proyecto | 077 — Plataforma Inteligente de Gestión de Activos Financieros |
 | Documento | `docs/PRD.md`: requisitos del producto en su conjunto, por fases, con la forma de verificar cada uno |
-| Versión del documento | 1.0 |
+| Versión del documento | 1.1 (registro de cambios en la sección 16.3) |
 | Fecha | Domingo 18 de octubre de 2026 |
 | Autor | Ramon Ernesto Nieblas Mendivil, estudiante en estadía del TSU en Desarrollo de Software Multiplataforma (Universidad Tecnológica de San Luis Río Colorado). Analista y arquitecto, desarrollador del servidor y del cliente, y responsable de pruebas del proyecto (SRS 3.7). |
 | Empresa | PluriOne S.A. de C.V. (Develop Talent & Technology) |
 | Líder de proyecto | Edgar Loeffelmann Ibarra: revisión del MVP y aprobación del entregable (SRS 1.2) |
-| Especificación de referencia | SRS versión 0.3 (en elaboración), tal como está en el commit `268a2c2` |
-| Estado del producto al 18/10/2026 | MVP: servidor completo (API, motor de cálculo, base de datos y datos semilla), verificado con 271 pruebas automatizadas; la interfaz web está pendiente (MVP.md, sección 12). Fase de refinamiento: empieza el lunes 19 de octubre de 2026; ninguno de sus 17 requisitos está implementado. |
+| Especificación de referencia | SRS versión 0.3 (en elaboración), en la versión del 18 de octubre de 2026 que acompaña a este documento; sus cambios de ese día constan en la fila 0.3 del SRS 3.1 |
+| Estado del producto al 18/10/2026 | MVP completo y verificado: los 18 imprescindibles funcionan en el servidor (API, motor de cálculo, base de datos y datos semilla; 271 pruebas automatizadas que pasan) y en el cliente web (las 12 pantallas del SRS 4.5.2, recorridas con 33 capturas fechadas). Cumple AC-01 a AC-07; AC-08 espera la revisión del Diario Oficial (MVP.md, sección 12). El repositorio es público y lo revisan, hasta el fin de semana del 24 y 25 de octubre de 2026, los agentes de la plataforma del líder de proyecto. Fase de refinamiento: empieza el lunes 19 de octubre de 2026; ninguno de sus 17 requisitos está implementado. |
 
 ## Propósito y uso de este documento
 
-Este archivo es el documento de requisitos del producto (PRD) del Proyecto 077. Describe el producto completo: qué problema atiende, para quién, qué hace en cada fase, con qué calidad y qué datos, y cómo se acepta. El líder de proyecto pidió que la carpeta `docs/` contenga dos archivos Markdown, uno del MVP y otro del PRD (SRS 2.5.1, S-01, y 3.9.2, AC-06), y el 18 de octubre de 2026 fijó sus nombres: `MVP.md` y `PRD.md` (este archivo). Solo queda por confirmar con él si `docs/` debe tener exactamente esos dos (sección 14.3). Su plataforma los usará, entre otras cosas, como criterios para evaluar la aplicación.
+Este archivo es el documento de requisitos del producto (PRD) del Proyecto 077. Describe el producto completo: qué problema atiende, para quién, qué hace en cada fase, con qué calidad y qué datos, y cómo se acepta. El líder de proyecto pidió que la carpeta `docs/` contenga dos archivos Markdown, uno del MVP y otro del PRD (SRS 2.5.1, S-01, y 3.9.2, AC-06), y el 18 de octubre de 2026 fijó sus nombres: `MVP.md` y `PRD.md` (este archivo). Solo queda por confirmar con él si `docs/` debe tener exactamente esos dos (sección 14.3). Su plataforma evalúa los repositorios con un conjunto de agentes y usará estos dos archivos, entre otras cosas, como criterios para evaluar la aplicación.
 
 Relación con los demás documentos:
 
@@ -45,6 +45,7 @@ Cómo usarlo para evaluar la aplicación y su evolución:
 | V-nn | Pantalla del cliente web | SRS 4.5.2 |
 | Enn | Operación de la API | SRS 4.5.2; MVP.md 7.4 |
 | R-nn, X-nn, S-nn y D-nn | Restricción, exclusión de alcance, suposición y dependencia | SRS 2.4, 2.4.7 y 2.5 |
+| R3 y R4 | Tareas pendientes del estudiante en el plan de trabajo del 18 de octubre de 2026: R3, la revisión del DOF (AC-08); R4, la comprobación a mano de tres cifras del SRS 5.2 (MVP.md 12.6). No son restricciones R-nn | Plan del 18 de octubre de 2026, que no está en el repositorio |
 | OE-n | Objetivo específico | Definición |
 | SRS 5.2 | Conjunto de datos de referencia (el «oráculo»); MVP.md lo resume en su sección 5.8 | SRS 5.2 y `backend/tests/oraculo/` |
 
@@ -63,12 +64,10 @@ Estado de una decisión. El SRS señala lo abierto con las marcas ⟦decidir⟧ 
 - Por confirmar: depende de una respuesta del líder de proyecto, de la empresa o de la asesora académica.
 - Adoptado, por confirmar: valor que el código aplica donde el SRS deja una decisión abierta (igual que en MVP.md).
 
-Estado de implementación al 18/10/2026. Las cuatro primeras categorías son las de MVP.md 12:
+Estado de implementación al 18/10/2026. Las dos primeras categorías son las de MVP.md 12:
 
-- Hecho y verificado: implementado, verificado por pruebas automatizadas y sin partes de interfaz pendientes.
-- Hecho sin interfaz: el motor y la API cumplen los criterios y sus pruebas pasan; faltan las pantallas.
-- Pendiente en parte: una parte está hecha y verificada, y al menos un criterio pide algo que solo puede dar la interfaz o está en conflicto.
-- Pendiente: algo que un criterio exige y hoy no existe.
+- Hecho y verificado: implementado; su CPF aprueba en la corrida con registro del 18/10/2026, y lo que su criterio pide de la interfaz se ve en el cliente web, con al menos una captura fechada del recorrido de AC-04. Los 18 imprescindibles están en esta categoría.
+- Pendiente: algo que un criterio exige y hoy no existe o no consta.
 - Sin implementar: requisito posterior al MVP del que no hay código en el repositorio.
 
 Fuentes. Además de los documentos de `docs/`, este documento usa el README, el código y el historial de git. Unos pocos datos vienen del registro de decisiones del estudiante, un archivo de trabajo que no está en el control de versiones; se cita como «registro de decisiones» solo cuando el dato no está en el SRS.
@@ -244,10 +243,10 @@ Los enunciados son los de la Definición. Los requisitos de cada objetivo salen 
 | OE | Enunciado (Definición) | Requisitos que lo atienden | Cómo se comprueba | Estado al 18/10/2026 |
 |---|---|---|---|---|
 | OE-1 | Especificar los requisitos funcionales, no funcionales y lógicos de datos de la plataforma, junto con el glosario del dominio, para delimitar qué se consolida y qué se mide. | El SRS | Con el propio SRS: 18 requisitos funcionales con criterio de aceptación (3.2), RNF-01 a RNF-12 (3.3), las reglas RD-01 a RD-24 (3.4) y el glosario aparte (1.3). Las fuentes no fijan una meta numérica. La versión 1.0 del SRS será la vigente al concluir la última revisión del MVP, y se registrará como «revisada», no «aprobada» (SRS 3.9.5; abierto). | El SRS está en la versión 0.3, en elaboración. Siguen vacíos el 1.1, la tabla de términos del 1.3, las fichas detalladas de RF-06, RF-08, RF-09 y RF-10, el 4.5.3, el 4.5.4 y el 5.3, salvo la fila de RF-01 (SRS 3.1). |
-| OE-2 | Diseñar la arquitectura web, el modelo de datos y la interfaz de la plataforma, y registrar sus decisiones técnicas, para que todas las vistas obtengan sus cifras de un motor único de cálculo. | El SRS, sección 4 | Con el SRS 4.1 (casos de uso), 4.2 (componentes), 4.3 (modelo entidad-relación), 4.4 (diccionario de datos), 4.5.1 (guía de estilo) y 4.5.2 (mapa de navegación), y con los registros de decisión (ADR). El fin del objetivo se observa con RNF-02 (cifras idénticas entre vistas) y RNF-10 (cambiar una fuente sin tocar el motor). Las fuentes no fijan una meta numérica. | Integrados 4.1 a 4.4, 4.5.1 y 4.5.2. Vacíos 4.5.3 (wireframes) y 4.5.4 (mockups). No existe ningún ADR (README, «Índice del paquete»). La interfaz web no está construida (MVP.md 1.4). |
-| OE-3 | Implementar el registro de portafolios, intermediarios y transacciones sobre un catálogo de instrumentos que incluya las emisiones de CETES, con validación de saldos por intermediario y aislamiento por usuario, para consolidar las posiciones y las transacciones del portafolio en su conjunto. | M: RF-01 a RF-06, RF-12, RF-25 y RF-28. S: RF-15 y RF-27. | El CPF de cada requisito; RNF-03 (aislamiento entre cuentas) y RNF-04 (contraseñas no reversibles). | RF-01 a RF-06, RF-25 y RF-28: hechos sin interfaz. RF-12: pendiente en parte. RF-15 y RF-27: sin implementar. |
-| OE-4 | Implementar el motor de cálculo del valor de mercado, del rendimiento ponderado por tiempo y de la máxima caída –incluidos el vencimiento y la valuación de los CETES– y su presentación en un tablero, para medir el rendimiento y el riesgo del portafolio en su conjunto. | M: RF-07 a RF-11, RF-26a, RF-26b, RF-30 y RF-31. S: RF-13 y RF-14. C: RF-16 y RF-18. | El CPF de cada requisito; RNF-01, que fija la tolerancia de RF-08, RF-09, RF-10 y RF-26b. | RF-30: hecho y verificado. RF-08, RF-09, RF-10, RF-26a y RF-26b: hechos sin interfaz. RF-07, RF-11 y RF-31: pendientes en parte. RF-13, RF-14, RF-16 y RF-18: sin implementar. |
-| OE-5 | Comparar los resultados del motor con un conjunto de referencia resuelto de forma independiente, que incluya un instrumento en dos intermediarios y una emisión de CETES que venza en el periodo, para demostrar que difieren a lo más un centavo en importes y 0.001 puntos porcentuales en rendimiento y máxima caída. | RNF-01 | CPNF-01 sobre el SRS 5.2, con diferencia de 0.01 o menos en importes y de 0.001 puntos porcentuales o menos en TWR y máxima caída, y AC-03: el commit que congela el SRS 5.2 es anterior al primer commit del motor. El SRS 5.2 incluye DEMOACC con Casa A y Casa B y la emisión BI261008, que vence el 08/10/2026. | El SRS 5.2 se congeló con `11097f8` (15/10) antes de `b3391fd` (17/10), el primer commit del motor. CPNF-01 pasa en el motor (27 pruebas) y por la API desde la base, sin red (3 pruebas). Falta guardar la tabla de diferencias (MVP.md 6.1 y 12.2). |
+| OE-2 | Diseñar la arquitectura web, el modelo de datos y la interfaz de la plataforma, y registrar sus decisiones técnicas, para que todas las vistas obtengan sus cifras de un motor único de cálculo. | El SRS, sección 4 | Con el SRS 4.1 (casos de uso), 4.2 (componentes), 4.3 (modelo entidad-relación), 4.4 (diccionario de datos), 4.5.1 (guía de estilo) y 4.5.2 (mapa de navegación), y con los registros de decisión (ADR). El fin del objetivo se observa con RNF-02 (cifras idénticas entre vistas) y RNF-10 (cambiar una fuente sin tocar el motor). Las fuentes no fijan una meta numérica. | Integrados 4.1 a 4.4, 4.5.1 y 4.5.2. Vacíos 4.5.3 (wireframes) y 4.5.4 (mockups). No existe ningún ADR (README, «Índice del paquete»). El cliente web implementa las 12 pantallas del mapa de navegación (4.5.2) con los tokens de la guía de estilo (4.5.1), y RNF-02 ya se demostró: el valor de mercado es idéntico, como texto, en el tablero y en las posiciones (MVP.md 1.4 y 6.1). |
+| OE-3 | Implementar el registro de portafolios, intermediarios y transacciones sobre un catálogo de instrumentos que incluya las emisiones de CETES, con validación de saldos por intermediario y aislamiento por usuario, para consolidar las posiciones y las transacciones del portafolio en su conjunto. | M: RF-01 a RF-06, RF-12, RF-25 y RF-28. S: RF-15 y RF-27. | El CPF de cada requisito; RNF-03 (aislamiento entre cuentas) y RNF-04 (contraseñas no reversibles). | RF-01 a RF-06, RF-12, RF-25 y RF-28: hechos y verificados, en la API y en el cliente web. RNF-03 y RNF-04 se cumplen. RF-15 y RF-27: sin implementar. |
+| OE-4 | Implementar el motor de cálculo del valor de mercado, del rendimiento ponderado por tiempo y de la máxima caída –incluidos el vencimiento y la valuación de los CETES– y su presentación en un tablero, para medir el rendimiento y el riesgo del portafolio en su conjunto. | M: RF-07 a RF-11, RF-26a, RF-26b, RF-30 y RF-31. S: RF-13 y RF-14. C: RF-16 y RF-18. | El CPF de cada requisito; RNF-01, que fija la tolerancia de RF-08, RF-09, RF-10 y RF-26b. | RF-07 a RF-11, RF-26a, RF-26b, RF-30 y RF-31: hechos y verificados; el tablero (V-04) presenta los indicadores y la evolución del valor. RF-13, RF-14, RF-16 y RF-18: sin implementar. |
+| OE-5 | Comparar los resultados del motor con un conjunto de referencia resuelto de forma independiente, que incluya un instrumento en dos intermediarios y una emisión de CETES que venza en el periodo, para demostrar que difieren a lo más un centavo en importes y 0.001 puntos porcentuales en rendimiento y máxima caída. | RNF-01 | CPNF-01 sobre el SRS 5.2, con diferencia de 0.01 o menos en importes y de 0.001 puntos porcentuales o menos en TWR y máxima caída, y AC-03: el commit que congela el SRS 5.2 es anterior al primer commit del motor. El SRS 5.2 incluye DEMOACC con Casa A y Casa B y la emisión BI261008, que vence el 08/10/2026. | Cumplido. El SRS 5.2 se congeló con `11097f8` (15/10) antes de `b3391fd` (17/10), el primer commit del motor. CPNF-01 pasa en el motor (27 pruebas) y por la API desde la base, sin red (3 pruebas), y la tabla de diferencias del 18/10/2026 no tiene ninguna cifra fuera de tolerancia (MVP.md 6.1 y 12.2). Siguen pendientes la comprobación a mano de tres cifras del SRS 5.2 y la segunda fuente de la tasa a 28 días del 10/09 (MVP.md 12.6). |
 
 Notas:
 
@@ -260,14 +259,14 @@ Solo se incluyen metas que fijan las fuentes. El detalle de cada requisito no fu
 
 | Métrica | Origen | Valor objetivo | Fecha | Estado al 18/10/2026 |
 |---|---|---|---|---|
-| Exactitud del cálculo sobre el SRS 5.2 | OE-5; RNF-01; R-10 | Diferencia de 0.01 o menos en importes y de 0.001 puntos porcentuales o menos en TWR y máxima caída; títulos iguales; cada rechazo esperado (N1 a N8) con su motivo y sin cambiar cifras (SRS 5.2) | 18/10/2026 | Pasa en el motor y por la API; falta guardar la tabla de diferencias |
-| Integridad del conjunto de referencia | AC-03 | El commit que congela el SRS 5.2 es anterior al primero del motor | 18/10/2026 | Cumplido en git; el conjunto de referencia (`backend/tests/oraculo/`) no cambió desde `11097f8` (MVP.md 12.2) |
-| Cifras idénticas entre vistas y en consultas repetidas | OE-2; RNF-02 | 0 cifras distintas para el SRS 5.2 | 18/10/2026 | La comparación automática por la API pasa (17 pruebas); la demostración con capturas necesita las pantallas V-04 y V-05 |
-| Imprescindibles que cumplen su criterio | AC-01 | 18 de 18, cada uno con su CPF aprobado y registrado | 18/10/2026 | 1 hecho y verificado, 13 hechos sin interfaz y 4 pendientes en parte (RF-07, RF-11, RF-12 y RF-31); falta el registro de resultados (MVP.md 12.1 y 12.2) |
-| Seguridad del MVP | AC-02; RNF-03 a RNF-05 | Valores objetivo de la sección 7 | 18/10/2026 | RNF-03 y RNF-04 pasan; no consta la ejecución de CPNF-05 |
+| Exactitud del cálculo sobre el SRS 5.2 | OE-5; RNF-01; R-10 | Diferencia de 0.01 o menos en importes y de 0.001 puntos porcentuales o menos en TWR y máxima caída; títulos iguales; cada rechazo esperado (N1 a N8) con su motivo y sin cambiar cifras (SRS 5.2) | 18/10/2026 | Cumplida: CPNF-01 sin ninguna cifra fuera de tolerancia en la tabla de diferencias del registro de resultados, y los rechazos N1 a N8 aprueban en CPF-05 y CPF-11 (MVP.md 5.8) |
+| Integridad del conjunto de referencia | AC-03 | El commit que congela el SRS 5.2 es anterior al primero del motor | 18/10/2026 | Cumplida: el conjunto de referencia (`backend/tests/oraculo/`) no cambió desde `11097f8`, y las 3 pruebas de inspección de AC-03 pasan (MVP.md 12.2) |
+| Cifras idénticas entre vistas y en consultas repetidas | OE-2; RNF-02 | 0 cifras distintas para el SRS 5.2 | 18/10/2026 | Cumplida: la comparación por la API pasa (17 pruebas), y las capturas del recorrido de AC-04 muestran «$58,940.88» igual, como texto, en la tarjeta, la etiqueta del corte y la última fila de la tabla del tablero y en el total de las posiciones, también en la consulta repetida |
+| Imprescindibles que cumplen su criterio | AC-01 | 18 de 18, cada uno con su CPF aprobado y registrado | 18/10/2026 | Cumplida: 18 de 18 hechos y verificados, con su CPF aprobado en el registro de resultados y al menos una captura del recorrido de AC-04 (MVP.md 12.1 y 12.2) |
+| Seguridad del MVP | AC-02; RNF-03 a RNF-05 | Valores objetivo de la sección 7 | 18/10/2026 | Cumplida: RNF-03 y RNF-04 pasan en el registro de resultados, y CPNF-05 cumple, sin ninguna credencial encontrada (MVP.md 6.1) |
 | Calidad al cierre | AC-09; RNF-06 a RNF-12 | Valores objetivo de la sección 7 | A más tardar el 13/11/2026 | Por verificar |
 | Requisitos de la fase de refinamiento | AC-10 | Cada requisito de SRS 2.6 que se incorpore a SRS 3.2 cumple su criterio y aprueba su CPF; los no entregados constan en SRS 3.1 y 2.6.3 como posteriores a la estadía | 20/11/2026 | Ninguno implementado; la fase empieza el 19/10/2026 |
-| Observaciones del líder | AC-11 | Cada una resuelta o registrada en SRS 3.1 como trasladada | 20/11/2026 | La revisión del MVP aún no ocurre |
+| Observaciones del líder | AC-11 | Cada una resuelta o registrada en SRS 3.1 como trasladada | 20/11/2026 | La revisión del MVP está en curso: los agentes de la plataforma del líder revisan hasta el fin de semana del 24 y 25 de octubre de 2026 |
 
 ### 3.4 Lo que las fuentes no fijan como métrica
 
@@ -275,7 +274,7 @@ Solo se incluyen metas que fijan las fuentes. El detalle de cada requisito no fu
 - Exactitud de los precios y cercanía de la valuación de los CETES al mercado secundario: por decisión del estudiante, que el SRS deja por confirmar con el líder, la aceptación no las evalúa; los precios son sintéticos y van marcados (SRS 3.9; S-05; S-13).
 - Accesibilidad: el nivel AA de WCAG 2.2 es una meta de diseño del estudiante, no un requisito verificable; agregar un requisito de accesibilidad está abierto (SRS 4.5.1; sección 9.3).
 - Desempeño: RNF-06 todavía no tiene valor objetivo; el tiempo máximo T se fija tras medir la línea base el 30/10/2026 (SRS 3.3).
-- Exactitud en el tablero: el criterio 1 de RF-11 pide la tolerancia de RNF-01 (0.001 puntos porcentuales), pero el tablero presenta los por cientos con 2 decimales (RD-13). La tolerancia se cumple en las cifras del motor (CPNF-01), no en lo que muestra el tablero. Hay dos salidas, sin decidir: aplicar la tolerancia a las cifras del motor o presentar 3 decimales (MVP.md 3.8 y 12.5).
+- Exactitud en el tablero: el criterio 1 de RF-11 pedía la tolerancia de RNF-01 (0.001 puntos porcentuales), pero el tablero presenta los por cientos con 2 decimales (RD-13). El 18/10/2026 el SRS 3.2 lo precisó (P-64): la tolerancia se aplica a las cifras del motor, sin redondear (CPNF-01), y el tablero las presenta con 2 decimales, conforme a RD-13 y RD-16, idénticas en cada vista y en cada consulta repetida (RNF-02) (MVP.md 3.8).
 
 ---
 
@@ -339,7 +338,7 @@ Personas, por rol (SRS 1.2, 3.7 y 3.9.1; sin datos de contacto):
 | Rol | Persona | Responsabilidad (SRS 1.2) | Participación en el producto |
 |---|---|---|---|
 | Desarrollador y analista | Ramon Ernesto Nieblas Mendivil | Análisis, diseño, desarrollo y documentación del sistema | Una sola persona en cuatro roles: analista y arquitecto, desarrollador del servidor, desarrollador del cliente y responsable de pruebas (SRS 3.7). Como responsable de pruebas aporta la evidencia en un registro fechado, pero no decide la aceptación (SRS 3.9.1). Definió el alcance funcional y las tecnologías con la libertad que dio el líder (S-01). |
-| Líder de proyecto | Edgar Loeffelmann Ibarra | Revisión del MVP y aprobación del entregable | Fijó la entrega del MVP a más tardar el 18 de octubre y que `docs/` contenga un archivo del MVP y otro del PRD (S-01; AC-06). Revisa el MVP después del 18 de octubre, en el repositorio que indique, y una segunda vez si encuentra inconsistencias o carencias (SRS 3.9.1). Por confirmar: si su revisión cubre `docs/`, la fecha, el medio, la hora de corte y si su conformidad queda por escrito. |
+| Líder de proyecto | Edgar Loeffelmann Ibarra | Revisión del MVP y aprobación del entregable | Pidió que `docs/` contenga un archivo del MVP y otro del PRD, y el 18 de octubre fijó sus nombres (S-01; AC-06). Evalúa con un conjunto de agentes que analizan los repositorios subidos a su plataforma; usan `docs/` como criterio de evaluación y revisarán hasta el fin de semana del 24 y 25 de octubre de 2026. Hace una segunda revisión si encuentra inconsistencias o carencias (SRS 3.9.1). No hace falta avisarle de cada entrega, y no hay hora de corte. Por confirmar: la fecha de una segunda revisión y si su conformidad queda por escrito. |
 | Asesor empresarial | Persona de la empresa nombrada en el SRS 1.2 | Seguimiento administrativo de la estadía | No revisa el sistema ni el SRS y no interviene en la aceptación (SRS 3.9.1). |
 | Asesora académica | Persona de la universidad nombrada en el SRS 1.2 | Seguimiento académico y evaluación de la memoria de estadías | Revisa la memoria y, quizá, el desarrollo o la terminación del proyecto el 20 de noviembre. Por confirmar: qué revisa, con qué evidencia y si interviene en la conformidad del cierre (SRS 3.9.1 y 3.9.4). |
 
@@ -401,7 +400,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Abierto: el lugar de los diferidos del SRS 2.6.1 en ese orden y el orden entre ellos, porque no tienen categoría MoSCoW (SRS 2.6.3).
 - Arrastre: con cada requisito que se recorta pasan los que dependen de él; por ejemplo, RF-17 y RF-21 con RF-20, y RF-23 y RF-34 con RF-32 (SRS 2.6.3; S-02).
 - Revisión: el orden se revisa al cierre de cada semana, y cada cambio se registra en el SRS 3.1 (SRS 2.6 y 2.6.3).
-- Imprescindibles que no cumplen a tiempo: su paso a la fase de refinamiento se acuerda con el líder y se registra en el SRS 3.1 antes de la revisión (SRS 3.9.2; S-02). Al 18/10/2026 no consta ese acuerdo (MVP.md 12.1).
+- Imprescindibles que no cumplen a tiempo: su paso a la fase de refinamiento se acuerda con el líder y se registra en el SRS 3.1 antes de la revisión (SRS 3.9.2; S-02). En la entrega del 18/10/2026 no hizo falta: los 18 cumplen y no hubo traslados (MVP.md 12.1).
 
 ### 5.4 Cómo cambian las capacidades por fase
 
@@ -434,35 +433,35 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 
 | RF | Requisito | Área | Prioridad | Fase y fecha objetivo | OE | Prueba | Estado al 18/10/2026 | Detalle |
 |---|---|---|---|---|---|---|---|---|
-| RF-01 | Registro e inicio de sesión | A | M | MVP | OE-3 | CPF-01 | Hecho sin interfaz | 6.3; MVP.md 3.3 |
-| RF-02 | Aislamiento por usuario | A | M | MVP | OE-3 | CPF-02 | Hecho sin interfaz | 6.3; MVP.md 3.3 |
-| RF-12 | Consentimiento, aviso de privacidad y advertencias | A | M | MVP | OE-3 | CPF-12 | Pendiente en parte | 6.3; MVP.md 3.3 |
-| RF-03 | Gestión de portafolios | B | M | MVP | OE-3 | CPF-03 | Hecho sin interfaz | 6.4; MVP.md 3.4 |
-| RF-25 | Intermediarios | B | M | MVP | OE-3 | CPF-25 | Hecho sin interfaz | 6.4; MVP.md 3.4 |
-| RF-04 | Catálogo de instrumentos | C | M | MVP | OE-3 | CPF-04 | Hecho sin interfaz | 6.5; MVP.md 3.5 |
+| RF-01 | Registro e inicio de sesión | A | M | MVP | OE-3 | CPF-01 | Hecho y verificado | 6.3; MVP.md 3.3 |
+| RF-02 | Aislamiento por usuario | A | M | MVP | OE-3 | CPF-02 | Hecho y verificado | 6.3; MVP.md 3.3 |
+| RF-12 | Consentimiento, aviso de privacidad y advertencias | A | M | MVP | OE-3 | CPF-12 | Hecho y verificado | 6.3; MVP.md 3.3 |
+| RF-03 | Gestión de portafolios | B | M | MVP | OE-3 | CPF-03 | Hecho y verificado | 6.4; MVP.md 3.4 |
+| RF-25 | Intermediarios | B | M | MVP | OE-3 | CPF-25 | Hecho y verificado | 6.4; MVP.md 3.4 |
+| RF-04 | Catálogo de instrumentos | C | M | MVP | OE-3 | CPF-04 | Hecho y verificado | 6.5; MVP.md 3.5 |
 | RF-34 | Emisiones de CETES posteriores a la semilla | C | Diferido | Semana del 19 de octubre | — | — | Sin implementar | 6.5 |
-| RF-05 | Registro y consulta de transacciones | D | M | MVP | OE-3 | CPF-05 | Hecho sin interfaz | 6.6; MVP.md 3.6 |
-| RF-28 | Saldo no negativo por intermediario | D | M | MVP | OE-3 | CPF-28 | Hecho sin interfaz | 6.6; MVP.md 3.6 |
+| RF-05 | Registro y consulta de transacciones | D | M | MVP | OE-3 | CPF-05 | Hecho y verificado | 6.6; MVP.md 3.6 |
+| RF-28 | Saldo no negativo por intermediario | D | M | MVP | OE-3 | CPF-28 | Hecho y verificado | 6.6; MVP.md 3.6 |
 | RF-23 | Transacciones en más de una divisa | D | Diferido | Semana del 2 de noviembre | — | — | Sin implementar | 6.6 |
 | RF-39 | Modificar y eliminar transacciones | D | Diferido | Por fijar | — | — | Sin implementar | 6.6 |
-| RF-06 | Posición vigente | E | M | MVP | OE-3 | CPF-06 | Hecho sin interfaz | 6.7; MVP.md 3.7 |
-| RF-08 | Valor de mercado y resultado no realizado | E | M | MVP | OE-4 | CPF-08 | Hecho sin interfaz | 6.7; MVP.md 3.7 |
-| RF-26a | Vencimiento de los CETES | E | M | MVP | OE-4 | CPF-26a | Hecho sin interfaz | 6.7; MVP.md 3.7 |
-| RF-26b | Valor estimado de los CETES | E | M | MVP | OE-4 | CPF-26b | Hecho sin interfaz | 6.7; MVP.md 3.7 |
+| RF-06 | Posición vigente | E | M | MVP | OE-3 | CPF-06 | Hecho y verificado | 6.7; MVP.md 3.7 |
+| RF-08 | Valor de mercado y resultado no realizado | E | M | MVP | OE-4 | CPF-08 | Hecho y verificado | 6.7; MVP.md 3.7 |
+| RF-26a | Vencimiento de los CETES | E | M | MVP | OE-4 | CPF-26a | Hecho y verificado | 6.7; MVP.md 3.7 |
+| RF-26b | Valor estimado de los CETES | E | M | MVP | OE-4 | CPF-26b | Hecho y verificado | 6.7; MVP.md 3.7 |
 | RF-27 | Desglose por intermediario | E | S | Semana del 19 de octubre (propuesta) | OE-3 | CPF-27 | Sin implementar | 6.7 |
 | RF-13 | Distribución por clase de activo | E | S | Semana del 19 de octubre (propuesta) | OE-4 | CPF-13 | Sin implementar | 6.7 |
-| RF-09 | Rendimiento ponderado por tiempo (TWR) | F | M | MVP | OE-4 | CPF-09 | Hecho sin interfaz | 6.8; MVP.md 3.8 |
-| RF-10 | Máxima caída | F | M | MVP | OE-4 | CPF-10 | Hecho sin interfaz | 6.8; MVP.md 3.8 |
-| RF-11 | Tablero | F | M | MVP | OE-4 | CPF-11 | Pendiente en parte | 6.8; MVP.md 3.8 |
+| RF-09 | Rendimiento ponderado por tiempo (TWR) | F | M | MVP | OE-4 | CPF-09 | Hecho y verificado | 6.8; MVP.md 3.8 |
+| RF-10 | Máxima caída | F | M | MVP | OE-4 | CPF-10 | Hecho y verificado | 6.8; MVP.md 3.8 |
+| RF-11 | Tablero | F | M | MVP | OE-4 | CPF-11 | Hecho y verificado | 6.8; MVP.md 3.8 |
 | RF-19 | Rendimiento ponderado por dinero (XIRR) | F | Diferido | Semana del 19 de octubre | — | — | Sin implementar | 6.8 |
 | RF-20 | Volatilidad anualizada | F | Diferido | Semana del 19 de octubre | — | — | Sin implementar | 6.8 |
 | RF-17 | Índice de Sharpe | F | Diferido | Semana del 26 de octubre | — | — | Sin implementar | 6.8 |
 | RF-14 | Explicación en lenguaje natural | F | S | Semana del 2 de noviembre (decidida) | OE-4 | CPF-14 | Sin implementar | 6.8 |
 | RF-16 | Valor en riesgo histórico | F | C | Semana del 9 de noviembre si hay margen (propuesta) | OE-4 | CPF-16 | Sin implementar | 6.8 |
 | RF-18 | Comparación contra un índice de referencia | F | C | Igual que RF-16 (propuesta) | OE-4 | CPF-18 | Sin implementar | 6.8 |
-| RF-07 | Precios de cierre sintéticos | G | M | MVP | OE-4 | CPF-07 | Pendiente en parte | 6.9; MVP.md 3.9 |
+| RF-07 | Precios de cierre sintéticos | G | M | MVP | OE-4 | CPF-07 | Hecho y verificado | 6.9; MVP.md 3.9 |
 | RF-30 | Tasas reales de CETES | G | M | MVP | OE-4 | CPF-30 | Hecho y verificado | 6.9; MVP.md 3.9 |
-| RF-31 | Procedencia de cada dato | G | M | MVP | OE-4 | CPF-31 | Pendiente en parte | 6.9; MVP.md 3.9 |
+| RF-31 | Procedencia de cada dato | G | M | MVP | OE-4 | CPF-31 | Hecho y verificado | 6.9; MVP.md 3.9 |
 | RF-32 | Actualización diaria desde el SIE | G | Diferido | Semana del 19 de octubre | — | — | Sin implementar | 6.9 |
 | RF-33 | Captura o importación de precios de cierre | G | Diferido | Semana del 26 de octubre | — | — | Sin implementar | 6.9 |
 | RF-21 | Escenarios por Monte Carlo | H | Diferido | Semana del 26 de octubre | — | — | Sin implementar | 6.10 |
@@ -480,7 +479,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-01. Casos de uso: CU-01 y CU-02. Pantallas: V-01 y V-02.
 - Relación con otros requisitos: el registro exige el consentimiento de RF-12; reglas RD-03 y RD-11; la contraseña se guarda conforme a RNF-04.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle, verificación y valores adoptados: MVP.md 3.3.
-- Estado al 18/10/2026: hecho sin interfaz; faltan V-01 y V-02.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-01) y en V-01 y V-02, con capturas del recorrido de AC-04 (MVP.md 3.3 y 12.1).
 - Abierto: la política de contraseña y el mensaje de error del inicio de sesión (el código aplica valores adoptados, por confirmar). El cierre de sesión no tiene requisito propio (SRS 4.1).
 
 #### RF-02 — Aislamiento por usuario
@@ -489,7 +488,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-02. Casos de uso: CU-03 a CU-07. Pantalla: V-12.
 - Relación con otros requisitos: reglas RD-01 y RD-02; RNF-03; exclusión X-02.
 - Criterio de aceptación: SRS 3.2, criterios 1 y 2. Detalle: MVP.md 3.3.
-- Estado al 18/10/2026: hecho sin interfaz; falta V-12.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-02 y CPNF-03) y en la pantalla «No encontrado», que muestra el mismo texto para un portafolio ajeno y para uno inexistente (MVP.md 3.3 y 12.1).
 
 #### RF-12 — Consentimiento, aviso de privacidad y advertencias
 
@@ -497,7 +496,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-12. Casos de uso: CU-01, CU-02, CU-09 y CU-10, y los avisos en CU-06 y CU-07. Pantallas: V-02, V-03 y V-11, y los avisos en V-04 a V-06.
 - Relación con otros requisitos: reglas RD-11, RD-15 y RD-23; restricciones R-03 y R-11.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 4. Detalle: MVP.md 3.3.
-- Estado al 18/10/2026: pendiente en parte; faltan los criterios 1, 2 y 4, que dependen de la interfaz (casilla sin marcar, lectura del aviso y avisos visibles).
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-12) y en el cliente: la casilla sin marcar, la lectura del aviso sin sesión y en un diálogo, la revocación con bloqueo y los dos avisos a la vista en V-04 a V-06, con capturas del recorrido de AC-04 (MVP.md 3.3 y 12.1).
 - Abierto: el plazo de supresión tras la revocación (por decidir con la empresa) y los textos de los avisos y de la casilla de consentimiento.
 
 ### 6.4 Área B. Portafolios e intermediarios
@@ -508,7 +507,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-03. Caso de uso: CU-03. Pantalla: V-08.
 - Relación con otros requisitos: reglas RD-03, RD-08 (solo MXN) y RD-10; exclusión X-06.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle: MVP.md 3.4.
-- Estado al 18/10/2026: hecho sin interfaz; falta V-08, con el diálogo de confirmación.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-03) y en V-08, con el diálogo de confirmación y la opción de cancelar (MVP.md 3.4 y 12.1).
 
 #### RF-25 — Intermediarios
 
@@ -516,7 +515,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-25. Caso de uso: CU-04. Pantalla: V-09.
 - Relación con otros requisitos: reglas RD-03, RD-09 (los intermediarios no se modifican ni se eliminan) y RD-10; exclusión X-05.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle: MVP.md 3.4.
-- Estado al 18/10/2026: hecho sin interfaz; falta V-09.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-25) y en V-09 (MVP.md 3.4 y 12.1).
 
 ### 6.5 Área C. Catálogo de instrumentos
 
@@ -526,7 +525,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-04. Casos de uso: CU-08; también en CU-05 y CU-11 (SRS 4.1). Pantalla: V-10.
 - Relación con otros requisitos: reglas RD-04 y RD-09; cuatro clases excluyentes (acción, ETF, FIBRA y CETES); suposición S-09.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y catálogo semilla: MVP.md 3.5 y 5.1.
-- Estado al 18/10/2026: hecho sin interfaz; falta V-10.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-04) y en V-10, con la marca de demostración visible (MVP.md 3.5 y 12.1).
 - Adoptado, por confirmar: el prefijo «DEMO» de las claves ficticias y que la consulta del catálogo exija sesión.
 
 #### RF-34 — Emisiones de CETES posteriores a la semilla
@@ -549,7 +548,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-05. Casos de uso: CU-05 (registro) y CU-06 (consulta). Pantallas: V-06 y V-07.
 - Relación con otros requisitos: usa el catálogo (RF-04) y los intermediarios (RF-25); reglas RD-02, RD-06, RD-07, RD-09, RD-10, RD-13, RD-14 y RD-15; restricción R-02 y exclusión X-01 (captura manual).
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y fórmulas: MVP.md 3.6 y 4.3.
-- Estado al 18/10/2026: hecho sin interfaz; faltan V-06 y V-07.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-05) y en V-06 y V-07. La revisión antes de registrar y «Registrar otra» quedaron para la fase de refinamiento (MVP.md 3.6 y 12.4).
 
 #### RF-28 — Saldo no negativo por intermediario
 
@@ -557,7 +556,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-28. Caso de uso: CU-12, incluido en CU-05. Pantalla: V-07.
 - Relación con otros requisitos: limitado al registro; la modificación y la eliminación pasan a RF-39. Exclusiones X-04 y X-06.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle: MVP.md 3.6.
-- Estado al 18/10/2026: hecho sin interfaz; falta mostrar el motivo del rechazo en V-07.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-28) y en V-07, que muestra el motivo del rechazo sin registrar nada y conserva lo capturado (MVP.md 3.6 y 12.1).
 
 #### RF-23 — Transacciones en más de una divisa
 
@@ -591,7 +590,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-3. Prueba: CPF-06. Casos de uso: CU-06 y CU-07. Pantallas: V-05 y V-04.
 - Relación con otros requisitos: se deriva de RF-05; regla de cálculo del SRS 3.2 (concertación, corte inclusivo, sin efectivo y sin emisiones vencidas); RNF-02; exclusión X-06.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle: MVP.md 3.7.
-- Estado al 18/10/2026: hecho sin interfaz; falta V-05. Su ficha detallada en el SRS 3.2 sigue vacía.
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-06) y en V-05 (MVP.md 3.7 y 12.1). Su ficha detallada en el SRS 3.2 sigue vacía.
 
 #### RF-08 — Valor de mercado y resultado no realizado
 
@@ -599,7 +598,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-08. Casos de uso: CU-06 y CU-07. Pantallas: V-05 y V-04.
 - Relación con otros requisitos: usa RF-06, los precios de RF-07 y la valuación de CETES de RF-26b; exclusión X-03 (sin efectos fiscales); RNF-01.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 4. Detalle y fórmulas: MVP.md 3.7 y 4.3.
-- Estado al 18/10/2026: hecho sin interfaz; faltan V-05 y V-04. Su ficha detallada en el SRS 3.2 sigue vacía.
+- Estado al 18/10/2026: hecho y verificado, en el motor y la API (CPF-08 y CPNF-01) y en V-04 y V-05 (MVP.md 3.7 y 12.1). Su ficha detallada en el SRS 3.2 sigue vacía.
 
 #### RF-26a — Vencimiento de los CETES
 
@@ -607,7 +606,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-26a. Casos de uso: CU-05, CU-06 y CU-07. Pantallas: V-05 y V-07.
 - Relación con otros requisitos: RF-09 cuenta el retiro; suposición S-14 (sin descontar ISR); regla RD-05.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle: MVP.md 3.7.
-- Estado al 18/10/2026: hecho sin interfaz; faltan su presentación en V-05 y el motivo de rechazo en V-07.
+- Estado al 18/10/2026: hecho y verificado (CPF-26a); V-05 presenta la emisión vencida y V-07 muestra el motivo de cada rechazo (MVP.md 3.7 y 12.1).
 
 #### RF-26b — Valor estimado de los CETES
 
@@ -615,7 +614,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-26b. Casos de uso: CU-06 y CU-07. Pantallas: V-05 y V-04.
 - Relación con otros requisitos: usa las tasas de RF-30; restricción R-14 (rige la última colocación con fecha igual o anterior a la de valuación); regla RD-16; suposiciones S-12 y S-13; RNF-01.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y fórmula: MVP.md 3.7 y 4.3.
-- Estado al 18/10/2026: hecho sin interfaz; falta su presentación en V-05 con el rótulo de estimación.
+- Estado al 18/10/2026: hecho y verificado (CPF-26b); V-05 y V-04 la presentan con el rótulo «estimado» y la tasa aplicada (MVP.md 3.7 y 12.1).
 - Abierto: si RF-26b tiene ficha propia en el SRS 3.2.
 
 #### RF-27 — Desglose por intermediario
@@ -650,7 +649,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-09. Caso de uso: CU-07. Pantalla: V-04.
 - Relación con otros requisitos: usa los importes de RF-05, la valuación de RF-08 y el retiro de RF-26a; RNF-01.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y fórmula: MVP.md 3.8 y 4.3.
-- Estado al 18/10/2026: hecho sin interfaz; falta V-04. Su ficha detallada en el SRS 3.2 sigue vacía.
+- Estado al 18/10/2026: hecho y verificado (CPF-09 y CPNF-01) y presentado en V-04 (MVP.md 3.8 y 12.1). Su ficha detallada en el SRS 3.2 sigue vacía.
 - Abierto en el SRS, adoptado por el conjunto de referencia y por el código: el factor 1 con denominador 0, la serie en días naturales y el día base (MVP.md 4.3).
 
 #### RF-10 — Máxima caída
@@ -659,7 +658,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-10. Caso de uso: CU-07. Pantalla: V-04.
 - Relación con otros requisitos: se mide sobre el índice de RF-09; RNF-01.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y fórmula: MVP.md 3.8 y 4.3.
-- Estado al 18/10/2026: hecho sin interfaz; falta V-04. Su ficha detallada en el SRS 3.2 sigue vacía.
+- Estado al 18/10/2026: hecho y verificado (CPF-10 y CPNF-01) y presentado en V-04 (MVP.md 3.8 y 12.1). Su ficha detallada en el SRS 3.2 sigue vacía.
 - Abierto en el SRS, adoptado por el conjunto de referencia: el índice 1 como primer máximo y la regla de pico y valle.
 
 #### RF-11 — Tablero
@@ -668,7 +667,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-11. Caso de uso: CU-07. Pantalla: V-04.
 - Relación con otros requisitos: presenta RF-08 a RF-10 con la serie de RF-09; RNF-01, RNF-02 y RNF-07.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle: MVP.md 3.8.
-- Estado al 18/10/2026: pendiente en parte; falta la gráfica (criterio 2), y el criterio 1 está en conflicto con los 2 decimales de RD-13 (sección 3.4).
+- Estado al 18/10/2026: hecho y verificado, en la API (CPF-11 y CPNF-02) y en V-04: los cuatro indicadores con su unidad y su fecha o periodo, la gráfica con su tabla alternativa y el tablero sin datos. El criterio 1 se juzga con la precisión del SRS 3.2 del 18/10/2026 (P-64; sección 3.4). Las definiciones desplegables de RNF-07 quedaron para la fase de refinamiento (MVP.md 3.8 y 12.4).
 
 #### RF-19 — Rendimiento ponderado por dinero (XIRR)
 
@@ -746,8 +745,8 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-07. Casos de uso: CU-11, CU-06 y CU-07. Pantallas: V-04 y V-05.
 - Relación con otros requisitos: reglas RD-04, RD-13, RD-17, RD-19 y RD-21; restricciones R-04, R-05 y R-13; exclusión X-07; suposición S-05.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y datos: MVP.md 3.9 y 5.2.
-- Estado al 18/10/2026: pendiente en parte; falta el criterio 3, la marca de demostración en V-04 y V-05.
-- Desviación por registrar en el SRS: la carga la hace un script SQL, no el componente «Cargas» que describe el SRS 4.2 (MVP.md 3.9).
+- Estado al 18/10/2026: hecho y verificado (CPF-07); V-04 y V-05 señalan los precios con la etiqueta «Datos de demostración» (criterio 3; MVP.md 3.9 y 12.1).
+- La carga la hace un script SQL, no un componente «Cargas»; el 18/10/2026 el SRS 4.2 lo registró así (P-66; MVP.md 3.9).
 
 #### RF-30 — Tasas reales de CETES
 
@@ -755,8 +754,8 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-30. Caso de uso: CU-11. Sin pantalla propia.
 - Relación con otros requisitos: reglas RD-13 y RD-18 a RD-20; restricción R-14; dependencia D-02.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y datos: MVP.md 3.9 y 5.3.
-- Estado al 18/10/2026: hecho y verificado.
-- Pendiente: confirmar con una segunda fuente la tasa a 28 días del 10/09/2026, la única con una sola fuente que afecta las cifras del SRS 5.2.
+- Estado al 18/10/2026: hecho y verificado (CPF-30); sus tasas se ven en la procedencia de V-04 y V-05 (MVP.md 3.9 y 12.1).
+- Pendiente: confirmar con una segunda fuente la tasa a 28 días del 10/09/2026, la única con una sola fuente que afecta las cifras del SRS 5.2 (P-65).
 
 #### RF-31 — Procedencia de cada dato
 
@@ -764,7 +763,7 @@ La numeración no es continua: el SRS y la Definición no tienen RF-29 ni RF-35 
 - Prioridad y fase: M; MVP. Objetivo: OE-4. Prueba: CPF-31. Casos de uso: CU-06, CU-07 y CU-11. Pantallas: V-04 y V-05.
 - Relación con otros requisitos: regla RD-17; restricción R-05; dependencia D-03.
 - Criterio de aceptación: SRS 3.2, criterios 1 a 3. Detalle y fuentes: MVP.md 3.9 y 5.5.
-- Estado al 18/10/2026: pendiente en parte; faltan los criterios 2 y 3, la línea de fuente junto a cada dato en V-04 y V-05.
+- Estado al 18/10/2026: hecho y verificado (CPF-31); V-04 y V-05 muestran junto a cada dato su fuente y la fecha del dato (criterios 2 y 3; MVP.md 3.9 y 12.1).
 - Abierto: la licencia y el nombre de la fuente de la semilla sintética (el código aplica la versión «1», adoptada, por confirmar).
 
 #### RF-32 — Actualización diaria desde el SIE
@@ -875,11 +874,11 @@ La recomendación que consta en el registro de decisiones es tratar el saldo ini
 
 | ID | Característica (ISO/IEC 25010:2023) | Qué exige (SRS 3.3) | Métrica y valor objetivo | Método y prueba | Fecha de verificación | Estado al 18/10/2026 |
 |---|---|---|---|---|---|---|
-| RNF-01 | Adecuación funcional: corrección funcional | Cada importe, TWR y máxima caída del SRS 5.2 dentro de la tolerancia de OE-5 respecto del valor resuelto de forma independiente | Diferencia absoluta máxima: ≤ 0.01 en importes; ≤ 0.001 puntos porcentuales en rendimiento y máxima caída | Prueba CPNF-01: pytest compara sin redondear las cifras del motor con las del SRS 5.2 congelado y genera la tabla de diferencias | 18/10/2026 | Pasa en el motor (27 pruebas) y por la API desde la base, sin red (3); falta guardar la tabla de diferencias |
-| RNF-02 | Adecuación funcional: corrección funcional | Cada cifra idéntica, dígito por dígito, en todas las vistas y en cada consulta repetida, sin cambios en los datos | Cifras distintas para el SRS 5.2: 0 | Demostración CPNF-02: comparar como texto, con capturas, el tablero y las posiciones, y repetir cada consulta | 18/10/2026 | La comparación automática por la API pasa (17 pruebas); la demostración con capturas necesita V-04 y V-05 |
-| RNF-03 | Seguridad: confidencialidad e integridad | Sin sesión o con sesión ajena, rechazar sin consultar, registrar, modificar ni eliminar nada y sin revelar si la información existe | Solicitudes aceptadas: 0; respuestas que distinguen lo ajeno de lo inexistente: 0 | Prueba CPNF-03: con dos usuarios, recorrer el esquema OpenAPI sin sesión y con sesión ajena | 18/10/2026 | Pasa |
-| RNF-04 | Seguridad: confidencialidad | Ninguna contraseña legible en la base, sus respaldos, los registros ni las respuestas; forma no reversible, distinta por cuenta y con un costo no menor que el mínimo de OWASP | Contraseñas legibles: 0; cuentas con igual valor almacenado: 0; parámetros de costo bajo el mínimo: 0 (Argon2id: m ≥ 19 MiB, t ≥ 2, p = 1) | Prueba CPNF-04, con un respaldo de pg_dump | 18/10/2026 | Pasa |
-| RNF-05 | Seguridad: confidencialidad | Ninguna credencial vigente (de la base, el *token* del SIE o la clave de las sesiones) en el historial del repositorio, los archivos del navegador, las direcciones de las solicitudes ni los registros | Apariciones de una credencial que todavía autentica, por lugar: 0 | Inspección CPNF-05: búsqueda del valor vigente de cada credencial en todo el historial, la compilación del cliente y los registros, con gitleaks como complemento | 18/10/2026 y 30/10/2026 (con RF-32) | No consta su ejecución; `backend/.env` está excluido del control de versiones y ningún commit lo incluye |
+| RNF-01 | Adecuación funcional: corrección funcional | Cada importe, TWR y máxima caída del SRS 5.2 dentro de la tolerancia de OE-5 respecto del valor resuelto de forma independiente | Diferencia absoluta máxima: ≤ 0.01 en importes; ≤ 0.001 puntos porcentuales en rendimiento y máxima caída | Prueba CPNF-01: pytest compara sin redondear las cifras del motor con las del SRS 5.2 congelado y genera la tabla de diferencias | 18/10/2026 | Cumple: pasa en el motor (27 pruebas) y por la API desde la base, sin red (3), y la tabla de diferencias del registro de resultados no tiene ninguna cifra fuera de tolerancia (MVP.md 6.1) |
+| RNF-02 | Adecuación funcional: corrección funcional | Cada cifra idéntica, dígito por dígito, en todas las vistas y en cada consulta repetida, sin cambios en los datos | Cifras distintas para el SRS 5.2: 0 | Demostración CPNF-02: comparar como texto, con capturas, el tablero y las posiciones, y repetir cada consulta | 18/10/2026 | Cumple: la comparación automática por la API pasa (17 pruebas), y las capturas del recorrido de AC-04 muestran el mismo valor, como texto, en V-04 y V-05, también en la consulta repetida (MVP.md 6.1) |
+| RNF-03 | Seguridad: confidencialidad e integridad | Sin sesión o con sesión ajena, rechazar sin consultar, registrar, modificar ni eliminar nada y sin revelar si la información existe | Solicitudes aceptadas: 0; respuestas que distinguen lo ajeno de lo inexistente: 0 | Prueba CPNF-03: con dos usuarios, recorrer el esquema OpenAPI sin sesión y con sesión ajena | 18/10/2026 | Cumple: pasa en el registro de resultados |
+| RNF-04 | Seguridad: confidencialidad | Ninguna contraseña legible en la base, sus respaldos, los registros ni las respuestas; forma no reversible, distinta por cuenta y con un costo no menor que el mínimo de OWASP | Contraseñas legibles: 0; cuentas con igual valor almacenado: 0; parámetros de costo bajo el mínimo: 0 (Argon2id: m ≥ 19 MiB, t ≥ 2, p = 1) | Prueba CPNF-04, con un respaldo de pg_dump | 18/10/2026 | Cumple: pasa en el registro de resultados |
+| RNF-05 | Seguridad: confidencialidad | Ninguna credencial vigente (de la base, el *token* del SIE o la clave de las sesiones) en el historial del repositorio, los archivos del navegador, las direcciones de las solicitudes ni los registros | Apariciones de una credencial que todavía autentica, por lugar: 0 | Inspección CPNF-05: búsqueda del valor vigente de cada credencial en todo el historial, la compilación del cliente y los registros, con gitleaks como complemento | 18/10/2026 y 30/10/2026 (con RF-32) | Cumple el 18/10/2026: 0 coincidencias de las 3 credenciales en el historial de git, el índice, el árbol de trabajo, `frontend/dist` y los registros; `backend/.env` está ignorado por git y ningún commit lo incluye (MVP.md 6.1) |
 | RNF-06 | Eficiencia de desempeño: comportamiento temporal | Con el volumen de referencia, en el equipo de desarrollo y un navegador del SRS 3.5, el tablero completo en a lo más T segundos | Percentil 95 del tiempo hasta que el último indicador y la gráfica son visibles, en 30 cargas con caché vacía (percentil, número de cargas y caché, abiertos). T se fija tras medir la línea base (responsable: Ramon; 30/10/2026). Volumen de referencia por fijar antes del 23/10/2026 | Prueba CPNF-06: un script siembra el volumen y Playwright carga y cronometra el tablero; se registran además los picos de procesador y memoria, que fijan los mínimos del SRS 3.6.2 y 3.6.3 | 06/11/2026 | Sin valor objetivo todavía |
 | RNF-07 | Capacidad de interacción: autodescriptividad | Junto a cada indicador, su unidad y su fecha de corte o periodo, y acceso a su definición sin salir de la pantalla | Indicadores con unidad, fecha o periodo y definición, por pantalla: 100 %; definiciones distintas del glosario del SRS 1.3: 0 | Demostración CPNF-07: lista de verificación por indicador y pantalla, en una sesión nueva y con capturas | 23/10/2026; su aceptación cae en AC-09 | Por verificar; la tabla de términos del SRS 1.3 está vacía |
 | RNF-08 | Fiabilidad: tolerancia a fallos | Si la fuente de tasas falla o bloquea el *token*, seguir calculando y presentando con las últimas tasas almacenadas | Pruebas del motor y del tablero aprobadas sin la fuente: 100 %; consultas a la fuente durante un cálculo: 0 | Prueba CPNF-08: CPNF-01 y los casos de RF-11 sin red, con un sustituto de la fuente que falla si se invoca; con RF-32, también error y límite excedido | 30/10/2026 | Adelantado en el MVP: CPNF-01 corre sin red |
@@ -1012,7 +1011,7 @@ Según el SRS 2.3 y 4.5.1:
 - El tablero debe entenderse «en frío», sin recordar sesiones anteriores; es el punto de entrada habitual (SRS 2.2).
 - Cada indicador va con su unidad, su fecha de corte o periodo y su definición, sin salir de la pantalla (RNF-07).
 - El cliente no redondea, suma, promedia ni convierte cifras: solo agrega separadores de miles, el símbolo de pesos y la unidad, y reordena las fechas. Toda cifra llega de la API como texto, ya calculada por el motor.
-- Formato: coma de miles y punto decimal («-$218.56», «1.00 %»); fechas DD/MM/AAAA; sin notación abreviada. La única conversión de una cifra a número en el cliente sería la altura de cada punto de la gráfica (abierto, como excepción documentada de RD-12).
+- Formato: coma de miles y punto decimal («-$218.56», «1.00 %»); fechas DD/MM/AAAA; sin notación abreviada. La única conversión de una cifra a número en el cliente es la altura de cada punto de la gráfica; el texto que se muestra sigue siendo la cadena de la API (en el SRS sigue abierto, como excepción documentada de RD-12; en el cliente, P-62).
 - Textos en español de México, trato de tú y lenguaje llano; un término por concepto («transacción», no «operación»); siglas desarrolladas en su primera aparición; nunca códigos internos.
 - Ningún texto, color o icono califica una inversión o sugiere operar; no hay indicadores «en vivo», contadores animados ni recarga automática (R-01; R-02; R-13). El botón dice «Registrar transacción», nunca «Comprar» ni «Vender».
 - Avisos permanentes, sin botón de cerrar, en el tablero, las posiciones y las transacciones. La propuesta los pone antes de las cifras, con la ubicación por decidir (SRS 4.5.1). Textos propuestos, por decidir: «La información de este sistema no constituye asesoría de inversión.» y «Las valuaciones son estimaciones informativas, no precios oficiales, y no sustituyen el estado de cuenta de tu intermediario.»
@@ -1022,19 +1021,19 @@ Según el SRS 2.3 y 4.5.1:
 
 - Base: CDS (Coinbase Design System) con un tema propio, la «opción B» del SRS 4.5.1. Se adoptan la estructura y los nombres de los tokens de CDS, su escala de espacio de base 8 px, sus radios y puntos de corte, su escala tipográfica con la fuente Inter autoalojada y un subconjunto sobrio de componentes con todos sus textos en español.
 - No se usan: los temas de CDS, cuyo primario es el azul de Coinbase; logotipos, ilustraciones ni glifos de marca; las gráficas de CDS (se usa Recharts 3.10.1); los componentes de venta, atracción o tiempo real, ni los que chocan con criterios de WCAG (Toast, Calendar y DatePicker). Coinbase solo se nombra en la página de avisos de licencias.
-- Paleta propia para los modos claro y oscuro, según la preferencia del sistema operativo, con mínimos de contraste de 4.5:1 para texto y de 3:1 para bordes, iconos, foco y líneas de las gráficas. Los colores son una propuesta, medidos con la fórmula de WCAG pero aún no vistos en un navegador (por confirmar).
-- Estado: CDS no está instalado. Para adoptar la opción B falta bajar React a la 19.1.10, que npm resuelva las dependencias sin forzarlas (por confirmar en una rama a más tardar el 23/10/2026), que compile con Vite 8 y retirar las reglas que dejó la plantilla de Vite. Mientras tanto, las vistas del MVP se escriben con componentes propios delgados, con HTML nativo y los mismos nombres de tokens.
+- Paleta propia para los modos claro y oscuro, según la preferencia del sistema operativo, con mínimos de contraste de 4.5:1 para texto y de 3:1 para bordes, iconos, foco y líneas de las gráficas. Los colores son una propuesta (por confirmar), medidos con la fórmula de WCAG. El cliente del MVP ya los aplica, y las capturas de AC-04 son del modo claro; los detalles del modo oscuro quedaron para la fase de refinamiento, aunque sus tokens sí están. Por decisión del 18/10/2026 (P-83), ganancia y pérdida van sin color, solo con el signo que da la API, y el contenido tiene un ancho máximo de 1200 px.
+- Estado: CDS no está instalado. Para adoptar la opción B falta bajar React a la 19.1.10, que npm resuelva las dependencias sin forzarlas (por confirmar en una rama a más tardar el 23/10/2026) y que compile con Vite 8. Las vistas del MVP se escribieron con componentes propios delgados, con HTML nativo, los mismos nombres de tokens y la paleta de 4.5.1 (`frontend/src/ui/` y `frontend/src/estilos/`), y ya se quitaron los restos de la plantilla de Vite.
 - Abiertos: el identificador del tema o el uso de una identidad visual de PluriOne, si existe; el juego de iconos; los textos de varios componentes.
 
 ### 9.3 Accesibilidad
 
 - Meta de diseño: nivel AA de WCAG 2.2. No es un requisito verificable, porque el SRS 3.3 no tiene un requisito de accesibilidad; agregarlo está abierto (SRS 4.5.1; sección 7.4).
-- Reglas que ya fija la guía (SRS 4.5.1): cada pantalla funciona a 320 px CSS (criterio 1.4.10); objetivos de clic de al menos 24 × 24 px (criterio 2.5.8); un solo h1 por pantalla y el foco en el h1 tras cada navegación; enlace «Saltar al contenido»; foco siempre visible; gráfica con resumen textual visible, tabla alterna, recorrido con las flechas y sin animación.
+- Reglas que ya fija la guía (SRS 4.5.1): cada pantalla funciona a 320 px CSS (criterio 1.4.10); objetivos de clic de al menos 24 × 24 px (criterio 2.5.8); un solo h1 por pantalla y el foco en el h1 tras cada navegación; enlace «Saltar al contenido»; foco siempre visible; gráfica con resumen textual visible, tabla alterna, recorrido con las flechas y sin animación. En el MVP, la gráfica tiene su resumen textual, su tabla alterna y el recorrido con las flechas ← y → de Recharts; quedaron para la fase de refinamiento la revisión a 320 px, el manejo del foco y el título por pantalla, y la tecla Esc propia de la gráfica (MVP.md 12.4).
 - La sesión dura 480 minutos sin aviso ni renovación; cómo se atiende el criterio 2.2.1 está abierto (SRS 4.5.2).
 
 ### 9.4 Pantallas
 
-Rutas, menú y transiciones del SRS 4.5.2 son una propuesta de diseño (abierto). Las operaciones de la API que usa cada pantalla salen del código del servidor.
+Rutas, menú y transiciones del SRS 4.5.2 son una propuesta de diseño (abierto). El cliente del MVP los implementa con un enrutador propio, sin dependencias nuevas (P-84). Las operaciones de la API que usa cada pantalla salen del código del servidor.
 
 | Id | Pantalla | Requisitos | Sesión |
 |---|---|---|---|
@@ -1062,16 +1061,18 @@ Resoluciones (SRS 3.6.1): escritorio desde 1280 × 720 px CSS; en móvil, 360 px
 | Qué se verifica | Cómo | Cuándo |
 |---|---|---|
 | Contraste de los colores | Análisis con el script de contraste, que aplica la fórmula de WCAG | 17/10/2026 y en la prueba de CDS, a más tardar el 23/10/2026 |
-| Cifras idénticas en las vistas | Demostración (RNF-02) | 18/10/2026 |
+| Cifras idénticas en las vistas | Demostración (RNF-02) | 18/10/2026; cumplida (MVP.md 6.1) |
 | Unidad, fecha y definición de cada indicador | Demostración (RNF-07) | 23/10/2026 |
 | Resoluciones | Demostración en Chromium y Firefox a 1280 × 720 y 320 px CSS, y a 360 px si se conserva (RNF-11) | 13/11/2026 |
 | Teclado, lector de pantalla y revisión automática | Demostración con teclado y NVDA, y prueba con axe | Por decidir con el requisito de accesibilidad |
 | Idioma y marca | Inspección: ningún texto en inglés ni color azul de Coinbase | En la prueba de CDS |
-| Recorrido de los imprescindibles | Demostración a 1280 px con capturas fechadas (AC-04) | Con la entrega del MVP |
+| Recorrido de los imprescindibles | Demostración a 1280 px con capturas fechadas (AC-04) | 18/10/2026; hecho, con 33 capturas (MVP.md 12.3) |
 
 ### 9.6 Estado al 18/10/2026
 
-Ninguna de las 12 pantallas está construida; `frontend/src/` solo tiene la página de prueba de conexión con la API. Por eso RF-07, RF-11, RF-12 y RF-31 están pendientes en parte y AC-04 está pendiente (MVP.md 12). Si las pantallas no quedan antes de la revisión, rige S-02.
+Las 12 pantallas de la sección 9.4 están construidas en `frontend/src/` y recorridas con capturas fechadas (AC-04; MVP.md 12.1). Las cifras llegan de la API como texto, y el cliente solo les da formato, con un módulo propio que aprueba sus 10 pruebas; el valor de mercado es idéntico en el tablero y en las posiciones (RNF-02). Los avisos de RF-12, la marca de demostración de RF-07 y la línea de fuente de RF-31 están a la vista.
+
+Lo que el plan del 18 de octubre recortó del cliente, sin quitar criterios del SRS 3.2 ni requisitos no funcionales que se juzguen ese día, queda para la fase de refinamiento: las definiciones desplegables de RNF-07, el menú desplegable por debajo de 1280 px, la revisión a 320 px y los detalles del modo oscuro, «Mapa del sitio», la entrada al historial de N-17, el selector N-16 en V-05 y V-06, la tecla Esc propia de la gráfica, el portafolio activo en `sessionStorage`, el foco y el título por pantalla, y el diálogo de revisión de V-07 con «Registrar otra» (MVP.md 12.4). Hay además dos hallazgos menores: en V-05, un portafolio inexistente muestra el aviso de no encontrado dentro de V-05 en lugar de llevar a V-12, y quedan clases sin uso en `frontend/src/ui/datos.css`.
 
 ---
 
@@ -1095,7 +1096,7 @@ Los registros de decisión (ADR) de la interfaz de datos, la aritmética, las gr
 
 ### 10.3 Componentes
 
-- MVP: los componentes del servidor (rutas de la API, cuentas y consentimiento, autorización, portafolios, transacciones, consultas, motor, acceso a datos y configuración) están implementados; el cliente web está pendiente. El componente «Cargas» y el adaptador de la semilla que describe el SRS 4.2 no existen en Python: la carga la hace un script SQL, una desviación por registrar en el SRS (MVP.md 7.1).
+- MVP: los componentes del servidor (rutas de la API, cuentas y consentimiento, autorización, portafolios, transacciones, consultas, motor, acceso a datos y configuración) están implementados, y también el cliente web: las vistas, el cliente de la API, la sesión, un enrutador propio, la gráfica y la procedencia (MVP.md 7.1). El MVP no tiene el componente «Cargas» ni el adaptador de la semilla: la carga la hace un script SQL, como registra el SRS 4.2 desde el 18/10/2026 (P-66).
 - Fase de refinamiento (SRS 4.2):
 
 | Componente | Responsabilidad | Requisitos |
@@ -1122,7 +1123,7 @@ Versiones exactas en MVP.md 7.2. En breve:
 |---|---|
 | Servidor | Python 3.13, FastAPI, SQLAlchemy 2, psycopg 3, pydantic, pwdlib con Argon2id; entorno y dependencias con uv; pruebas con pytest |
 | Base de datos | PostgreSQL 18 |
-| Cliente web | React 19.3.0, Vite 8 y Recharts 3.10.1 (instalado y aún sin usar); se construye con Node.js 24 |
+| Cliente web | React 19.3.0, Vite 8 (con un proxy de `/api` hacia la API y puertos fijos) y Recharts 3.10.1 en la gráfica del tablero; enrutador propio, sin dependencias nuevas; se construye con Node.js 24 |
 | Guía de estilo | CDS 9.29.0 como base, no instalado (sección 9.2) |
 | Cálculo | `decimal` de Python con 28 dígitos; nunca punto flotante binario (RD-12) |
 
@@ -1144,7 +1145,7 @@ Hardware (SRS 3.6):
 
 - Equipo del usuario: sin requisitos de cómputo; resoluciones de la sección 9.4.
 - Servidor futuro: x86-64 con Windows Server 2025 o Ubuntu Server 24.04 LTS (otras versiones, abierto); procesador, memoria y almacenamiento del sistema operativo más el consumo del servidor y la base, por medir con RNF-06 (30/10/2026); salida HTTPS al SIE, la única interfaz externa, y entrada HTTPS desde la red de los usuarios.
-- Equipo de desarrollo: el equipo personal del estudiante, que hace de servidor durante la estadía (R-07): Windows 11 Home, 16 GB de RAM y 23.9 GB libres de disco al 13/10/2026. El SRS 3.6.3 pide actualizar Python, Node.js y Firefox antes del 18/10/2026; no se ha hecho (MVP.md 7.2).
+- Equipo de desarrollo: el equipo personal del estudiante, que hace de servidor durante la estadía (R-07): Windows 11 Home, 16 GB de RAM y 23.9 GB libres de disco al 13/10/2026. El SRS 3.6.3 pedía actualizar Python, Node.js y Firefox antes del 18/10/2026; el 18 de octubre esa actualización pasó a la semana del 19 de octubre (P-68; MVP.md 7.2).
 
 ### 10.7 Licencias del software
 
@@ -1182,11 +1183,11 @@ Elementos externos que limitan el diseño (SRS 2.4):
 
 - Mercado de valores (LMV): art. 225, asesoría de inversión (R-01); arts. 2, 9 y 113, intermediación (R-02); arts. 322 y 323, proveedores de precios (R-11). Sin dictamen jurídico, se asume que respetar R-01, R-02 y R-11 basta para que quien opere la plataforma no necesite registro ni autorización de la CNBV (S-15, por confirmar con la empresa). Si la empresa tiene una opinión jurídica, RF-14, RF-21 y RF-22 se ajustan a ella; si concluye lo contrario, se eliminan o se rediseñan.
 - Protección de datos personales (LFPDPPP de 2025): consentimiento y aviso (arts. 7, 15 y 16; R-03); medidas de seguridad (art. 18; R-12); datos mínimos de la cuenta (art. 12); derechos ARCO (art. 21); bloqueo y supresión tras la revocación (RD-23). Si se registran datos reales, el aviso debe identificar al responsable del tratamiento, que está por confirmar con la empresa (S-04). El aviso de demostración vigente deja pendientes el responsable, el plazo del bloqueo y el medio para los derechos ARCO (MVP.md 5.7).
-- Revisión del DOF (D-04): se supone que durante la estadía no se expide un reglamento de la LFPDPPP ni se reforman los artículos de R-03 y R-12. El estudiante revisa el DOF antes del 18 de octubre y antes del 20 de noviembre de 2026 (AC-08 y AC-13). Al 18/10/2026 la revisión de AC-08 no consta en el SRS 3.1.
+- Revisión del DOF (D-04): se supone que durante la estadía no se expide un reglamento de la LFPDPPP ni se reforman los artículos de R-03 y R-12. El estudiante revisa el DOF a más tardar el 18 de octubre (AC-08, precisado así el 18/10/2026; P-67) y antes del 20 de noviembre de 2026 (AC-13). Al 18/10/2026 la revisión de AC-08 todavía no consta en el SRS 3.1.
 - Fiscal: RF-26a liquida los CETES antes de la retención de ISR, cuya tasa anual en 2026 es de 0.90 % (S-14). No hay cálculo fiscal de lotes ni del costo promedio fiscal (X-03).
 - Licencias de datos: R-05, R-06 y R-13; el Banco de México permite reproducir su información citando la fuente (D-03).
 - Licencias de software: sección 10.7.
-- Confidencialidad: R-04 y R-12 vienen del convenio con la empresa. El repositorio es privado y no contiene documentación confidencial del cliente (README, «Avisos»). El documento de consideraciones legales (`docs/legal.md`) está pendiente (README).
+- Confidencialidad: R-04 y R-12 vienen del convenio con la empresa. El repositorio del proyecto pasó a ser público, según informó el estudiante el 18 de octubre de 2026, así que todo lo que entra en un commit queda publicado. No contiene documentación confidencial del cliente, y la tabla de personas del SRS 1.2 ya no tiene datos de contacto. El documento de consideraciones legales (`docs/legal.md`) está pendiente (README).
 
 ### 11.3 Suposiciones
 
@@ -1194,8 +1195,8 @@ Las suposiciones se dan por ciertas sin poder garantizarlas; si alguna deja de c
 
 | ID | Se asume | Si no se cumple | Estado |
 |---|---|---|---|
-| S-01 | El alcance es la delimitación MoSCoW de la Definición, que el estudiante definió con la libertad que dio el líder; el líder fijó la fecha del MVP y los dos archivos de `docs/`. La empresa no espera servicios en la nube ni otras tecnologías. | Se rehacen el SRS 3.2, 2.6, 2.4.7 y 5.3; otras tecnologías chocarían con R-07 | Por confirmar cuándo y por qué medio |
-| S-02 | Una sola persona completa los 18 imprescindibles el 18/10/2026 y los requisitos del SRS 2.6 en sus fechas | Se acuerda con el líder qué imprescindibles pasan a la fase; los de 2.6 pasan a la fase posterior en orden MoSCoW estricto | — |
+| S-01 | El alcance es la delimitación MoSCoW de la Definición, que el estudiante definió con la libertad que dio el líder; el líder pidió los dos archivos de `docs/` (`MVP.md` y `PRD.md`); la fecha del MVP, el 18 de octubre, la fijó el estudiante. La empresa no espera servicios en la nube ni otras tecnologías. | Se rehacen el SRS 3.2, 2.6, 2.4.7 y 5.3; otras tecnologías chocarían con R-07 | Por confirmar cuándo y por qué medio |
+| S-02 | Una sola persona completa los 18 imprescindibles el 18/10/2026 y los requisitos del SRS 2.6 en sus fechas | Se acuerda con el líder qué imprescindibles pasan a la fase; los de 2.6 pasan a la fase posterior en orden MoSCoW estricto | Se cumplió para los 18 imprescindibles: no hubo traslados (MVP.md 12.1). Los del SRS 2.6, por ver |
 | S-03 | Sin servidor de producción durante la estadía | Se agrega un hito de despliegue, cifrado en tránsito y respaldo, y RF-32 deja de depender del equipo encendido | Decidido |
 | S-05 | Quienes revisan aceptan validar con precios sintéticos marcados y tasas reales | Exigir precios reales choca con R-05 y X-07 sin licencia | Por confirmar con quienes revisan |
 | S-06 | RF-24 se entrega solo para Android o como aplicación web progresiva | Con iOS, RF-24 no cabe en la estadía | Por confirmar con la empresa |
@@ -1214,7 +1215,7 @@ Las suposiciones se dan por ciertas sin poder garantizarlas; si alguna deja de c
 | D-04 | No hay reglamento ni reforma de la LFPDPPP durante la estadía | Se revisan RF-12, R-03, R-12 y RNF-03 a RNF-05 | Se comprueba con AC-08 y AC-13 |
 | D-05 | Python 3.13, PostgreSQL 18 y Node.js 24 reciben correcciones durante la estadía y el mantenimiento | El SRS 3.5 pasa a versiones con soporte y se repiten las pruebas | Periodo de mantenimiento por definir con la empresa |
 | D-06 | Las licencias de las bibliotecas permiten un producto de código cerrado | Sección 10.7 | Forma de entrega por confirmar con la empresa; avisos del cliente, abierto |
-| D-07 | El líder revisa el MVP después del 18 de octubre, y una segunda vez si hace falta; la asesora académica revisa la memoria y quizá el proyecto el 20/11/2026 | La aceptación del MVP se recorre y se reduce el margen de la fase de refinamiento | Fechas y forma por confirmar |
+| D-07 | El líder revisa el MVP después del 18 de octubre, y una segunda vez si hace falta; la asesora académica revisa la memoria y quizá el proyecto el 20/11/2026 | La aceptación del MVP se recorre y se reduce el margen de la fase de refinamiento | El líder revisa con los agentes de su plataforma hasta el fin de semana del 24 y 25/10/2026; la segunda revisión y la de la asesora, por confirmar |
 
 ---
 
@@ -1256,9 +1257,9 @@ Las capacidades de la sección 6.12 no forman parte del alcance vigente. Para op
 |---|---|---|
 | Lunes 21 de septiembre de 2026 | Revisión de planeación, con la asesora académica | SRS 3.8; README |
 | Lunes 28 de septiembre de 2026 | Revisión de avance | SRS 3.8; README |
-| Domingo 18 de octubre de 2026, inclusive | Entrega del MVP; verificación de RNF-01 a RNF-05; revisión del DOF anterior a esa fecha (AC-08; por precisar si admite el mismo día) | SRS 3.8, 3.3 y 3.9.2 |
-| Después del 18 de octubre | Revisión del MVP por el líder y, si hace falta, segunda revisión (fechas por confirmar) | SRS 3.9.1 |
+| Domingo 18 de octubre de 2026 | Entrega del MVP, sin hora de corte; verificación de RNF-01 a RNF-05; revisión del DOF a más tardar ese día (AC-08; P-67) | SRS 3.8, 3.3 y 3.9.2 |
 | Lunes 19 de octubre de 2026 | Empieza la fase de refinamiento | SRS 2.6; Definición |
+| Hasta el fin de semana del 24 y 25 de octubre de 2026 | Revisión del MVP por los agentes de la plataforma del líder; segunda revisión si hace falta (fecha por confirmar) | SRS 3.9.1; lo que informó el estudiante el 18/10/2026 |
 | Domingo 15 de noviembre de 2026 | Termina el desarrollo de la fase de refinamiento | SRS 2.6 |
 | Semana del 16 de noviembre | Capacitación, entrega y cierre | SRS 2.6 y 3.9.4 |
 | Viernes 20 de noviembre de 2026 | Cierre de la fase de refinamiento y fin de la estadía; aceptación al cierre (AC-09 a AC-13); revisión del DOF anterior a esa fecha (AC-13) | SRS 3.8 y 3.9.4 |
@@ -1271,13 +1272,13 @@ Antes que los requisitos del SRS 2.6 van, en este orden (SRS 2.6.3 y 3.9.3):
 2. La revisión del MVP (D-07).
 3. Si el líder encuentra inconsistencias o carencias, su corrección antes de la segunda revisión.
 
-Lo que falta del MVP al 18/10/2026 está en MVP.md 12.6: pantallas del cliente web, registro de resultados, recorrido de AC-04, sección del README para instalar en local, revisión del DOF, el commit y el envío de este documento y de MVP.md, el criterio 1 de RF-11 y la confirmación de la tasa a 28 días del 10/09.
+Al 18/10/2026 no hay imprescindibles trasladados por S-02. Lo que queda del MVP está en MVP.md 12.6: la revisión del DOF de AC-08, la comprobación a mano de tres cifras del SRS 5.2, la confirmación de la tasa a 28 días del 10/09, los recortes de nivel 1 del cliente web, empezando por las definiciones de RNF-07, que se verifica el 23/10/2026, y dos hallazgos menores del cliente.
 
 ### 13.3 Semana a semana
 
 | Semana | Requisitos con fecha | Verificaciones y otras fechas |
 |---|---|---|
-| Del 19 al 25 de octubre | Diferidos: RF-19, RF-20, RF-32 y RF-34. Deberían incluirse, como propuesta: RF-27 y RF-13. | 23/10: RNF-07. Antes del 23/10: fijar el volumen de referencia de RNF-06, completar el glosario del SRS 1.3 y probar CDS (opción B). |
+| Del 19 al 25 de octubre | Diferidos: RF-19, RF-20, RF-32 y RF-34. Deberían incluirse, como propuesta: RF-27 y RF-13. | 23/10: RNF-07, que necesita las definiciones desplegables de cada indicador que quedaron fuera del MVP (MVP.md 12.4). Antes del 23/10: fijar el volumen de referencia de RNF-06, completar el glosario del SRS 1.3 y probar CDS (opción B). |
 | Del 26 de octubre al 1 de noviembre | Diferidos: RF-17, RF-21 y RF-33. Debería incluirse, como propuesta: RF-15. | 30/10: RNF-05 de nuevo (con RF-32), RNF-08 y RNF-09; línea base de RNF-06 para fijar T; mediciones del SRS 3.6. Al 1 de noviembre quedan fijos los indicadores que tendrá RF-24: los entregados a esa fecha. |
 | Del 2 al 8 de noviembre | Diferidos: RF-22, RF-23 y RF-24 (primera de dos semanas). Debería incluirse, con fecha decidida: RF-14. | 06/11: RNF-06 y RNF-10. Semanas del 2 y del 9: documentación técnica, manual de usuario y plan de mantenimiento. El lunes 2 de noviembre es día sin operaciones bursátiles (MVP.md 5.4); si la empresa labora ese día está por confirmar. |
 | Del 9 al 15 de noviembre | Diferido: RF-24 (segunda semana). Opcionales, como propuesta: RF-16 y RF-18, si hay margen; si no, posteriores a la estadía. | 13/11: RNF-11 y RNF-12, y límite de AC-09; el responsable de pruebas ejecuta las pruebas hasta esa fecha. 15/11: termina el desarrollo. |
@@ -1294,10 +1295,10 @@ Lo que falta del MVP al 18/10/2026 está en MVP.md 12.6: pantallas del cliente w
 
 | Entregable | Cuándo | Criterio |
 |---|---|---|
-| Código del MVP en el repositorio que indique el líder | 18/10/2026 (hora de corte por confirmar) | AC-01 a AC-05 |
+| Código del MVP en el repositorio público del proyecto, que revisan los agentes de la plataforma del líder | 18/10/2026, sin hora de corte | AC-01 a AC-05 |
 | `docs/MVP.md` y `docs/PRD.md` | 18/10/2026 | AC-06 |
 | Base de demostración con solo semillas y cuentas de prueba | 18/10/2026 | AC-07 |
-| Registro de resultados de las pruebas | 18/10/2026 y hasta el 13/11/2026 | AC-01 a AC-03, AC-07 (inspección de las semillas) y AC-09; al cierre, AC-10 |
+| Registro de resultados de las pruebas, en `backend/tests/resultados/`, con una carpeta por fecha (P-70); la del MVP es `2026-10-18/` | 18/10/2026 y hasta el 13/11/2026 | AC-01 a AC-04, AC-07 (inspección de las semillas) y AC-09; al cierre, AC-10 |
 | Código, base de demostración restaurable, manual técnico, manual de usuario, plan de mantenimiento y reporte de pruebas | Al cierre (fecha y medio por confirmar) | AC-12 (por confirmar si el líder los espera) |
 
 ### 13.6 Después de la estadía
@@ -1324,27 +1325,27 @@ Según el SRS 3.9:
 
 | Rol | Qué revisa | Cuándo | Resultado |
 |---|---|---|---|
-| Líder de proyecto | El MVP, incluidos los dos archivos de `docs/` (por confirmar si su revisión los cubre), en el repositorio que indique (por confirmar cuál, qué rama y cómo accede) | Después del 18 de octubre (fecha por confirmar), y una segunda vez si encuentra inconsistencias o carencias | Observaciones o conformidad (por confirmar si deja constancia escrita y si equivale a aceptar) |
-| Responsable de pruebas (el estudiante) | Ejecuta los CPF y los CPNF y documenta el recorrido de AC-04 en un registro fechado de resultados (ruta abierta) | Hasta el 18 de octubre (MVP) y el 13 de noviembre (RNF-06 a RNF-12) | Evidencia, no la decisión de aceptar |
+| Líder de proyecto | El MVP, incluidos los dos archivos de `docs/`, que su plataforma usa como criterios para evaluar la aplicación (SRS 3.9.1). Lo evalúa con un conjunto de agentes que analizan el repositorio público del proyecto | Hasta el fin de semana del 24 y 25 de octubre de 2026, y una segunda vez si encuentra inconsistencias o carencias (fecha por confirmar) | Observaciones o conformidad (por confirmar si deja constancia escrita y si equivale a aceptar) |
+| Responsable de pruebas (el estudiante) | Ejecuta los CPF y los CPNF y documenta el recorrido de AC-04 en un registro fechado de resultados, en `backend/tests/resultados/`, con una carpeta por fecha (P-70) | Hasta el 18 de octubre (MVP) y el 13 de noviembre (RNF-06 a RNF-12) | Evidencia, no la decisión de aceptar |
 | Asesora académica | La memoria de estadías y, quizá, el desarrollo o la terminación del proyecto (por confirmar qué y con qué evidencia) | Quizá el 20 de noviembre (por confirmar) | Evaluación académica; si interviene en la conformidad del cierre, por confirmar |
 | Asesor empresarial | No revisa el sistema ni la especificación | — | No interviene en la aceptación |
 
 ### 14.3 Aceptación del MVP
 
-El MVP se entrega a más tardar el domingo 18 de octubre de 2026, inclusive, en el repositorio que indique el líder (hora de corte y si rige el commit o su envío, por confirmar). Solo se ejecuta en el equipo de desarrollo, donde el recorrido de AC-04 documenta su funcionamiento; no consta una demostración en sesión (por confirmar). Se considera aceptado cuando una revisión del líder, primera o segunda, concluye sin observaciones pendientes, condición por confirmar con él (SRS 3.9.2).
+El MVP se entrega el domingo 18 de octubre de 2026, sin hora de corte, en el repositorio público del proyecto, que revisan los agentes de la plataforma del líder hasta el fin de semana del 24 y 25 de octubre. Solo se ejecuta en el equipo de desarrollo, donde el recorrido de AC-04 documenta su funcionamiento; no consta una demostración en sesión (por confirmar). Se considera aceptado cuando una revisión del líder, primera o segunda, concluye sin observaciones pendientes, condición por confirmar con él (SRS 3.9.2). La evidencia está en `backend/tests/resultados/2026-10-18/`, y en la tabla sus rutas son relativas a esa carpeta (MVP.md 12).
 
 | AC | Criterio (SRS 3.9.2) | Evidencia | Estado al 18/10/2026 (MVP.md 12.2) |
 |---|---|---|---|
-| AC-01 | Cada imprescindible vigente en el SRS 3.2 cumple su criterio y aprueba su CPF | Resultado y fecha de cada CPF en el registro de resultados | Pendiente: faltan el registro de resultados, los criterios de interfaz de RF-07, RF-11, RF-12 y RF-31, y resolver el criterio 1 de RF-11 |
-| AC-02 | RNF-02 a RNF-05 alcanzan su valor objetivo al 18 de octubre | Resultado y fecha de CPNF-02 a CPNF-05 | Pendiente en parte: falta el registro, ejecutar CPNF-05 y la demostración de RNF-02 con capturas |
-| AC-03 | RNF-01 sobre el SRS 5.2, y el commit que lo congela es anterior al primero del motor | Tabla de diferencias de CPNF-01 y hash del commit `11097f8` | Hecho en código y git; falta guardar la evidencia |
-| AC-04 | Recorrido de los imprescindibles, en el equipo de desarrollo y con los datos del SRS 5.2, con al menos una captura fechada por requisito | Registro del recorrido con sus capturas | Pendiente: no hay pantallas |
-| AC-05 | El repositorio explica cómo instalar el MVP en local, crear la base, cargar las semillas y ejecutar las pruebas, sin valores reales en las variables de ejemplo | Sección «Cómo ejecutarlo localmente» del README | Pendiente; los pasos completos están en MVP.md 11 |
-| AC-06 | `docs/` contiene los dos archivos Markdown que pidió el líder; el 18/10/2026 fijó sus nombres, `MVP.md` y `PRD.md` (por confirmar si deben ser exactamente esos dos) | Los archivos en la versión entregada | En curso: `docs/MVP.md` y este archivo; falta su envío |
-| AC-07 | La base de demostración solo contiene semillas y cuentas de prueba con datos ficticios | Inspección del script de semillas | Hecho; falta guardar la evidencia |
-| AC-08 | Consta en el SRS 3.1 una revisión del DOF conforme a D-04, anterior al 18 de octubre | Fecha y resultado en el SRS 3.1 | Pendiente |
+| AC-01 | Cada imprescindible vigente en el SRS 3.2 cumple su criterio y aprueba su CPF | Resultado y fecha de cada CPF en el registro de resultados | Cumplido: los 18 imprescindibles cumplen su criterio, con su CPF aprobado en `junit.xml` y su captura en `ac04/`; el criterio 1 de RF-11 se juzga con la precisión del SRS 3.2 del 18/10/2026 (P-64) |
+| AC-02 | RNF-02 a RNF-05 alcanzan su valor objetivo al 18 de octubre | Resultado y fecha de CPNF-02 a CPNF-05 | Cumplido: CPNF-02 a CPNF-04 pasan en `junit.xml`, CPNF-05 cumple (`cpnf05.txt`) y RNF-02 se demostró con capturas (`ac04/RNF-02_*.png`) |
+| AC-03 | RNF-01 sobre el SRS 5.2, y el commit que lo congela es anterior al primero del motor | Tabla de diferencias de CPNF-01 y hash del commit `11097f8` | Cumplido: la tabla de diferencias (`cpnf01_diferencias.csv`) no tiene ninguna cifra fuera de tolerancia, y la inspección de AC-03 pasa (`ac03_junit.xml`) |
+| AC-04 | Recorrido de los imprescindibles, en el equipo de desarrollo y con los datos del SRS 5.2, con al menos una captura fechada por requisito | Registro del recorrido con sus capturas | Cumplido: en el entorno real, 54 filas correctas, ninguna falla y 33 capturas fechadas (`ac04/recorrido.csv` y `ac04/`) |
+| AC-05 | El repositorio explica cómo instalar el MVP en local, crear la base, cargar las semillas y ejecutar las pruebas, sin valores reales en las variables de ejemplo | Sección «Cómo ejecutarlo localmente» del README | Cumplido: la sección del README; los pasos completos también están en MVP.md 11 |
+| AC-06 | `docs/` contiene los dos archivos Markdown que pidió el líder; el 18/10/2026 fijó sus nombres, `MVP.md` y `PRD.md` (por confirmar si deben ser exactamente esos dos) | Los archivos en la versión entregada | Cumplido: `docs/MVP.md` y este archivo, en su versión 1.1 |
+| AC-07 | La base de demostración solo contiene semillas y cuentas de prueba con datos ficticios | Inspección del script de semillas | Cumplido: inspección del script de semillas y de los correos de prueba, todos de example.com (`INDICE.md`) |
+| AC-08 | Consta en el SRS 3.1 una revisión del DOF conforme a D-04, a más tardar el 18 de octubre (P-67) | Fecha y resultado en el SRS 3.1 | Pendiente: la revisión del DOF (R3) todavía no consta en el SRS 3.1 |
 
-Si un imprescindible no cumple AC-01 a tiempo, su paso a la fase de refinamiento se acuerda con el líder y se registra en el SRS 3.1 antes de la revisión (S-02).
+Si un imprescindible no cumple AC-01 a tiempo, su paso a la fase de refinamiento se acuerda con el líder y se registra en el SRS 3.1 antes de la revisión (S-02). En esta entrega no hizo falta.
 
 ### 14.4 Observaciones del líder
 
@@ -1353,7 +1354,7 @@ Según el SRS 3.9.3:
 1. Cada observación se registra con su fecha y el requisito o documento afectado (medio por confirmar).
 2. Se corrige, se repiten los CPF y CPNF afectados y se anotan su resultado y su fecha; si cambia el SRS, se abre una versión en su apartado 3.1.
 3. Las correcciones preceden a los requisitos del SRS 2.6 y consumen el margen de la fase de refinamiento.
-4. El líder revisa por segunda vez (fecha y aviso por confirmar). Si quedan observaciones, el MVP se considera revisado con observaciones, y estas se tratan conforme a AC-11 (por confirmar con el líder).
+4. El líder revisa por segunda vez (fecha por confirmar). Si quedan observaciones, el MVP se considera revisado con observaciones, y estas se tratan conforme a AC-11 (por confirmar con el líder).
 
 ### 14.5 Aceptación al cierre de la estadía
 
@@ -1381,7 +1382,7 @@ La estadía termina el viernes 20 de noviembre de 2026. Quién da la conformidad
 | Riesgo | Efecto | Mitigación o regla | Fuente |
 |---|---|---|---|
 | Capacidad: una sola persona en cuatro roles, sin estimación de esfuerzo por requisito | Requisitos del SRS 2.6 que no caben | Recorte MoSCoW estricto con sus dependientes | SRS 3.7; S-02; 2.6.3 |
-| Interfaz del MVP sin construir al 18/10/2026 | Imprescindibles trasladados por S-02 que consumen el margen de la fase de refinamiento | S-02, acordado con el líder y registrado en el SRS 3.1 | MVP.md 1.4 y 12.1; SRS 3.9.3 |
+| RNF-07 y los recortes de nivel 1 del cliente web | RNF-07 se verifica el 23/10/2026 y necesita las definiciones desplegables que no entraron en el MVP; los demás recortes consumen margen de la fase de refinamiento | Hacer primero las definiciones de RNF-07, antes del 23/10 | MVP.md 12.4 y 12.6 |
 | Error de cálculo | Decisiones equivocadas del usuario | Motor único; conjunto de referencia resuelto por dos caminos y congelado; RNF-01 y RNF-02 | R-10; SRS 5.2 |
 | Tasa a 28 días del 10/09/2026 confirmada con una sola fuente | Si cambia, se regeneran el SRS 5.2 y las semillas | Confirmarla con una segunda fuente | SRS 5.2; MVP.md 12.5 |
 | Dependencia de una sola fuente externa (SIE) y de su límite diario | Sin tasas nuevas o con el *token* bloqueado | Los cálculos leen de la base (RNF-08); carga manual mientras tanto | D-01; D-02; R-15 |
@@ -1392,20 +1393,19 @@ La estadía termina el viernes 20 de noviembre de 2026. Quién da la conformidad
 | Datos reales durante la estadía | Aviso con responsable, medidas de R-12 y recuperación de contraseña | Supuesto de solo datos ficticios (por confirmar) | S-04 |
 | El registro revela si un correo ya tiene cuenta | Cualquiera puede saber si un correo tiene cuenta; está por decidir si se acepta mientras solo haya datos ficticios (S-04) | Revisarlo antes de admitir datos reales (abierto) | MVP.md 12.4 |
 | Sin matriz de riesgos | Riesgos del proyecto sin registro formal | La matriz `docs/riesgos.md` está pendiente | README |
+| Repositorio público | Todo lo que entra en un commit queda publicado | `backend/.env` fuera del control de versiones, con CPNF-05 de nuevo el 30/10/2026 (RNF-05); sin datos de contacto en el SRS 1.2 | SRS 1.2; RNF-05; lo que informó el estudiante el 18/10/2026 |
 
 ### 15.2 Preguntas abiertas
 
-Sin decisión registrada al 18/10/2026. Las fechas límite que no da el SRS vienen del registro de decisiones.
+Sin decisión registrada al 18/10/2026. Las fechas límite que no da el SRS vienen del registro de decisiones o de lo que informó el estudiante el 18/10/2026.
 
 | Tema | Qué falta decidir o confirmar | Quién | Fecha límite | Afecta a |
 |---|---|---|---|---|
 | Plan de la fase de refinamiento | Fechas propuestas de RF-27, RF-13, RF-15, RF-16 y RF-18; fecha de RF-39; lugar y orden de los diferidos en el recorte; quién hace la fase posterior; si se labora el lunes 2 de noviembre | Estudiante; la fase posterior y el 2 de noviembre, con la empresa | RF-27 y RF-13, antes del 19/10; lo demás, al cierre de la semana del 19 | SRS 2.6.1 a 2.6.3 |
 | Diseño de RF-32 | Rol con el que escribe la tarea del SIE, valores de origen de las cargas, disparador diario y cliente HTTP; componente «Cargas» frente al script SQL | Estudiante | Rol y origen, antes del 19/10; lo demás, en la semana del 19 | RF-32; RF-34; RF-23 |
 | Reglas de datos para las cargas diarias | Sustituir o versionar las correcciones (RD-21) y la fecha de obtención de cada carga | Estudiante | Antes del 19/10 | RF-32 |
-| Pantallas del MVP | Cuáles se construyen antes de la revisión y cuáles pasan por S-02, con aviso al líder | Estudiante, con el líder | 18/10 | RF-07; RF-11; RF-12; RF-31; AC-01; AC-04 |
-| Criterio 1 de RF-11 | Aplicar la tolerancia a las cifras del motor o presentar 3 decimales | Estudiante | 18/10, antes de entregar el MVP, porque AC-01 juzga RF-11 con el texto vigente | RF-11; AC-01 |
-| Revisión y aceptación | Si la revisión cubre `docs/`, fecha y constancia, segunda revisión, demostración, aceptación con datos de demostración y sin servidor, conformidad del cierre, entregables de AC-12 y capacitación | Líder de proyecto y asesora académica | Antes de la revisión del líder | SRS 3.9 |
-| Entrega del MVP | Repositorio, rama y hora de corte; si `docs/` debe tener exactamente los dos archivos que pidió (hoy tiene cuatro) | Líder de proyecto | 18/10 | AC-06; SRS 3.9.2 |
+| Revisión y aceptación | Constancia de la revisión, fecha de una segunda revisión, demostración, aceptación con datos de demostración y sin servidor, conformidad del cierre, entregables de AC-12 y capacitación | Líder de proyecto y asesora académica | Mientras dure la revisión del líder, hasta el fin de semana del 24 y 25/10 | SRS 3.9 |
+| Archivos de `docs/` | Si `docs/` debe tener exactamente los dos archivos que pidió el líder (hoy tiene cuatro). El repositorio y la hora de corte ya no son preguntas: el repositorio es público, la entrega va en la rama main (P-71), lo revisan los agentes de su plataforma y no hay hora de corte; sigue por confirmar qué rama o versión analizan (SRS 3.9.1) | Líder de proyecto | Mientras dure su revisión, hasta el fin de semana del 24 y 25/10 | AC-06 |
 | Datos personales | Datos reales, responsable del tratamiento y plazo del bloqueo tras la revocación | Empresa | Antes de la revisión del líder | S-04; RD-23; RF-12 |
 | Opinión jurídica sobre el art. 225 de la LMV | Si la empresa la tiene | Empresa | Antes del 26/10 (RF-21) | RF-14; RF-21; RF-22 |
 | Aplicación móvil | Android o aplicación web progresiva frente a iOS; si el SRS 3.6.1 conserva los 360 px | Estudiante y empresa | Antes del 2/11 | RF-24; S-06 |
@@ -1420,8 +1420,10 @@ Sin decisión registrada al 18/10/2026. Las fechas límite que no da el SRS vien
 | Reglas del cálculo del MVP | Confirmar las que adoptó el conjunto de referencia y llenar las fichas de RF-06, RF-08, RF-09 y RF-10 | Estudiante | Las reglas, antes del 19/10; las fichas, antes del 23/10 | RF-06; RF-08 a RF-10 |
 | Valores adoptados en el código | Política de contraseña, mensajes, duración de la sesión, límite de RD-05 (728 o 730 días), decimales de presentación y forma de la API | Estudiante | A más tardar el 23/10; RD-05, antes de RF-34 (semana del 19/10) | MVP.md 12.5 |
 | Licencia de la semilla sintética | Confirmar la versión «1» y el nombre de su fuente | Estudiante | Antes del 23/10 | RF-31 |
-| Versiones del entorno | Actualizar Python, Node.js y Firefox o registrar una nueva fecha | Estudiante | 18/10 | SRS 3.6.3; AC-05 |
-| Revisión del DOF | Hacerla y registrarla; si «anterior al 18» admite el mismo día | Estudiante | 18/10 | AC-08 |
+| Versiones del entorno | Actualizar Python, Node.js y Firefox; el SRS 3.6.3 ya fija la nueva fecha (P-68) | Estudiante | Semana del 19/10 | SRS 3.5 y 3.6.3 |
+| Revisión del DOF | Hacerla y registrarla en el SRS 3.1 (R3); el SRS ya dice «a más tardar el 18 de octubre» (P-67) | Estudiante | 18/10 | AC-08 |
+| Comprobación a mano del SRS 5.2 | Comprobar con calculadora el costo por título de T01, la valuación de BI261217 al 14/10/2026 y el TWR de P2-C, y registrar el resultado (R4) | Estudiante | — | AC-03; SRS 5.2 |
+| Tasa a 28 días del 10/09/2026 | Confirmarla con una segunda fuente (P-65); si cambia, se regeneran el SRS 5.2 y las semillas | Estudiante | — | RNF-01; AC-03 |
 
 ### 15.3 Marcas abiertas del SRS
 
@@ -1438,9 +1440,10 @@ Al 18/10/2026, el SRS del commit `268a2c2` tiene 297 marcas de decisión o confi
 | Descripción del MVP | [`docs/MVP.md`](MVP.md) | El MVP del 18 de octubre: capacidades, criterios, fórmulas, datos, API, instalación y estado |
 | Especificación de requisitos (SRS) | [`docs/2 (SRS) Especificación de Requisitos de Software.md`](2%20%28SRS%29%20Especificaci%C3%B3n%20de%20Requisitos%20de%20Software.md) | Requisitos, reglas de datos, diseño, conjunto de referencia y criterios de aceptación |
 | Definición del proyecto | [`docs/1 Definición del proyecto.md`](1%20Definici%C3%B3n%20del%20proyecto.md) | Problema, objetivos OE-1 a OE-5, justificación y clasificación MoSCoW |
-| README del repositorio | [`README.md`](../README.md) | Índice del paquete, fechas clave, stack, base de datos local y avisos |
+| README del repositorio | [`README.md`](../README.md) | Índice del paquete, fechas clave, stack, «Cómo ejecutarlo localmente» (AC-05) y avisos |
 | Conjunto de referencia | [`backend/tests/oraculo/README.md`](../backend/tests/oraculo/README.md) | Escenario, entradas, cifras esperadas, fuentes y tolerancias |
 | Aviso de privacidad de demostración | [`backend/semillas/aviso_privacidad_demo.md`](../backend/semillas/aviso_privacidad_demo.md) | Texto vigente del aviso (RF-12) |
+| Registro de resultados del 18/10/2026 | [`backend/tests/resultados/2026-10-18/INDICE.md`](../backend/tests/resultados/2026-10-18/INDICE.md) | Evidencia de AC-01 a AC-04 y AC-07: corrida con registro, tabla de diferencias de CPNF-01, inspecciones de AC-03 y CPNF-05, y el recorrido de AC-04 con su guion y sus capturas |
 | Glosario del dominio financiero | Documento aparte, enlazado en el SRS 1.3 | Términos financieros |
 | Registros de decisión (ADR), matriz de riesgos, cronograma y consideraciones legales | `docs/adr/`, `docs/riesgos.md`, `docs/cronograma.md` y `docs/legal.md` | Pendientes (README, «Índice del paquete») |
 
@@ -1457,11 +1460,13 @@ El SRS 3.1 registra las versiones de la especificación: las 0.x son borradores,
 | 14/10/2026 | Entra RF-34 y el orden de recorte MoSCoW estricto. RF-32 deja la UDI y carga las series de plazo; el FIX histórico se carga una sola vez con RF-23. Se fijan los métodos de RF-17, RF-19, RF-20 y RF-21 y los indicadores de RF-24. Los precios de RF-33 son privados de su autor. RF-14 se hará en la semana del 2 de noviembre con plantillas y sin juicios de conveniencia; se retira R-09. | Commit `b80c439`; SRS 3.1, fila 0.3 |
 | 15/10/2026 | Se congela el SRS 5.2, evidencia de AC-03. No cambia el alcance. | Commit `11097f8`; SRS 5.2 |
 | 16 y 18/10/2026 | Decisiones de diseño, sin cambio de alcance: Recharts 3.10.1 para las gráficas; guía de estilo basada en CDS con tema propio (SRS 4.5.1) y mapa de navegación (SRS 4.5.2). | Commits `6cd253c` y `268a2c2`; SRS 3.1, fila 0.3 |
+| 18/10/2026 | Entrega del MVP, sin cambio de alcance: el cliente web con las 12 pantallas y la evidencia de AC-01 a AC-04. El SRS precisa el criterio 1 de RF-11 (P-64), registra en 4.2 el script SQL de semillas (P-66), dice «a más tardar» en AC-08 (P-67), pasa la actualización de versiones a la semana del 19 de octubre (P-68) y sitúa el registro de resultados en `backend/tests/resultados/` (P-70). El SRS 1.2 deja de listar datos de contacto, porque el repositorio pasó a ser público. | Commit `e636b78` (cliente web); SRS 3.1, fila 0.3 |
 
-Pendientes de registro al 18/10/2026: ningún traslado de imprescindibles por S-02 consta en el SRS 3.1, la revisión del DOF de AC-08 tampoco, y la versión 0.3 sigue abierta y reúne todos los cambios del 7 al 18 de octubre (MVP.md 12; SRS 3.1).
+Al 18/10/2026 no hubo traslados de imprescindibles por S-02. La revisión del DOF de AC-08 todavía no consta en el SRS 3.1, y la versión 0.3 sigue abierta y reúne todos los cambios del 7 al 18 de octubre (MVP.md 12; SRS 3.1).
 
 ### 16.3 Registro de cambios de este documento
 
 | Versión | Fecha | Autor | Cambios |
 |---|---|---|---|
 | 1.0 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Primera versión, entregada con el MVP (AC-06). Refleja el SRS 0.3 del commit `268a2c2` y el estado de MVP.md al 18/10/2026. |
+| 1.1 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Estado de la entrega del MVP, según la versión 1.1 de MVP.md: el cliente web con las 12 pantallas (commit `e636b78`) y los 18 imprescindibles hechos y verificados, con la evidencia de `backend/tests/resultados/2026-10-18/`; AC-01 a AC-07 cumplidos y AC-08 pendiente. Se actualizan el encabezado, las convenciones de estado, OE-2 a OE-5, las métricas de 3.3, 3.4, el líder en 4.5, 5.3, el estado de los 18 imprescindibles en 6.2 a 6.9, RNF-01 a RNF-05 en 7.2, 9.1 a 9.6, 10.3, 10.5, 10.6, 11.2 a 11.4, la hoja de ruta y los entregables (13), los responsables y AC-01 a AC-08 (14), los riesgos y las preguntas abiertas (15) y 16.1 y 16.2. Registra las precisiones del SRS del 18/10/2026 (P-64, P-66, P-67, P-68 y P-70). Quita la hora de corte y «el repositorio que indique el líder»: el repositorio es público y lo revisan, hasta el fin de semana del 24 y 25 de octubre, los agentes de la plataforma del líder. |

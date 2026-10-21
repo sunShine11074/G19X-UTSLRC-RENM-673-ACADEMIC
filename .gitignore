@@ -12,6 +12,9 @@ confidencial/
 # ---- Documentos personales y de la estadía (borradores, notas, cartas, Develop/) ----
 /6th quarter (Estadías)/
 
+# ---- Configuración local de Claude Code (rutas del equipo; el repositorio es público) ----
+.claude/
+
 # ---- Python ----
 __pycache__/
 *.py[cod]

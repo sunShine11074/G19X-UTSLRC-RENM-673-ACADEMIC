@@ -6,18 +6,18 @@ Plataforma Inteligente de Gestión de Activos Financieros: producto mínimo viab
 |---|---|
 | Proyecto | 077 — Plataforma Inteligente de Gestión de Activos Financieros |
 | Documento | `docs/MVP.md`: descripción del MVP y de cómo comprobar cada una de sus capacidades |
-| Versión del documento | 1.0 |
+| Versión del documento | 1.1 (registro de cambios en la sección 14) |
 | Fecha | Domingo 18 de octubre de 2026 |
 | Autor | Ramon Ernesto Nieblas Mendivil, estudiante en estadía del TSU en Desarrollo de Software Multiplataforma (Universidad Tecnológica de San Luis Río Colorado). Analista, desarrollador y responsable de pruebas del proyecto (SRS 3.7). |
 | Empresa | PluriOne S.A. de C.V. (Develop Talent & Technology) |
 | Líder de proyecto | Edgar Loeffelmann Ibarra: revisión del MVP y aprobación del entregable (SRS 1.2) |
-| Entrega del MVP | A más tardar el domingo 18 de octubre de 2026, inclusive (SRS 3.8 y 3.9.2) |
-| Especificación de referencia | SRS versión 0.3 (en elaboración), tal como está en el commit `268a2c2` |
-| Estado del MVP | Servidor completo (API, motor de cálculo, base de datos y datos semilla) y verificado con 271 pruebas automatizadas. La interfaz web está pendiente: hoy solo existe una página de prueba de conexión. El detalle está en la sección 12. |
+| Entrega del MVP | Domingo 18 de octubre de 2026 (SRS 3.8), sin hora de corte. El repositorio es público, y el líder de proyecto lo evalúa con los agentes de su plataforma hasta el fin de semana del 24 y 25 de octubre de 2026 (sección 10.1) |
+| Especificación de referencia | SRS versión 0.3 (en elaboración), en la versión del 18 de octubre de 2026 que acompaña a este documento; sus cambios de ese día constan en la fila 0.3 del SRS 3.1 |
+| Estado del MVP | Completo y verificado. Los 18 imprescindibles funcionan en el servidor (API, motor de cálculo, base de datos y datos semilla), con 271 pruebas automatizadas que pasan, y en el cliente web, con las 12 pantallas del SRS 4.5.2, recorridas con 33 capturas fechadas. Se cumplen AC-01 a AC-07; AC-08 espera la revisión del Diario Oficial. El detalle está en la sección 12. |
 
 ## Propósito y uso de este documento
 
-Este archivo describe el MVP del Proyecto 077: qué hace, para quién, con qué datos, cómo calcula, cómo se instala y cómo se comprueba cada capacidad. El líder de proyecto pidió que la carpeta `docs/` contenga dos archivos Markdown, uno del MVP y otro del PRD (SRS 2.5.1, S-01, y 3.9.2, AC-06), y el 18 de octubre de 2026 fijó sus nombres: `MVP.md` (este archivo) y `PRD.md`. Solo queda por confirmar con él si `docs/` debe tener exactamente esos dos (sección 12.5). Su plataforma los usará, entre otras cosas, como criterios para evaluar la aplicación.
+Este archivo describe el MVP del Proyecto 077: qué hace, para quién, con qué datos, cómo calcula, cómo se instala y cómo se comprueba cada capacidad. El líder de proyecto pidió que la carpeta `docs/` contenga dos archivos Markdown, uno del MVP y otro del PRD (SRS 2.5.1, S-01, y 3.9.2, AC-06), y el 18 de octubre de 2026 fijó sus nombres: `MVP.md` (este archivo) y `PRD.md`. Solo queda por confirmar con él si `docs/` debe tener exactamente esos dos (sección 12.5). Su plataforma evalúa los repositorios con un conjunto de agentes y usará estos dos archivos, entre otras cosas, como criterios para evaluar la aplicación.
 
 Relación con los demás documentos:
 
@@ -31,7 +31,7 @@ Cómo usarlo para evaluar la aplicación:
 2. Las secciones 4 y 5 dan las fórmulas y los datos, con resultados esperados que se pueden comprobar. La sección 6 da los requisitos no funcionales que se verifican con el MVP (RNF-01 a RNF-05), con su métrica, su prueba y su estado, y la sección 9, lo que queda fuera del MVP.
 3. La sección 10 lista los criterios de aceptación de la entrega (AC-01 a AC-08) y la evidencia que pide cada uno.
 4. La sección 11 da los comandos para instalar, ejecutar y probar el sistema en un equipo local.
-5. La sección 12 dice, sin adornos, qué está hecho y verificado, qué está hecho sin interfaz y qué está pendiente, en todo o en parte, al 18 de octubre de 2026.
+5. La sección 12 dice, sin adornos, qué está hecho y verificado y con qué evidencia, qué quedó para la fase de refinamiento y qué sigue pendiente al 18 de octubre de 2026.
 
 ### Convenciones
 
@@ -46,6 +46,7 @@ Cómo usarlo para evaluar la aplicación:
 | V-nn | Pantalla del cliente web | SRS 4.5.2 |
 | Enn | Operación de la API | SRS 4.5.2 y `backend/app/api/` |
 | R-nn, X-nn, S-nn y D-nn | Restricción, exclusión de alcance, suposición y dependencia | SRS 2.4, 2.4.7 y 2.5 |
+| R3 y R4 | Tareas pendientes del estudiante en el plan de trabajo del 18 de octubre de 2026: R3, la revisión del Diario Oficial (AC-08); R4, la comprobación a mano de tres cifras del SRS 5.2 (sección 12.6). No son restricciones R-nn | Plan del 18 de octubre de 2026, que no está en el repositorio |
 | OE-n | Objetivo específico | Definición del proyecto |
 | SRS 5.2 | Conjunto de datos de referencia (el «oráculo»); este documento lo resume en la sección 5.8, no en su sección 5.2, que trata los precios sintéticos | SRS 5.2 y `backend/tests/oraculo/` |
 | ⟦decidir⟧ y ⟦confirmar⟧ | Marcas con que el SRS señala una decisión o una confirmación abierta. Este documento no las usa: lo que el código aplica en su lugar se rotula «Adoptado, por confirmar», y lo que sigue abierto se lista en la sección 12.5 | SRS |
@@ -54,9 +55,10 @@ En este documento, el estado de cada cosa se nombra así:
 
 - Especificado: lo exige el SRS.
 - Implementado: existe en el código del repositorio.
-- Verificado: lo comprueba una prueba automatizada que pasó el 18 de octubre de 2026.
+- Verificado: lo comprueba una prueba automatizada que pasó el 18 de octubre de 2026 y, en lo que solo puede dar la interfaz, una captura del recorrido de AC-04 de ese mismo día.
 - Adoptado, por confirmar: valor que el código aplica donde el SRS deja una decisión abierta. Funciona hoy, pero puede cambiar cuando se confirme y se lleve al SRS.
-- Pendiente: lo exige un criterio y hoy no existe.
+- Para la fase de refinamiento: algo que el plan del 18 de octubre recortó del cliente web sin quitar ningún criterio del SRS 3.2 ni ningún requisito no funcional que se juzgue ese día (sección 12.4).
+- Pendiente: lo exige un criterio y hoy no existe o no consta.
 
 ## Contenido
 
@@ -73,6 +75,7 @@ En este documento, el estado de cada cosa se nombra así:
 11. [Cómo ejecutarlo y verificarlo en local](#11-cómo-ejecutarlo-y-verificarlo-en-local)
 12. [Estado al 18 de octubre de 2026](#12-estado-al-18-de-octubre-de-2026)
 13. [Documentos relacionados](#13-documentos-relacionados)
+14. [Registro de cambios](#14-registro-de-cambios)
 
 ---
 
@@ -96,8 +99,8 @@ El producto no emite recomendaciones de inversión ni ejecuta órdenes: solo reg
 ### 1.3 Qué es el MVP
 
 - Alcance: los 18 requisitos imprescindibles (categoría «Must-have» de MoSCoW) del SRS 3.2: RF-01 a RF-12, RF-25, RF-26a, RF-26b, RF-28, RF-30 y RF-31. Atienden los objetivos OE-3 (registro y consolidación del portafolio) y OE-4 (motor de cálculo y tablero). OE-5, la comparación con un conjunto de referencia, se demuestra con RNF-01 (sección 6).
-- Fecha: a más tardar el domingo 18 de octubre de 2026, inclusive (SRS 3.8).
-- Quién lo definió: el líder de proyecto fijó la fecha del MVP y los dos archivos de `docs/`; el alcance funcional y las tecnologías los definió el estudiante (SRS 2.5, S-01).
+- Fecha: el domingo 18 de octubre de 2026 (SRS 3.8), sin hora de corte. Según informó el estudiante ese día, es una fecha que él se fijó para tener tiempo de seguir con el PRD, revisar y refinar hasta el fin de la estadía (sección 10.1).
+- Quién lo definió: el alcance funcional y las tecnologías los definió el estudiante, y el líder de proyecto pidió los dos archivos de `docs/` (SRS 2.5, S-01).
 - Datos: precios de cierre sintéticos, marcados como datos de demostración (RF-07); tasas reales de CETES del Banco de México (RF-30), y la valuación de los CETES como estimación informativa (RF-26b). Según el SRS 3.9, la aceptación evalúa el cálculo contra el conjunto de referencia, no la exactitud de los precios ni la cercanía de la valuación al mercado. Es una decisión del estudiante que el SRS deja por confirmar con el líder de proyecto (S-05 y S-13).
 - Dónde corre: no hay servidor de producción. El sistema se ejecuta, se prueba y se demuestra en el equipo de desarrollo (SRS 2.5, S-03; 3.9.2).
 - Usuarios: solo cuentas de prueba con datos ficticios y un aviso de privacidad de demostración (SRS 2.5, S-04).
@@ -105,9 +108,11 @@ El producto no emite recomendaciones de inversión ni ejecuta órdenes: solo reg
 
 ### 1.4 Lo que se entrega el 18 de octubre, en breve
 
-- El servidor está completo: una API con 19 operaciones más una de diagnóstico, el motor único de cálculo, el esquema de base de datos de 13 tablas y la carga de los datos semilla. Lo verifican 271 pruebas automatizadas que pasan (sección 11.5).
-- El conjunto de referencia (SRS 5.2) se congeló en el commit `11097f8`, del 15 de octubre, antes del primer commit del motor (`b3391fd`, del 17 de octubre). El motor reproduce sus cifras dentro de la tolerancia (RNF-01).
-- La interfaz web no está construida: `frontend/src/App.jsx` solo muestra una página que comprueba la conexión con la API. Por eso faltan las 12 pantallas del SRS 4.5.2 y las partes de los criterios que solo puede cumplir la interfaz (sección 12). Si no quedan a tiempo, rige S-02: su paso a la fase de refinamiento se acuerda con el líder y se registra en el SRS 3.1 antes de la revisión (SRS 3.9.2).
+- El servidor está completo: una API con 19 operaciones más una de diagnóstico, el motor único de cálculo, el esquema de base de datos de 13 tablas y la carga de los datos semilla. Lo verifican 271 pruebas automatizadas, que pasan en la corrida con registro del 18 de octubre (sección 11.5).
+- El cliente web está completo: las 12 pantallas del SRS 4.5.2 (V-01 a V-12), en React, con un enrutador propio y la gráfica del tablero en Recharts. Presenta las cifras tal como las entrega la API, sin recalcularlas, con los avisos de RF-12, la marca de demostración de RF-07 y la procedencia de RF-31. Compila (`npm run build`), pasa el lint (`npm run lint`) y su módulo de formato aprueba sus 10 pruebas (`node --test`).
+- El conjunto de referencia (SRS 5.2) se congeló en el commit `11097f8`, del 15 de octubre, antes del primer commit del motor (`b3391fd`, del 17 de octubre). El motor reproduce sus cifras dentro de la tolerancia (RNF-01): la tabla de diferencias del 18 de octubre no tiene ninguna cifra fuera de ella.
+- La evidencia está en `backend/tests/resultados/2026-10-18/`: la corrida con registro, la tabla de diferencias, la inspección de AC-03, la de credenciales (CPNF-05) y el recorrido de AC-04, con 33 capturas fechadas tomadas en el entorno real del equipo de desarrollo con los datos del SRS 5.2.
+- No hubo traslados por S-02: ninguna pantalla ni criterio pasó a la fase de refinamiento. Lo que el plan del día recortó sin quitar criterios, los hallazgos menores y los pendientes están en las secciones 12.4 y 12.6.
 
 ### 1.5 Términos
 
@@ -184,7 +189,7 @@ La demostración y la aceptación usan el escenario del conjunto de referencia (
 - Cliente y servidor se ejecutan en el mismo equipo; no se requiere Internet (SRS 3.6.1).
 - Navegadores: versiones vigentes basadas en Chromium o Firefox (SRS 3.5).
 - Resolución mínima de escritorio: 1280 × 720 px CSS, con el navegador al 100 % de zoom (SRS 3.6.1).
-- El cliente debe abrirse en `localhost`, no en `127.0.0.1`, para que la cookie de sesión viaje (sección 11.7).
+- El cliente se abre en `http://localhost:5173`, no en `http://127.0.0.1:5173`: la API solo acepta escrituras, el inicio de sesión incluido, desde los orígenes exactos de `CORS_ORIGINS`, y para el navegador `127.0.0.1` es otro origen (sección 11.7).
 
 ---
 
@@ -192,28 +197,28 @@ La demostración y la aceptación usan el escenario del conjunto de referencia (
 
 ### 3.1 Resumen de los 18 imprescindibles
 
-La agrupación por área es de este documento; el SRS 3.2 los lista por identificador. La columna «Estado» usa las categorías de la sección 12.
+La agrupación por área es de este documento; el SRS 3.2 los lista por identificador. La columna «Estado» usa las categorías de la sección 12; la evidencia de cada uno está en la sección 12.1.
 
 | RF | Capacidad | Área | OE | Prueba | Casos de uso | Pantallas | API | Estado al 18/10/2026 |
 |---|---|---|---|---|---|---|---|---|
-| RF-01 | Registro e inicio de sesión | A | OE-3 | CPF-01 | CU-01, CU-02 | V-01, V-02 | E03 a E06 | Hecho sin interfaz |
-| RF-02 | Aislamiento de la información de cada usuario | A | OE-3 | CPF-02 | CU-03 a CU-07 | V-12 | Todas las que exigen sesión | Hecho sin interfaz |
-| RF-03 | Gestión de portafolios | B | OE-3 | CPF-03 | CU-03 | V-08 | E12 a E16 | Hecho sin interfaz |
-| RF-04 | Catálogo de instrumentos | C | OE-3 | CPF-04 | CU-08 | V-10 | E08 | Hecho sin interfaz |
-| RF-05 | Registro y consulta de transacciones | D | OE-3 | CPF-05 | CU-05, CU-06 | V-06, V-07 | E17, E18 | Hecho sin interfaz |
-| RF-06 | Posición vigente | E | OE-3 | CPF-06 | CU-06, CU-07 | V-05, V-04 | E19, E20 | Hecho sin interfaz |
-| RF-07 | Precios de cierre sintéticos | G | OE-4 | CPF-07 | CU-11, CU-06, CU-07 | V-04, V-05 | Semillas; E19, E20 | Pendiente en parte (criterio 3) |
-| RF-08 | Valor de mercado y resultado no realizado | E | OE-4 | CPF-08 | CU-06, CU-07 | V-05, V-04 | E19, E20 | Hecho sin interfaz |
-| RF-09 | Rendimiento ponderado por tiempo (TWR) | F | OE-4 | CPF-09 | CU-07 | V-04 | E20 | Hecho sin interfaz |
-| RF-10 | Máxima caída | F | OE-4 | CPF-10 | CU-07 | V-04 | E20 | Hecho sin interfaz |
-| RF-11 | Tablero | F | OE-4 | CPF-11 | CU-07 | V-04 | E20, E09, E12 | Pendiente en parte (criterios 1 y 2) |
-| RF-12 | Consentimiento, aviso de privacidad y advertencias | A | OE-3 | CPF-12 | CU-01, CU-02, CU-09, CU-10 | V-02, V-03, V-11; avisos en V-04 a V-06 | E02, E03, E06, E07 | Pendiente en parte (criterios 1, 2 y 4) |
-| RF-25 | Intermediarios | B | OE-3 | CPF-25 | CU-04 | V-09 | E10, E11 | Hecho sin interfaz |
-| RF-26a | Vencimiento de los CETES | E | OE-4 | CPF-26a | CU-05, CU-06, CU-07 | V-05, V-07 | E18, E19, E20 | Hecho sin interfaz |
-| RF-26b | Valor estimado de los CETES antes del vencimiento | E | OE-4 | CPF-26b | CU-06, CU-07 | V-05, V-04 | E19, E20 | Hecho sin interfaz |
-| RF-28 | Saldo no negativo por intermediario | D | OE-3 | CPF-28 | CU-12 (dentro de CU-05) | V-07 | E18 | Hecho sin interfaz |
+| RF-01 | Registro e inicio de sesión | A | OE-3 | CPF-01 | CU-01, CU-02 | V-01, V-02 | E03 a E06 | Hecho y verificado |
+| RF-02 | Aislamiento de la información de cada usuario | A | OE-3 | CPF-02 | CU-03 a CU-07 | V-12 | Todas las que exigen sesión | Hecho y verificado |
+| RF-03 | Gestión de portafolios | B | OE-3 | CPF-03 | CU-03 | V-08 | E12 a E16 | Hecho y verificado |
+| RF-04 | Catálogo de instrumentos | C | OE-3 | CPF-04 | CU-08 | V-10 | E08 | Hecho y verificado |
+| RF-05 | Registro y consulta de transacciones | D | OE-3 | CPF-05 | CU-05, CU-06 | V-06, V-07 | E17, E18 | Hecho y verificado |
+| RF-06 | Posición vigente | E | OE-3 | CPF-06 | CU-06, CU-07 | V-05, V-04 | E19, E20 | Hecho y verificado |
+| RF-07 | Precios de cierre sintéticos | G | OE-4 | CPF-07 | CU-11, CU-06, CU-07 | V-04, V-05 | Semillas; E19, E20 | Hecho y verificado |
+| RF-08 | Valor de mercado y resultado no realizado | E | OE-4 | CPF-08 | CU-06, CU-07 | V-05, V-04 | E19, E20 | Hecho y verificado |
+| RF-09 | Rendimiento ponderado por tiempo (TWR) | F | OE-4 | CPF-09 | CU-07 | V-04 | E20 | Hecho y verificado |
+| RF-10 | Máxima caída | F | OE-4 | CPF-10 | CU-07 | V-04 | E20 | Hecho y verificado |
+| RF-11 | Tablero | F | OE-4 | CPF-11 | CU-07 | V-04 | E20, E09, E12 | Hecho y verificado |
+| RF-12 | Consentimiento, aviso de privacidad y advertencias | A | OE-3 | CPF-12 | CU-01, CU-02, CU-09, CU-10 | V-02, V-03, V-11; avisos en V-04 a V-06 | E02, E03, E06, E07 | Hecho y verificado |
+| RF-25 | Intermediarios | B | OE-3 | CPF-25 | CU-04 | V-09 | E10, E11 | Hecho y verificado |
+| RF-26a | Vencimiento de los CETES | E | OE-4 | CPF-26a | CU-05, CU-06, CU-07 | V-05, V-07 | E18, E19, E20 | Hecho y verificado |
+| RF-26b | Valor estimado de los CETES antes del vencimiento | E | OE-4 | CPF-26b | CU-06, CU-07 | V-05, V-04 | E19, E20 | Hecho y verificado |
+| RF-28 | Saldo no negativo por intermediario | D | OE-3 | CPF-28 | CU-12 (dentro de CU-05) | V-07 | E18 | Hecho y verificado |
 | RF-30 | Tasas reales de CETES | G | OE-4 | CPF-30 | CU-11 | Sin pantalla propia | Semillas | Hecho y verificado |
-| RF-31 | Procedencia de cada dato | G | OE-4 | CPF-31 | CU-06, CU-07, CU-11 | V-04, V-05 | E19, E20 | Pendiente en parte (criterios 2 y 3) |
+| RF-31 | Procedencia de cada dato | G | OE-4 | CPF-31 | CU-06, CU-07, CU-11 | V-04, V-05 | E19, E20 | Hecho y verificado |
 
 Áreas: A, cuenta, consentimiento y aislamiento; B, portafolios e intermediarios; C, catálogo; D, transacciones; E, posiciones y valuación; F, indicadores y tablero; G, datos de mercado y procedencia. Fuentes: SRS 3.2 (OE y prueba), 4.1 (casos de uso) y 4.5.2 (pantallas y operaciones de la API).
 
@@ -256,7 +261,7 @@ Adoptado, por confirmar (el SRS deja abiertas estas decisiones):
 
 No está por confirmar, porque lo decidió el estudiante: Argon2id con m = 19456 KiB, t = 2 y p = 1, el mínimo que exige RNF-04.
 
-Estado: implementado y verificado en la API (E03 a E06). Pendientes: las pantallas V-01 (inicio de sesión) y V-02 (registro).
+Estado: implementado y verificado en la API (E03 a E06; CPF-01) y en las pantallas V-01 (inicio de sesión) y V-02 (registro). El recorrido de AC-04 captura el rechazo del registro sin consentimiento, el alta de una cuenta de prueba, que lleva al inicio de sesión con el correo ya escrito, y el mensaje único ante una contraseña errónea, que además vacía el campo.
 
 #### RF-02 — Aislamiento de la información de cada usuario
 
@@ -276,7 +281,7 @@ Criterios de aceptación (SRS 3.2):
 
 Verificación: CPF-02, en `backend/tests/api/test_cpf02_propiedad.py` (3 pruebas): la respuesta 404 a un dato de B es idéntica, byte por byte, a la de un identificador inexistente, y la base no cambia. CPNF-03 (`backend/tests/no_funcionales/test_cpnf03.py`) recorre todas las operaciones de la API sin sesión y con sesión ajena.
 
-Estado: implementado y verificado en la API. Pendiente: la pantalla V-12 («No encontrado»).
+Estado: implementado y verificado en la API (CPF-02 y CPNF-03) y en la pantalla V-12 («No encontrado»): en el recorrido de AC-04, otra cuenta abre el portafolio «Principal» de la cuenta del escenario y un portafolio inexistente, y en ambos casos ve el mismo texto, «No existe el portafolio.». Hallazgo menor: si se abren las posiciones (V-05) de un portafolio inexistente, el aviso de no encontrado aparece dentro de V-05 en lugar de llevar a V-12 (sección 12.4).
 
 #### RF-12 — Consentimiento, aviso de privacidad y advertencias de uso
 
@@ -303,9 +308,14 @@ Adoptado, por confirmar:
 - El MVP solo bloquea la cuenta; la supresión de los datos queda fuera del MVP.
 - Revocar exige una confirmación expresa en la solicitud.
 - El registro debe indicar la versión del aviso que leyó la persona; si ya no es la vigente, responde 409. Sin aviso vigente, responde 503.
-- Los textos de los avisos viven en el cliente. El SRS 4.5.1 propone: «La información de este sistema no constituye asesoría de inversión.» y «Las valuaciones son estimaciones informativas, no precios oficiales, y no sustituyen el estado de cuenta de tu intermediario.» El texto de la casilla de consentimiento sigue abierto.
+- Los textos de los avisos y de la casilla viven en el cliente (`frontend/src/textos/textos.js`). Los avisos son los que propone el SRS 4.5.1: «La información de este sistema no constituye asesoría de inversión.» y «Las valuaciones son estimaciones informativas, no precios oficiales, y no sustituyen el estado de cuenta de tu intermediario.» La casilla dice: «Doy mi consentimiento para el tratamiento de mis datos personales, financieros y patrimoniales conforme al aviso de privacidad.» Su confirmación en el SRS sigue abierta.
 
-Estado: implementado y verificado en la API (E02, E03, E06 y E07), y el criterio 3 se cumple completo. Pendiente lo que depende del cliente: la casilla sin marcar en pantalla (criterio 1), la lectura del aviso en la interfaz (criterio 2), los avisos visibles (criterio 4) y las pantallas V-02, V-03 y V-11.
+Estado: implementado y verificado en la API (E02, E03, E06 y E07; CPF-12) y en el cliente, con capturas del recorrido de AC-04 para cada criterio:
+
+1. La casilla de consentimiento aparece sin marcar, el registro sin ella se rechaza (V-02) y la cuenta muestra su consentimiento con su momento, su medio y la versión del aviso (V-11).
+2. El aviso se lee sin sesión (V-03) y en un diálogo, sin salir del registro (V-02).
+3. La revocación pide confirmación (V-11); después, la cuenta queda bloqueada y ya no puede iniciar sesión (V-01).
+4. Los dos avisos aparecen antes de las cifras, sin botón de cerrar, en el tablero, las posiciones y las transacciones (V-04 a V-06).
 
 ### 3.4 Área B. Portafolios e intermediarios
 
@@ -330,7 +340,7 @@ Verificación: CPF-03, en `backend/tests/api/test_cpf03_portafolios.py` (5 prueb
 
 Adoptado, por confirmar: la confirmación se da escribiendo el nombre del portafolio en la solicitud de eliminación; si no coincide, responde 422 y nada cambia. Los nombres tienen 120 caracteres o menos, sin caracteres de control.
 
-Estado: implementado y verificado en la API (E12 a E16). Pendiente: la pantalla V-08, con el diálogo de confirmación y la opción de cancelar.
+Estado: implementado y verificado en la API (E12 a E16; CPF-03) y en la pantalla V-08. El recorrido de AC-04 crea un portafolio desechable, cuyo tablero se abre al crearlo; lo renombra; abre el diálogo de eliminar, que pide escribir el nombre; comprueba que Cancelar no cambia nada, y lo elimina.
 
 #### RF-25 — Intermediarios
 
@@ -346,7 +356,7 @@ Criterios de aceptación (SRS 3.2):
 
 Verificación: CPF-25, en `backend/tests/api/test_cpf25_intermediarios.py` (3 pruebas). La API no ofrece operaciones para modificar ni eliminar intermediarios.
 
-Estado: implementado y verificado en la API (E10 y E11). Pendientes: la pantalla V-09 y el diálogo de alta dentro de V-07.
+Estado: implementado y verificado en la API (E10 y E11; CPF-25) y en la pantalla V-09. El recorrido de AC-04 muestra la lista de la cuenta del escenario y que otra cuenta sí puede registrar «Casa A».
 
 ### 3.5 Área C. Catálogo
 
@@ -368,7 +378,7 @@ Adoptado, por confirmar: las claves ficticias llevan el prefijo «DEMO», como r
 
 Datos: los 7 instrumentos de la sección 5.1.
 
-Estado: implementado y verificado en la API (E08). Pendiente: la pantalla V-10, con la marca de demostración visible.
+Estado: implementado y verificado en la API (E08; CPF-04) y en la pantalla V-10, con la marca de demostración visible (captura del recorrido de AC-04).
 
 ### 3.6 Área D. Transacciones
 
@@ -403,7 +413,7 @@ Adoptado, por confirmar:
 - El costo o ingreso por título se presenta con hasta 7 decimales, sin ceros finales y con al menos 2 (por ejemplo, «50.145» y «54.8405»).
 - El SRS deja abierto si el formulario muestra una revisión antes de registrar.
 
-Estado: implementado y verificado en la API (E17 y E18). Pendientes: las pantallas V-06 (lista de transacciones) y V-07 (registro).
+Estado: implementado y verificado en la API (E17 y E18; CPF-05) y en las pantallas V-06 (lista de transacciones) y V-07 (registro, con un formulario guiado). El recorrido de AC-04 consulta las 15 transacciones de «Principal» y registra una compra en un portafolio desechable. El formulario no muestra una revisión antes de registrar ni ofrece «Registrar otra»; ambas cosas quedaron para la fase de refinamiento (sección 12.4).
 
 #### RF-28 — Saldo no negativo por intermediario
 
@@ -419,7 +429,7 @@ Criterios de aceptación (SRS 3.2):
 
 Verificación: CPF-28, en `backend/tests/api/test_cpf28_saldo.py` (5 pruebas), que incluye dos ventas simultáneas de las que solo una debe pasar; además, las pruebas `test_rf28_*` del motor. En el conjunto de referencia se rechazan N1, N2 y N3 y se acepta el caso C1 (sección 5.8).
 
-Estado: implementado y verificado en la API. La API responde 409 con el código `saldo_negativo`, la fecha del primer saldo negativo y el saldo que resultaría. Pendiente: mostrar el motivo junto al campo en V-07.
+Estado: implementado y verificado en la API (CPF-28) y en la pantalla V-07. La API responde 409 con el código `saldo_negativo`, la fecha del primer saldo negativo y el saldo que resultaría, y V-07 muestra ese motivo. En el recorrido de AC-04, la venta N1 se rechaza porque dejaría el saldo de DEMOACC con Casa B en −50 títulos el 18/09/2026; no se registra nada (E17 da 15 transacciones antes y después) y lo capturado se conserva.
 
 ### 3.7 Área E. Posiciones y valuación, con CETES
 
@@ -437,7 +447,7 @@ Criterios de aceptación (SRS 3.2):
 
 Verificación: CPF-06, en `backend/tests/api/test_cpf06_posiciones.py` (4 pruebas); las pruebas `test_rf06_*` del motor, y CPNF-01 y CPNF-02 en `backend/tests/referencia/`.
 
-Estado: implementado y verificado en la API (E19 y E20). Pendiente: la pantalla V-05.
+Estado: implementado y verificado en la API (E19 y E20; CPF-06) y en la pantalla V-05, con las posiciones de «Principal» al 14/10/2026 (captura del recorrido de AC-04).
 
 #### RF-08 — Valor de mercado y resultado no realizado
 
@@ -452,7 +462,7 @@ Criterios de aceptación (SRS 3.2):
 
 Verificación: CPF-08, con las pruebas `test_rf08_crit1` a `test_rf08_crit4` de `backend/tests/motor/test_criterios_3_2.py`, y CPNF-01 para el conjunto de referencia, en el motor (`backend/tests/motor/test_oraculo_5_2.py`) y por la API (`backend/tests/referencia/test_cpnf01.py`).
 
-Estado: implementado y verificado en el motor y en la API (E19 y E20). Pendientes: las pantallas V-05 y V-04. La ficha detallada de RF-08 del SRS 3.2 sigue vacía.
+Estado: implementado y verificado en el motor y en la API (E19 y E20; CPF-08 y CPNF-01) y en las pantallas V-04 y V-05: al 14/10/2026, «Principal» tiene un costo de $56,307.89, un valor de mercado de $58,940.88 y un resultado no realizado de $2,632.99 (capturas del recorrido de AC-04). La ficha detallada de RF-08 del SRS 3.2 sigue vacía.
 
 #### RF-26a — Vencimiento de los CETES
 
@@ -470,7 +480,7 @@ Verificación: CPF-26a, en `backend/tests/api/test_cpf26a_registro.py` (3 prueba
 
 Adoptado, por confirmar: una emisión vencida aparece en las posiciones marcada como vencida y sin valuación. El límite de RD-05 se aplica como 730 días, no 728.
 
-Estado: implementado y verificado. Pendiente: su presentación en V-05 y el motivo de rechazo en V-07.
+Estado: implementado y verificado (CPF-26a). V-05 presenta la emisión BI261008 vencida el 08/10/2026 y liquidada a su valor nominal (captura del recorrido de AC-04), y V-07 muestra el motivo de cada rechazo de la API.
 
 #### RF-26b — Valor estimado de los CETES antes del vencimiento
 
@@ -486,7 +496,7 @@ Verificación: CPF-26b, con las pruebas `test_rf26b_*` del motor (criterios 1 y 
 
 Adoptado, por confirmar: si dos colocaciones tienen el mismo plazo efectivo, rige la más reciente y, si persiste el empate, la de menor plazo nominal. La tasa interpolada se presenta con 5 decimales. El SRS deja abierto si RF-26b tiene ficha propia.
 
-Estado: implementado y verificado. Pendiente: presentarla en V-05 con el rótulo de estimación (SRS 4.5.1).
+Estado: implementado y verificado (CPF-26b) y presentado en V-05 y V-04: cada posición en CETES lleva el rótulo «estimado» (SRS 4.5.1), su precio P, la tasa aplicada con el caso que la produjo (del plazo más corto o calculada entre dos plazos) y las colocaciones usadas (capturas del recorrido de AC-04).
 
 ### 3.8 Área F. Indicadores y tablero
 
@@ -504,7 +514,7 @@ Verificación: CPF-09, con las pruebas `test_rf09_*` del motor, los rechazos N7 
 
 Adoptado, por confirmar: un periodo inválido responde 422. El corte del tablero es siempre el fin del periodo. Por omisión, el periodo va del día siguiente al inicio de las semillas hasta el menor entre su fin y la fecha de hoy; hoy, del 11/09 al 14/10/2026.
 
-Estado: implementado y verificado. Pendiente: la presentación en V-04. La ficha detallada de RF-09 sigue vacía en el SRS.
+Estado: implementado y verificado (CPF-09 y CPNF-01) y presentado en V-04, sin anualizar: 4.39 % para P1-A (captura del recorrido de AC-04). La ficha detallada de RF-09 sigue vacía en el SRS.
 
 #### RF-10 — Máxima caída
 
@@ -518,7 +528,7 @@ Criterios de aceptación (SRS 3.2):
 
 Verificación: CPF-10, con las pruebas `test_rf10_*` del motor y CPNF-01. En el conjunto de referencia, P1-A da −6.680477… %, con pico el 16/09/2026 y valle el 23/09/2026, y P1-D (del 09/10 al 12/10) da 0.
 
-Estado: implementado y verificado. Pendiente: la presentación en V-04. La ficha detallada de RF-10 sigue vacía en el SRS.
+Estado: implementado y verificado (CPF-10 y CPNF-01) y presentado en V-04: −6.68 % para P1-A, del pico del 16/09/2026 al valle del 23/09/2026 (captura del recorrido de AC-04). La ficha detallada de RF-10 sigue vacía en el SRS.
 
 #### RF-11 — Tablero
 
@@ -538,9 +548,15 @@ Lo que devuelve hoy la API del tablero (E20) para P1-A: TWR 4.39 %; máxima caí
 
 Adoptado, por confirmar: sin transacciones hasta el fin del periodo, el tablero responde con el estado «sin datos», como recomienda el SRS.
 
-Conflicto abierto en el criterio 1: pide la tolerancia de RNF-01 (0.001 puntos porcentuales), pero el tablero presenta los por cientos con 2 decimales, como manda RD-13. En P1-A muestra 4.39 y el valor esperado es 4.3928 %; 9 de las 12 cifras de por ciento del conjunto de referencia quedan a más de 0.001 puntos de lo que se muestra; solo quedan dentro las máximas caídas de P1-A y P1-B (−6.680477 %, que se muestra −6.68) y la de P1-D (0.00) (sección 5.8). La tolerancia sí se cumple en las cifras del motor (CPNF-01). Hay dos salidas, sin decidir: precisar el criterio para que la tolerancia aplique a las cifras del motor, o presentar los por cientos con 3 decimales.
+Precisión del criterio 1, resuelta el 18/10/2026: el criterio pedía la tolerancia de RNF-01 (0.001 puntos porcentuales), pero el tablero presenta los por cientos con 2 decimales, como manda RD-13. En P1-A muestra 4.39 y el valor esperado es 4.3928 %; 9 de las 12 cifras de por ciento del conjunto de referencia quedan a más de 0.001 puntos de lo que se muestra (sección 5.8). El SRS 3.2 precisa ahora (P-64) que la tolerancia de RNF-01 se aplica a las cifras del motor, sin redondear (CPNF-01), y que el tablero las presenta redondeadas con 2 decimales, conforme a RD-13 y RD-16, idénticas en cada vista y en cada consulta repetida (RNF-02). Así se cumple: CPNF-01 no tiene ninguna cifra fuera de tolerancia, y RNF-02 se demostró con capturas (sección 6.1).
 
-Estado: implementado y verificado en la API. Pendiente la pantalla V-04: la gráfica (Recharts 3.10.1 está instalado, pero aún no se usa), las definiciones de RNF-07, los avisos, la marca de demostración y la procedencia.
+Estado: implementado y verificado en la API (CPF-11 y CPNF-02) y en la pantalla V-04. El recorrido de AC-04 muestra, para «Principal» en el periodo por omisión:
+
+1. Los cuatro indicadores, cada uno con su unidad y su fecha de corte o periodo: valor de mercado de $58,940.88 y resultado no realizado de $2,632.99 al 14/10/2026, TWR de 4.39 % sin anualizar y máxima caída de −6.68 % del 16/09/2026 al 23/09/2026 (criterio 1).
+2. La gráfica de Recharts, con un punto por día del 10/09 al 14/10/2026, un resumen en texto y la etiqueta del corte en $58,940.88, igual a la tarjeta del valor y a la última fila de su tabla alternativa de 35 días (criterio 2).
+3. El tablero de un portafolio recién creado, sin transacciones, que abre sin error (criterio 3).
+
+V-04 muestra también los avisos, la marca de demostración y la procedencia de cada valuación. Quedaron para la fase de refinamiento las definiciones desplegables de RNF-07, que se verifica el 23/10/2026, y la tecla Esc propia de la gráfica; las flechas ← y → de Recharts y la tabla alternativa sí están (sección 12.4).
 
 ### 3.9 Área G. Datos de mercado y procedencia
 
@@ -560,7 +576,7 @@ Verificación: CPF-07, en `backend/tests/api/test_cpf07_30_31_semillas.py` (5 pr
 
 Datos: sección 5.2.
 
-Estado: criterios 1 y 2 implementados y verificados. Pendiente el criterio 3: señalar los datos de demostración en V-04 y V-05. Desviación por registrar en el SRS: la carga la hace un script SQL (`backend/04_cargar_semillas.sql`), no un componente «Cargas» en Python como describe el SRS 4.2.
+Estado: implementado y verificado (CPF-07). Los criterios 1 y 2 se cumplen en la base y en la API, y el criterio 3 en V-04 y V-05, que señalan los precios y las cifras que dependen de ellos con la etiqueta «Datos de demostración» (capturas del recorrido de AC-04). La carga la hace un script SQL (`backend/04_cargar_semillas.sql`), no un componente «Cargas» en Python; el 18/10/2026 el SRS 4.2 lo registró así (P-66).
 
 #### RF-30 — Tasas reales de CETES
 
@@ -578,7 +594,7 @@ Verificación: CPF-30, en `backend/tests/api/test_cpf07_30_31_semillas.py`: 32 t
 
 Datos: sección 5.3.
 
-Estado: hecho y verificado. No tiene pantalla propia; sus tasas se ven en la procedencia de V-04 y V-05 (SRS 4.5.2). Pendiente de confirmar con una segunda fuente la tasa a 28 días del 10/09/2026 (sección 12.5).
+Estado: hecho y verificado (CPF-30). No tiene pantalla propia; sus tasas, con su plazo y su fecha de colocación, se ven en la procedencia de V-04 y V-05 (SRS 4.5.2; capturas del recorrido de AC-04). Sigue pendiente confirmar con una segunda fuente la tasa a 28 días del 10/09/2026 (P-65; sección 12.5).
 
 #### RF-31 — Procedencia de cada dato
 
@@ -596,7 +612,7 @@ Verificación: CPF-31, en `backend/tests/api/test_cpf07_30_31_semillas.py`: atri
 
 Adoptado, por confirmar: la licencia de la semilla sintética es la versión «1», propuesta al construir el conjunto de referencia (el SRS deja abierta esa licencia). La fecha de carga que se muestra es la del momento en que se ejecutó la carga.
 
-Estado: criterio 1 hecho y verificado; los datos de los criterios 2 y 3 ya los entrega la API. Pendiente: mostrar la línea de fuente junto a cada dato en V-04 y V-05 (SRS 4.5.1, «Línea de fuente»).
+Estado: implementado y verificado (CPF-31). El criterio 1 se cumple en la base, y los criterios 2 y 3 en V-04 y V-05 (SRS 4.5.1, «Línea de fuente»): junto a cada valuación de CETES aparecen «Fuente: Banco de México, https://www.banxico.org.mx» y la fecha de colocación de las tasas usadas, y junto a cada precio, su fuente señalada como datos de demostración y la fecha del cierre usado (capturas del recorrido de AC-04).
 
 ---
 
@@ -944,15 +960,15 @@ El conjunto se congeló con el commit `11097f8`, del 15/10/2026, anterior al pri
 
 ### 6.1 Los que se verifican con el MVP
 
-Según el SRS 3.3, RNF-01 a RNF-05 se verifican a más tardar el 18 de octubre de 2026. AC-03 cubre RNF-01 y AC-02 cubre RNF-02 a RNF-05.
+Según el SRS 3.3, RNF-01 a RNF-05 se verifican a más tardar el 18 de octubre de 2026. AC-03 cubre RNF-01 y AC-02 cubre RNF-02 a RNF-05. Los cinco alcanzan su valor objetivo; las rutas de la evidencia son relativas a `backend/tests/resultados/2026-10-18/`.
 
 | RNF | Qué exige | Métrica y valor objetivo | Método y prueba | Estado al 18/10/2026 |
 |---|---|---|---|---|
-| RNF-01 Corrección | Cada importe, TWR y máxima caída del conjunto de referencia dentro de la tolerancia de OE-5 | Diferencia máxima ≤ 0.01 en importes y ≤ 0.001 puntos porcentuales en rendimiento y máxima caída | Prueba CPNF-01: pytest compara sin redondear y genera la tabla de diferencias | Pasa en el motor (`backend/tests/motor/test_oraculo_5_2.py`, 27 pruebas) y por la API desde la base, sin red (`backend/tests/referencia/test_cpnf01.py`, 3). Falta guardar la tabla de diferencias en el repositorio. |
-| RNF-02 Cifras idénticas | Misma cifra, dígito por dígito, en todas las vistas y en consultas repetidas | 0 cifras distintas para el conjunto de referencia | Demostración CPNF-02: comparar como texto, con capturas, el tablero y las posiciones | La comparación automática por la API pasa (`backend/tests/referencia/test_cpnf02.py`, 17 pruebas). La demostración con capturas requiere las pantallas V-04 y V-05. |
-| RNF-03 Confidencialidad entre cuentas | Sin sesión o con sesión ajena, nada se consulta ni se cambia, y no se revela si existe | 0 solicitudes aceptadas; 0 respuestas que distingan lo ajeno de lo inexistente | Prueba CPNF-03: recorre todas las operaciones de la API | Pasa (`backend/tests/no_funcionales/test_cpnf03.py`). |
-| RNF-04 Contraseñas no reversibles | Ninguna contraseña legible en la base, respaldos, registros ni respuestas | 0 contraseñas legibles; 0 cuentas con igual valor almacenado; Argon2id con m ≥ 19 MiB, t ≥ 2 y p = 1 | Prueba CPNF-04, con un respaldo `pg_dump` | Pasa (`backend/tests/no_funcionales/test_cpnf04.py`). |
-| RNF-05 Credenciales fuera del alcance | Ninguna credencial vigente en el historial del repositorio, los archivos del navegador, las direcciones ni los registros | 0 apariciones por lugar | Inspección CPNF-05 (`backend/tests/inspeccion/cpnf05_credenciales.py`), que solo ejecuta el autor porque lee `backend/.env` | No consta su ejecución. `backend/.env` está excluido del control de versiones y ningún commit lo incluye. Se verifica otra vez el 30/10/2026, con RF-32. |
+| RNF-01 Corrección | Cada importe, TWR y máxima caída del conjunto de referencia dentro de la tolerancia de OE-5 | Diferencia máxima ≤ 0.01 en importes y ≤ 0.001 puntos porcentuales en rendimiento y máxima caída | Prueba CPNF-01: pytest compara sin redondear y genera la tabla de diferencias | Cumple. Pasa en el motor (`backend/tests/motor/test_oraculo_5_2.py`, 27 pruebas) y por la API desde la base, sin red (`backend/tests/referencia/test_cpnf01.py`, 3), en la corrida con registro del 18/10/2026. La tabla de diferencias (`cpnf01_diferencias.csv`) y su resumen (`cpnf01_resumen.csv`) no tienen ninguna cifra fuera de tolerancia, y `cpnf01_versiones.csv` registra el código comparado (`e636b78`) y el conjunto congelado (`11097f8`). |
+| RNF-02 Cifras idénticas | Misma cifra, dígito por dígito, en todas las vistas y en consultas repetidas | 0 cifras distintas para el conjunto de referencia | Demostración CPNF-02: comparar como texto, con capturas, el tablero y las posiciones | Cumple. La comparación automática por la API pasa (`backend/tests/referencia/test_cpnf02.py`, 17 pruebas), y la demostración con capturas del recorrido de AC-04 muestra «$58,940.88», igual como texto, en la tarjeta del valor, la etiqueta del corte de la gráfica y la última fila de su tabla en V-04, y en el total de V-05, también en la consulta repetida (`ac04/RNF-02_*.png`). |
+| RNF-03 Confidencialidad entre cuentas | Sin sesión o con sesión ajena, nada se consulta ni se cambia, y no se revela si existe | 0 solicitudes aceptadas; 0 respuestas que distingan lo ajeno de lo inexistente | Prueba CPNF-03: recorre todas las operaciones de la API | Cumple. Pasa en la corrida con registro (`backend/tests/no_funcionales/test_cpnf03.py`), y en el recorrido de AC-04 lo ajeno y lo inexistente muestran el mismo texto en V-12. |
+| RNF-04 Contraseñas no reversibles | Ninguna contraseña legible en la base, respaldos, registros ni respuestas | 0 contraseñas legibles; 0 cuentas con igual valor almacenado; Argon2id con m ≥ 19 MiB, t ≥ 2 y p = 1 | Prueba CPNF-04, con un respaldo `pg_dump` | Cumple. Pasa en la corrida con registro (`backend/tests/no_funcionales/test_cpnf04.py`). |
+| RNF-05 Credenciales fuera del alcance | Ninguna credencial vigente en el historial del repositorio, los archivos del navegador, las direcciones ni los registros | 0 apariciones por lugar | Inspección CPNF-05 (`backend/tests/inspeccion/cpnf05_credenciales.py`), que solo ejecuta el autor porque lee `backend/.env` | Cumple. La ejecutó el autor el 18/10/2026 a las 21:28 (`cpnf05.txt`): de 3 credenciales buscadas, 0 coincidencias en el historial de git (26 commits), el índice, el árbol de trabajo, `frontend/dist` (36 archivos) y los registros (45 archivos); `backend/.env` está ignorado por git y ningún commit lo incluye; código de salida 0, según informó el autor. Se verifica otra vez el 30/10/2026, con RF-32. |
 
 ### 6.2 Los que se verifican después del MVP
 
@@ -963,7 +979,7 @@ Según el SRS 3.3, RNF-01 a RNF-05 se verifican a más tardar el 18 de octubre d
 | RNF-06 y RNF-10 | Tiempo de carga del tablero; agregar o quitar una fuente sin tocar el motor | 06/11/2026 |
 | RNF-11 y RNF-12 | Pantallas completas en cada navegador y resolución; instalación desde el manual técnico | 13/11/2026 |
 
-El MVP adelanta dos de ellos: CPNF-01 corre sin red (base de RNF-08) y el motor vive aislado en su carpeta, sin dependencias externas (base de RNF-10).
+El MVP adelanta dos de ellos: CPNF-01 corre sin red (base de RNF-08) y el motor vive aislado en su carpeta, sin dependencias externas (base de RNF-10). Para RNF-07, el tablero ya muestra junto a cada indicador su unidad y su fecha de corte o periodo; faltan las definiciones desplegables, que quedaron para la fase de refinamiento (sección 12.4).
 
 ---
 
@@ -971,7 +987,7 @@ El MVP adelanta dos de ellos: CPNF-01 corre sin red (base de RNF-08) y el motor 
 
 ### 7.1 Arquitectura
 
-Es un sistema cliente-servidor: todo cálculo ocurre en el servidor, con el motor único, y el cliente solo presenta resultados (SRS 3.6 y 4.2). Hay dos contenedores, el cliente web y el servidor, y un componente externo, PostgreSQL. Durante la estadía los tres corren en el equipo de desarrollo.
+Es un sistema cliente-servidor: todo cálculo ocurre en el servidor, con el motor único, y el cliente solo presenta resultados (SRS 3.6 y 4.2). Hay dos contenedores, el cliente web y el servidor, y un componente externo, PostgreSQL. Durante la estadía los tres corren en el equipo de desarrollo: Vite sirve el cliente en `http://localhost:5173` y reenvía las peticiones a `/api` a la API, en `http://127.0.0.1:8000` (sección 11.4).
 
 | Componente (SRS 4.2) | Dónde está | Estado |
 |---|---|---|
@@ -985,8 +1001,8 @@ Es un sistema cliente-servidor: todo cálculo ocurre en el servidor, con el moto
 | Acceso a datos (SQLAlchemy 2) | `backend/app/db.py` y `backend/app/datos/` | Implementado |
 | Configuración | `backend/app/config.py` | Implementado |
 | Instalación de semillas | `backend/04_cargar_semillas.sql`, generado por `backend/semillas/genera_semillas.py` | Implementado como script SQL |
-| Cargas de datos de mercado y adaptador de la semilla | No existen en Python; la carga la hace el script SQL | Desviación de SRS 4.2, por registrar |
-| Cliente web: vistas de cuenta y consentimiento, vistas de portafolio, tablero, avisos y procedencia, cliente de la API | `frontend/src/` solo tiene la página de prueba de conexión | Pendiente |
+| Cargas de datos de mercado y adaptador de la semilla | No existen en el MVP; la carga la hace el script SQL | Registrado en el SRS 4.2 el 18/10/2026 (P-66); si llegan con RF-32 está por decidir |
+| Cliente web: vistas de cuenta y consentimiento, vistas de portafolio, tablero, avisos y procedencia, cliente de la API | `frontend/src/`: las 12 pantallas (`pantallas/`), el cliente de la API, que conserva las cifras como texto (`api/`), la sesión a partir de E06 (`sesion/`), un enrutador propio sin dependencias nuevas (`rutas/`), los componentes y avisos (`ui/`), la gráfica y su tabla (`graficas/`), la procedencia (`componentes/Procedencia.jsx`), el formato de cifras y fechas (`formato/`), los textos (`textos/`) y los tokens de estilo (`estilos/`) | Implementado |
 
 ### 7.2 Tecnologías y versiones
 
@@ -1003,10 +1019,10 @@ Es un sistema cliente-servidor: todo cálculo ocurre en el servidor, con el moto
 | PostgreSQL | 18 (instalada: 18.6) | SRS 3.5 y 3.6.3 |
 | Node.js y npm (construcción del cliente) | 24 (instaladas: 24.12.0 y 11.6.2) | SRS 3.5 y 3.6.3 |
 | React, react-dom y react-is | 19.3.0, versión exacta | `frontend/package.json` |
-| Recharts (gráficas) | 3.10.1, versión exacta; instalada, aún sin usar | `frontend/package.json`; SRS 4.2 |
+| Recharts (gráficas) | 3.10.1, versión exacta; la usa la gráfica del tablero (`frontend/src/graficas/GraficaValor.jsx`) | `frontend/package.json`; SRS 4.2 |
 | Vite | 8.3.0 | `frontend/package-lock.json` |
 
-El SRS 3.5 pide Python, PostgreSQL y Node.js «con su última corrección», y el SRS 3.6.3 pide actualizar Python, Node.js y Firefox antes del 18/10/2026; esa actualización no se ha hecho (sección 12.5).
+El SRS 3.5 pide Python, PostgreSQL y Node.js «con su última corrección». El SRS 3.6.3 pedía actualizar Python, Node.js y Firefox antes del 18/10/2026; el 18 de octubre esa actualización pasó a la semana del 19 de octubre, después de la entrega del MVP (P-68). El MVP se probó con las versiones instaladas de esta tabla (sección 12.5).
 
 ### 7.3 Base de datos
 
@@ -1079,7 +1095,8 @@ Lo que implementa el MVP:
 - Los secretos (contraseña de la base, clave de firma de las sesiones y token del SIE) solo viven en `backend/.env`, que está excluido del control de versiones; `backend/.env.example` solo tiene marcadores (RNF-05). El MVP no usa todavía el token del SIE.
 - Consentimiento expreso con registro de su momento, medio y versión del aviso; revocación con bloqueo inmediato (RF-12).
 - Solo datos ficticios: cuentas de prueba con correos ficticios y ningún dato real de clientes ni información interna de la empresa (SRS 2.4, R-04; S-04).
-- Avisos: la información no constituye asesoría de inversión y las valuaciones son estimaciones informativas (R-01 y R-11). Hoy los entrega la API como datos; su presentación en pantalla está pendiente.
+- Avisos: la información no constituye asesoría de inversión y las valuaciones son estimaciones informativas (R-01 y R-11). El cliente los muestra a la vista, sin botón de cerrar, en el tablero, las posiciones y las transacciones (RF-12, criterio 4).
+- El cliente no lee la cookie de sesión: sabe si hay sesión por la respuesta de E06. Todas sus peticiones van a `/api` en su propio origen, y el proxy de Vite las reenvía sin cambiar el encabezado `Origin` (sección 11.4).
 
 Lo que no cubre el MVP (sección 9.6): HTTPS y cifrado en tránsito, límite de intentos de inicio de sesión, recuperación o cambio de contraseña, supresión de datos al concluir el bloqueo y el ejercicio de los derechos ARCO. Las limitaciones conocidas de seguridad están en la sección 12.4.
 
@@ -1160,32 +1177,33 @@ La supresión de los datos al concluir el bloqueo es distinta: también queda fu
 
 ### 10.1 Quién acepta y cómo (SRS 3.9)
 
-- Revisa y acepta el líder de proyecto, en el repositorio que él indique, después del 18 de octubre, y una segunda vez si encuentra inconsistencias o carencias (SRS 3.9.1). La hora de corte y si cuenta el commit o su envío están por confirmar (SRS 3.9.2).
-- El SRS propone, por confirmar con el líder, que el MVP quede aceptado cuando una revisión suya, primera o segunda, concluya sin observaciones pendientes. Cada observación se registra con su fecha, se corrige antes que los requisitos de la fase de refinamiento y se repiten las pruebas afectadas. Si la segunda revisión deja observaciones, el MVP se considera revisado con observaciones, y cada una se resuelve antes del cierre o se registra en el SRS 3.1 como trasladada (SRS 3.9.2 y 3.9.3; AC-11); este tratamiento también está por confirmar con el líder. La fecha de la revisión y si su conformidad queda por escrito están por confirmar con él.
-- El responsable de pruebas, el autor, aporta la evidencia en un registro fechado de resultados; no decide la aceptación (SRS 3.9.1).
+- Revisa el líder de proyecto, y una segunda vez si encuentra inconsistencias o carencias (SRS 3.9.1). Según informó el estudiante el 18 de octubre, el líder evalúa con un conjunto de agentes que analizan los repositorios subidos a su plataforma; esos agentes usan `docs/MVP.md` y `docs/PRD.md` como criterios (AC-06) y revisarán hasta el fin de semana del 24 y 25 de octubre de 2026. No hace falta avisarle de cada entrega.
+- Lo que se revisa es el repositorio del proyecto en GitHub, que es público. No hay hora de corte: el 18 de octubre es la fecha que se fijó el estudiante para tener margen y seguir con el PRD, revisar y refinar hasta el fin de la estadía.
+- El SRS propone, por confirmar con el líder, que el MVP quede aceptado cuando una revisión suya, primera o segunda, concluya sin observaciones pendientes. Cada observación se registra con su fecha, se corrige antes que los requisitos de la fase de refinamiento y se repiten las pruebas afectadas. Si la segunda revisión deja observaciones, el MVP se considera revisado con observaciones, y cada una se resuelve antes del cierre o se registra en el SRS 3.1 como trasladada (SRS 3.9.2 y 3.9.3; AC-11); este tratamiento también está por confirmar con el líder. La fecha de una segunda revisión y si su conformidad queda por escrito están por confirmar con él.
+- El responsable de pruebas, el autor, aporta la evidencia en un registro fechado de resultados, que para esta entrega está en `backend/tests/resultados/2026-10-18/` (P-70); no decide la aceptación (SRS 3.9.1).
 - La aceptación del cálculo se hace con datos de demostración y contra el conjunto de referencia (SRS 3.9).
-- Si un imprescindible no cumple AC-01 a tiempo, su paso a la fase de refinamiento se acuerda con el líder y se registra en el SRS 3.1 antes de la revisión (S-02).
+- Si un imprescindible no cumple AC-01 a tiempo, su paso a la fase de refinamiento se acuerda con el líder y se registra en el SRS 3.1 antes de la revisión (S-02). En la entrega del 18 de octubre no hizo falta: los 18 cumplen (sección 12.1).
 
 ### 10.2 Criterios AC-01 a AC-08 (SRS 3.9.2)
 
 | AC | Criterio | Evidencia exigida | Dónde se comprueba |
 |---|---|---|---|
-| AC-01 | Cada imprescindible vigente en 3.2 al entregarse cumple su criterio de aceptación y aprueba su CPF. | Resultado y fecha de cada CPF en el registro de resultados | Sección 3 (criterios y pruebas), sección 11.5 (comandos) |
-| AC-02 | RNF-02 a RNF-05 alcanzan su valor objetivo al 18 de octubre. | Resultado y fecha de CPNF-02 a CPNF-05 en el registro de resultados | Sección 6.1 |
-| AC-03 | RNF-01 se cumple sobre el conjunto de referencia, y el commit que lo congela es anterior al primero del motor. | Tabla de diferencias de CPNF-01 y hash del commit que congela el conjunto de referencia (`11097f8`) | Sección 5.8; `backend/tests/inspeccion/test_ac03.py` |
-| AC-04 | Un recorrido de los imprescindibles, en el equipo de desarrollo y con los datos del conjunto de referencia (SRS 5.2; sección 5.8), deja al menos una captura fechada por requisito. | Registro del recorrido con sus capturas | Requiere las pantallas del SRS 4.5.2 |
+| AC-01 | Cada imprescindible vigente en 3.2 al entregarse cumple su criterio de aceptación y aprueba su CPF. | Resultado y fecha de cada CPF en el registro de resultados | `junit.xml` y las capturas de `ac04/`; sección 3 (criterios y pruebas) y sección 11.5 (comandos) |
+| AC-02 | RNF-02 a RNF-05 alcanzan su valor objetivo al 18 de octubre. | Resultado y fecha de CPNF-02 a CPNF-05 en el registro de resultados | `junit.xml`, `cpnf05.txt` y `ac04/RNF-02_*.png`; sección 6.1 |
+| AC-03 | RNF-01 se cumple sobre el conjunto de referencia, y el commit que lo congela es anterior al primero del motor. | Tabla de diferencias de CPNF-01 y hash del commit que congela el conjunto de referencia (`11097f8`) | `cpnf01_diferencias.csv`, `cpnf01_resumen.csv`, `cpnf01_versiones.csv` y `ac03_junit.xml` (de `backend/tests/inspeccion/test_ac03.py`); sección 5.8 |
+| AC-04 | Un recorrido de los imprescindibles, en el equipo de desarrollo y con los datos del conjunto de referencia (SRS 5.2; sección 5.8), deja al menos una captura fechada por requisito. | Registro del recorrido con sus capturas | `ac04/recorrido.csv`, las capturas de `ac04/` y el guion `recorrido_ac04.mjs`; sección 11.8 |
 | AC-05 | El repositorio explica cómo instalar el MVP en local con las versiones de 3.5, crear la base, cargar las semillas y ejecutar las pruebas, sin valores reales en las variables de ejemplo. | La sección «Cómo ejecutarlo localmente» del README | `README.md`; sección 11 de este documento |
-| AC-06 | La carpeta `docs/` contiene los dos archivos Markdown que pidió el líder: uno del MVP y otro del documento de requisitos del producto (PRD). El líder fijó sus nombres el 18/10/2026: `MVP.md` y `PRD.md`; falta confirmar si `docs/` debe tener exactamente esos dos. | Los archivos en la versión entregada | `docs/MVP.md` (este archivo) y `docs/PRD.md` |
-| AC-07 | La base de demostración solo contiene semillas y cuentas de prueba con datos ficticios. | Inspección del script de semillas, en el registro de resultados | `backend/04_cargar_semillas.sql` |
-| AC-08 | Consta en el SRS 3.1 una revisión del Diario Oficial de la Federación conforme a D-04, anterior al 18 de octubre. D-04 supone que durante la estadía no se expide un reglamento de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares ni se reforman los artículos en que se basan R-03 y R-12 de modo que cambien el aviso de privacidad, la revocación del consentimiento o las medidas de seguridad; la revisión comprueba que así sea. | Fecha y resultado en el SRS 3.1 | SRS 3.1 |
+| AC-06 | La carpeta `docs/` contiene los dos archivos Markdown que pidió el líder: uno del MVP y otro del documento de requisitos del producto (PRD). El líder fijó sus nombres el 18/10/2026: `MVP.md` y `PRD.md`; si `docs/` debe tener exactamente esos dos sigue por confirmar (sección 12.5). | Los archivos en la versión entregada | `docs/MVP.md` (este archivo) y `docs/PRD.md` |
+| AC-07 | La base de demostración solo contiene semillas y cuentas de prueba con datos ficticios. | Inspección del script de semillas, en el registro de resultados | `INDICE.md` del registro; `backend/04_cargar_semillas.sql` |
+| AC-08 | Consta en el SRS 3.1 una revisión del Diario Oficial de la Federación conforme a D-04, a más tardar el 18 de octubre (el SRS decía «anterior al 18 de octubre» y el 18/10/2026 lo precisó así; P-67). D-04 supone que durante la estadía no se expide un reglamento de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares ni se reforman los artículos en que se basan R-03 y R-12 de modo que cambien el aviso de privacidad, la revocación del consentimiento o las medidas de seguridad; la revisión comprueba que así sea. | Fecha y resultado en el SRS 3.1 | SRS 3.1 |
 
-El estado de cada criterio está en la sección 12.2. RNF-07 no forma parte de esta aceptación: se verifica el 23/10/2026 y entra en AC-09, al cierre de la estadía (SRS 3.9.4).
+Las rutas de la columna «Dónde se comprueba» son relativas a `backend/tests/resultados/2026-10-18/`, salvo `README.md` y las que empiezan por `backend/` o `docs/`. El estado de cada criterio está en la sección 12.2. RNF-07 no forma parte de esta aceptación: se verifica el 23/10/2026 y entra en AC-09, al cierre de la estadía (SRS 3.9.4).
 
 ---
 
 ## 11. Cómo ejecutarlo y verificarlo en local
 
-Los comandos salen del README, de los encabezados de los scripts y de la documentación del código. El 18/10/2026 se ejecutaron las pruebas automatizadas y la inspección de AC-03 (sección 11.5); los pasos de instalación y arranque no se repitieron ese día. Las rutas son relativas a la raíz del repositorio, y el equipo de desarrollo usa Windows con PowerShell.
+Los comandos salen del README («Cómo ejecutarlo localmente», que tiene el detalle y los problemas frecuentes), de los encabezados de los scripts y de la documentación del código. El 18/10/2026 el estudiante preparó con estos pasos su base de desarrollo (`proyecto077`, en el puerto 5432, con los scripts 01 a 04 y el rol `app_077`), cargó el escenario del SRS 5.2 con el cargador y usó el cliente en `http://localhost:5173` contra la API en `127.0.0.1:8000`; en ese entorno corrió el recorrido de AC-04 (sección 11.8). Ese mismo día se ejecutaron la corrida con registro, la inspección de AC-03 y la de credenciales (sección 11.5). Las rutas son relativas a la raíz del repositorio, y el equipo de desarrollo usa Windows con PowerShell.
 
 ### 11.1 Requisitos
 
@@ -1237,25 +1255,32 @@ Copy-Item .env.example .env
 
 ### 11.4 Ejecutar
 
-Servidor, en `backend/` (por omisión escucha en `http://127.0.0.1:8000`; la documentación interactiva queda en `http://localhost:8000/docs`):
+Servidor, en `backend/` (escucha en `http://127.0.0.1:8000`; `http://127.0.0.1:8000/health` responde sin tocar la base, y la documentación interactiva queda en `http://localhost:8000/docs`):
 
 ```
 uv sync
 uv run fastapi dev app/main.py
 ```
 
-Cliente web, en `frontend/` (Vite sirve en `http://localhost:5173`; hoy solo muestra la prueba de conexión con la API):
+Cliente web, en `frontend/`, en otra ventana:
 
 ```
 npm ci
 npm run dev
 ```
 
-Cargar el escenario del conjunto de referencia en la API en marcha, para demostrar el recorrido de AC-04. Se ejecuta en `backend/`. El cargador registra la cuenta ficticia `oraculo@example.com` (otra, con `--correo`) y pide para ella una contraseña de 15 caracteres o más, sin mostrarla. Luego inicia sesión y registra por la API los dos portafolios, los dos intermediarios y las transacciones T01 a T16; al terminar solo imprime conteos, no identificadores. Si la cuenta ya existe, el registro responde 409 y la carga se detiene, así que se corre una sola vez por base o con otro correo:
+- `npm ci` instala exactamente lo de `frontend/package-lock.json`; no se usa `npm install`, que puede cambiar el lockfile.
+- Vite sirve el cliente en `http://localhost:5173`, que es donde se abre (sección 11.7). El puerto es fijo: `frontend/vite.config.js` usa `strictPort`, así que, si el 5173 está ocupado, Vite se detiene con un error en lugar de pasar a otro puerto que quedaría fuera de `CORS_ORIGINS`.
+- El cliente hace todas sus peticiones a `/api` en su propio origen, y el proxy de Vite las reenvía a la API en `http://127.0.0.1:8000`. El proxy no usa `changeOrigin`, así que el encabezado `Origin` del navegador llega intacto a la comprobación de origen de la API.
+- `npm run dev -- --mode temporal` sirve en `http://127.0.0.1:5174` contra una API en `127.0.0.1:8001`. Es solo para desarrollar contra un entorno desechable; no hace falta para usar el MVP.
+
+Cargar el escenario del conjunto de referencia en la API en marcha, para demostrar el recorrido de AC-04. Se ejecuta en `backend/`, en una consola interactiva. El cargador registra la cuenta ficticia `oraculo@example.com` (otra, con `--correo`) y pide para ella una contraseña de 15 caracteres o más, sin mostrarla. Luego inicia sesión y registra por la API, como lo haría un usuario, los dos portafolios, los dos intermediarios y las transacciones T01 a T16; al terminar solo imprime conteos, no identificadores. `--origen` debe ser uno de `CORS_ORIGINS`. Si la API rechaza un paso, el cargador muestra el motivo que da la API, nunca la contraseña. Si la cuenta ya existe, el registro responde 409 y la carga se detiene, así que se corre una sola vez por base o con otro correo:
 
 ```
 uv run python -m tests.referencia.cargador --url http://localhost:8000 --origen http://localhost:5173
 ```
+
+Con el escenario cargado, el tablero de «Principal» en el periodo por omisión (del 11/09/2026 al 14/10/2026) muestra un TWR de 4.39 %, una máxima caída de −6.68 %, un valor de mercado de $58,940.88 y un resultado no realizado de $2,632.99; las posiciones al 14/10/2026 dan el mismo valor y un costo de $56,307.89.
 
 ### 11.5 Pruebas automatizadas
 
@@ -1263,13 +1288,13 @@ Las pruebas no usan `backend/.env` ni la base de desarrollo: cada corrida levant
 
 | Qué | Comando (en `backend/`) | Resultado el 18/10/2026 |
 |---|---|---|
-| Suite completa | `uv run --frozen pytest -q` | 271 pasan, 3 deseleccionadas (las de inspección), 0 fallan; de 1 a 7 minutos según la carga del equipo (66 s en una corrida sin otra carga) |
+| Suite completa | `uv run --frozen pytest -q` | 271 pasan, 3 deseleccionadas (las de inspección), 0 fallan; de menos de un minuto (53.41 s en la corrida con registro) a 7 minutos, según la carga del equipo |
 | Solo el motor, sin base de datos | `uv run --frozen pytest -m motor` | 143 pasan, en unos 3 segundos según pytest |
 | Un requisito por la API | `uv run --frozen pytest tests/api/test_cpf28_saldo.py` (con el archivo que da la sección 3) | — |
 | Un requisito en el motor | `uv run --frozen pytest tests/motor/test_criterios_3_2.py -k rf08` (con `rf06`, `rf09`, `rf10`, `rf26a`, `rf26b` o `rf28` en lugar de `rf08`) | — |
-| Inspección de AC-03 (desde la raíz) | `uv run --directory backend pytest -m inspeccion tests/inspeccion/test_ac03.py` | 3 pasan |
-| Inspección de RNF-05 (solo el autor; lee `backend/.env`) | `uv run python tests/inspeccion/cpnf05_credenciales.py` | No consta su ejecución |
-| Suite con evidencia guardada | `uv run --frozen pytest --registro-resultados` | Aún no se ejecuta; escribe en `backend/tests/resultados/AAAA-MM-DD/` |
+| Inspección de AC-03 | `uv run --frozen pytest -m inspeccion tests/inspeccion/test_ac03.py --junitxml=tests/resultados/2026-10-18/ac03_junit.xml` | 3 pasan (`ac03_junit.xml`) |
+| Inspección de RNF-05 (solo el autor; lee `backend/.env`) | `uv run python tests/inspeccion/cpnf05_credenciales.py`, después de compilar el cliente con `npm run build` para que revise un `frontend/dist` que exista | Cumple: «CPNF-05: cumple» en `cpnf05.txt` (21:28) y código de salida 0, según informó el autor (sección 6.1) |
+| Suite con evidencia guardada | `uv run --frozen pytest --registro-resultados --junitxml=tests/resultados/2026-10-18/junit.xml` | A las 21:11, sobre `e636b78`: 271 pasan, 3 deseleccionadas, 0 fallan, en 53.41 s. Deja en `backend/tests/resultados/2026-10-18/` el `junit.xml` y la tabla de diferencias de CPNF-01 (`cpnf01_diferencias.csv`, `cpnf01_resumen.csv` y `cpnf01_versiones.csv`) |
 
 Marcas disponibles: `motor` (sin base), `bd` (con el clúster temporal), `api`, `referencia` y `no_funcional`; `inspeccion` queda excluida por omisión.
 
@@ -1284,6 +1309,14 @@ Mapa de pruebas por carpeta:
 | `tests/referencia` | 20 | CPNF-01 por la API y CPNF-02 |
 | `tests/no_funcionales` | 3 | CPNF-03 y CPNF-04 |
 | Total | 271 | |
+
+Cliente web, en `frontend/`. Los tres pasaron el 18/10/2026:
+
+| Qué | Comando | Resultado el 18/10/2026 |
+|---|---|---|
+| Lint | `npm run lint` | Sin errores (oxlint con `.oxlintrc.json`) |
+| Compilación | `npm run build` | Sin errores; deja el cliente en `frontend/dist`, que no se versiona |
+| Formato de cifras y fechas | `node --test src/formato/formato.test.js` | 10 de 10 pasan |
 
 ### 11.6 Comprobación manual rápida
 
@@ -1302,73 +1335,112 @@ Después:
 ### 11.7 Advertencias
 
 - Guardar `backend/.env` en UTF-8; si PowerShell 5.1 lo guarda en otra codificación, la API no arranca y lo dice con un mensaje.
-- Abrir el cliente en `http://localhost:5173`, no en `127.0.0.1`, o la cookie de sesión no viaja.
+- Abrir el cliente en `http://localhost:5173`, no en `http://127.0.0.1:5173`. La API rechaza con 403 (`origen_no_permitido`) toda escritura, el inicio de sesión incluido, cuyo encabezado `Origin` no sea exactamente uno de `CORS_ORIGINS` (`http://localhost:5173`), y para el navegador `127.0.0.1` es otro origen, así que desde ahí ni siquiera se puede iniciar sesión. Además, la cookie de sesión es de cada host: una sesión abierta en `localhost` no existe en `127.0.0.1`.
 - Para iniciar sesión o registrar datos desde `/docs`, agregar `http://localhost:8000` a `CORS_ORIGINS` y volver a arrancar la API; si no, toda escritura, el inicio de sesión incluido, responde 403.
-- `frontend/vite.config.js` no fija el puerto: si el 5173 está ocupado, Vite usa otro y el cliente queda fuera de `CORS_ORIGINS`.
+- El puerto del cliente es fijo (`strictPort` en `frontend/vite.config.js`): si el 5173 está ocupado, `npm run dev` se detiene con un error. Se cierra el proceso que lo ocupa y se vuelve a correr.
 - Si `02` se detiene por la configuración regional, el mensaje de error del script indica cómo crear la base con otra.
+
+### 11.8 Recorrido de AC-04 con capturas
+
+El guion `backend/tests/resultados/2026-10-18/recorrido_ac04.mjs` recorre las pantallas con los datos del SRS 5.2 y deja al menos una captura fechada por imprescindible (AC-04). Necesita Node.js 24, sin dependencias, Microsoft Edge, la API y el cliente en marcha y el escenario cargado (sección 11.4). Se ejecuta desde la raíz del repositorio y pide la contraseña de la cuenta sin mostrarla:
+
+```
+node backend/tests/resultados/2026-10-18/recorrido_ac04.mjs --base http://localhost:5173 --correo oraculo@example.com --salida backend/tests/resultados/2026-10-18/ac04
+```
+
+- Abre Edge sin interfaz, encuentra cada pantalla y cada control por su atributo `data-recorrido`, espera a que lleguen los datos y captura con una ventana de 1280 × 720, en modo claro.
+- Deja en `--salida` las capturas en PNG, nombradas con el requisito, la pantalla, la fecha y la hora (por ejemplo, `RF-11_V-04_2026-10-18_2108.png`), y `recorrido.csv`, con una fila por requisito y captura: requisito, pantalla, archivo, hora, resultado y detalle. Si un paso falla, lo anota como «falló» y sigue.
+- Captura el tablero y las posiciones antes de escribir nada. Después crea, renombra y elimina el portafolio «Recorrido AC-04 (desechable)», con una compra, y, en un contexto aislado, crea una cuenta ficticia de example.com, con una clave aleatoria que no se guarda, que termina con su consentimiento revocado. No cambia «Principal» ni «Secundario».
+
+El estudiante lo corrió el 18/10/2026 contra su entorno real; el resultado está en la sección 12.3.
 
 ---
 
 ## 12. Estado al 18 de octubre de 2026
 
-Esta sección se actualiza con cada entrega. Fecha de corte: domingo 18 de octubre de 2026, sobre el commit `268a2c2`, el último antes de agregar este archivo. Desde `faf6b32` (correcciones de la revisión del servidor) solo cambió el SRS; el código no.
+Esta sección se actualiza con cada entrega. Fecha de corte: domingo 18 de octubre de 2026, por la noche. El código es el del commit `e636b78` («Construye el cliente web del MVP (pantallas V-01 a V-12)»), que agrega el cliente web y hace que el cargador del escenario muestre el motivo de un rechazo de la API sin la contraseña; el servidor no cambió desde `faf6b32`. La evidencia está en `backend/tests/resultados/2026-10-18/`, con un índice en `INDICE.md`; en esta sección, sus rutas son relativas a esa carpeta.
 
 Categorías:
 
-- Hecho y verificado: implementado, verificado por pruebas automatizadas y sin partes de interfaz pendientes.
-- Hecho sin interfaz: el motor y la API cumplen los criterios y sus pruebas pasan; faltan las pantallas para usarlo desde el navegador y para el recorrido de AC-04.
-- Pendiente en parte: una parte de lo exigido está hecha y verificada, y otra no. En un imprescindible, el motor y la API cumplen lo que les toca y sus pruebas pasan, pero al menos un criterio pide algo que solo puede dar la interfaz web (una casilla, la lectura del aviso, un aviso a la vista, la marca de demostración, la línea de fuente o la gráfica) o está en conflicto; cada fila nombra el criterio pendiente.
-- Pendiente: algo que el criterio exige y hoy no existe.
+- Hecho y verificado: implementado; su CPF aprueba en la corrida con registro del 18/10/2026 (`junit.xml`), y lo que su criterio pide de la interfaz se ve en el cliente web, con al menos una captura fechada del recorrido de AC-04 (`ac04/`).
+- Cumplido: en un criterio de aceptación, existe la evidencia que pide el SRS 3.9.2 y muestra que se alcanza.
+- Para la fase de refinamiento: lo que el plan del 18 de octubre recortó del cliente web en su nivel 1, que no quita ningún criterio del SRS 3.2 ni ningún requisito no funcional que se juzgue ese día.
+- Pendiente: algo que un criterio exige y hoy no existe o no consta.
 
 ### 12.1 Por imprescindible
 
-| RF | Motor y API | Interfaz web | Estado |
-|---|---|---|---|
-| RF-01 | Implementado y verificado (CPF-01) | Faltan V-01 y V-02 | Hecho sin interfaz |
-| RF-02 | Implementado y verificado (CPF-02, CPNF-03) | Falta V-12 | Hecho sin interfaz |
-| RF-03 | Implementado y verificado (CPF-03) | Falta V-08, con el diálogo de confirmación | Hecho sin interfaz |
-| RF-04 | Implementado y verificado (CPF-04) | Falta V-10 | Hecho sin interfaz |
-| RF-05 | Implementado y verificado (CPF-05) | Faltan V-06 y V-07 | Hecho sin interfaz |
-| RF-06 | Implementado y verificado (CPF-06, CPNF-01, CPNF-02) | Falta V-05 | Hecho sin interfaz |
-| RF-07 | Criterios 1 y 2 verificados (CPF-07) | Criterio 3 pendiente: la marca de demostración en V-04 y V-05 | Pendiente en parte |
-| RF-08 | Implementado y verificado (CPF-08, CPNF-01) | Faltan V-04 y V-05 | Hecho sin interfaz |
-| RF-09 | Implementado y verificado (CPF-09, CPNF-01) | Falta V-04 | Hecho sin interfaz |
-| RF-10 | Implementado y verificado (CPF-10, CPNF-01) | Falta V-04 | Hecho sin interfaz |
-| RF-11 | Criterio 3 y datos de los criterios 1 y 2 verificados (CPF-11, CPNF-02) | Criterio 2 pendiente: la gráfica en V-04. Criterio 1 en conflicto con los 2 decimales de RD-13 | Pendiente en parte |
-| RF-12 | Criterio 3 y la parte de API de los demás verificados (CPF-12) | Criterios 1, 2 y 4 pendientes: casilla, lectura del aviso y avisos visibles; faltan V-02, V-03 y V-11 | Pendiente en parte |
-| RF-25 | Implementado y verificado (CPF-25) | Falta V-09 | Hecho sin interfaz |
-| RF-26a | Implementado y verificado (CPF-26a) | Faltan V-05 y V-07 | Hecho sin interfaz |
-| RF-26b | Implementado y verificado (CPF-26b) | Falta V-05 | Hecho sin interfaz |
-| RF-28 | Implementado y verificado (CPF-28) | Falta mostrar el motivo en V-07 | Hecho sin interfaz |
-| RF-30 | Implementado y verificado (CPF-30) | Sin pantalla propia | Hecho y verificado |
-| RF-31 | Criterio 1 verificado; la API entrega los datos de los criterios 2 y 3 (CPF-31) | Criterios 2 y 3 pendientes: fuente y fecha junto a cada dato en V-04 y V-05 | Pendiente en parte |
+En la tabla, `…` sustituye a `_2026-10-18_HHMM` en el nombre de cada captura de `ac04/`; por ejemplo, `RF-04_V-10…` es `RF-04_V-10_2026-10-18_2108.png`. Una misma captura completa de V-04 o de V-05 sirve a varios requisitos, y `ac04/recorrido.csv` tiene una fila por cada uno.
 
-Resumen: 1 imprescindible hecho y verificado, 13 hechos sin interfaz y 4 con criterios pendientes de la interfaz (RF-07, RF-11, RF-12 y RF-31). Ninguna de las 12 pantallas del SRS 4.5.2 está construida. Si no quedan antes de la revisión, rige S-02 (sección 10.1); al 18/10/2026 no consta ese acuerdo en el SRS 3.1.
+| RF | Motor y API (`junit.xml`) | Interfaz web (capturas de `ac04/`) | Estado |
+|---|---|---|---|
+| RF-01 | CPF-01: 12 pruebas pasan | V-01 y V-02: `RF-12_V-02…_rechazo`, `RF-01_V-01…_cuenta-creada` y `RF-01_V-01…_rechazo` | Hecho y verificado |
+| RF-02 | CPF-02 (3) y CPNF-03 (2) pasan | Pantalla «No encontrado»: `RF-02_V-12…_ajeno` y `RNF-03_V-12…_inexistente` | Hecho y verificado |
+| RF-03 | CPF-03 (5) | V-04 y V-08: `RF-03_V-04…_alta`, `RF-03_V-08…_cambio-nombre`, `…_dialogo-eliminar`, `…_cancelado` y `…_eliminado` | Hecho y verificado |
+| RF-04 | CPF-04 (3) | V-10: `RF-04_V-10…` | Hecho y verificado |
+| RF-05 | CPF-05 (8) | V-06 y V-07: `RF-05_V-06…`, `RF-05_V-07…_compra` y `RF-05_V-06…_registrada` | Hecho y verificado |
+| RF-06 | CPF-06 (4), CPNF-01 y CPNF-02 | V-05: `RF-06_V-05…` | Hecho y verificado |
+| RF-07 | CPF-07 (5 pruebas, compartidas con CPF-30 y CPF-31) | V-04 y V-05, etiqueta «Datos de demostración» (criterio 3): `RF-11_V-04…` y `RF-06_V-05…` | Hecho y verificado |
+| RF-08 | CPF-08 (`test_rf08_*` del motor) y CPNF-01 | V-04 y V-05: `RF-11_V-04…` y `RF-06_V-05…` | Hecho y verificado |
+| RF-09 | CPF-09 (`test_rf09_*` del motor y rechazos N7 y N8 de CPF-11) y CPNF-01 | V-04: `RF-11_V-04…` | Hecho y verificado |
+| RF-10 | CPF-10 (`test_rf10_*` del motor) y CPNF-01 | V-04: `RF-11_V-04…` | Hecho y verificado |
+| RF-11 | CPF-11 (6) y CPNF-02 (17) | V-04, criterios 1 a 3: `RF-11_V-04…`, `RF-11_V-04…_grafica` y `RF-03_V-04…_alta` | Hecho y verificado |
+| RF-12 | CPF-12 (3) | Criterios 1 a 3: `RF-12_V-11…`, `RF-12_V-02…_casilla`, `…_rechazo` y `…_dialogo-aviso`, `RF-12_V-03…_sin-sesion`, `RF-12_V-11…_dialogo-revocar`, `RF-12_V-01…_revocado` y `…_bloqueada`. Criterio 4, avisos en V-04 a V-06: `RF-11_V-04…`, `RF-06_V-05…` y `RF-05_V-06…` | Hecho y verificado |
+| RF-25 | CPF-25 (3) | V-09: `RF-25_V-09…` y `RF-25_V-09…_casa-a-cuenta-b` | Hecho y verificado |
+| RF-26a | CPF-26a (3 y 2) | V-05, emisión vencida y liquidada: `RF-06_V-05…` | Hecho y verificado |
+| RF-26b | CPF-26b (`test_rf26b_*` del motor y `test_cpf26_valuacion.py`) | V-05 y V-04, rótulo «estimado» y tasa aplicada: `RF-06_V-05…` y `RF-11_V-04…` | Hecho y verificado |
+| RF-28 | CPF-28 (5) | V-07, rechazo de N1 sin registrar nada: `RF-28_V-07…` | Hecho y verificado |
+| RF-30 | CPF-30 | Sin pantalla propia; tasas en la procedencia: `RF-06_V-05…` y `RF-11_V-04…` | Hecho y verificado |
+| RF-31 | CPF-31 | V-04 y V-05, criterios 2 y 3: `RF-11_V-04…` y `RF-06_V-05…` | Hecho y verificado |
+
+Resumen: los 18 imprescindibles están hechos y verificados. Las 271 pruebas de `junit.xml` pasan, sin fallas ni omisiones, y el recorrido completo de AC-04 dejó 54 filas correctas y ninguna falla en `ac04/recorrido.csv`, con 33 capturas de 1280 × 720 que cubren de RF-01 a RF-31, RNF-02 y RNF-03. No hubo traslados por S-02: no se recortó ninguna pantalla ni ningún criterio.
 
 ### 12.2 Por criterio de aceptación
 
-| AC | Lo que existe | Lo que falta | Estado |
+| AC | Evidencia | Resultado | Estado |
 |---|---|---|---|
-| AC-01 | Pruebas automatizadas de los 18 CPF; 271 pruebas pasan | El registro de resultados con fecha; los criterios de interfaz de RF-07, RF-11, RF-12 y RF-31; resolver el conflicto del criterio 1 de RF-11 | Pendiente |
-| AC-02 | CPNF-03 y CPNF-04 pasan; CPNF-02 pasa por la API; existe el script de CPNF-05 | El registro de resultados; ejecutar CPNF-05; la demostración de RNF-02 con capturas | Pendiente en parte |
-| AC-03 | `11097f8` (15/10) es anterior a `b3391fd` (17/10) y el conjunto no cambió desde entonces; `test_ac03.py` pasa; CPNF-01 pasa | Guardar en el repositorio la tabla de diferencias de CPNF-01; confirmar la tasa a 28 días del 10/09 | Hecho en código y git; falta la evidencia guardada |
-| AC-04 | El cargador del escenario y el mapa de pantallas del SRS 4.5.2 | Las pantallas, el recorrido y sus capturas | Pendiente |
-| AC-05 | El README explica la base de datos local; `.env.example` no tiene valores reales; este documento da los pasos completos (sección 11) | La sección «Cómo ejecutarlo localmente» en el README | Pendiente |
-| AC-06 | `docs/MVP.md` (este archivo) y `docs/PRD.md`, con los nombres que fijó el líder | El envío de los dos antes de la hora de corte; confirmar con el líder si `docs/` debe tener exactamente esos dos archivos (sección 12.5) | En curso |
-| AC-07 | `04_cargar_semillas.sql` no carga usuarios; las cuentas de prueba se crean por la API con correos ficticios | Anotar la inspección en el registro de resultados | Hecho; falta la evidencia guardada |
-| AC-08 | Nada | La revisión del Diario Oficial y su fila en el SRS 3.1 | Pendiente |
+| AC-01 | `junit.xml` y las capturas de `ac04/` (sección 12.1) | Los 18 imprescindibles cumplen su criterio y aprueban su CPF. El criterio 1 de RF-11 se juzga con la precisión del SRS 3.2 del 18/10/2026 (P-64; sección 3.8) | Cumplido |
+| AC-02 | `junit.xml` (CPNF-02 a CPNF-04), `cpnf05.txt` y `ac04/RNF-02_*.png` | RNF-02 a RNF-05 alcanzan su valor objetivo (sección 6.1) | Cumplido |
+| AC-03 | `cpnf01_diferencias.csv`, `cpnf01_resumen.csv`, `cpnf01_versiones.csv` y `ac03_junit.xml` | Ninguna cifra fuera de tolerancia. `11097f8` (15/10) es anterior a `b3391fd` (17/10) y el conjunto no cambió desde entonces: las 3 pruebas de inspección pasan. Siguen pendientes la comprobación a mano de tres cifras del SRS 5.2 (R4) y la segunda fuente de la tasa a 28 días del 10/09 (P-65; sección 12.6) | Cumplido |
+| AC-04 | `ac04/recorrido.csv`, las 33 capturas de `ac04/` y el guion `recorrido_ac04.mjs` | El estudiante lo corrió en su entorno real, con los datos del SRS 5.2: 54 filas correctas, ninguna falla y al menos una captura fechada por imprescindible (sección 12.3) | Cumplido |
+| AC-05 | Sección «Cómo ejecutarlo localmente» de `README.md` | Explica los requisitos y las versiones, la base, las semillas, `backend/.env`, el arranque con el proxy de Vite, el cargador, las pruebas y el recorrido. Las variables de ejemplo no tienen valores reales: CPNF-05 no encontró ninguna credencial en el árbol de trabajo | Cumplido |
+| AC-06 | `docs/MVP.md` y `docs/PRD.md` | Los dos archivos, con los nombres que fijó el líder, al día con el estado de la entrega (versión 1.1 de cada uno). Si `docs/` debe tener exactamente esos dos sigue por confirmar (sección 12.5) | Cumplido |
+| AC-07 | `INDICE.md`, sección «AC-07» | El script de semillas no carga cuentas: solo siembra datos de referencia y de demostración. Todos los correos de prueba son de example.com, también los de las cuentas que creó el recorrido. La inspección no abrió la base de desarrollo del estudiante | Cumplido |
+| AC-08 | SRS 3.1 | La revisión del Diario Oficial conforme a D-04 (R3, del estudiante) todavía no consta en el SRS 3.1 | Pendiente |
 
 ### 12.3 Verificación ejecutada el 18/10/2026
 
-- Suite completa sobre `268a2c2`: 271 pruebas pasan, 3 deseleccionadas y 0 fallan, el mismo conteo que registró el commit `faf6b32`. Una corrida hecha mientras corrían otras dos suites en el mismo equipo dio un error de conexión por tiempo de espera en CPNF-04; repetida sola, esa prueba pasa.
-- Inspección de AC-03: 3 pruebas pasan.
-- Comprobaciones con git: `11097f8` es ancestro del commit actual, `backend/tests/oraculo` no cambió desde entonces y `backend/.env` no está en ningún commit.
-- Estas corridas no dejan evidencia en el repositorio; no sustituyen el registro de resultados que piden AC-01 a AC-03.
+En orden:
+
+1. Cliente web, sobre el código de `e636b78`: `npm run build` y `npm run lint` pasan, y `node --test` del módulo de formato da 10 de 10.
+2. Entorno real: el estudiante preparó su base `proyecto077` (puerto 5432, scripts 01 a 04 y rol `app_077`), cargó el escenario del SRS 5.2 con el cargador, en la cuenta ficticia `oraculo@example.com`, y abrió el cliente en `http://localhost:5173`, conectado por el proxy a la API en `127.0.0.1:8000`.
+3. Recorrido de AC-04: lo ejecutó el estudiante con `recorrido_ac04.mjs` contra ese entorno. El recorrido completo fue de las 21:08:27 a las 21:09:10 y dejó 54 filas correctas, ninguna falla y 33 capturas de 1280 × 720. Antes quedaron en el mismo `recorrido.csv` dos intentos de inicio de sesión fallidos (20:14:21 y 21:07:44), cada uno con su captura de diagnóstico `fallo-inicio_V-01_*.png`, que no es evidencia; el recorrido completo los supera. Hubo además un ensayo previo en un entorno temporal (20:59, 54 de 54 filas correctas), fuera del repositorio.
+4. Cifras del tablero real: TWR de 4.39 %, máxima caída de −6.68 % del 16/09/2026 al 23/09/2026, valor de mercado de $58,940.88 y resultado no realizado de $2,632.99, las del SRS 5.2. El valor es igual, como texto, en la tarjeta, la etiqueta del corte, la última fila de la tabla de la serie y el total de V-05, también en la consulta repetida (RNF-02).
+5. Corrida con registro (21:11, sobre `e636b78`), en `backend/`: `uv run --frozen pytest --registro-resultados --junitxml=tests/resultados/2026-10-18/junit.xml` da 271 pasan, 3 deseleccionadas (las de inspección) y 0 fallan, en 53.41 s. Luego, `pytest -m inspeccion tests/inspeccion/test_ac03.py` da 3 pasan (`ac03_junit.xml`). La salida de consola de las dos está en `_e3_salida.txt`.
+6. CPNF-05 (21:28, el estudiante): `cpnf05.txt` termina con «CPNF-05: cumple»; el código de salida fue 0, según informó el estudiante (sección 6.1).
+7. Comprobaciones con git: `11097f8` es ancestro del commit actual, `backend/tests/oraculo` no cambió desde entonces y `backend/.env` no está en ningún commit.
 
 ### 12.4 Limitaciones conocidas
 
-- Interfaz web: solo existe la página de prueba de conexión. Todo el MVP se usa hoy por la API.
-- Presentación del TWR y de la máxima caída con 2 decimales frente a la tolerancia de 0.001 puntos porcentuales del criterio 1 de RF-11 (sección 3.8).
+Del cliente web, recortado en el nivel 1 del plan del 18 de octubre y para la fase de refinamiento. Ninguno quita un criterio del SRS 3.2 ni un requisito no funcional que se juzgue ese día:
+
+- Las definiciones desplegables de cada indicador que pide RNF-07; se conservan junto a cada uno su unidad y su fecha de corte o periodo, que piden el criterio 1 de RF-11 y RNF-02. RNF-07 se verifica el 23/10/2026.
+- El menú desplegable por debajo de 1280 px; la lista del menú queda visible.
+- La revisión a 320 px y los detalles del modo oscuro; los tokens del modo oscuro sí están.
+- La página «Mapa del sitio».
+- La entrada al historial de la navegación N-17 del SRS 4.5.2: «Consultar» reemplaza la entrada en lugar de agregar otra.
+- El selector de portafolio N-16 en V-05 y V-06; queda en V-04.
+- La tecla Esc propia de la gráfica; las flechas ← y → de Recharts y la tabla alternativa sí están.
+- Guardar el portafolio activo en `sessionStorage`; queda en memoria.
+- El manejo del foco y el título del documento (`document.title`) en cada pantalla; queda un título fijo.
+- El diálogo de revisión de V-07 antes de registrar y la opción «Registrar otra».
+
+Hallazgos menores del cliente, al cerrar el código:
+
+- En V-05, un portafolio inexistente muestra el aviso de no encontrado dentro de V-05 en lugar de llevar a V-12, lo que no es coherente con la navegación N-08 del SRS 4.5.2. Lo ajeno y lo inexistente siguen mostrando el mismo texto, «No existe el portafolio.».
+- Quedan clases `.muestra-*` sin uso en `frontend/src/ui/datos.css`.
+
+Del servidor, el cálculo y el entorno:
+
 - Un TWR exactamente en medio punto se presenta redondeado hacia cero (sección 4.5); no ocurre en el conjunto de referencia.
 - El intervalo de las semillas terminó el 14/10/2026: no se pueden registrar transacciones posteriores hasta que llegue RF-32.
 - Solo corre en el equipo de desarrollo, sin HTTPS.
@@ -1379,35 +1451,39 @@ Resumen: 1 imprescindible hecho y verificado, 13 hechos sin interfaz y 4 con cri
 - El registro revela si un correo ya tiene cuenta (409). Está por decidir si se acepta mientras solo haya datos ficticios (S-04) y se revisa antes de admitir datos reales.
 - Cerrar la sesión no invalida una cookie copiada antes de su vencimiento.
 - Si las pruebas se interrumpen a la fuerza, el clúster temporal puede quedar en ejecución.
-- La duración de la suite depende de la carga del equipo (de 1 a 7 minutos el 18/10/2026; 66 s en una corrida sin otra carga).
-- Documentación desactualizada: el índice del README todavía da por pendiente todo el apartado 4.5 del SRS, aunque ya tiene 4.5.1 y 4.5.2 (siguen vacíos 4.5.3 y 4.5.4, y 5.3 solo tiene la fila de RF-01); el README del conjunto de referencia todavía dice que el congelamiento está pendiente; la portada del SRS conserva la fecha del 7 de octubre.
+- La duración de la suite depende de la carga del equipo: de menos de un minuto (53.41 s en la corrida con registro del 18/10/2026) a 7 minutos.
+- Documentación desactualizada: el README del conjunto de referencia (`backend/tests/oraculo/README.md`) conserva las notas previas al congelamiento, y la portada del SRS conserva la fecha del 7 de octubre.
 
 ### 12.5 Decisiones abiertas que afectan al MVP
 
 | Tema | Qué falta decidir o confirmar | Afecta a |
 |---|---|---|
-| Pantallas del MVP | Cuáles se construyen antes de la revisión y cuáles pasan a la fase de refinamiento por S-02, con aviso al líder y registro en el SRS 3.1 | RF-07, RF-11, RF-12, RF-31; RNF-02; AC-01, AC-02 y AC-04 |
-| Criterio 1 de RF-11 | Aplicar la tolerancia a las cifras del motor o presentar los por cientos con 3 decimales | AC-01 |
-| Tasa a 28 días del 10/09/2026 | Confirmarla con una segunda fuente; si cambia, se regeneran el conjunto de referencia y las semillas | RNF-01; AC-03 |
+| Tasa a 28 días del 10/09/2026 | Confirmarla con una segunda fuente (P-65); si cambia, se regeneran el conjunto de referencia y las semillas | RNF-01; AC-03 |
 | Reglas del cálculo | Confirmar las que fijó el conjunto de referencia (serie diaria en días naturales desde el día base, factor 1 con denominador 0, índice 1 como primer máximo, pico y valle) y llenar las fichas de RF-06, RF-08, RF-09 y RF-10 | RF-06, RF-08, RF-09 y RF-10 |
 | Valores adoptados en el código | Política de contraseña, mensajes de error, duración de la sesión, si el registro abre la sesión, si el catálogo exige sesión, límite de 728 o 730 días de RD-05, decimales de presentación y forma de la API | RF-01, RF-03 a RF-05, RF-12, RF-26a, RF-26b |
 | Licencia de la semilla sintética | Confirmar la versión «1» y el nombre de su fuente | RF-31 |
-| Componente de cargas | Registrar en el SRS 4.2 que las semillas las carga un script SQL | RF-07, RF-30 |
-| Registro de resultados | Ruta, formato y versionado de la evidencia | AC-01 a AC-04 y AC-07 |
-| Entrega | Repositorio, rama y hora de corte que revisa el líder; si `docs/` debe tener exactamente los dos archivos que pidió (hoy tiene cuatro) | AC-06; SRS 3.9.2 |
-| Aviso y consentimiento | Textos de los avisos y de la casilla; plazo de supresión tras la revocación y responsable del tratamiento, con la empresa | RF-12 |
-| Versiones del entorno | Actualizar Python, Node.js y Firefox, como pide el SRS 3.6.3, o registrar una nueva fecha | AC-05 |
-| Revisión del Diario Oficial | Hacerla y registrarla; precisar si «anterior al 18» admite el mismo día | AC-08 |
+| Componente de cargas | El SRS 4.2 ya registra que el MVP carga las semillas con el script SQL 04 (P-66); falta decidir, con RF-32, si el 04 sigue como instalación o lo sustituyen las cargas | RF-07, RF-30, RF-32 |
+| Entrega | Si `docs/` debe tener exactamente los dos archivos que pidió el líder (hoy tiene cuatro). Ya no son incógnitas el repositorio ni la hora de corte: el repositorio del proyecto es público, lo revisan los agentes de la plataforma del líder y no hay hora de corte (sección 10.1) | AC-06 |
+| Aviso y consentimiento | Confirmar en el SRS los textos de los avisos y de la casilla que usa el cliente; plazo de supresión tras la revocación y responsable del tratamiento, con la empresa | RF-12 |
+| Versiones del entorno | Actualizar Python, Node.js y Firefox en la semana del 19 de octubre, como dice ahora el SRS 3.6.3 (P-68) | SRS 3.5 y 3.6.3 |
+| Revisión del Diario Oficial | Hacerla y registrarla en el SRS 3.1 (R3); el SRS ya dice «a más tardar el 18 de octubre» (P-67) | AC-08; D-04 |
 
-### 12.6 Lo que falta para cumplir el SRS 3.9.2
+### 12.6 Pendientes
 
-1. Las pantallas mínimas del cliente web, o el acuerdo de S-02 para las que no alcancen.
-2. El registro de resultados: la suite con `--registro-resultados` después del último commit de código, CPNF-05 y AC-03, con su resultado y fecha.
-3. El recorrido de AC-04 con capturas fechadas.
-4. La sección «Cómo ejecutarlo localmente» del README.
-5. La revisión del Diario Oficial registrada en el SRS 3.1.
-6. El commit y el envío de `docs/MVP.md` y `docs/PRD.md` antes de la hora de corte.
-7. La decisión sobre el criterio 1 de RF-11 y la confirmación de la tasa a 28 días del 10/09.
+Para cumplir el SRS 3.9.2:
+
+1. AC-08: la revisión del Diario Oficial conforme a D-04 (R3), con su fecha y su resultado en el SRS 3.1.
+
+Para completar la verificación del conjunto de referencia, sin resultado todavía:
+
+2. R4: comprobar a mano, con calculadora, tres cifras del SRS 5.2: el costo por título de T01, la valuación de BI261217 al 14/10/2026 y el TWR de P2-C.
+3. P-65: confirmar con una segunda fuente la tasa a 28 días del 10/09/2026 (sección 12.5).
+
+Para la fase de refinamiento:
+
+4. Los recortes de nivel 1 de la sección 12.4, empezando por las definiciones de RNF-07, que se verifica el 23/10/2026.
+5. Los dos hallazgos menores del cliente (sección 12.4).
+6. Las limitaciones del servidor de la sección 12.4 y las decisiones abiertas de la sección 12.5.
 
 ---
 
@@ -1418,10 +1494,20 @@ Resumen: 1 imprescindible hecho y verificado, 13 hechos sin interfaz y 4 con cri
 | Documento de requisitos del producto (PRD) | [`docs/PRD.md`](PRD.md) | El producto en su conjunto (AC-06) |
 | Especificación de requisitos (SRS) | [`docs/2 (SRS) Especificación de Requisitos de Software.md`](2%20%28SRS%29%20Especificaci%C3%B3n%20de%20Requisitos%20de%20Software.md) | Requisitos, reglas de datos, diseño, conjunto de referencia y criterios de aceptación |
 | Definición del proyecto | [`docs/1 Definición del proyecto.md`](1%20Definici%C3%B3n%20del%20proyecto.md) | Descripción, objetivos OE-1 a OE-5, justificación y clasificación MoSCoW |
-| README del repositorio | [`README.md`](../README.md) | Stack, estructura del repositorio y base de datos local |
+| README del repositorio | [`README.md`](../README.md) | Stack, estructura del repositorio y «Cómo ejecutarlo localmente» (AC-05) |
 | Conjunto de referencia | [`backend/tests/oraculo/README.md`](../backend/tests/oraculo/README.md) | Escenario, entradas, cifras esperadas, fuentes y tolerancias |
+| Registro de resultados del 18/10/2026 | [`backend/tests/resultados/2026-10-18/INDICE.md`](../backend/tests/resultados/2026-10-18/INDICE.md) | Evidencia de AC-01 a AC-04 y AC-07: corrida con registro, tabla de diferencias de CPNF-01, inspecciones de AC-03 y CPNF-05, y el recorrido de AC-04 con su guion y sus capturas |
 | Aviso de privacidad de demostración | [`backend/semillas/aviso_privacidad_demo.md`](../backend/semillas/aviso_privacidad_demo.md) | Texto vigente del aviso (RF-12) |
 | Scripts de la base | `backend/01_crear_base.sql` a `backend/04_cargar_semillas.sql` | Base, esquema, prueba del esquema y semillas |
 | Variables de ejemplo | [`backend/.env.example`](../backend/.env.example) | Configuración del servidor, sin valores reales |
 | Documentación interactiva de la API | `http://localhost:8000/docs`, con la API en marcha | Operaciones E01 a E20 |
 | Glosario del dominio financiero | Documento aparte, enlazado en el SRS 1.3 | Términos financieros |
+
+---
+
+## 14. Registro de cambios
+
+| Versión | Fecha | Autor | Cambios |
+|---|---|---|---|
+| 1.0 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Primera versión (commit `358fdae`), con el servidor completo y el cliente web todavía sin construir. Reflejaba el SRS 0.3 del commit `268a2c2`. |
+| 1.1 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Estado de la entrega del MVP: el cliente web con las 12 pantallas (commit `e636b78`), la evidencia de `backend/tests/resultados/2026-10-18/` (corrida con registro, CPNF-01, AC-03, CPNF-05 y recorrido de AC-04) y los 18 imprescindibles hechos y verificados. AC-01 a AC-07 cumplidos y AC-08 pendiente. Se actualizan el encabezado, 1.3, 1.4, 2.4, el estado de cada requisito de la sección 3, 6.1, 7.1, 7.2, 8, 10.1, 10.2, la sección 11 (proxy de Vite, puertos fijos, `localhost` y no `127.0.0.1` por la comprobación de origen, el cargador y el nuevo apartado 11.8 del recorrido) y la sección 12 completa. Registra las precisiones del SRS del 18/10/2026: el criterio 1 de RF-11 (P-64), el script SQL de semillas en el SRS 4.2 (P-66), AC-08 «a más tardar» (P-67), la actualización de versiones en la semana del 19 de octubre (P-68) y la ruta del registro de resultados (P-70). Quita la hora de corte y «el repositorio que indique el líder»: el repositorio es público y lo revisan, hasta el fin de semana del 24 y 25 de octubre, los agentes de la plataforma del líder. Agrega esta sección. |
