@@ -1,0 +1,20 @@
+archivo,tolerancia,cifras,fuera_de_tolerancia,diferencia_maxima
+indicadores.csv,exacto: igualdad,42,0,
+indicadores.csv,fraccion: ≤ 0.00001,12,0,0.000000000000000000000000000
+indicadores.csv,importe: ≤ 0.01,24,0,0.0000000
+indicadores.csv,pp: ≤ 0.001,12,0,0.000000000000000000000000000
+indice_por_periodo.csv,fraccion: ≤ 0.00001,480,0,0.000000000000000000000000000
+posiciones.csv,exacto: igualdad,312,0,
+posiciones.csv,importe: ≤ 0.01,240,0,0.0000
+posiciones.csv,pp: ≤ 0.001,40,0,0.0000000000
+posiciones.csv,unitario: ≤ 1E-7,40,0,0.00000
+precios_usados.csv,exacto: igualdad,315,0,
+serie_diaria.csv,fraccion: ≤ 0.00001,280,0,0.0000000000
+serie_diaria.csv,importe: ≤ 0.01,350,0,0.0000000
+serie_diaria.csv,pp: ≤ 0.001,70,0,0.000000000000000000000000000
+transacciones.csv,exacto: igualdad,16,0,
+transacciones.csv,importe: ≤ 0.01,48,0,0.0000
+transacciones.csv,unitario: ≤ 1E-7,32,0,0.00000
+valuacion_cetes.csv,exacto: igualdad,1183,0,
+valuacion_cetes.csv,pp: ≤ 0.001,91,0,0.000000000000000000000000001
+valuacion_cetes.csv,unitario: ≤ 1E-7,91,0,0.000000000000000000000000010

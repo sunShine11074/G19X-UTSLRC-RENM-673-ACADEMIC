@@ -1,0 +1,9 @@
+﻿Credenciales buscadas: 3
+Coincidencias en el historial de git (26 commits): 0
+Coincidencias en el índice: 0
+Coincidencias en el árbol de trabajo (sin ignorados): 0
+Coincidencias en frontend/dist (36 archivos): 0
+Coincidencias en los registros (45 archivos): 0
+backend/.env ignorado por git: sí
+Commits que incluyen backend/.env: 0
+CPNF-05: cumple

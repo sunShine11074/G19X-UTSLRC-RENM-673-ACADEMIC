@@ -1,0 +1,57 @@
+﻿requisito,pantalla,archivo,hora,resultado,detalle
+inicio,,fallo-inicio_V-01_2026-10-18_2014.png,20:14:21,falló,No se pudo iniciar sesión (error: No se pudo completar No se pudo iniciar sesión. Revisa tu correo y tu contraseña; una cuenta cuyo consentimiento se revocó ya no puede abrir sesión.)
+inicio,,fallo-inicio_V-01_2026-10-18_2107.png,21:07:44,falló,No se pudo iniciar sesión (error: No se pudo completar No se pudo iniciar sesión. Revisa tu correo y tu contraseña; una cuenta cuyo consentimiento se revocó ya no puede abrir sesión.)
+RF-11 crit. 1,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-07 crit. 3,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-08,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-09,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-10,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-12 crit. 4,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-31 crit. 2 y 3,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-26b,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-30,V-04,RF-11_V-04_2026-10-18_2108.png,21:08:27,correcto,"Principal, periodo por omisión; valor al corte igual a 5.2 ($58,940.88)"
+RF-11 crit. 2,V-04,RF-11_V-04_2026-10-18_2108_grafica.png,21:08:27,correcto,"etiqueta «$58,940.88»"
+RNF-02,V-04,RNF-02_V-04_2026-10-18_2108_tarjeta.png,21:08:27,correcto,"tarjeta «$58,940.88»"
+RNF-02,V-04,RNF-02_V-04_2026-10-18_2108_etiqueta-corte.png,21:08:28,correcto,"etiqueta del corte «$58,940.88»"
+RNF-02,V-04,RNF-02_V-04_2026-10-18_2108_ultima-fila.png,21:08:28,correcto,"última fila «$58,940.88»"
+RF-06,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RF-08,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RF-26a,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RF-26b,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RF-30,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RF-31 crit. 2 y 3,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RF-07 crit. 3,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RF-12 crit. 4,V-05,RF-06_V-05_2026-10-18_2108.png,21:08:29,correcto,Principal al 14/10/2026
+RNF-02,V-05,RNF-02_V-05_2026-10-18_2108_total.png,21:08:30,correcto,"total del valor «$58,940.88»"
+RNF-02,V-04,RNF-02_V-04_2026-10-18_2108_repetida.png,21:08:32,correcto,"consulta repetida: tarjeta «$58,940.88», corte «$58,940.88», ultima «$58,940.88»"
+RNF-02,V-05,RNF-02_V-05_2026-10-18_2108_repetida.png,21:08:33,correcto,"consulta repetida: total «$58,940.88»"
+RNF-02 (consulta repetida),V-04 y V-05,,21:08:33,coincide,"cifras de la tarjeta, la etiqueta del corte, la última fila y el total: $58,940.88 / $58,940.88 / $58,940.88 / $58,940.88; primera consulta: $58,940.88 / $58,940.88 / $58,940.88 / $58,940.88; igual a 5.2 ($58,940.88)"
+RF-05 (consulta),V-06,RF-05_V-06_2026-10-18_2108.png,21:08:35,correcto,Principal: 15 filas en la tabla
+RF-12 crit. 4,V-06,RF-05_V-06_2026-10-18_2108.png,21:08:35,correcto,Principal: 15 filas en la tabla
+RF-28 crit. 3,V-07,RF-28_V-07_2026-10-18_2108.png,21:08:37,correcto,"N1 (venta de DEMOACC con Casa B el 18/09/2026, 150 títulos): «No se registró la transacción. Corrige lo siguiente y vuelve a enviarla: La venta dejaría el saldo de DEMOACC con Casa B en este portafolio en -50 títulos el 18/09/2026. El saldo con cada intermediari»; nada registrado (E17: 15 antes y después); lo capturado se conserva"
+RF-28 crit. 1,V-07,RF-28_V-07_2026-10-18_2108.png,21:08:37,correcto,"N1 (venta de DEMOACC con Casa B el 18/09/2026, 150 títulos): «No se registró la transacción. Corrige lo siguiente y vuelve a enviarla: La venta dejaría el saldo de DEMOACC con Casa B en este portafolio en -50 títulos el 18/09/2026. El saldo con cada intermediari»; nada registrado (E17: 15 antes y después); lo capturado se conserva"
+RF-04,V-10,RF-04_V-10_2026-10-18_2108.png,21:08:39,correcto,
+RF-25 (consulta),V-09,RF-25_V-09_2026-10-18_2108.png,21:08:40,correcto,
+RF-03 (alta),V-04,RF-03_V-04_2026-10-18_2108_alta.png,21:08:43,correcto,«Recorrido AC-04 (desechable)» sin transacciones
+RF-11 crit. 3,V-04,RF-03_V-04_2026-10-18_2108_alta.png,21:08:43,correcto,«Recorrido AC-04 (desechable)» sin transacciones
+RF-03 (cambio de nombre),V-08,RF-03_V-08_2026-10-18_2108_cambio-nombre.png,21:08:45,correcto,"«Recorrido AC-04 (desechable)» → «Recorrido AC-04 (desechable, renombrado)»"
+"RF-05 (registro, formulario)",V-07,RF-05_V-07_2026-10-18_2108_compra.png,21:08:47,correcto,"compra de 10 DEMOACC con Casa A el 01/10/2026 a $105.35, comisiones $3.05"
+RF-05 (registro),V-06,RF-05_V-06_2026-10-18_2108_registrada.png,21:08:48,correcto,con «Transacción registrada»
+RF-03 crit. 1 (confirmación),V-08,RF-03_V-08_2026-10-18_2108_dialogo-eliminar.png,21:08:50,correcto,el diálogo pide escribir el nombre
+RF-03 crit. 3 (cancelar),V-08,RF-03_V-08_2026-10-18_2108_cancelado.png,21:08:50,correcto,Cancelar no cambió nada: el portafolio sigue en E12
+RF-03 (eliminación),V-08,RF-03_V-08_2026-10-18_2108_eliminado.png,21:08:52,correcto,eliminado; ya no aparece en E12
+RF-12 crit. 1,V-11,RF-12_V-11_2026-10-18_2108.png,21:08:53,correcto,cuenta del oráculo; no se revoca
+RF-12 crit. 2 (sin sesión),V-03,RF-12_V-03_2026-10-18_2108_sin-sesion.png,21:08:55,correcto,"contexto aislado, sin sesión"
+RF-12 crit. 1 (casilla sin marcar),V-02,RF-12_V-02_2026-10-18_2108_casilla.png,21:08:56,correcto,la casilla aparece sin marcar
+RF-12 crit. 2 (diálogo del aviso),V-02,RF-12_V-02_2026-10-18_2108_dialogo-aviso.png,21:08:56,correcto,el aviso se lee sin salir del formulario
+RF-12 crit. 1 (rechazo sin consentimiento),V-02,RF-12_V-02_2026-10-18_2108_rechazo.png,21:08:57,correcto,«No se creó la cuenta. Corrige lo siguiente: Para registrarte debes marcar la casilla de consentimiento.»
+RF-01 crit. 1,V-02,RF-12_V-02_2026-10-18_2108_rechazo.png,21:08:57,correcto,«No se creó la cuenta. Corrige lo siguiente: Para registrarte debes marcar la casilla de consentimiento.»
+RF-01 (alta),V-01,RF-01_V-01_2026-10-18_2108_cuenta-creada.png,21:08:59,correcto,cuenta recorrido-b-2108@example.com; con «Tu cuenta quedó creada. Inicia sesión.»; correo ya escrito
+RF-01 (contraseña errónea),V-01,RF-01_V-01_2026-10-18_2108_rechazo.png,21:09:00,correcto,«No se pudo completar No se pudo iniciar sesión. Revisa tu correo y tu contraseña; una cuenta cuyo consentimiento se revocó ya no puede abrir sesión.»; la contraseña se vació
+RF-25 crit. 1,V-09,RF-25_V-09_2026-10-18_2109_casa-a-cuenta-b.png,21:09:03,correcto,"la cuenta B registra «Casa A», que también existe en la cuenta del oráculo"
+RF-02 crit. 2 (ajeno),V-12,RF-02_V-12_2026-10-18_2109_ajeno.png,21:09:04,correcto,portafolio «Principal» del oráculo: «No encontrado No existe el portafolio. Ir a Portafolios»
+RNF-03,V-12,RNF-03_V-12_2026-10-18_2109_inexistente.png,21:09:06,correcto,mismo texto que el portafolio ajeno
+RF-02 crit. 2 (inexistente),V-12,RNF-03_V-12_2026-10-18_2109_inexistente.png,21:09:06,correcto,mismo texto que el portafolio ajeno
+RF-12 crit. 3 (confirmación),V-11,RF-12_V-11_2026-10-18_2109_dialogo-revocar.png,21:09:07,correcto,cuenta B
+RF-12 crit. 3 (revocación),V-01,RF-12_V-01_2026-10-18_2109_revocado.png,21:09:08,correcto,con «Revocaste tu consentimiento; tu cuenta quedó bloqueada.»
+RF-12 crit. 3 (cuenta bloqueada),V-01,RF-12_V-01_2026-10-18_2109_bloqueada.png,21:09:09,correcto,ya no puede entrar: «No se pudo completar No se pudo iniciar sesión. Revisa tu correo y tu contraseña; una cuenta cuyo consentimiento se revocó ya no puede abrir sesión.»
