@@ -191,7 +191,7 @@ export default function V07RegistrarTransaccion() {
       <MensajeEstado tipo="exito">{aviso}</MensajeEstado>
       {errorCarga && <MensajeEstado tipo="error">{textoParaUsuario(errorCarga.mensaje)}</MensajeEstado>}
       <ResumenError errores={resumen} titulo="No se registró la transacción. Corrige lo siguiente y vuelve a enviarla:" />
-      <form className="formulario-transaccion" onSubmit={enviar} noValidate aria-busy={esperando ? 'true' : undefined}>
+      <form className="formulario-transaccion p77-card ancho-8" onSubmit={enviar} noValidate aria-busy={esperando ? 'true' : undefined}>
         <div className="formulario-transaccion__rejilla">
           <Select
             id="portafolio"
@@ -261,6 +261,7 @@ export default function V07RegistrarTransaccion() {
             etiqueta="Títulos"
             ayuda={AYUDAS.cantidad}
             inputMode="numeric"
+            className="campo__control--cifra"
             autoComplete="off"
             value={valores.cantidad}
             onChange={cambiar('cantidad')}
@@ -271,6 +272,7 @@ export default function V07RegistrarTransaccion() {
             etiqueta="Precio por título (MXN)"
             ayuda={AYUDAS.precio}
             inputMode="decimal"
+            className="campo__control--cifra"
             autoComplete="off"
             value={valores.precio}
             onChange={cambiar('precio')}
@@ -281,6 +283,7 @@ export default function V07RegistrarTransaccion() {
             etiqueta="Importe de comisiones con IVA (MXN)"
             ayuda={AYUDAS.comisiones}
             inputMode="decimal"
+            className="campo__control--cifra"
             autoComplete="off"
             value={valores.comisiones}
             onChange={cambiar('comisiones')}

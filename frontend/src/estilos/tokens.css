@@ -1,216 +1,379 @@
 /*
- * Tokens del tema propio del Proyecto 077 (SRS 4.5.1, «Paleta», «Tipografía» y
- * «Espaciado, retícula y puntos de corte»). Los nombres son los de las variables
- * que genera el ThemeProvider de CDS (--color-*, --space-*, --fontSize-*…), para
- * que migrar a CDS no toque las pantallas (nota b.2 del borrador de 4.5).
+ * Tokens del sistema de diseño «Proyecto 077 UI» (versión 1).
+ * ARCHIVO GENERADO por scripts/tokens-a-css.mjs desde src/estilos/sistema/tokens.json: no lo
+ * edites a mano; cambia el JSON y vuelve a generarlo (node scripts/tokens-a-css.mjs).
  *
- * Reglas para quien escribe CSS:
- * - Usa solo var(--…); nunca un color fijo.
- * - Los nombres cortos (--fg, --fgMuted, --bgAlternate…) son alias de los --color-*
- *   y valen igual; usa el que prefieras.
- * - El modo sigue la preferencia del sistema operativo. data-tema="oscuro" o
- *   "claro" en <html> lo fuerza (solo para revisar en desarrollo).
+ * - Tema activo: data-theme="<modo>-<acento>" en <html> (light-lime, light-blue, light-red, light-purple, dark-lime, dark-blue, dark-red, dark-purple).
+ *   Sin atributo, o con un valor desconocido, rige light-lime.
+ * - Nunca escribas un color fijo en un componente: usa var(--…).
+ * - Tipografía: font: var(--t-…) en CSS, o la clase .t-… en el marcado.
+ * - Puntos de corte (las variables no sirven dentro de @media; escribe el valor):
+ *   bp-sm: 375px (Teléfono: rail sustituido por barra inferior.)
+ *   bp-md: 768px (Tableta: rail visible, cuadrícula de 8 columnas.)
+ *   bp-lg: 1024px (Escritorio: cuadrícula de 12 columnas.)
+ *   bp-xl: 1440px (Ancho de diseño de referencia de los frames.)
  */
 
-:root {
-  /* Color, modo claro (columna «Claro» de la Paleta) */
-  --color-fg: #16211f;
-  --color-fgMuted: #5e6d6a;
-  --color-fgInverse: #ffffff;
-  --color-fgPrimary: #1c5b52;
-  --color-fgPositive: #1e6b2e;
-  --color-fgNegative: #93342b;
-  --color-fgWarning: #8a5a00;
-  --color-bg: #ffffff;
-  --color-bgAlternate: #f2f5f4;
-  --color-bgSecondary: #e8eeec;
-  --color-bgTertiary: #d5dedb;
-  --color-bgElevation1: #ffffff;
-  --color-bgElevation2: #ffffff;
-  --color-bgInverse: #16211f;
-  --color-bgPrimary: #1c5b52;
-  --color-bgPrimaryWash: #e4f1ee;
-  --color-bgPositive: #1e6b2e;
-  --color-bgPositiveWash: #e6f2e8;
-  --color-bgNegative: #93342b;
-  --color-bgNegativeWash: #f6e5e2;
-  --color-bgWarning: #a86a00;
-  --color-bgWarningWash: #fbf1de;
-  --color-bgLine: #d5dedb;
-  --color-bgLineHeavy: #858f8c;
-  --color-bgLinePrimary: #1c5b52;
-  --color-bgLinePrimarySubtle: #a9cfc7;
-  --color-bgOverlay: rgba(22, 33, 31, 0.33);
-  --color-yellow0: #fbf1de;
-  --color-yellow70: #6e4a00;
-  --serie-1: #1c5b52;
-  --serie-2: #b76b1c;
-  --serie-3: #8557c8;
-  --sombra-elevacion2: 0 8px 24px rgba(22, 33, 31, 0.18);
+@font-face {
+  font-family: 'Manrope';
+  src: url('./fuentes/Manrope-Variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-tema='claro']) {
-    --color-fg: #e6ecea;
-    --color-fgMuted: #8a9794;
-    --color-fgInverse: #161e1d;
-    --color-fgPrimary: #6fbdaf;
-    --color-fgPositive: #7cc98a;
-    --color-fgNegative: #e0978d;
-    --color-fgWarning: #e5b567;
-    --color-bg: #161e1d;
-    --color-bgAlternate: #1d2726;
-    --color-bgSecondary: #24302e;
-    --color-bgTertiary: #2c3835;
-    --color-bgElevation1: #1b2423;
-    --color-bgElevation2: #212b29;
-    --color-bgInverse: #e6ecea;
-    --color-bgPrimary: #6fbdaf;
-    --color-bgPrimaryWash: #1e3532;
-    --color-bgPositive: #7cc98a;
-    --color-bgPositiveWash: #1c3022;
-    --color-bgNegative: #e0978d;
-    --color-bgNegativeWash: #34211e;
-    --color-bgWarning: #e5b567;
-    --color-bgWarningWash: #33290f;
-    --color-bgLine: #2c3835;
-    --color-bgLineHeavy: #6f7976;
-    --color-bgLinePrimary: #6fbdaf;
-    --color-bgLinePrimarySubtle: #2f5a53;
-    --color-bgOverlay: rgba(11, 16, 15, 0.33);
-    --color-yellow0: #33290f;
-    --color-yellow70: #f0c878;
-    --serie-1: #6fbdaf;
-    --serie-2: #be7125;
-    --serie-3: #956ed2;
-    --sombra-elevacion2: 0 8px 24px rgba(0, 0, 0, 0.5);
-  }
+@font-face {
+  font-family: 'DM Sans';
+  src: url('./fuentes/DMSans-Variable.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Mismo bloque oscuro, forzado con data-tema="oscuro" (solo revisión). */
-:root[data-tema='oscuro'] {
-  --color-fg: #e6ecea;
-  --color-fgMuted: #8a9794;
-  --color-fgInverse: #161e1d;
-  --color-fgPrimary: #6fbdaf;
-  --color-fgPositive: #7cc98a;
-  --color-fgNegative: #e0978d;
-  --color-fgWarning: #e5b567;
-  --color-bg: #161e1d;
-  --color-bgAlternate: #1d2726;
-  --color-bgSecondary: #24302e;
-  --color-bgTertiary: #2c3835;
-  --color-bgElevation1: #1b2423;
-  --color-bgElevation2: #212b29;
-  --color-bgInverse: #e6ecea;
-  --color-bgPrimary: #6fbdaf;
-  --color-bgPrimaryWash: #1e3532;
-  --color-bgPositive: #7cc98a;
-  --color-bgPositiveWash: #1c3022;
-  --color-bgNegative: #e0978d;
-  --color-bgNegativeWash: #34211e;
-  --color-bgWarning: #e5b567;
-  --color-bgWarningWash: #33290f;
-  --color-bgLine: #2c3835;
-  --color-bgLineHeavy: #6f7976;
-  --color-bgLinePrimary: #6fbdaf;
-  --color-bgLinePrimarySubtle: #2f5a53;
-  --color-bgOverlay: rgba(11, 16, 15, 0.33);
-  --color-yellow0: #33290f;
-  --color-yellow70: #f0c878;
-  --serie-1: #6fbdaf;
-  --serie-2: #be7125;
-  --serie-3: #956ed2;
-  --sombra-elevacion2: 0 8px 24px rgba(0, 0, 0, 0.5);
+@font-face {
+  font-family: 'Google Sans Code';
+  src: url('./fuentes/GoogleSansCode-Variable.woff2') format('woff2');
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
-  /* Alias cortos de los colores (mismo valor que su --color-*) */
-  --fg: var(--color-fg);
-  --fgMuted: var(--color-fgMuted);
-  --fgInverse: var(--color-fgInverse);
-  --fgPrimary: var(--color-fgPrimary);
-  --fgPositive: var(--color-fgPositive);
-  --fgNegative: var(--color-fgNegative);
-  --fgWarning: var(--color-fgWarning);
-  --bg: var(--color-bg);
-  --bgAlternate: var(--color-bgAlternate);
-  --bgSecondary: var(--color-bgSecondary);
-  --bgTertiary: var(--color-bgTertiary);
-  --bgElevation1: var(--color-bgElevation1);
-  --bgElevation2: var(--color-bgElevation2);
-  --bgInverse: var(--color-bgInverse);
-  --bgPrimary: var(--color-bgPrimary);
-  --bgPrimaryWash: var(--color-bgPrimaryWash);
-  --bgPositive: var(--color-bgPositive);
-  --bgPositiveWash: var(--color-bgPositiveWash);
-  --bgNegative: var(--color-bgNegative);
-  --bgNegativeWash: var(--color-bgNegativeWash);
-  --bgWarning: var(--color-bgWarning);
-  --bgWarningWash: var(--color-bgWarningWash);
-  --bgLine: var(--color-bgLine);
-  --bgLineHeavy: var(--color-bgLineHeavy);
-  --bgLinePrimary: var(--color-bgLinePrimary);
-  --bgOverlay: var(--color-bgOverlay);
-  --yellow0: var(--color-yellow0);
-  --yellow70: var(--color-yellow70);
+  /* Familias */
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-num: "Google Sans Code", ui-monospace, monospace;
 
-  /* Espacio: escala de CDS, base 8 px (0_5 = 0.5, 1_5 = 1.5…) */
-  --space-0_25: 2px;
-  --space-0_5: 4px;
-  --space-0_75: 6px;
-  --space-1: 8px;
-  --space-1_5: 12px;
-  --space-2: 16px;
-  --space-3: 24px;
-  --space-4: 32px;
-  --space-5: 40px;
-  --space-6: 48px;
-  --space-8: 64px;
-  --space-10: 80px;
+  /* Estilos de texto (peso tamaño/interlineado familia) */
+  --t-display: 800 2.25rem/2.75rem var(--font-display); /* Título de cada pantalla (uno por pantalla). */
+  --t-title-lg: 700 1.75rem/2.25rem var(--font-display); /* Título de modal o de sección grande. */
+  --t-title: 500 1.375rem/1.75rem var(--font-display); /* Título de tarjeta, en ink-muted. */
+  --t-title-sm: 600 1.125rem/1.5rem var(--font-display); /* Subsección dentro de una tarjeta. */
+  --t-body: 400 1rem/1.5rem var(--font-sans); /* Párrafos y descripciones. */
+  --t-body-sm: 400 0.875rem/1.25rem var(--font-sans); /* Texto de apoyo, celdas de texto en tablas. */
+  --t-label-lg: 600 1.25rem/1.75rem var(--font-sans); /* Nombre de la persona en el encabezado. */
+  --t-label: 500 0.875rem/1.25rem var(--font-sans); /* Etiquetas de campos, encabezados de tabla y de leyenda. */
+  --t-caption: 500 0.75rem/1rem var(--font-sans); /* Metadatos y notas al pie; nunca menor. */
+  --t-tooltip: 500 0.8125rem/1.125rem var(--font-sans); /* Etiquetas al pasar el puntero o enfocar. */
+  --t-button: 600 1rem/1.5rem var(--font-sans); /* Texto de botones de 48px. */
+  --t-button-sm: 600 0.875rem/1.25rem var(--font-sans); /* Texto de botones compactos y del control segmentado. */
+  --t-num-display: 600 2.5rem/3rem var(--font-num); /* Valor principal de la pantalla (valor total del portafolio). */
+  --t-num-lg: 600 1.75rem/2.25rem var(--font-num); /* Valor de un KPI en tarjeta. */
+  --t-num-md: 500 1.25rem/1.75rem var(--font-num); /* KPI secundario o variación destacada. */
+  --t-num: 400 1rem/1.5rem var(--font-num); /* Montos en tablas, listas y campos de monto. */
+  --t-num-sm: 400 0.875rem/1.25rem var(--font-num); /* Tablas compactas y badges de variación. */
+  --t-num-xs: 400 0.75rem/1rem var(--font-num); /* Ejes de gráficas y horas. */
 
-  /* Radios y bordes */
-  --borderRadius-100: 4px; /* etiqueta de demostración */
-  --borderRadius-200: 8px; /* campos y tarjetas */
-  --borderRadius-400: 16px; /* avisos */
-  --borderRadius-1000: 9999px; /* botones (como CDS) */
-  --borderWidth-100: 1px;
-  --borderWidth-200: 2px;
-  --ancho-foco: 2px;
-  --barra-menu-activo: 3px;
+  /* spacing: Base de 4px más el gutter de 10px entre tarjetas. */
+  --space-1: 4px; /* Ícono a texto en badges; relleno del control segmentado; relleno vertical de tooltips. */
+  --space-2: 8px; /* Ícono a etiqueta en botones; etiqueta a campo; entre avatares. */
+  --space-gutter: 10px; /* Entre tarjetas de la cuadrícula y entre muestras del selector de color; relleno horizontal de badges y tooltips. */
+  --space-3: 12px; /* Entre destinos del rail; relleno vertical de celdas. */
+  --space-4: 16px; /* Margen exterior de la página; entre campo y botón; relleno horizontal de celdas. */
+  --space-5: 20px; /* Relleno horizontal dentro de campos. */
+  --space-6: 24px; /* Relleno interior de tarjetas; entre botones del encabezado; relleno lateral de botones. */
+  --space-8: 32px; /* Entre bloques de un modal. */
+  --space-10: 40px; /* Entre las acciones del encabezado y el nombre de la persona; entre secciones grandes. */
 
-  /* Tipografía: escala de CDS; en el MVP, la fuente del sistema (4.5.1) */
-  --fontFamily-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --fontSize-title1: 1.75rem;
-  --lineHeight-title1: 2.25rem;
-  --fontWeight-title1: 600;
-  --fontSize-title2: 1.75rem;
-  --lineHeight-title2: 2.25rem;
-  --fontWeight-title2: 400;
-  --fontSize-title3: 1.25rem;
-  --lineHeight-title3: 1.75rem;
-  --fontWeight-title3: 600;
-  --fontSize-headline: 1rem;
-  --lineHeight-headline: 1.5rem;
-  --fontWeight-headline: 600;
-  --fontSize-body: 1rem;
-  --lineHeight-body: 1.5rem;
-  --fontWeight-body: 400;
-  --fontSize-label1: 0.875rem;
-  --lineHeight-label1: 1.25rem;
-  --fontWeight-label1: 600;
-  --fontSize-label2: 0.875rem;
-  --lineHeight-label2: 1.25rem;
-  --fontWeight-label2: 400;
-  --fontSize-legal: 0.8125rem;
-  --lineHeight-legal: 1rem;
-  --fontWeight-legal: 400;
+  /* radius: Redondeado generoso: tarjetas de 30px, todo lo interactivo en píldora. */
+  --radius-sm: 12px; /* Tooltips y tooltips de gráfica. */
+  --radius-md: 24px; /* Rail, menús y paneles dentro de una tarjeta. */
+  --radius-lg: 30px; /* Tarjetas y modales. */
+  --radius-pill: 9999px; /* Botones, campos, chips, botones de ícono, avatares y el selector de color. */
 
-  /* Controles y retícula */
-  --controlSize-alto: 40px;
-  --ancho-maximo: 1200px; /* ancho del contenido (H-7) */
-  --ancho-menu: 240px;
-  --ancho-lectura: 70ch; /* párrafos largos, como el aviso */
-  --margen-lateral: var(--space-3); /* 16 px en teléfono (base.css) */
-  --alto-grafica: 300px;
+  /* size: Medidas fijas de controles y piezas recurrentes. */
+  --size-control: 48px; /* Alto de botones y campos; diámetro de botones de ícono y destinos del rail (objetivo táctil de 44px o más). */
+  --size-control-sm: 36px; /* Botones compactos y control segmentado dentro de tarjetas. */
+  --size-rail: 80px; /* Ancho del rail de navegación. */
+  --size-avatar-sm: 40px; /* Avatares en listas y selectores. */
+  --size-avatar: 48px; /* Avatar de la persona en el encabezado. */
+  --size-swatch: 22px; /* Muestra de color del selector de acento. */
+  --size-icon-sm: 16px; /* Íconos dentro de botones, badges y celdas. */
+  --size-icon: 20px; /* Íconos del rail y de los botones de ícono. */
+  --size-icon-lg: 24px; /* Íconos de estados vacíos y de alertas destacadas. */
+  --size-logo: 44px; /* Logo en la parte superior del rail. */
+
+  /* duration: Duraciones de transición. */
+  --duration-fast: 150ms; /* Color, fondo y borde en hover y foco. */
+  --duration-base: 200ms; /* Cambio de tema y de modo; transformaciones pequeñas. */
+  --duration-slow: 300ms; /* Apertura de popovers y modales (el cierre usa duration-base). */
+
+  /* easing: Curvas de aceleración. */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* Cambios de estado. */
+  --ease-enter: cubic-bezier(0, 0, 0, 1); /* Elementos que entran. */
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1); /* Elementos que salen. */
+
+  /* zIndex: Capas. */
+  --z-rail: 20; /* Rail y barra inferior. */
+  --z-popover: 40; /* Popovers y menús. */
+  --z-tooltip: 50; /* Tooltips. */
+  --z-modal: 60; /* Modales y su overlay. */
+  --z-toast: 70; /* Notificaciones. */
+
+  /* Color y sombras iguales en los ocho temas */
+  --rail: #000000; /* Fondo del rail de navegación lateral; negro en ambos modos. */
+  --rail-item: #313132; /* Círculo de cada destino del rail en reposo. */
+  --rail-item-hover: #3e3e40; /* Círculo del destino del rail al pasar el puntero. */
+  --rail-ink: #f8f9f9; /* Íconos sobre rail y rail-item. */
+  --lime: #c6ef4e; /* Acento Lima como relleno en este modo; también es la muestra del selector de color. Solo con on-lime encima. */
+  --lime-hover: #d3fd5e; /* Relleno Lima en hover. */
+  --lime-rail: #c6ef4e; /* Lima sobre el rail negro (destino activo, anillo de foco); lleva texto negro. */
+  --on-lime: #000000; /* Texto e ícono sobre lime y lime-hover. */
+  --blue-rail: #5e94ff; /* Azul sobre el rail negro (destino activo, anillo de foco); lleva texto negro. */
+  --red-rail: #f75c62; /* Rojo sobre el rail negro (destino activo, anillo de foco); lleva texto negro. */
+  --on-red: #000000; /* Texto e ícono sobre red y red-hover. */
+  --purple-rail: #a878fc; /* Morado sobre el rail negro (destino activo, anillo de foco); lleva texto negro. */
+  --on-purple: #000000; /* Texto e ícono sobre purple y purple-hover. */
+  --on-rail-accent: #000000; /* Ícono sobre rail-accent (8:1 o más en todos los temas). */
+  --chart-6: #008300; /* Serie categórica 6 (orden fijo, nunca rotar). Más de 6 categorías: agrúpalas en «Otros». */
+  --chart-accent: var(--accent-ink); /* Línea de la serie principal (el portafolio del usuario): sigue al acento, 3:1 o más sobre surface. */
+  --chart-accent-fill: var(--accent); /* Relleno de área bajo chart-accent; nunca sin la línea encima. */
+  --chart-compare: var(--ink-muted); /* Serie de comparación (benchmark, promedio): línea punteada. */
+}
+
+/* ---- Por modo ---- */
+:root,
+:root[data-theme^='light'] {
+  --bg: #eaece0; /* Fondo de la página detrás de las tarjetas; el rail flota sobre él. */
+  --surface: #ffffff; /* Tarjetas, modales, tablas y menús. */
+  --surface-sunken: #f0f1ef; /* Campos de texto, pista del control segmentado y zonas hundidas dentro de una tarjeta. */
+  --surface-control: #f8f9f9; /* Botones de ícono y popovers que se apoyan directo sobre bg (botones del encabezado, selector de color). */
+  --border: #d9dad4; /* Contorno de 1px de tarjetas y separadores. Decorativo: no identifica controles. */
+  --border-subtle: #e2e2e5; /* Contorno de 1px de popovers (selector de color, menús). */
+  --border-strong: #868881; /* Contorno de controles que deben distinguirse (checkbox, avatar de agregar, campos en formularios densos): 3:1 o más sobre bg, surface, surface-sunken y surface-control. */
+  --ink: #212529; /* Texto e íconos principales sobre bg, surface, surface-sunken y surface-control; también el anillo de selección de avatares y muestras de color. */
+  --ink-muted: #666666; /* Texto secundario, títulos de tarjeta, etiquetas y placeholder; 4.5:1 sobre bg, surface, surface-sunken y surface-control. */
+  --ink-disabled: #a1a1a1; /* Etiqueta de controles deshabilitados (exento de contraste, siempre con disabled o aria-disabled). */
+  --action: #000000; /* Relleno del botón principal: negro en modo claro, casi blanco en modo oscuro. */
+  --action-hover: #2a2b2d; /* Relleno del botón principal en hover. */
+  --on-action: #ffffff; /* Etiqueta e ícono sobre action y action-hover. */
+  --overlay: #1214188c; /* Velo detrás de modales y hojas. */
+  --lime-ink: #5b7205; /* Lima como texto, ícono o línea sobre bg, surface, surface-sunken, surface-control y lime-soft (4.5:1). */
+  --lime-soft: #f2fbd8; /* Fondo tintado Lima detrás de lime-ink (chips, filas seleccionadas). */
+  --blue: #105eff; /* Acento Azul como relleno en este modo; también es la muestra del selector de color. Solo con on-blue encima. */
+  --blue-hover: #014ee9; /* Relleno Azul en hover. */
+  --blue-ink: #0b5afb; /* Azul como texto, ícono o línea sobre bg, surface, surface-sunken, surface-control y blue-soft (4.5:1). */
+  --blue-soft: #e2ecff; /* Fondo tintado Azul detrás de blue-ink (chips, filas seleccionadas). */
+  --on-blue: #ffffff; /* Texto e ícono sobre blue y blue-hover. */
+  --red: #e13947; /* Acento Rojo como relleno en este modo; también es la muestra del selector de color. Solo con on-red encima. */
+  --red-hover: #f04853; /* Relleno Rojo en hover. */
+  --red-ink: #cd2137; /* Rojo como texto, ícono o línea sobre bg, surface, surface-sunken, surface-control y red-soft (4.5:1). */
+  --red-soft: #fbe7e9; /* Fondo tintado Rojo detrás de red-ink (chips, filas seleccionadas). */
+  --purple: #9d6bf2; /* Acento Morado como relleno en este modo; también es la muestra del selector de color. Solo con on-purple encima. */
+  --purple-hover: #a978ff; /* Relleno Morado en hover. */
+  --purple-ink: #804bd0; /* Morado como texto, ícono o línea sobre bg, surface, surface-sunken, surface-control y purple-soft (4.5:1). */
+  --purple-soft: #efe7fd; /* Fondo tintado Morado detrás de purple-ink (chips, filas seleccionadas). */
+  --positive: #057956; /* Ganancia o variación positiva como texto o ícono sobre bg, surface, surface-sunken, surface-control y positive-soft. Siempre con signo, flecha o palabra; no cambia con el acento. */
+  --positive-soft: #dcf1eb; /* Fondo de badge o fila detrás de positive. */
+  --negative: #c63202; /* Pérdida o variación negativa como texto o ícono sobre bg, surface, surface-sunken, surface-control y negative-soft. Siempre con signo, flecha o palabra; no cambia con el acento. */
+  --negative-soft: #fbe6e1; /* Fondo de badge o fila detrás de negative. */
+  --warning: #8e5f03; /* Advertencia como texto o ícono sobre bg, surface, surface-sunken, surface-control y warning-soft. Siempre con signo, flecha o palabra; no cambia con el acento. */
+  --warning-soft: #fbefdc; /* Fondo de badge o fila detrás de warning. */
+  --chart-1: #2a78d6; /* Serie categórica 1 (orden fijo, nunca rotar). Más de 6 categorías: agrúpalas en «Otros». */
+  --chart-2: #eb6834; /* Serie categórica 2 (orden fijo, nunca rotar). Más de 6 categorías: agrúpalas en «Otros». */
+  --chart-3: #1baf7a; /* Serie categórica 3 (orden fijo, nunca rotar). Más de 6 categorías: agrúpalas en «Otros». */
+  --chart-4: #eda100; /* Serie categórica 4 (orden fijo, nunca rotar). Más de 6 categorías: agrúpalas en «Otros». */
+  --chart-5: #e87ba4; /* Serie categórica 5 (orden fijo, nunca rotar). Más de 6 categorías: agrúpalas en «Otros». */
+  --chart-grid: #e5e6df; /* Líneas de cuadrícula: recesivas a propósito. */
+  --chart-axis: #c5c7be; /* Línea base y eje. */
+  --shadow-popover: 0 12px 32px #1214181f, 0 2px 8px #12141814; /* Popovers, menús, tooltips y modales. */
+}
+
+:root[data-theme^='dark'] {
+  --bg: #121317;
+  --surface: #1c1d22;
+  --surface-sunken: #26282e;
+  --surface-control: #32353d;
+  --border: #2e3037;
+  --border-subtle: #3a3d45;
+  --border-strong: #7b7f86;
+  --ink: #f1f2ec;
+  --ink-muted: #a6a9a2;
+  --ink-disabled: #5c5f66;
+  --action: #f1f2ec;
+  --action-hover: #dadcd3;
+  --on-action: #121317;
+  --overlay: #000000b3;
+  --lime-ink: #c6ef4e;
+  --lime-soft: #373f29;
+  --blue: #5e94ff;
+  --blue-hover: #73a2ff;
+  --blue-ink: #689bff;
+  --blue-soft: #29354e;
+  --on-blue: #000000;
+  --red: #f75c62;
+  --red-hover: #ff7173;
+  --red-ink: #ff7173;
+  --red-soft: #4c2b30;
+  --purple: #a878fc;
+  --purple-hover: #b28aff;
+  --purple-ink: #b187ff;
+  --purple-soft: #382f4e;
+  --positive: #2eb184;
+  --positive-soft: #163934;
+  --negative: #ff714f;
+  --negative-soft: #472823;
+  --warning: #e49e22;
+  --warning-soft: #483922;
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+  --chart-3: #199e70;
+  --chart-4: #c98500;
+  --chart-5: #d55181;
+  --chart-grid: #2b2d33;
+  --chart-axis: #474a52;
+  --shadow-popover: 0 12px 32px #000000b3, 0 2px 8px #00000080;
+}
+
+:root[data-theme^='dark'] {
+  color-scheme: dark;
+}
+
+/* ---- Por acento (los colores de cada acento ya cambian con el modo) ---- */
+:root,
+:root[data-theme$='-lime'] {
+  --accent: var(--lime); /* El acento elegido por la persona usuaria, como relleno: destino activo fuera del rail, tarjeta destacada, selección. Solo con on-accent encima. */
+  --accent-hover: var(--lime-hover); /* Hover de un relleno accent. */
+  --accent-ink: var(--lime-ink); /* Acento como texto, ícono, enlace o línea de gráfica sobre bg, surface, surface-sunken, surface-control y accent-soft. Nunca para cifras ni variaciones. */
+  --accent-soft: var(--lime-soft); /* Fondo tintado del acento detrás de accent-ink. */
+  --on-accent: var(--on-lime); /* Texto e ícono sobre accent y accent-hover. */
+  --rail-accent: var(--lime-rail); /* Círculo del destino activo del rail, siempre con on-rail-accent. */
+  --focus-ring-rail: 0 0 0 2px #000000, 0 0 0 4px #c6ef4e; /* Foco de teclado dentro del rail negro. */
+}
+
+:root[data-theme$='-blue'] {
+  --accent: var(--blue);
+  --accent-hover: var(--blue-hover);
+  --accent-ink: var(--blue-ink);
+  --accent-soft: var(--blue-soft);
+  --on-accent: var(--on-blue);
+  --rail-accent: var(--blue-rail);
+  --focus-ring-rail: 0 0 0 2px #000000, 0 0 0 4px #5e94ff;
+}
+
+:root[data-theme$='-red'] {
+  --accent: var(--red);
+  --accent-hover: var(--red-hover);
+  --accent-ink: var(--red-ink);
+  --accent-soft: var(--red-soft);
+  --on-accent: var(--on-red);
+  --rail-accent: var(--red-rail);
+  --focus-ring-rail: 0 0 0 2px #000000, 0 0 0 4px #f75c62;
+}
+
+:root[data-theme$='-purple'] {
+  --accent: var(--purple);
+  --accent-hover: var(--purple-hover);
+  --accent-ink: var(--purple-ink);
+  --accent-soft: var(--purple-soft);
+  --on-accent: var(--on-purple);
+  --rail-accent: var(--purple-rail);
+  --focus-ring-rail: 0 0 0 2px #000000, 0 0 0 4px #a878fc;
+}
+
+/* ---- Por tema ---- */
+:root,
+:root[data-theme='light-lime'] {
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #5b7205; /* Foco de teclado en cualquier superficie: 2px del color de la superficie y 2px de accent-ink (3:1 o más en todas). */
+}
+
+:root[data-theme='light-blue'] {
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #0b5afb;
+}
+
+:root[data-theme='light-red'] {
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #cd2137;
+}
+
+:root[data-theme='light-purple'] {
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #804bd0;
+}
+
+:root[data-theme='dark-lime'] {
+  --focus-ring: 0 0 0 2px #1c1d22, 0 0 0 4px #c6ef4e;
+}
+
+:root[data-theme='dark-blue'] {
+  --focus-ring: 0 0 0 2px #1c1d22, 0 0 0 4px #689bff;
+}
+
+:root[data-theme='dark-red'] {
+  --focus-ring: 0 0 0 2px #1c1d22, 0 0 0 4px #ff7173;
+}
+
+:root[data-theme='dark-purple'] {
+  --focus-ring: 0 0 0 2px #1c1d22, 0 0 0 4px #b187ff;
+}
+
+/* ---- Clases de texto ---- */
+.t-display {
+  font: var(--t-display);
+}
+
+.t-title-lg {
+  font: var(--t-title-lg);
+}
+
+.t-title {
+  font: var(--t-title);
+}
+
+.t-title-sm {
+  font: var(--t-title-sm);
+}
+
+.t-body {
+  font: var(--t-body);
+}
+
+.t-body-sm {
+  font: var(--t-body-sm);
+}
+
+.t-label-lg {
+  font: var(--t-label-lg);
+}
+
+.t-label {
+  font: var(--t-label);
+}
+
+.t-caption {
+  font: var(--t-caption);
+}
+
+.t-tooltip {
+  font: var(--t-tooltip);
+}
+
+.t-button {
+  font: var(--t-button);
+}
+
+.t-button-sm {
+  font: var(--t-button-sm);
+}
+
+.t-num-display {
+  font: var(--t-num-display);
+}
+
+.t-num-lg {
+  font: var(--t-num-lg);
+}
+
+.t-num-md {
+  font: var(--t-num-md);
+}
+
+.t-num {
+  font: var(--t-num);
+}
+
+.t-num-sm {
+  font: var(--t-num-sm);
+}
+
+.t-num-xs {
+  font: var(--t-num-xs);
 }

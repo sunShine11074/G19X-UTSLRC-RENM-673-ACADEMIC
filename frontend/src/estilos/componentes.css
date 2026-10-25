@@ -1,0 +1,761 @@
+/*
+ * Componentes del sistema de diseño «Proyecto 077 UI» (components/bundle.css del artefacto),
+ * adaptados al cliente: la tipografía va incluida en cada clase, el Tooltip se puede recorrer con
+ * el puntero y cerrar con Esc (1.4.13), y se agregan el menú emergente (p77-menu) y la barra
+ * inferior del rail. Todo valor sale de tokens.css.
+ */
+
+/* Foco de teclado común: anillo del sistema; el contorno transparente lo conserva en colores forzados. */
+.p77-btn:focus-visible,
+.p77-icon-btn:focus-visible,
+.p77-avatar:focus-visible,
+.p77-user:focus-visible,
+.p77-swatch:focus-visible,
+.p77-menu__item:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+/* ---- Button ---- */
+.p77-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--size-control);
+  padding: var(--space-2) var(--space-6);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--on-action);
+  font: var(--t-button);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.p77-btn:hover {
+  background: var(--action-hover);
+}
+
+.p77-btn:active {
+  transform: scale(0.98);
+}
+
+.p77-btn .svg-inline--fa {
+  font-size: var(--size-icon-sm);
+}
+
+.p77-btn--secondary {
+  background: var(--surface-sunken);
+  color: var(--ink);
+}
+
+.p77-btn--secondary:hover {
+  background: var(--border-subtle);
+}
+
+.p77-btn--accent {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.p77-btn--accent:hover {
+  background: var(--accent-hover);
+}
+
+.p77-btn--sm {
+  min-height: var(--size-control-sm);
+  padding: var(--space-1) var(--space-4);
+  font: var(--t-button-sm);
+}
+
+.p77-btn--block {
+  display: flex;
+  width: 100%;
+}
+
+/* Enlace con forma de texto (abrir el aviso, volver): subrayado y en accent-ink. */
+.p77-btn--link {
+  min-height: 24px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--accent-ink);
+  font: var(--t-body);
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.p77-btn--link:hover {
+  background: none;
+  text-decoration-thickness: 2px;
+}
+
+.p77-btn--link:active {
+  transform: none;
+}
+
+.p77-btn:disabled,
+.p77-btn[aria-disabled='true'] {
+  background: var(--surface-sunken);
+  color: var(--ink-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* En espera («Guardando…») sigue enfocable y conserva su ancho. */
+.p77-btn[aria-busy='true'] {
+  cursor: progress;
+}
+
+/* ---- IconButton ---- */
+.p77-icon-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--size-control);
+  height: var(--size-control);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-control);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.p77-icon-btn:hover {
+  background: var(--border-subtle);
+}
+
+.p77-icon-btn .svg-inline--fa {
+  font-size: var(--size-icon);
+}
+
+.p77-icon-btn__dot {
+  width: var(--size-swatch);
+  height: var(--size-swatch);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+/* ---- Tooltip ---- */
+.p77-has-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.p77-tooltip {
+  position: absolute;
+  z-index: var(--z-tooltip);
+  padding: var(--space-1) var(--space-gutter);
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: var(--surface);
+  box-shadow: var(--shadow-popover);
+  font: var(--t-tooltip);
+  white-space: nowrap;
+  /* Oculta, también mide 0: así no ensancha la página junto a un borde. */
+  visibility: hidden;
+  opacity: 0;
+  scale: 0;
+  transition:
+    opacity var(--duration-fast) var(--ease-enter),
+    visibility 0s linear var(--duration-fast),
+    scale 0s linear var(--duration-fast);
+}
+
+/* Puente invisible entre el control y la etiqueta, para poder pasar el puntero sobre ella. */
+.p77-tooltip::before {
+  content: '';
+  position: absolute;
+}
+
+.p77-tooltip--right {
+  left: calc(100% + var(--space-3));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.p77-tooltip--right::before {
+  inset: 0 100% 0 calc(-1 * var(--space-3));
+}
+
+.p77-tooltip--left {
+  right: calc(100% + var(--space-3));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.p77-tooltip--left::before {
+  inset: 0 calc(-1 * var(--space-3)) 0 100%;
+}
+
+.p77-tooltip--bottom {
+  top: calc(100% + var(--space-2));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.p77-tooltip--bottom::before {
+  inset: calc(-1 * var(--space-2)) 0 100% 0;
+}
+
+/* Debajo y alineada a la derecha del control, para el último control junto al borde. */
+.p77-tooltip--bottom-end {
+  top: calc(100% + var(--space-2));
+  right: 0;
+}
+
+.p77-tooltip--bottom-end::before {
+  inset: calc(-1 * var(--space-2)) 0 100% 0;
+}
+
+.p77-tooltip--top {
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.p77-tooltip--top::before {
+  inset: 100% 0 calc(-1 * var(--space-2)) 0;
+}
+
+/* Al pasar el puntero aparece tras 300 ms; al enfocar, de inmediato. Esc lo oculta (data-oculto). */
+.p77-has-tooltip:hover > .p77-tooltip,
+.p77-has-tooltip:focus-within > .p77-tooltip {
+  visibility: visible;
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity var(--duration-fast) var(--ease-enter) 300ms,
+    visibility 0s linear 300ms,
+    scale 0s linear 300ms;
+}
+
+.p77-has-tooltip:focus-within > .p77-tooltip {
+  transition-delay: 0s;
+}
+
+.p77-has-tooltip[data-oculto] > .p77-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  scale: 0;
+  transition: none;
+}
+
+/* ---- NavRail ---- */
+.p77-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: var(--size-rail);
+  padding: var(--space-6) 0;
+  background: var(--rail);
+  border-radius: var(--radius-md);
+  z-index: var(--z-rail);
+}
+
+.p77-rail :focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring-rail);
+}
+
+/* El menú «Más» es un popover sobre surface, no el rail: lleva el anillo común. */
+.p77-rail .p77-menu__item:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.p77-rail__logo-enlace {
+  display: block;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-pill);
+}
+
+.p77-rail__logo {
+  display: block;
+  width: var(--size-logo);
+  height: var(--size-logo);
+}
+
+.p77-rail__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.p77-rail__item {
+  display: grid;
+  place-items: center;
+  width: var(--size-control);
+  height: var(--size-control);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--rail-item);
+  color: var(--rail-ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.p77-rail__item:hover {
+  background: var(--rail-item-hover);
+}
+
+.p77-rail__item[aria-current='page'],
+.p77-rail__item[data-actual] {
+  background: var(--rail-accent);
+  color: var(--on-rail-accent);
+}
+
+.p77-rail__item--plain {
+  background: transparent;
+}
+
+.p77-rail__item .svg-inline--fa {
+  font-size: var(--size-icon);
+}
+
+.p77-rail__spacer {
+  flex: 1;
+  min-height: var(--space-6);
+}
+
+/* ---- TopBar ---- */
+.p77-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  min-height: var(--size-control);
+}
+
+.p77-topbar__title {
+  flex: 1 1 16rem;
+  min-width: 0;
+  margin: 0;
+  font: var(--t-display);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.p77-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.p77-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 22rem;
+  margin-left: var(--space-4);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  font: var(--t-label-lg);
+  cursor: pointer;
+}
+
+.p77-user__nombre {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- ThemeControls ---- */
+.p77-theme {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.p77-theme__accent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p77-swatches {
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-gutter);
+  width: var(--size-control);
+  margin: 0;
+  padding: var(--space-4) 0;
+  background: var(--surface-control);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-popover);
+  z-index: var(--z-popover);
+}
+
+.p77-swatch {
+  display: block;
+  width: var(--size-swatch);
+  height: var(--size-swatch);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.p77-swatch--lime {
+  background: var(--lime);
+}
+
+.p77-swatch--blue {
+  background: var(--blue);
+}
+
+.p77-swatch--red {
+  background: var(--red);
+}
+
+.p77-swatch--purple {
+  background: var(--purple);
+}
+
+.p77-swatch[aria-checked='true'] {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.p77-swatch[aria-checked='true']:focus-visible {
+  box-shadow:
+    inset 0 0 0 2px var(--ink),
+    var(--focus-ring);
+}
+
+/* ---- Avatar ---- */
+.p77-avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  overflow: hidden;
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  color: var(--ink);
+  font: var(--t-button-sm);
+  text-transform: uppercase;
+}
+
+.p77-avatar--lg {
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+}
+
+/* Junto a bg (barra superior), el avatar va sobre surface-control para distinguirse del fondo. */
+.p77-user .p77-avatar {
+  background: var(--surface-control);
+  border: 1px solid var(--border-strong);
+}
+
+/* ---- Menú emergente (persona y «Más»): no está en los frames; usa los tokens de popover ---- */
+.p77-menu {
+  position: absolute;
+  z-index: var(--z-popover);
+  min-width: 14rem;
+  max-width: min(22rem, calc(100vw - 2 * var(--space-4)));
+  margin: 0;
+  padding: var(--space-2);
+  list-style: none;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-popover);
+}
+
+.p77-menu__encabezado {
+  margin: 0;
+  padding: var(--space-2) var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-2);
+  color: var(--ink-muted);
+  font: var(--t-body-sm);
+  overflow-wrap: anywhere;
+}
+
+.p77-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  font: var(--t-label);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.p77-menu__item:hover {
+  background: var(--surface-sunken);
+}
+
+.p77-menu__item[aria-current='page'] {
+  background: var(--accent-soft);
+}
+
+.p77-menu__item .svg-inline--fa {
+  flex: none;
+  width: var(--size-icon-sm);
+  font-size: var(--size-icon-sm);
+  color: var(--ink-muted);
+}
+
+/* ---- Card ---- */
+.p77-card {
+  min-width: 0;
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--ink);
+  container-type: inline-size;
+}
+
+.p77-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.p77-card__header > :is(h2, h3, p) {
+  margin: 0;
+}
+
+.p77-card > h2:first-child {
+  margin-bottom: var(--space-6);
+}
+
+.p77-card__title {
+  margin: 0;
+  font: var(--t-title);
+  color: var(--ink-muted);
+}
+
+.p77-card > :last-child {
+  margin-bottom: 0;
+}
+
+.p77-card--accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.p77-card--accent :is(.p77-card__title, h2, p) {
+  color: var(--on-accent);
+}
+
+.p77-card--accent .p77-btn {
+  background: var(--on-accent);
+  color: var(--accent);
+}
+
+.p77-card--accent .p77-btn:hover {
+  background: var(--on-accent);
+  color: var(--accent-hover);
+}
+
+.p77-card--accent .p77-btn:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 0 0 4px var(--on-accent);
+}
+
+/* ---- Stat ---- */
+.p77-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.p77-stat__label {
+  margin: 0;
+  font: var(--t-label);
+  color: var(--ink-muted);
+}
+
+/* La cifra se achica con el ancho de su tarjeta para no desbordarla (consulta de contenedor). */
+.p77-stat__value {
+  margin: 0;
+  font: var(--t-num-lg);
+  font-size: clamp(1.25rem, 11cqi, 1.75rem);
+  color: var(--ink);
+}
+
+.p77-stat__value--display {
+  font: var(--t-num-display);
+  font-size: clamp(1.5rem, 11cqi, 2.5rem);
+}
+
+.p77-stat__unidad {
+  margin-inline-start: var(--space-2);
+  font: var(--t-label);
+  color: var(--ink-muted);
+}
+
+.p77-stat__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  font: var(--t-caption);
+  color: var(--ink-muted);
+}
+
+/* ---- Delta: ganancia o pérdida con color, flecha y signo o palabra (nunca solo color) ---- */
+.p77-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-gutter);
+  border-radius: var(--radius-pill);
+  font: var(--t-num-sm);
+  white-space: nowrap;
+}
+
+.p77-delta .svg-inline--fa {
+  font-size: var(--size-icon-sm);
+}
+
+.p77-delta--up {
+  background: var(--positive-soft);
+  color: var(--positive);
+}
+
+.p77-delta--down {
+  background: var(--negative-soft);
+  color: var(--negative);
+}
+
+.p77-delta--flat {
+  background: var(--surface-sunken);
+  color: var(--ink-muted);
+}
+
+.p77-delta--plain {
+  padding: 0;
+  background: transparent;
+  font: inherit;
+}
+
+/* Con palabra («Ganancia», «Pérdida») en lugar de cifra, el texto va en DM Sans. */
+.p77-delta--palabra {
+  font: var(--t-label);
+}
+
+/* ---- DataTable ---- */
+.p77-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--ink);
+  font: var(--t-body-sm);
+}
+
+.p77-table caption {
+  caption-side: top;
+  padding-bottom: var(--space-4);
+  text-align: left;
+  font: var(--t-title-sm);
+  color: var(--ink);
+}
+
+/* Si la tabla abre la tarjeta, su título es el de la tarjeta (t-title, ink-muted). */
+.p77-card > .tabla-region:first-child .p77-table caption {
+  padding-bottom: var(--space-6);
+  font: var(--t-title);
+  color: var(--ink-muted);
+}
+
+.p77-table th,
+.p77-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.p77-table thead th {
+  font: var(--t-label);
+  color: var(--ink-muted);
+}
+
+.p77-table tbody th {
+  font-weight: 500;
+}
+
+.p77-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.p77-table tbody tr:hover {
+  background: var(--surface-sunken);
+}
+
+.p77-table tfoot :is(th, td) {
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 0;
+  font-weight: 600;
+}
+
+/* Columnas de cifras: a la derecha y en Google Sans Code, para que los decimales queden en columna. */
+.p77-table .is-num {
+  text-align: right;
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.p77-table thead .is-num {
+  font-family: var(--font-sans);
+}
+
+.p77-table .is-fecha {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.p77-table .is-muted {
+  color: var(--ink-muted);
+}

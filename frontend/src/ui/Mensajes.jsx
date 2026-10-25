@@ -3,12 +3,13 @@
 import { navegar } from '../rutas/navegacion.js'
 import { MENSAJES } from '../textos/textos.js'
 import { Boton } from './Boton.jsx'
+import { IconoError } from './Icono.jsx'
 import './datos.css'
 
 /**
  * Región viva que anuncia el resultado de una acción sin mover el foco (4.1.3).
  * Se deja siempre montada (aunque vacía) para que el lector de pantalla anuncie el cambio.
- * tipo 'error' usa role="alert"; los demás, role="status". Sin animación (2.2.2).
+ * tipo 'error' usa role="alert" y, con texto, el triángulo; los demás, role="status". Sin animación (2.2.2).
  */
 export function MensajeEstado({ tipo, children, ...resto }) {
   const esError = tipo === 'error'
@@ -19,7 +20,14 @@ export function MensajeEstado({ tipo, children, ...resto }) {
       data-tipo={tipo}
       {...resto}
     >
-      {children}
+      {esError && children != null && children !== '' && children !== false ? (
+        <>
+          <IconoError />
+          <span>{children}</span>
+        </>
+      ) : (
+        children
+      )}
     </p>
   )
 }
@@ -27,10 +35,11 @@ export function MensajeEstado({ tipo, children, ...resto }) {
 /**
  * Estado sin datos del tablero (RF-11 crit. 3): el portafolio no tiene transacciones hasta el
  * corte. `fechaCorte` llega como AAAA-MM-DD; el botón lleva a V-07 del portafolio (N-13).
+ * Es la tarjeta destacada (p77-card--accent) de la pantalla: invita a empezar.
  */
 export function EstadoSinDatos({ fechaCorte, idPortafolio }) {
   return (
-    <div className="estado-sin-datos" role="status">
+    <div className="estado-sin-datos p77-card p77-card--accent" role="status">
       <p>
         {fechaCorte ? MENSAJES.sinDatos(fechaCorte) : 'Este portafolio no tiene transacciones.'}
       </p>

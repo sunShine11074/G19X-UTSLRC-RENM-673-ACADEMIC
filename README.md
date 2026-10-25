@@ -47,7 +47,7 @@ motor único de cálculo. **No emite recomendaciones de inversión.**
 |---|---|
 | Backend | Python 3.13 · FastAPI · SQLAlchemy 2 · psycopg 3 (gestionado con `uv`) |
 | Base de datos | PostgreSQL 18; esquema y semillas con scripts de `psql` (ver «Cómo ejecutarlo localmente») |
-| Frontend | React 19 · Vite 8 · Recharts 3 (se construye con Node.js 24) |
+| Frontend | React 19 · Vite 8 · Recharts 3 · íconos Font Awesome Free 7 (se construye con Node.js 24) |
 | Cálculo financiero | `decimal` de Python con 28 dígitos; nunca punto flotante binario (RD-12) |
 
 Principio de arquitectura: **una sola fuente de cálculo.** Los indicadores se calculan en el backend
@@ -162,7 +162,7 @@ cd ..
 
 - `uv sync` crea `backend/.venv` con las versiones de `backend/uv.lock`, pytest incluido.
 - `npm ci` instala exactamente lo de `frontend/package-lock.json` (React 19.3.0, Recharts
-  3.10.1 y Vite 8). No uses `npm install`, que puede cambiar el lockfile.
+  3.10.1, Font Awesome 7.3.1 y Vite 8). No uses `npm install`, que puede cambiar el lockfile.
 
 ### 4. Configuración de la API (`backend/.env`)
 
@@ -297,12 +297,20 @@ La del 18/10/2026 terminó con 0, sin coincidencias; su salida está en
 ```powershell
 npm run lint
 npm run build
-node --test src/formato/formato.test.js
+node --test src/formato/formato.test.js src/ui/direccion.test.js
 ```
 
 `npm run lint` corre oxlint con `.oxlintrc.json`; `npm run build` deja el cliente compilado en
 `frontend/dist`, que no se versiona, y `node --test` prueba el módulo que da formato a cifras y
-fechas sin convertirlas a número.
+fechas sin convertirlas a número, y el que decide si una variación sube o baja (solo con el texto).
+
+**Sistema de diseño.** La interfaz sigue el sistema «Proyecto 077 UI»: rail negro, tarjetas
+redondeadas y ocho temas (modo claro u oscuro con acento lima, azul, rojo o morado), que la
+persona elige en la barra superior y que se guardan en su navegador. Los valores viven en
+`frontend/src/estilos/sistema/tokens.json`; `frontend/src/estilos/tokens.css` se genera desde
+ese archivo y no se edita a mano. Cuando el sistema cambie, reemplaza el JSON y, en `frontend/`,
+ejecuta `node scripts/tokens-a-css.mjs`. Las fuentes (Manrope, DM Sans y Google Sans Code, con
+licencia SIL Open Font License 1.1) van autoalojadas en `frontend/src/estilos/fuentes/`.
 
 ### 8. Recorrido de AC-04 con capturas
 

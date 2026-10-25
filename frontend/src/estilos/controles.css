@@ -1,163 +1,103 @@
-/* Botones, campos, casillas y resumen de errores (4.5.1). Solo tokens. */
+/*
+ * Campos, casillas y resumen de errores con el TextField del sistema «Proyecto 077 UI»:
+ * píldora de 48 px sobre surface-sunken, etiqueta visible arriba en t-label e ink-muted, error
+ * con borde negative, ícono y texto. Los botones son p77-btn (componentes.css). Solo tokens.
+ */
 
 .icono {
   flex: none;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-/* ---- Botones ---- */
-.boton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-1);
-  min-height: var(--controlSize-alto);
-  min-width: 24px;
-  padding: var(--space-1) var(--space-3);
-  border: var(--borderWidth-100) solid transparent;
-  border-radius: var(--borderRadius-1000);
-  font-size: var(--fontSize-headline);
-  line-height: var(--lineHeight-headline);
-  font-weight: var(--fontWeight-headline);
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.boton:hover {
-  filter: brightness(0.93);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-tema='claro']) .boton:hover {
-    filter: brightness(1.12);
-  }
-}
-
-:root[data-tema='oscuro'] .boton:hover {
-  filter: brightness(1.12);
-}
-
-.boton--primario {
-  background: var(--color-bgPrimary);
-  color: var(--color-fgInverse);
-}
-
-.boton--secundario {
-  background: var(--color-bgSecondary);
-  color: var(--color-fg);
-  border-color: var(--color-bgLineHeavy);
-}
-
-.boton--negativo {
-  background: var(--color-bgNegative);
-  color: var(--color-fgInverse);
-}
-
-.boton--enlace {
-  min-height: 24px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  color: var(--color-fgPrimary);
-  font-weight: var(--fontWeight-body);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
-}
-
-.boton--enlace:hover {
-  filter: none;
-  text-decoration-thickness: 2px;
-}
-
-.boton[aria-disabled='true'] {
-  cursor: progress;
-  opacity: 0.75;
-}
-
-.boton:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
 }
 
 .acciones {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-3);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 }
 
 /* ---- Campos ---- */
 .campo {
   display: flex;
   flex-direction: column;
-  gap: var(--space-0_5);
-  margin: 0 0 var(--space-2);
+  gap: var(--space-2);
+  min-width: 0;
   max-width: 32rem;
+  margin: 0 0 var(--space-4);
 }
 
 .campo__etiqueta {
-  font-size: var(--fontSize-label1);
-  line-height: var(--lineHeight-label1);
-  font-weight: var(--fontWeight-label1);
-  color: var(--color-fg);
+  font: var(--t-label);
+  color: var(--ink-muted);
 }
 
+/* Debajo del control, como en el TextField del sistema; así los controles de una fila se alinean. */
 .campo__ayuda {
   margin: 0;
-  font-size: var(--fontSize-label2);
-  line-height: var(--lineHeight-label2);
-  color: var(--color-fgMuted);
+  font: var(--t-caption);
+  color: var(--ink-muted);
 }
 
 .campo__control {
   width: 100%;
-  min-height: var(--controlSize-alto);
-  padding: var(--space-1) var(--space-1_5);
-  border: var(--borderWidth-100) solid var(--color-bgLineHeavy);
-  border-radius: var(--borderRadius-200);
-  background: var(--color-bg);
-  color: var(--color-fg);
-  font-size: var(--fontSize-body);
-  line-height: var(--lineHeight-body);
+  min-height: var(--size-control);
+  padding: var(--space-2) var(--space-5);
+  /* border-strong (3:1) y no transparente: el límite del campo debe verse (1.4.11). */
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  color: var(--ink);
+  font: var(--t-body);
+  transition: box-shadow var(--duration-fast) var(--ease-standard);
 }
 
-.campo__control:focus-visible,
-.campo__control:focus {
-  outline: none;
-  border-color: var(--color-bgPrimary);
-  box-shadow: 0 0 0 1px var(--color-bgPrimary);
+.campo__control:focus,
+.campo__control:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
 }
 
 .campo__control[aria-invalid='true'] {
-  border-color: var(--color-bgNegative);
+  border-color: var(--negative);
 }
 
-.campo__control[aria-invalid='true']:focus {
-  border-color: var(--color-bgPrimary);
+.campo__control:disabled {
+  color: var(--ink-disabled);
+  cursor: not-allowed;
+}
+
+/* Montos, cantidades, fechas y porcentajes se escriben en Google Sans Code. */
+.campo__control--cifra,
+.campo--fecha .campo__control {
+  font: var(--t-num);
 }
 
 .campo__control--select {
+  height: var(--size-control);
+  padding-right: var(--space-10);
   cursor: pointer;
 }
 
 .campo__control--select option {
-  background: var(--color-bgElevation1);
-  color: var(--color-fg);
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .campo--fecha .campo__control {
-  max-width: 12rem;
+  max-width: 14rem;
+}
+
+/* Botón en la fila de un formulario: a la altura del control, debajo de la etiqueta (t-label + space-2). */
+.alinear-con-control {
+  align-self: flex-start;
+  margin-top: calc(1.25rem + var(--space-2));
 }
 
 .campo__con-boton {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1);
-  align-items: stretch;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .campo__con-boton .campo__control {
@@ -167,41 +107,39 @@
 
 .campo__boton {
   flex: none;
-  font-size: var(--fontSize-label1);
-  padding-inline: var(--space-2);
 }
 
 .campo__boton[aria-pressed='true'] {
-  background: var(--color-bgPrimaryWash);
-  color: var(--color-fgPrimary);
-  border-color: var(--color-bgPrimary);
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 
 .campo__error {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-0_5);
+  gap: var(--space-1);
   margin: 0;
-  font-size: var(--fontSize-label2);
-  line-height: var(--lineHeight-label2);
-  color: var(--color-fgNegative);
+  font: var(--t-body-sm);
+  color: var(--negative);
 }
 
-.campo__error .icono {
+.campo__error .svg-inline--fa {
+  flex: none;
   margin-top: 2px;
+  font-size: var(--size-icon-sm);
 }
 
 /* ---- Casilla y opciones ---- */
 .casilla {
-  margin: 0 0 var(--space-2);
-  max-width: var(--ancho-lectura);
+  max-width: 70ch;
+  margin: 0 0 var(--space-4);
 }
 
 .casilla__fila,
 .opcion {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-1);
+  gap: var(--space-2);
 }
 
 .casilla__fila input,
@@ -210,7 +148,7 @@
   width: 20px;
   height: 20px;
   margin: 2px 0 0;
-  accent-color: var(--color-bgPrimary);
+  accent-color: var(--action);
   cursor: pointer;
 }
 
@@ -220,52 +158,50 @@
 }
 
 .casilla .campo__error {
-  margin-top: var(--space-0_5);
+  margin-top: var(--space-2);
 }
 
 .grupo-opciones {
-  border: 0;
-  padding: 0;
   min-width: 0;
+  padding: 0;
+  border: 0;
 }
 
 .grupo-opciones__lista {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1) var(--space-3);
-  margin-top: var(--space-0_5);
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-1);
 }
 
 /* ---- Resumen de errores ---- */
 .resumen-error {
-  margin: 0 0 var(--space-3);
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--borderRadius-400);
-  background: var(--color-bgNegativeWash);
-  color: var(--color-fg);
-  max-width: var(--ancho-lectura);
+  max-width: 70ch;
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--negative-soft);
+  color: var(--ink);
 }
 
 .resumen-error__titulo {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
-  margin: 0 0 var(--space-0_5);
-  font-size: var(--fontSize-headline);
-  line-height: var(--lineHeight-headline);
-  font-weight: var(--fontWeight-headline);
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+  font: var(--t-title-sm);
 }
 
 .resumen-error__icono {
   display: inline-flex;
-  color: var(--color-fgNegative);
+  color: var(--negative);
 }
 
 .resumen-error__lista {
   margin: 0;
-  padding-left: var(--space-5);
+  padding-left: var(--space-10);
 }
 
 .resumen-error__lista a {
-  color: var(--color-fg);
+  color: var(--ink);
 }

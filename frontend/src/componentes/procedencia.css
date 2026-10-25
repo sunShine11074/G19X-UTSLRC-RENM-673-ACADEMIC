@@ -3,7 +3,7 @@
 .procedencia {
   display: flex;
   flex-direction: column;
-  gap: var(--space-0_5);
+  gap: var(--space-1);
   min-width: 0;
 }
 
@@ -12,34 +12,31 @@
 }
 
 .procedencia__dato {
-  color: var(--color-fg);
-  font-size: var(--fontSize-label2);
-  line-height: var(--lineHeight-label2);
+  color: var(--ink);
+  font: var(--t-body-sm);
 }
 
 /* Rótulo «estimado» de los CETES (RF-26b; R-11): texto, no solo color (1.4.1). */
 .procedencia__estimado {
   display: inline-block;
-  padding: 0 var(--space-0_75);
-  border: var(--borderWidth-100) solid var(--color-bgLineHeavy);
-  border-radius: var(--borderRadius-100);
-  color: var(--color-fg);
-  font-size: var(--fontSize-label1);
-  line-height: var(--lineHeight-label1);
-  font-weight: var(--fontWeight-label1);
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  color: var(--ink);
+  font: var(--t-caption);
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .procedencia__tasas {
   margin: 0;
-  padding-inline-start: var(--space-3);
-  color: var(--color-fgMuted);
-  font-size: var(--fontSize-legal);
-  line-height: var(--lineHeight-legal);
+  padding-inline-start: var(--space-6);
+  color: var(--ink-muted);
+  font: var(--t-caption);
 }
 
 .procedencia__tasas li + li {
-  margin-top: var(--space-0_25);
+  margin-top: 2px;
 }
 
 .procedencia .linea-fuente {

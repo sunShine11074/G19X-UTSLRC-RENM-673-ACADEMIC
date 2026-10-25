@@ -61,13 +61,13 @@ export default function V09Intermediarios() {
 
   return (
     <Plantilla titulo="Intermediarios" pantalla="V-09" listo={!cargando}>
-      <div className="catalogos">
-        <p className="catalogos-intro">
+      <>
+        <p className="catalogos-intro catalogos-intro--suelta">
           Registra las casas de bolsa o los bancos con los que mantienes tus inversiones. Cada nombre se guarda tal
           como lo escribes y, una vez registrado, no se puede modificar ni eliminar.
         </p>
 
-        <section className="catalogos-seccion" aria-labelledby="titulo-agregar-intermediario">
+        <section className="catalogos-seccion p77-card ancho-5" aria-labelledby="titulo-agregar-intermediario">
           <h2 id="titulo-agregar-intermediario">Agregar un intermediario</h2>
           <form className="formulario-alta" noValidate onSubmit={enviar}>
             <Campo
@@ -95,7 +95,7 @@ export default function V09Intermediarios() {
           <MensajeEstado>{mensaje}</MensajeEstado>
         </section>
 
-        <section className="catalogos-seccion">
+        <section className="catalogos-seccion p77-card ancho-7">
           {error && !cargando ? (
             <MensajeEstado tipo="error">{textoParaUsuario(error.mensaje)}</MensajeEstado>
           ) : cargando && !datos ? (
@@ -109,7 +109,7 @@ export default function V09Intermediarios() {
             />
           )}
         </section>
-      </div>
+      </>
     </Plantilla>
   )
 }

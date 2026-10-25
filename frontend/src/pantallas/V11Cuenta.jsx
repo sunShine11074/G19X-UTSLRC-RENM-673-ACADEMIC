@@ -12,6 +12,7 @@ import { useSesion } from '../sesion/useSesion.js'
 import { MENSAJES, textoParaUsuario } from '../textos/textos.js'
 import { Boton } from '../ui/Boton.jsx'
 import { DialogoConfirmacion } from '../ui/Dialogos.jsx'
+import { IconoError } from '../ui/Icono.jsx'
 import { Plantilla } from '../ui/Plantilla.jsx'
 import { ResumenError } from '../ui/ResumenError.jsx'
 import './cuentas.css'
@@ -46,7 +47,7 @@ export default function V11Cuenta() {
 
   return (
     <Plantilla titulo="Cuenta" pantalla="V-11" listo={!cuenta.cargando}>
-      <div className="cuentas cuentas--ancha">
+      <>
         <ResumenError errores={errores} />
         {cuenta.cargando && !datos && (
           <p className="cuentas__estado" role="status">
@@ -55,13 +56,14 @@ export default function V11Cuenta() {
         )}
         {cuenta.error && cuenta.error.estado !== 401 && (
           <p className="cuentas__aviso-error" role="alert">
-            {textoParaUsuario(cuenta.error.mensaje)}
+            <IconoError />
+            <span>{textoParaUsuario(cuenta.error.mensaje)}</span>
           </p>
         )}
 
         {datos && (
           <>
-            <section aria-labelledby="v11-datos">
+            <section className="p77-card ancho-4" aria-labelledby="v11-datos">
               <h2 id="v11-datos">Datos de la cuenta</h2>
               <dl className="cuentas__datos">
                 <div>
@@ -75,10 +77,10 @@ export default function V11Cuenta() {
               </dl>
             </section>
 
-            <section aria-labelledby="v11-consentimiento">
+            <section className="p77-card ancho-8" aria-labelledby="v11-consentimiento">
               <h2 id="v11-consentimiento">Registro de consentimiento</h2>
               <div className="cuentas__tabla-region" role="region" aria-labelledby="v11-consentimiento" tabIndex={0}>
-                <table className="cuentas__tabla" data-recorrido="consentimientos">
+                <table className="cuentas__tabla p77-table" data-recorrido="consentimientos">
                   <caption className="visualmente-oculto">
                     Registro de consentimiento: tipo, momento, medio y versión del aviso de privacidad
                   </caption>
@@ -116,7 +118,7 @@ export default function V11Cuenta() {
             </section>
 
             {activa && (
-              <section aria-labelledby="v11-revocar">
+              <section className="p77-card" aria-labelledby="v11-revocar">
                 <h2 id="v11-revocar">Revocar el consentimiento</h2>
                 <p className="lectura">{MENSAJES.revocarExplicacion}</p>
                 <Boton
@@ -153,7 +155,7 @@ export default function V11Cuenta() {
           <p>{MENSAJES.revocarExplicacion}</p>
           <p>Esta acción no se puede deshacer desde la aplicación.</p>
         </DialogoConfirmacion>
-      </div>
+      </>
     </Plantilla>
   )
 }

@@ -11,7 +11,7 @@ import './datos.css'
 export function NoEncontrado({ mensaje = MENSAJES.paginaInexistente }) {
   const { cuenta } = useSesion() ?? {}
   return (
-    <div className="no-encontrado" data-recorrido="no-encontrado">
+    <div className="no-encontrado p77-card" data-recorrido="no-encontrado">
       <p className="no-encontrado-mensaje">{mensaje}</p>
       <p>
         {cuenta ? (

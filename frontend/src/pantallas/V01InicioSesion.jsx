@@ -56,7 +56,7 @@ export default function V01InicioSesion() {
 
   return (
     <PlantillaPublica titulo="Iniciar sesión" pantalla="V-01" listo>
-      <div className="cuentas">
+      <div className="cuentas p77-card">
         {mensaje && (
           <p className="cuentas__mensaje" role="status" data-recorrido="mensaje">
             {mensaje}

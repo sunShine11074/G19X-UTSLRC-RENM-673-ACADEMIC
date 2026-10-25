@@ -1,162 +1,82 @@
 /*
- * Componentes de datos y diálogos (B3; SRS 4.5.1, «Componentes»).
- * Solo tokens de color (var(--…)) con los nombres de CDS; sin colores fijos.
- * Tamaños en rem sobre una raíz de 16 px; espacio en la escala de base 8 px.
+ * Componentes de datos, avisos y diálogos con el sistema «Proyecto 077 UI».
+ * Solo tokens (var(--…)); la tabla usa p77-table y la tarjeta de indicador p77-card + p77-stat
+ * (componentes.css). Aquí queda lo propio del proyecto.
  */
-
-/* Texto solo para el lector de pantalla. */
-.solo-lector {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
 
 /* ---------- Tabla ---------- */
 
+/* Región con desplazamiento propio: en pantallas angostas la tabla se desplaza dentro de su
+   tarjeta, nunca la página (1.4.10). position: relative contiene el texto solo para lector. */
 .tabla-region {
+  position: relative;
   max-width: 100%;
   overflow-x: auto;
-  margin-block: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
 }
 
 .tabla-region:focus-visible {
-  outline: 2px solid var(--bgPrimary);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
 }
 
-.tabla {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--bg);
-  color: var(--fg);
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.tabla caption {
-  caption-side: top;
-  text-align: left;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-  padding-block-end: 0.5rem;
-}
-
-.tabla th,
-.tabla td {
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-  vertical-align: top;
-  border-bottom: 1px solid var(--bgLine);
-}
-
-.tabla thead th {
-  font-weight: 600;
-  border-bottom: 1px solid var(--bgLineHeavy);
-}
-
-.tabla tbody th {
-  font-weight: 400;
-}
-
-.tabla tbody tr:nth-child(even) {
-  background: var(--bgAlternate);
-}
-
-.tabla tfoot th,
-.tabla tfoot td {
-  font-weight: 600;
-  border-top: 1px solid var(--bgLineHeavy);
-  border-bottom: none;
-}
-
-.tabla .cifra,
-.tabla th.cifra,
-.tabla td.cifra {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
 .tabla-vacia {
-  color: var(--fgMuted);
+  color: var(--ink-muted);
 }
 
-/* ---------- Tarjeta de indicador ---------- */
+/* ---------- Tarjeta de indicador (p77-card + p77-stat) ---------- */
 
 .tarjeta-indicador {
-  background: var(--bgAlternate);
-  color: var(--fg);
-  border-radius: 8px;
-  padding: 1rem 1.5rem;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
-.tarjeta-indicador h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 600;
-}
-
-.tarjeta-indicador .tarjeta-cifra {
+.tarjeta-indicador .tarjeta-fecha {
   margin: 0;
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
+  font: var(--t-caption);
+  color: var(--ink-muted);
 }
 
-.tarjeta-indicador .tarjeta-unidad,
-.tarjeta-indicador .tarjeta-fecha {
-  color: var(--fgMuted);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.tarjeta-indicador .tarjeta-unidad {
-  margin-inline-start: 0.25rem;
-  white-space: nowrap;
-}
-
-.tarjeta-indicador .tarjeta-fecha {
-  margin: 0.25rem 0 0;
+.tarjeta-indicador .p77-delta {
+  align-self: flex-start;
 }
 
 /* ---------- Etiqueta de demostración ---------- */
 
+/* Texto, no solo color (1.4.1); en warning sobre warning-soft (H-6). */
 .etiqueta-demo {
-  display: inline-block;
-  background: var(--yellow0);
-  color: var(--yellow70);
-  border-radius: 4px;
-  padding: 0 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-gutter);
+  border-radius: var(--radius-pill);
+  background: var(--warning-soft);
+  color: var(--warning);
+  font: var(--t-label);
   font-weight: 600;
   white-space: nowrap;
-  vertical-align: baseline;
+  vertical-align: middle;
+}
+
+.etiqueta-demo .svg-inline--fa {
+  font-size: var(--size-icon-sm);
 }
 
 /* ---------- Avisos ---------- */
 
 .aviso {
   display: flex;
-  gap: 0.75rem;
   align-items: flex-start;
-  border-radius: 16px;
-  padding: 1rem 1.5rem;
-  margin-block: 0 1rem;
-  color: var(--fg);
-  background: var(--bgSecondary);
-  max-width: 100%;
+  gap: var(--space-3);
   min-width: 0;
+  max-width: 100%;
+  margin-block: 0 var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .aviso p {
@@ -164,51 +84,51 @@
 }
 
 .aviso p + p {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
 }
 
 .aviso-icono {
   flex: none;
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0.25rem;
-  color: var(--fgPrimary);
+  margin-top: var(--space-1);
+  font-size: var(--size-icon-sm);
+  color: var(--accent-ink);
 }
 
 .aviso-cuerpo {
   min-width: 0;
+  font: var(--t-body-sm);
 }
 
 .aviso-titulo {
-  margin: 0 0 0.25rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 600;
+  margin: 0 0 var(--space-1);
+  font: var(--t-title-sm);
 }
 
 .aviso--advertencia {
-  background: var(--bgWarningWash);
-  border-inline-start: 4px solid var(--bgWarning);
+  border-color: var(--warning-soft);
+  background: var(--warning-soft);
 }
 
 .aviso--advertencia .aviso-icono {
-  color: var(--fgWarning);
+  color: var(--warning);
 }
 
 .aviso--error {
-  background: var(--bgNegativeWash);
+  border-color: var(--negative-soft);
+  background: var(--negative-soft);
 }
 
 .aviso--error .aviso-icono {
-  color: var(--fgNegative);
+  color: var(--negative);
+}
+
+.aviso--exito {
+  border-color: var(--accent-soft);
+  background: var(--accent-soft);
 }
 
 .aviso--exito .aviso-icono {
-  color: var(--fgPrimary);
-}
-
-.avisos-permanentes {
-  margin-block: 0 1.5rem;
+  color: var(--ink);
 }
 
 .avisos-permanentes .aviso {
@@ -216,70 +136,94 @@
 }
 
 .linea-fuente {
-  margin: 0.25rem 0;
-  color: var(--fgMuted);
-  font-size: 0.8125rem;
-  line-height: 1rem;
+  margin: var(--space-1) 0;
+  color: var(--ink-muted);
+  font: var(--t-caption);
 }
 
 .linea-fuente a {
   color: inherit;
-  text-decoration: underline;
 }
 
 /* ---------- Mensajes ---------- */
 
 .mensaje-estado {
-  margin: 0 0 1rem;
-  color: var(--fg);
-}
-
-.mensaje-estado:empty {
   margin: 0;
+  color: var(--ink-muted);
 }
 
-.mensaje-estado--error {
-  color: var(--fgNegative);
+/* Error y éxito se ven como una franja; «Consultando…» queda como texto, sin mover la página. */
+.mensaje-estado:is(.mensaje-estado--error, [data-tipo='exito']):not(:empty) {
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-lg);
+  color: var(--ink);
 }
 
-.estado-sin-datos {
-  background: var(--bgAlternate);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-block: 1rem;
+.mensaje-estado--error:not(:empty) {
+  background: var(--negative-soft);
 }
 
+/* Franjas de error con el triángulo en negative delante del texto (nunca solo el color). */
+:is(.mensaje-estado--error, .dialogo-error, .cuentas__aviso-error):has(> .icono-error) {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.icono-error {
+  flex: none;
+  margin-top: var(--space-1);
+  font-size: var(--size-icon-sm);
+  color: var(--negative);
+}
+
+.mensaje-estado[data-tipo='exito']:not(:empty) {
+  background: var(--accent-soft);
+}
+
+/* Estado sin datos: la tarjeta destacada (accent) de la pantalla, con la acción para empezar. */
 .estado-sin-datos p {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
+  font: var(--t-title-sm);
 }
 
 /* ---------- Diálogos ---------- */
 
 .dialogo {
-  background: var(--bgElevation2);
-  color: var(--fg);
-  border: 1px solid var(--bgLineHeavy);
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: min(32rem, calc(100vw - 2rem));
-  max-width: 100%;
   box-sizing: border-box;
-  box-shadow: var(--sombra-elevacion2);
+  width: min(34rem, calc(100vw - 2 * var(--space-4)));
+  max-width: 100%;
+  padding: var(--space-8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-popover);
+}
+
+.dialogo[open] {
+  animation: dialogo-entra var(--duration-slow) var(--ease-enter);
+}
+
+@keyframes dialogo-entra {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-2));
+  }
+}
+
+.dialogo::backdrop {
+  background: var(--overlay);
+}
+
+.dialogo h2 {
+  margin: 0 0 var(--space-4);
+  font: var(--t-title-lg);
+  color: var(--ink);
 }
 
 .dialogo h2:focus:not(:focus-visible) {
   outline: none;
-}
-
-.dialogo::backdrop {
-  background: var(--bgOverlay);
-}
-
-.dialogo h2 {
-  margin: 0 0 1rem;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 600;
 }
 
 .dialogo-cuerpo > :first-child {
@@ -287,27 +231,27 @@
 }
 
 .dialogo-cuerpo p {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
 
 .dialogo-error {
-  background: var(--bgNegativeWash);
-  color: var(--fg);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--negative-soft);
+  color: var(--ink);
 }
 
 .dialogo-botones {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
 }
 
 /* ---------- Selector de portafolio ---------- */
-/* Usa las clases de campo de controles.css (B2); aquí solo su ancho. */
+/* Usa las clases de campo de controles.css; aquí solo su ancho. */
 
 .selector-portafolio {
   min-width: 12rem;
@@ -315,36 +259,7 @@
 
 /* ---------- No encontrado ---------- */
 
-.no-encontrado {
-  padding-block: 1rem;
-}
-
 .no-encontrado .no-encontrado-mensaje {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  margin: 0 0 1rem;
-}
-
-.no-encontrado a {
-  color: var(--fgPrimary);
-  text-decoration: underline;
-}
-
-/* ---------- Muestra (solo desarrollo) ---------- */
-
-.muestra-rejilla {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1.5rem;
-  margin-block: 1rem 2rem;
-}
-
-.muestra-seccion {
-  margin-block: 0 2.5rem;
-}
-
-.muestra-botones {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  margin: 0 0 var(--space-4);
+  font: var(--t-title-sm);
 }

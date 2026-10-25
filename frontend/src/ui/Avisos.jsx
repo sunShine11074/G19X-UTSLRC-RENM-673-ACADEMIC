@@ -1,8 +1,10 @@
 // Avisos, avisos permanentes y línea de fuente (B3; SRS 4.5.1, «Componentes»; RF-12 crit. 4;
 // RF-31 crit. 2 y 3; H-6). Contrato del Anexo A: Aviso({tipo}), AvisosPermanentes() y
 // LineaFuente({fuente}).
+import { faCircleCheck, faCircleInfo, faCircleXmark, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { AVISOS } from '../textos/textos.js'
 import './datos.css'
+import { Icono } from './Icono.jsx'
 
 // Textos de 4.5.1 por si textos.js aún no los tiene; rige textos.js.
 const AVISOS_4_5_1 = [
@@ -27,48 +29,16 @@ function avisosPermanentes() {
   return textos.length > 0 ? textos : AVISOS_4_5_1
 }
 
-// Iconos decorativos de 16 px; toman el color de su variante (4.5.1, «Iconografía»).
-function Icono({ tipo }) {
-  const comun = {
-    className: 'aviso-icono',
-    viewBox: '0 0 16 16',
-    width: 16,
-    height: 16,
-    'aria-hidden': true,
-    focusable: 'false',
-  }
-  if (tipo === 'advertencia') {
-    return (
-      <svg {...comun}>
-        <path d="M8 1.5 15 14.5H1z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M8 6v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="8" cy="12.25" r="0.9" fill="currentColor" />
-      </svg>
-    )
-  }
-  if (tipo === 'error') {
-    return (
-      <svg {...comun}>
-        <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M5.5 5.5l5 5m0-5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    )
-  }
-  if (tipo === 'exito') {
-    return (
-      <svg {...comun}>
-        <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M5 8.25l2 2 4-4.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    )
-  }
-  return (
-    <svg {...comun}>
-      <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 7v4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="8" cy="4.75" r="0.9" fill="currentColor" />
-    </svg>
-  )
+// Íconos decorativos de Font Awesome Solid; toman el color de su variante (sistema, «Iconografía»).
+const ICONOS = {
+  info: faCircleInfo,
+  advertencia: faTriangleExclamation,
+  error: faCircleXmark,
+  exito: faCircleCheck,
+}
+
+function IconoAviso({ tipo }) {
+  return <Icono icono={ICONOS[tipo] ?? ICONOS.info} className="aviso-icono" />
 }
 
 const TITULOS = { info: 'Información', advertencia: 'Advertencia', error: 'Error', exito: 'Listo' }
@@ -81,7 +51,7 @@ const TITULOS = { info: 'Información', advertencia: 'Advertencia', error: 'Erro
 export function Aviso({ tipo = 'info', titulo, children, ...resto }) {
   return (
     <div className={`aviso aviso--${tipo}`} {...resto}>
-      <Icono tipo={tipo} />
+      <IconoAviso tipo={tipo} />
       <div className="aviso-cuerpo">
         {titulo ? (
           <p className="aviso-titulo">{titulo}</p>

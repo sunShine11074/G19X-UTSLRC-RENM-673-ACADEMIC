@@ -9,6 +9,7 @@ import { fecha } from '../formato/formato.js'
 import { Enlace } from '../rutas/Enlace.jsx'
 import { useSesion } from '../sesion/useSesion.js'
 import { textoParaUsuario } from '../textos/textos.js'
+import { IconoError } from '../ui/Icono.jsx'
 import { Plantilla, PlantillaPublica } from '../ui/Plantilla.jsx'
 import './cuentas.css'
 
@@ -28,7 +29,7 @@ export default function V03AvisoPrivacidad() {
 
   return (
     <Marco titulo="Aviso de privacidad" pantalla="V-03" listo={!aviso.cargando}>
-      <div className="cuentas cuentas--lectura">
+      <div className="cuentas cuentas--lectura p77-card">
         {aviso.cargando && (
           <p className="cuentas__estado" role="status">
             Consultando…
@@ -36,7 +37,8 @@ export default function V03AvisoPrivacidad() {
         )}
         {aviso.error && (
           <p className="cuentas__aviso-error" role="alert">
-            {textoParaUsuario(aviso.error.mensaje)}
+            <IconoError />
+            <span>{textoParaUsuario(aviso.error.mensaje)}</span>
           </p>
         )}
         {aviso.datos && (

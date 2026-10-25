@@ -3,10 +3,14 @@
 // y de las secciones 7.2 y 7.3 de la recomendación. Todo lo que se lee (información emergente,
 // etiqueta del corte, resumen y tabla) sale de la cadena de la API; la altura `y` es la única
 // conversión a número (excepción del Anexo A). Sin animación (isAnimationActive={false}).
+// Colores del ChartStyle del sistema «Proyecto 077 UI»: la serie en chart-accent (sigue al acento,
+// 3:1 o más sobre surface en los ocho temas), cuadrícula en chart-grid, eje en chart-axis y marcas
+// en ink-muted; la información emergente es la inversa del tema, como los Tooltip.
 import { useId } from 'react'
 import { CartesianGrid, Line, LineChart, ReferenceDot, Tooltip, XAxis, YAxis } from 'recharts'
 import { fecha, fechaCorta, pesos } from '../formato/formato.js'
 import { EtiquetaDemo } from '../ui/EtiquetaDemo.jsx'
+import { IconoError } from '../ui/Icono.jsx'
 import { ResumenGrafica } from './ResumenGrafica.jsx'
 import { TablaSerie } from './TablaSerie.jsx'
 import { marcaEje, puntosGrafica, textoResumen } from './serie.js'
@@ -22,7 +26,7 @@ function EtiquetaCorte({ viewBox, valor, fechaIso }) {
   if (!viewBox) return null
   const cx = viewBox.x + (viewBox.width ?? 0) / 2
   const cy = viewBox.y + (viewBox.height ?? 0) / 2
-  const halo = { stroke: 'var(--bg)', strokeWidth: 4, paintOrder: 'stroke', strokeLinejoin: 'round' }
+  const halo = { stroke: 'var(--surface)', strokeWidth: 4, paintOrder: 'stroke', strokeLinejoin: 'round' }
   return (
     <g pointerEvents="none">
       {cy - 10 > ALTO_ETIQUETA + 8 && (
@@ -31,7 +35,7 @@ function EtiquetaCorte({ viewBox, valor, fechaIso }) {
           y1={ALTO_ETIQUETA + 6}
           x2={cx}
           y2={cy - 10}
-          stroke="var(--fgMuted)"
+          stroke="var(--ink-muted)"
           strokeWidth={1}
           strokeDasharray="2 3"
         />
@@ -41,13 +45,14 @@ function EtiquetaCorte({ viewBox, valor, fechaIso }) {
         y={ALTO_ETIQUETA}
         textAnchor="end"
         fontSize={13}
-        fill="var(--fg)"
+        fill="var(--ink)"
+        className="grafica-etiqueta-corte"
         {...halo}
       >
         <tspan fontWeight={600} data-recorrido="etiqueta-corte">
           {pesos(valor)}
         </tspan>
-        <tspan fill="var(--fgMuted)">{` · ${fecha(fechaIso)} (corte)`}</tspan>
+        <tspan fill="var(--ink-muted)">{` · ${fecha(fechaIso)} (corte)`}</tspan>
       </text>
     </g>
   )
@@ -80,12 +85,14 @@ export function GraficaValor({ serie, fechaCorte, valorAlCorte, nombrePortafolio
       </p>
       {!corte && (
         <p className="grafica-alerta" role="alert">
-          La serie no incluye la fecha de corte.
+          <IconoError />
+          <span>La serie no incluye la fecha de corte.</span>
         </p>
       )}
       {distinto && (
         <p className="grafica-alerta" role="alert">
-          El valor al corte no coincide con el último punto de la serie.
+          <IconoError />
+          <span>El valor al corte no coincide con el último punto de la serie.</span>
         </p>
       )}
       <ResumenGrafica nombrePortafolio={nombrePortafolio} serie={serie} periodo={periodo} fechaCorte={fechaCorte} />
@@ -99,22 +106,22 @@ export function GraficaValor({ serie, fechaCorte, valorAlCorte, nombrePortafolio
             title={`Valor de mercado del portafolio «${nombrePortafolio}» (MXN)`}
             desc={resumen}
           >
-            <CartesianGrid vertical={false} stroke="var(--bgLine)" />
+            <CartesianGrid vertical={false} stroke="var(--chart-grid)" />
             <XAxis
               dataKey="fecha"
               type="category"
               interval="preserveStartEnd"
               minTickGap={18}
               tickFormatter={(v) => (typeof v === 'string' ? fechaCorta(v) : String(v))}
-              tick={{ fill: 'var(--fgMuted)', fontSize: 12 }}
-              stroke="var(--bgLineHeavy)"
+              tick={{ fill: 'var(--ink-muted)', fontSize: 12 }}
+              stroke="var(--chart-axis)"
               tickLine={false}
             />
             <YAxis
               width="auto"
               domain={['auto', 'auto']}
               tickFormatter={marcaEje}
-              tick={{ fill: 'var(--fgMuted)', fontSize: 12 }}
+              tick={{ fill: 'var(--ink-muted)', fontSize: 12 }}
               axisLine={false}
               tickLine={false}
             />
@@ -127,23 +134,26 @@ export function GraficaValor({ serie, fechaCorte, valorAlCorte, nombrePortafolio
               formatter={(_valor, _nombre, item) => [`${pesos(item.payload.texto)} MXN`, 'Valor']}
               separator=": "
               contentStyle={{
-                backgroundColor: 'var(--bgElevation2)',
-                borderColor: 'var(--bgLineHeavy)',
-                color: 'var(--fg)',
-                fontSize: 13,
+                backgroundColor: 'var(--ink)',
+                border: 'none',
+                borderRadius: 'var(--radius-sm)',
+                boxShadow: 'var(--shadow-popover)',
+                color: 'var(--surface)',
+                font: 'var(--t-tooltip)',
+                padding: 'var(--space-2) var(--space-3)',
               }}
-              labelStyle={{ color: 'var(--fg)', fontWeight: 600 }}
-              itemStyle={{ color: 'var(--fg)' }}
-              cursor={{ stroke: 'var(--bgLineHeavy)' }}
+              labelStyle={{ color: 'var(--surface)', fontWeight: 600 }}
+              itemStyle={{ color: 'var(--surface)', padding: 0 }}
+              cursor={{ stroke: 'var(--chart-axis)' }}
             />
             <Line
               type="linear"
               dataKey="y"
               name="Valor de mercado"
-              stroke="var(--serie-1)"
+              stroke="var(--chart-accent)"
               strokeWidth={2}
-              dot={{ r: 2.5, fill: 'var(--serie-1)', stroke: 'none' }}
-              activeDot={{ r: 6, fill: 'var(--serie-1)', stroke: 'var(--bg)', strokeWidth: 2 }}
+              dot={{ r: 2.5, fill: 'var(--chart-accent)', stroke: 'none' }}
+              activeDot={{ r: 6, fill: 'var(--chart-accent)', stroke: 'var(--surface)', strokeWidth: 2 }}
               isAnimationActive={false}
             />
             {corte && (
@@ -151,8 +161,8 @@ export function GraficaValor({ serie, fechaCorte, valorAlCorte, nombrePortafolio
                 x={corte.fecha}
                 y={corte.y}
                 r={6}
-                fill="var(--serie-1)"
-                stroke="var(--bg)"
+                fill="var(--chart-accent)"
+                stroke="var(--surface)"
                 strokeWidth={2}
                 label={<EtiquetaCorte valor={corte.texto} fechaIso={corte.fecha} />}
               />

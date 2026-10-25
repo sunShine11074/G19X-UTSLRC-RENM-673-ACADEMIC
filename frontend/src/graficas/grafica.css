@@ -1,9 +1,9 @@
-/* Gráfica de valor (B5 / P-D). Solo tokens de color (4.5.1, «Paleta»); sin colores fijos. */
+/* Gráfica de valor (B5 / P-D) con el ChartStyle del sistema «Proyecto 077 UI». Solo tokens. */
 
 .grafica-valor {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-3);
   min-width: 0;
 }
 
@@ -11,34 +11,34 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem 0.75rem;
+  gap: var(--space-2) var(--space-3);
 }
 
 .grafica-titulo {
   margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 600;
+  font: var(--t-title);
+  color: var(--ink-muted);
 }
 
-.grafica-meta,
-.grafica-resumen {
+.grafica-meta {
   margin: 0;
-  color: var(--fgMuted);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  color: var(--ink-muted);
+  font: var(--t-body-sm);
 }
 
 .grafica-resumen {
-  color: var(--fg);
-  font-size: 1rem;
-  line-height: 1.5rem;
   max-width: 70ch;
+  margin: 0;
+  color: var(--ink);
+  font: var(--t-body);
 }
 
 .grafica-alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
   margin: 0;
-  color: var(--fgNegative);
+  color: var(--negative);
 }
 
 /* El relleno va en el envoltorio exterior, no en el elemento que mide Recharts (issue #7890). */
@@ -54,64 +54,87 @@
   min-width: 0;
 }
 
-.grafica :focus-visible {
-  outline: 2px solid var(--bgPrimary);
-  outline-offset: 2px;
+/* Marcas de los ejes y etiqueta del corte en Google Sans Code (t-num-xs). */
+.grafica .recharts-cartesian-axis-tick-value,
+.grafica .grafica-etiqueta-corte {
+  font-family: var(--font-num);
 }
 
-.grafica .recharts-surface:focus {
-  outline: none;
-}
-
+.grafica :focus-visible,
 .grafica .recharts-surface:focus-visible {
-  outline: 2px solid var(--bgPrimary);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
 }
 
 .grafica-tabla > summary {
-  cursor: pointer;
-  color: var(--fgPrimary);
-  text-decoration: underline;
   width: fit-content;
   min-height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 .grafica-tabla > summary:focus-visible {
-  outline: 2px solid var(--bgPrimary);
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+/* La tabla se desplaza dentro de su tarjeta en pantallas angostas, nunca la página (1.4.10). */
+.grafica-tabla__region {
+  max-width: 100%;
+  margin-top: var(--space-3);
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+}
+
+.grafica-tabla__region:focus-visible {
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
 }
 
 .grafica-tabla table {
-  margin-top: 0.75rem;
+  min-width: min(18rem, 100%);
   border-collapse: collapse;
-  min-width: 18rem;
+  font: var(--t-body-sm);
 }
 
 .grafica-tabla caption {
+  padding-bottom: var(--space-2);
   text-align: left;
+  font: var(--t-label);
   font-weight: 600;
-  padding-bottom: 0.5rem;
 }
 
 .grafica-tabla th,
 .grafica-tabla td {
-  padding: 0.25rem 0.75rem;
-  border-bottom: 1px solid var(--bgLine);
+  padding: var(--space-1) var(--space-3);
+  border-bottom: 1px solid var(--border);
   text-align: left;
 }
 
 .grafica-tabla thead th {
-  font-weight: 600;
+  font: var(--t-label);
+  color: var(--ink-muted);
 }
 
 .grafica-tabla tbody th {
   font-weight: 400;
 }
 
+.grafica-tabla .cifra,
+.grafica-tabla .fecha-suelta {
+  font-family: var(--font-num);
+  white-space: nowrap;
+}
+
 .grafica-tabla .cifra {
   text-align: right;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+}
+
+.grafica-tabla thead .cifra {
+  font-family: var(--font-sans);
 }
 
 .grafica-tabla .grafica-fila-corte th,
@@ -121,5 +144,5 @@
 
 .grafica-vacia {
   margin: 0;
-  color: var(--fgMuted);
+  color: var(--ink-muted);
 }

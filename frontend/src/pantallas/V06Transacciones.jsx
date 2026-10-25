@@ -3,6 +3,8 @@
 // concertación y luego id), con su costo o ingreso por título calculado por el motor.
 // Las cifras se muestran con formato.js, sin convertirlas (RNF-02). Sin momento de registro (H-7).
 // El selector N-16 quedó en el nivel 1 de recorte (solo en V-04).
+// Una Card del sistema «Proyecto 077 UI» con el portafolio y «+ Registrar transacción» en su encabezado.
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { esPortafolioInexistente } from '../api/cliente.js'
 import { listarTransacciones, verPortafolio } from '../api/operaciones.js'
 import { useConsulta } from '../api/useConsulta.js'
@@ -19,7 +21,7 @@ import { Tabla } from '../ui/Tabla.jsx'
 import './transacciones.css'
 
 const COLUMNAS = [
-  { clave: 'fecha', encabezado: 'Concertación' },
+  { clave: 'fecha', encabezado: 'Concertación', fecha: true },
   { clave: 'tipo', encabezado: 'Tipo' },
   { clave: 'instrumento', encabezado: 'Instrumento' },
   { clave: 'intermediario', encabezado: 'Intermediario' },
@@ -73,48 +75,52 @@ export default function V06Transacciones() {
     <Plantilla titulo="Transacciones" pantalla="V-06" listo={listo && !error}>
       <MensajeEstado tipo="exito">{estado?.mensaje ?? ''}</MensajeEstado>
       <AvisosPermanentes />
-      <div className="transacciones__barra">
-        {nombre && (
-          <p className="transacciones__portafolio">
-            Portafolio: <strong>{nombre}</strong>
+      <div className="p77-card">
+        <div className="transacciones__barra p77-card__header">
+          {nombre && (
+            <p className="transacciones__portafolio">
+              Portafolio: <strong>{nombre}</strong>
+            </p>
+          )}
+          <Boton
+            variante="primario"
+            chico
+            icono={faPlus}
+            data-recorrido="registrar-transaccion"
+            onClick={() => navegar(`/portafolios/${id}/transacciones/nueva`)}
+          >
+            {MENSAJES.registrarTransaccion ?? 'Registrar transacción'}
+          </Boton>
+        </div>
+        {error && <MensajeEstado tipo="error">{textoParaUsuario(error.mensaje)}</MensajeEstado>}
+        {!listo && !error && <p role="status">{MENSAJES.consultando ?? 'Consultando…'}</p>}
+        {listo && !error && (
+          <p className="transacciones__nota">
+            Tal como se capturaron, en pesos mexicanos (MXN). En las compras, la última columna es el costo por título, con
+            las comisiones incluidas; en las ventas, el ingreso por título.
           </p>
         )}
-        <Boton
-          variante="primario"
-          data-recorrido="registrar-transaccion"
-          onClick={() => navegar(`/portafolios/${id}/transacciones/nueva`)}
-        >
-          {MENSAJES.registrarTransaccion ?? 'Registrar transacción'}
-        </Boton>
-      </div>
-      {error && <MensajeEstado tipo="error">{textoParaUsuario(error.mensaje)}</MensajeEstado>}
-      {!listo && !error && <p role="status">{MENSAJES.consultando ?? 'Consultando…'}</p>}
-      {listo && !error && (
-        <p className="transacciones__nota">
-          Tal como se capturaron, en pesos mexicanos (MXN). En las compras, la última columna es el costo por título, con
-          las comisiones incluidas; en las ventas, el ingreso por título.
-        </p>
-      )}
-      {listo && !error && (
-        <div className="transacciones__tabla">
-        <Tabla
-          titulo={
-            <>
-              {nombre ? `Transacciones de «${nombre}»` : 'Transacciones'}
-              {hayDemo && (
+        {listo && !error && (
+          <div className="transacciones__tabla">
+            <Tabla
+              titulo={
                 <>
-                  {' '}
-                  <EtiquetaDemo />
+                  {nombre ? `Transacciones de «${nombre}»` : 'Transacciones'}
+                  {hayDemo && (
+                    <>
+                      {' '}
+                      <EtiquetaDemo />
+                    </>
+                  )}
                 </>
-              )}
-            </>
-          }
-          columnas={COLUMNAS}
-          filas={transacciones.map(filaDe)}
-          vacio="Este portafolio no tiene transacciones."
-        />
-        </div>
-      )}
+              }
+              columnas={COLUMNAS}
+              filas={transacciones.map(filaDe)}
+              vacio="Este portafolio no tiene transacciones."
+            />
+          </div>
+        )}
+      </div>
     </Plantilla>
   )
 }

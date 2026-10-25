@@ -16,7 +16,7 @@ const COLUMNAS = [
   { clave: 'clave', encabezado: 'Clave' },
   { clave: 'nombre', encabezado: 'Nombre' },
   { clave: 'clase', encabezado: 'Clase de activo' },
-  { clave: 'vencimiento', encabezado: 'Vencimiento' },
+  { clave: 'vencimiento', encabezado: 'Vencimiento', fecha: true },
   { clave: 'nominal', encabezado: 'Valor nominal (MXN)', cifra: true },
 ]
 
@@ -52,8 +52,8 @@ export default function V10Catalogo() {
   }))
 
   return (
-    <Plantilla titulo="Catálogo de instrumentos" pantalla="V-10" listo={!cargando}>
-      <div className="catalogos">
+    <Plantilla titulo="Catálogo" pantalla="V-10" listo={!cargando}>
+      <div className="catalogos p77-card">
         <p className="catalogos-intro">
           Estos son los instrumentos con los que puedes registrar transacciones. El catálogo es de solo lectura.
         </p>

@@ -4,18 +4,10 @@
 // - `campo` es el id del control en la página: si existe, el motivo es un enlace que
 //   lleva el foco a ese control. Sin `campo`, el motivo va solo en el resumen (H-8).
 // - Nunca muestra el nombre del campo de la API, solo el mensaje.
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef } from 'react'
 import '../estilos/controles.css'
-
-function IconoError() {
-  return (
-    <svg className="icono" width="20" height="20" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-      <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 4.2v4.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="8" cy="11.3" r="0.95" fill="currentColor" />
-    </svg>
-  )
-}
+import { Icono } from './Icono.jsx'
 
 export function ResumenError({ errores, titulo }) {
   const ref = useRef(null)
@@ -31,7 +23,7 @@ export function ResumenError({ errores, titulo }) {
     <div ref={ref} role="alert" tabIndex={-1} className="resumen-error" data-recorrido="resumen-error">
       <p className="resumen-error__titulo">
         <span className="resumen-error__icono">
-          <IconoError />
+          <Icono icono={faTriangleExclamation} />
         </span>
         {encabezado}
       </p>

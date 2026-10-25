@@ -1,35 +1,39 @@
-/* V-04 Tablero (B5 / P-D). Solo tokens de color (4.5.1, «Paleta»); sin colores fijos. */
+/* V-04 Tablero (B5 / P-D) en la cuadrícula de Cards del sistema «Proyecto 077 UI». Solo tokens. */
 
 .v04-consulta {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: var(--space-2) var(--space-3);
-  margin-bottom: var(--space-3);
+  gap: var(--space-4) var(--space-6);
 }
 
 .v04-consulta > * {
   min-width: 0;
 }
 
-/* Mismo ancho para las dos fechas; a 1280 px caben en una fila con el selector y «Consultar». */
+.v04-consulta > .campo {
+  margin: 0;
+}
+
+/* Mismo ancho para las dos fechas; desde 1280 px caben en una fila con el selector y «Consultar». */
 .v04-campo-fecha {
   width: 16rem;
   max-width: 100%;
 }
 
-/* El botón se alinea con los campos (etiqueta + ayuda arriba de cada control). */
-.v04-accion {
-  align-self: flex-end;
+.v04-consulta .selector-portafolio {
+  width: 16rem;
+  max-width: 100%;
 }
 
 .v04-resumen {
-  margin: var(--space-3) 0 0;
-  font-weight: var(--fontWeight-headline);
+  margin: 0;
+  padding-inline: var(--space-2);
+  font: var(--t-label);
+  color: var(--ink-muted);
 }
 
 .v04-bloque {
-  margin-top: var(--space-5);
   min-width: 0;
 }
 
@@ -37,57 +41,68 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-1) var(--space-2);
-  margin-bottom: var(--space-2);
+  gap: var(--space-2) var(--space-3);
+  margin: var(--space-4) var(--space-2) var(--space-4);
 }
 
 .v04-encabezado-bloque h2 {
   margin: 0;
-  font-size: var(--fontSize-title3);
-  line-height: var(--lineHeight-title3);
-  font-weight: var(--fontWeight-title3);
 }
 
-/* Cuatro tarjetas en una fila a 1280 px; dos o una en anchos menores (4.5.1, puntos de corte). */
+/* Cuatro tarjetas: el valor de mercado, más ancho, y las otras tres; dos por fila de 768 a
+   1279 px y una debajo de 768 (4.5.1, puntos de corte). */
 .v04-tarjetas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-  gap: var(--space-3);
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-gutter);
 }
 
-.v04-tarjetas > * {
-  min-width: 0;
+@media (min-width: 768px) {
+  .v04-tarjetas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .v04-tarjetas {
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  }
 }
 
 .v04-procedencia {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .v04-procedencia > li {
-  padding-bottom: var(--space-2);
-  border-bottom: 1px solid var(--bgLine);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.v04-procedencia > li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .v04-instrumento {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-1);
 }
 
 .v04-clave {
-  font-weight: var(--fontWeight-headline);
+  font-weight: 600;
 }
 
 .v04-fuentes {
-  margin-top: var(--space-3);
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
 }
 
 .v04-fuentes h3 {
-  margin: 0 0 var(--space-1);
-  font-size: var(--fontSize-headline);
-  line-height: var(--lineHeight-headline);
-  font-weight: var(--fontWeight-headline);
+  margin: 0 0 var(--space-2);
 }

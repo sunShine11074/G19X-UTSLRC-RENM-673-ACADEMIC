@@ -1,21 +1,14 @@
 // Campo, CampoFecha y CampoContrasena (Anexo A; 4.5.1, «Componentes»).
-// - La etiqueta es visible y está asociada; la ayuda y el error se enlazan con
-//   aria-describedby; el error lleva texto e icono (1.4.1; 3.3.1).
+// - La etiqueta es visible y está asociada, arriba del control; la ayuda y el error van debajo
+//   (TextField del sistema «Proyecto 077 UI») y se enlazan con aria-describedby; el error lleva
+//   texto e ícono (1.4.1; 3.3.1).
 // - El <input> recibe data-recorrido = id, salvo que se pase `recorrido`.
 // - Lo demás (value, onChange, type, autoComplete…) pasa al <input>.
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { aIso, fecha } from '../formato/formato.js'
 import '../estilos/controles.css'
-
-function IconoError() {
-  return (
-    <svg className="icono" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-      <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 4.2v4.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="8" cy="11.3" r="0.95" fill="currentColor" />
-    </svg>
-  )
-}
+import { Icono } from './Icono.jsx'
 
 function idsDescripcion(id, ayuda, error, extra) {
   const ids = [ayuda ? `${id}-ayuda` : null, error ? `${id}-error` : null, extra].filter(Boolean)
@@ -26,7 +19,7 @@ export function MensajeCampo({ id, error }) {
   if (!error) return null
   return (
     <p id={`${id}-error`} className="campo__error">
-      <IconoError />
+      <Icono icono={faTriangleExclamation} />
       <span>{error}</span>
     </p>
   )
@@ -38,11 +31,6 @@ export function Campo({ id, etiqueta, ayuda, error, recorrido, claseContenedor, 
       <label htmlFor={id} className="campo__etiqueta">
         {etiqueta}
       </label>
-      {ayuda && (
-        <p id={`${id}-ayuda`} className="campo__ayuda">
-          {ayuda}
-        </p>
-      )}
       <input
         id={id}
         name={id}
@@ -52,6 +40,11 @@ export function Campo({ id, etiqueta, ayuda, error, recorrido, claseContenedor, 
         aria-describedby={idsDescripcion(id, ayuda, error)}
         {...resto}
       />
+      {ayuda && (
+        <p id={`${id}-ayuda`} className="campo__ayuda">
+          {ayuda}
+        </p>
+      )}
       <MensajeCampo id={id} error={error} />
     </div>
   )
@@ -79,9 +72,6 @@ export function CampoFecha({ id, etiqueta, valorIso, alCambiar, ayuda, error, re
       <label htmlFor={id} className="campo__etiqueta">
         {etiqueta}
       </label>
-      <p id={`${id}-ayuda`} className="campo__ayuda">
-        DD/MM/AAAA{ayuda ? <> · {ayuda}</> : null}
-      </p>
       <input
         id={id}
         name={id}
@@ -97,6 +87,9 @@ export function CampoFecha({ id, etiqueta, valorIso, alCambiar, ayuda, error, re
         aria-describedby={idsDescripcion(id, true, error)}
         {...resto}
       />
+      <p id={`${id}-ayuda`} className="campo__ayuda">
+        DD/MM/AAAA{ayuda ? <> · {ayuda}</> : null}
+      </p>
       <MensajeCampo id={id} error={error} />
     </div>
   )
@@ -119,11 +112,6 @@ export function CampoContrasena({
       <label htmlFor={id} className="campo__etiqueta">
         {etiqueta}
       </label>
-      {ayuda && (
-        <p id={`${id}-ayuda`} className="campo__ayuda">
-          {ayuda}
-        </p>
-      )}
       <div className="campo__con-boton">
         <input
           id={id}
@@ -140,7 +128,7 @@ export function CampoContrasena({
         />
         <button
           type="button"
-          className="boton boton--secundario campo__boton"
+          className="p77-btn p77-btn--secondary campo__boton"
           aria-pressed={visible ? 'true' : 'false'}
           aria-controls={id}
           onClick={() => setVisible((v) => !v)}
@@ -148,6 +136,11 @@ export function CampoContrasena({
           Mostrar contraseña
         </button>
       </div>
+      {ayuda && (
+        <p id={`${id}-ayuda`} className="campo__ayuda">
+          {ayuda}
+        </p>
+      )}
       <MensajeCampo id={id} error={error} />
     </div>
   )

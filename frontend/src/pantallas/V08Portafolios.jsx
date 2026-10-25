@@ -10,6 +10,7 @@
 // data-recorrido: V-08, crear-portafolio, nombre-portafolio, renombrar, eliminar, confirmacion,
 // y en los diálogos confirmar y cancelar. Cada botón de fila lleva además data-portafolio con el
 // nombre tal como se guardó, para ubicar la fila sin depender del orden.
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useRef, useState } from 'react'
 import { esPortafolioInexistente } from '../api/cliente.js'
 import { crearPortafolio, eliminarPortafolio, listarPortafolios, renombrarPortafolio } from '../api/operaciones.js'
@@ -175,6 +176,7 @@ export default function V08Portafolios() {
       <span className="acciones-fila">
         <Boton
           variante="secundaria"
+          chico
           data-recorrido="renombrar"
           data-portafolio={p.nombre}
           aria-label={`Cambiar el nombre de ${p.nombre}`}
@@ -184,6 +186,7 @@ export default function V08Portafolios() {
         </Boton>
         <Boton
           variante="secundaria"
+          chico
           data-recorrido="eliminar"
           data-portafolio={p.nombre}
           aria-label={`Eliminar ${p.nombre}`}
@@ -197,14 +200,14 @@ export default function V08Portafolios() {
 
   return (
     <Plantilla titulo="Portafolios" pantalla="V-08" listo={!cargando}>
-      <div className="catalogos">
+      <div className="catalogos p77-card">
         <p className="catalogos-intro">
           Cada portafolio agrupa tus transacciones y se consulta por separado. Su divisa base es el peso
           mexicano (MXN).
         </p>
 
         <div className="catalogos-acciones">
-          <Boton variante="primaria" data-recorrido="crear-portafolio" onClick={() => abrir({ tipo: 'crear' })}>
+          <Boton variante="primaria" icono={faPlus} data-recorrido="crear-portafolio" onClick={() => abrir({ tipo: 'crear' })}>
             Crear portafolio
           </Boton>
         </div>

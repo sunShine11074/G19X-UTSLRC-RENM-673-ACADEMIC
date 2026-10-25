@@ -7,7 +7,7 @@ import { Plantilla, PlantillaPublica } from '../ui/Plantilla.jsx'
 
 function TextoError({ error }) {
   return (
-    <div role="alert" data-recorrido="error-pantalla" className="limite-error">
+    <div role="alert" data-recorrido="error-pantalla" className="limite-error p77-card">
       <p>Recarga la página o vuelve a intentarlo más tarde.</p>
       {import.meta.env.DEV && <pre>{String(error?.message ?? error)}</pre>}
     </div>

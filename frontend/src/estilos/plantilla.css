@@ -1,174 +1,330 @@
-/* Plantilla de pantalla y menú principal (4.5.1, «Navegación» y «Espaciado»). Solo tokens. */
+/*
+ * Plantilla de pantalla del sistema «Proyecto 077 UI»: NavRail + TopBar + cuadrícula de Cards,
+ * siempre en las mismas posiciones (3.2.3). Solo tokens.
+ * - Desde 768 px: rail negro fijo a la izquierda (se desplaza con la página si la ventana es baja).
+ * - Debajo de 768 px: el rail se vuelve barra inferior con 4 destinos y «Más».
+ * - Cuadrícula: 12 columnas desde 1024 px, 8 entre 768 y 1023, una debajo de 768.
+ */
 
 .saltar {
   position: absolute;
-  left: var(--space-2);
+  left: var(--space-4);
   top: -200px;
-  z-index: 10;
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--borderRadius-200);
-  background: var(--color-bgPrimary);
-  color: var(--color-fgInverse);
-  font-weight: var(--fontWeight-headline);
+  z-index: var(--z-toast);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--on-action);
+  font: var(--t-button);
+  text-decoration: none;
 }
 
 .saltar:focus,
 .saltar:focus-visible {
-  top: var(--space-1);
-  outline: var(--ancho-foco) solid var(--color-bgPrimary);
-  outline-offset: 2px;
+  top: var(--space-4);
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
 }
 
 .plantilla {
+  display: grid;
+  grid-template-columns: var(--size-rail) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+  min-height: 100vh;
+  padding: var(--space-4);
+}
+
+.plantilla > .p77-rail {
+  position: sticky;
+  top: var(--space-4);
+  min-height: calc(100vh - 2 * var(--space-4));
+}
+
+/* Ventana baja: el rail deja de quedarse fijo para que sus destinos de abajo sigan alcanzables. */
+@media (max-height: 40rem) {
+  .plantilla > .p77-rail {
+    position: relative;
+    top: 0;
+  }
+}
+
+/* Lo que pasa a una segunda línea de la barra superior queda contra el borde derecho, para que sus
+   emergentes (muestras, menú de la persona) quepan en la ventana. */
+.p77-topbar {
+  justify-content: flex-end;
+}
+
+.encabezado-publico > .p77-theme {
+  margin-inline-start: auto;
+}
+
+.plantilla__area {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Encabezado y pie: no quedan fijos al desplazarse (2.4.11) */
-.plantilla__encabezado {
-  border-bottom: var(--borderWidth-100) solid var(--color-bgLine);
-  background: var(--color-bg);
-}
-
-.plantilla__encabezado-interior,
-.plantilla__pie-interior {
-  max-width: calc(var(--ancho-menu) + var(--space-4) + var(--ancho-maximo));
-  margin-inline: auto;
-  padding: var(--space-1_5) var(--margen-lateral);
-}
-
-.marca {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-0_5) var(--space-1_5);
-  margin: 0;
-}
-
-.marca__nombre {
-  font-size: var(--fontSize-title3);
-  line-height: var(--lineHeight-title3);
-  font-weight: var(--fontWeight-title3);
-  color: var(--color-fgPrimary);
-}
-
-.marca__lema {
-  font-size: var(--fontSize-label2);
-  line-height: var(--lineHeight-label2);
-  color: var(--color-fgMuted);
-}
-
-.plantilla__cuerpo {
-  flex: 1 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-3);
-  width: 100%;
-  max-width: calc(var(--ancho-menu) + var(--space-4) + var(--ancho-maximo));
-  margin-inline: auto;
-  padding: var(--space-3) var(--margen-lateral) var(--space-6);
-}
-
-.plantilla__cuerpo--publica {
-  max-width: var(--ancho-maximo);
+  gap: var(--space-6);
+  min-width: 0;
+  min-height: calc(100vh - 2 * var(--space-4));
+  padding-top: var(--space-4);
 }
 
 .plantilla__contenido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  flex: 1 0 auto;
   min-width: 0;
-  max-width: var(--ancho-maximo);
 }
 
 .plantilla__pie {
-  border-top: var(--borderWidth-100) solid var(--color-bgLine);
-  color: var(--color-fgMuted);
-  font-size: var(--fontSize-legal);
-  line-height: var(--lineHeight-legal);
+  padding: 0 var(--space-2) var(--space-2);
+  color: var(--ink-muted);
+  font: var(--t-caption);
 }
 
 .plantilla__pie p {
   margin: 0;
 }
 
-/* ---- Menú principal ---- */
-.menu {
+/* ---- Cuadrícula de tarjetas ---- */
+.rejilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-gutter);
+  align-items: start;
+}
+
+.rejilla > * {
+  grid-column: 1 / -1;
   min-width: 0;
 }
 
-.menu__lista {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-0_5);
+/* Sin márgenes propios en la cuadrícula (los da el gutter); el <dialog> conserva su margin: auto,
+   que lo centra en la capa superior. */
+.rejilla > :not(dialog) {
   margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
-.menu__enlace {
+/* Las regiones vivas vacías no ocupan una fila (siguen en el árbol de accesibilidad). */
+.rejilla > .mensaje-estado:empty {
+  position: absolute;
+}
+
+.rejilla--estirar {
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .rejilla {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .rejilla > :is(.ancho-3, .ancho-6) {
+    grid-column: span 4;
+  }
+}
+
+@media (min-width: 1024px) {
+  .rejilla {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .rejilla > .ancho-3 {
+    grid-column: span 3;
+  }
+
+  .rejilla > .ancho-4 {
+    grid-column: span 4;
+  }
+
+  .rejilla > .ancho-5 {
+    grid-column: span 5;
+  }
+
+  .rejilla > .ancho-6 {
+    grid-column: span 6;
+  }
+
+  .rejilla > .ancho-7 {
+    grid-column: span 7;
+  }
+
+  .rejilla > .ancho-8 {
+    grid-column: span 8;
+  }
+}
+
+/* ---- Rail: «Más» y destinos que solo caben en el rail de escritorio ---- */
+.rail__mas-elemento {
+  display: none;
+}
+
+.rail__mas {
+  position: relative;
+}
+
+.rail__mas .p77-menu {
+  right: 0;
+  bottom: calc(100% + var(--space-4));
+}
+
+/* ---- Barra superior: menú de la persona ---- */
+.persona {
+  position: relative;
+}
+
+.persona .p77-menu {
+  top: calc(100% + var(--space-3));
+  right: 0;
+}
+
+/* ---- Pantallas sin sesión (V-01, V-02, V-03, V-12) ---- */
+.plantilla--publica {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.plantilla--publica .plantilla__area {
+  width: 100%;
+  max-width: 46rem;
+  padding-top: 0;
+}
+
+.encabezado-publico {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.marca {
   display: flex;
   align-items: center;
-  min-height: var(--controlSize-alto);
-  padding: var(--space-1) var(--space-1_5) var(--space-1) var(--space-2);
-  border-radius: var(--borderRadius-200);
-  color: var(--color-fg);
-  font-size: var(--fontSize-headline);
-  line-height: var(--lineHeight-headline);
-  font-weight: var(--fontWeight-headline);
+  gap: var(--space-3);
+  margin: 0;
+  color: var(--ink);
   text-decoration: none;
 }
 
-.menu__enlace:hover {
-  background: var(--color-bgAlternate);
-  text-decoration: underline;
+.marca__logo {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--size-control);
+  height: var(--size-control);
+  border-radius: var(--radius-pill);
+  background: var(--rail);
 }
 
-.menu__enlace[aria-current='page'] {
-  background: var(--color-bgPrimaryWash);
-  color: var(--color-fgPrimary);
-  box-shadow: inset var(--barra-menu-activo) 0 0 var(--color-bgPrimary);
+.marca__logo img {
+  display: block;
+  width: 36px;
+  height: 36px;
 }
 
-.menu__enlace:focus-visible {
-  outline-offset: 0;
-}
-
-.menu__pie {
+.marca__texto {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-1) var(--space-2);
-  margin-top: var(--space-2);
-  padding-top: var(--space-2);
-  border-top: var(--borderWidth-100) solid var(--color-bgLine);
+  flex-direction: column;
 }
 
-.menu__correo {
-  margin: 0;
-  min-width: 0;
-  overflow-wrap: anywhere;
-  font-size: var(--fontSize-label2);
-  line-height: var(--lineHeight-label2);
-  color: var(--color-fgMuted);
+.marca__nombre {
+  font: var(--t-title-sm);
 }
 
-.menu__cerrar {
-  font-size: var(--fontSize-label1);
+.marca__lema {
+  font: var(--t-body-sm);
+  color: var(--ink-muted);
 }
 
-/* Escritorio (1280 px o más): menú lateral de 240 px a la izquierda */
-@media (min-width: 1280px) {
-  .plantilla__cuerpo:not(.plantilla__cuerpo--publica) {
-    grid-template-columns: var(--ancho-menu) minmax(0, 1fr);
-    gap: var(--space-4);
+/* ---- Teléfono: barra inferior ---- */
+@media (max-width: 767px) {
+  :root:has(.plantilla > .p77-rail) {
+    /* El foco nunca queda debajo de la barra inferior (2.4.11). */
+    scroll-padding-bottom: calc(var(--size-control) + 2 * var(--space-3) + 2 * var(--space-2));
   }
 
-  .menu__lista {
-    flex-direction: column;
-    flex-wrap: nowrap;
+  .plantilla {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-bottom: calc(var(--size-control) + 2 * var(--space-3) + 2 * var(--space-2) + var(--space-6));
   }
 
-  .menu__pie {
-    flex-direction: column;
-    align-items: flex-start;
+  .plantilla--publica {
+    padding-bottom: var(--space-4);
+  }
+
+  .plantilla > .p77-rail {
+    position: fixed;
+    top: auto;
+    right: var(--space-2);
+    bottom: max(var(--space-2), env(safe-area-inset-bottom));
+    left: var(--space-2);
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+    min-height: 0;
+    padding: var(--space-3);
+  }
+
+  .p77-rail > :is(.p77-rail__logo-enlace, .p77-rail__spacer, .rail__utilidades) {
+    display: none;
+  }
+
+  .p77-rail > .p77-rail__list {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: var(--space-1);
+    width: 100%;
+  }
+
+  .rail__solo-escritorio {
+    display: none;
+  }
+
+  .rail__mas-elemento {
+    display: block;
+  }
+
+  .p77-rail .p77-tooltip--right {
+    top: auto;
+    bottom: calc(100% + var(--space-3));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .p77-rail .p77-tooltip--right::before {
+    inset: 100% 0 calc(-1 * var(--space-3)) 0;
+  }
+
+  .plantilla__area {
+    min-height: 0;
+    padding-top: 0;
+  }
+
+  .p77-topbar__title {
+    font: var(--t-title-lg);
+  }
+
+  .p77-topbar__actions {
+    gap: var(--space-3);
+  }
+}
+
+/* Debajo de 1024 px queda solo el avatar, para que la barra superior quepa en una fila; el correo
+   sigue siendo el nombre del botón. */
+@media (max-width: 1023px) {
+  .p77-user {
+    margin-left: 0;
+  }
+
+  .p77-user__nombre {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
   }
 }

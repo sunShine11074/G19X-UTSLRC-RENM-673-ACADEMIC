@@ -6,6 +6,8 @@
 // - El selector de portafolio (N-16) queda solo en V-04 (nivel 1 de recorte).
 // - Toda cifra es el texto de la API con formato.js: nada se suma ni se redondea (RNF-02). El
 //   total sale de `totales`, nunca de sumar filas, y usa el mismo pesos() que V-04.
+// - Cards del sistema «Proyecto 077 UI»: la fecha de corte y la tabla en una tarjeta; la
+//   procedencia en otra. El resultado no realizado lleva Delta (color, flecha y signo; H-7).
 import { useState } from 'react'
 import { esPortafolioInexistente } from '../api/cliente.js'
 import { verIntervalo, verPosiciones } from '../api/operaciones.js'
@@ -17,6 +19,7 @@ import { AYUDAS, MENSAJES, MENSAJES_TECNICOS, textoParaUsuario } from '../textos
 import { AvisosPermanentes } from '../ui/Avisos.jsx'
 import { Boton } from '../ui/Boton.jsx'
 import { CampoFecha } from '../ui/Campo.jsx'
+import { Delta } from '../ui/Delta.jsx'
 import { EtiquetaDemo } from '../ui/EtiquetaDemo.jsx'
 import { MensajeEstado } from '../ui/Mensajes.jsx'
 import { NoEncontrado } from '../ui/NoEncontrado.jsx'
@@ -87,7 +90,11 @@ function filaDe(p) {
     titulos: titulos(p.titulos),
     costo: pesos(p.costo_total),
     valor: <CeldaValor p={p} />,
-    resultado: pesos(p.resultado_no_realizado),
+    resultado: (
+      <Delta cifra={p.resultado_no_realizado} plano>
+        {pesos(p.resultado_no_realizado)}
+      </Delta>
+    ),
   }
 }
 
@@ -102,7 +109,11 @@ function TablaPosiciones({ datos }) {
         {pesos(datos.totales.valor)}
       </span>
     ),
-    resultado: pesos(datos.totales.resultado_no_realizado),
+    resultado: (
+      <Delta cifra={datos.totales.resultado_no_realizado} plano>
+        {pesos(datos.totales.resultado_no_realizado)}
+      </Delta>
+    ),
   }
   const titulo = (
     <>
@@ -131,7 +142,7 @@ function Procedencias({ posiciones }) {
   const conValuacion = posiciones.filter((p) => p.valuacion)
   if (conValuacion.length === 0) return null
   return (
-    <section className="v05-procedencias" aria-labelledby="v05-procedencias-titulo">
+    <section className="p77-card" aria-labelledby="v05-procedencias-titulo">
       <h2 id="v05-procedencias-titulo">Valuación y fuente de cada posición</h2>
       <ul className="v05-procedencias__lista">
         {conValuacion.map((p) => (
@@ -213,36 +224,36 @@ export default function V05Posiciones() {
 
       <AvisosPermanentes />
 
-      <form className="v05-consulta" onSubmit={consultar} noValidate>
-        <CampoFecha
-          id="fecha-corte"
-          etiqueta="Fecha de corte"
-          valorIso={valorCampo}
-          alCambiar={alCambiar}
-          ayuda={rango}
-          error={errorFecha ?? undefined}
-        />
-        <Boton
-          type="submit"
-          variante="primario"
-          esperando={posiciones.cargando}
-          textoEspera={MENSAJES.consultando}
-          data-recorrido="consultar"
-        >
-          {MENSAJES.consultar}
-        </Boton>
-      </form>
+      <div className="p77-card">
+        <form className="v05-consulta" onSubmit={consultar} noValidate>
+          <CampoFecha
+            id="fecha-corte"
+            etiqueta="Fecha de corte"
+            valorIso={valorCampo}
+            alCambiar={alCambiar}
+            ayuda={rango}
+            error={errorFecha ?? undefined}
+          />
+          <Boton
+            type="submit"
+            variante="primario"
+            className="alinear-con-control"
+            esperando={posiciones.cargando}
+            textoEspera={MENSAJES.consultando}
+            data-recorrido="consultar"
+          >
+            {MENSAJES.consultar}
+          </Boton>
+        </form>
 
-      <MensajeEstado tipo={errorGeneral ? 'error' : undefined}>
-        {posiciones.cargando ? MENSAJES.consultando : (errorGeneral ?? '')}
-      </MensajeEstado>
+        <MensajeEstado tipo={errorGeneral ? 'error' : undefined}>
+          {posiciones.cargando ? MENSAJES.consultando : (errorGeneral ?? '')}
+        </MensajeEstado>
 
-      {mostrarCifras && (
-        <>
-          <TablaPosiciones datos={datos} />
-          <Procedencias posiciones={datos.posiciones} />
-        </>
-      )}
+        {mostrarCifras && <TablaPosiciones datos={datos} />}
+      </div>
+
+      {mostrarCifras && <Procedencias posiciones={datos.posiciones} />}
     </Plantilla>
   )
 }

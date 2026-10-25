@@ -1,19 +1,16 @@
 /*
- * V-06 y V-07 (P-C). Solo tokens (var(--…)); sin colores fijos.
+ * V-06 y V-07 (P-C) en Cards del sistema «Proyecto 077 UI». Solo tokens.
  */
-
-.transacciones__barra {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2, 16px);
-  margin-block: 0 var(--space-2, 16px);
-}
 
 .transacciones__portafolio {
   margin: 0;
-  color: var(--fg);
+  font: var(--t-title);
+  color: var(--ink-muted);
+}
+
+.transacciones__portafolio strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .transacciones__clave {
@@ -23,35 +20,31 @@
 
 .transacciones__nombre {
   display: block;
-  color: var(--fgMuted);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  color: var(--ink-muted);
+  font: var(--t-caption);
 }
 
 /* Los encabezados de cifras pueden partirse en dos líneas para que la tabla quepa a 1280 px. */
-.transacciones__tabla .tabla thead th.cifra {
+.transacciones__tabla .p77-table thead th.is-num {
   white-space: normal;
 }
 
 .transacciones__nota {
-  margin: 0;
-  color: var(--fgMuted);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  max-width: 70ch;
+  margin: 0 0 var(--space-6);
+  color: var(--ink-muted);
+  font: var(--t-body-sm);
 }
 
 .transacciones__volver {
-  margin: 0 0 var(--space-2, 16px);
-}
-
-.formulario-transaccion {
-  max-width: 48rem;
+  margin: 0;
+  padding-inline: var(--space-2);
 }
 
 .formulario-transaccion__rejilla {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-2, 16px) var(--space-3, 24px);
+  gap: var(--space-2) var(--space-6);
 }
 
 .formulario-transaccion__rejilla > * {
@@ -65,8 +58,8 @@
 .formulario-transaccion__intermediario {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
-  gap: var(--space-2, 16px);
+  align-items: flex-start;
+  gap: var(--space-4);
 }
 
 .formulario-transaccion__intermediario > :first-child {
@@ -74,12 +67,17 @@
   min-width: 0;
 }
 
+/* El botón queda a la altura del control, no de la etiqueta ni de la ayuda. */
+.formulario-transaccion__intermediario > .p77-btn {
+  margin-top: calc(1.25rem + var(--space-2));
+}
+
 .formulario-transaccion__demo {
-  margin: var(--space-1, 8px) 0 0;
+  margin: var(--space-2) 0 0;
 }
 
 .formulario-transaccion__acciones {
-  margin-top: var(--space-3, 24px);
+  margin-top: var(--space-6);
 }
 
 @media (max-width: 40rem) {

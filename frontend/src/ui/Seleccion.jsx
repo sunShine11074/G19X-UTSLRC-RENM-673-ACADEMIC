@@ -28,11 +28,6 @@ export function Select({
       <label htmlFor={id} className="campo__etiqueta">
         {etiqueta}
       </label>
-      {ayuda && (
-        <p id={`${id}-ayuda`} className="campo__ayuda">
-          {ayuda}
-        </p>
-      )}
       <select
         id={id}
         name={id}
@@ -51,6 +46,11 @@ export function Select({
             ))
           : children}
       </select>
+      {ayuda && (
+        <p id={`${id}-ayuda`} className="campo__ayuda">
+          {ayuda}
+        </p>
+      )}
       <MensajeCampo id={id} error={error} />
     </div>
   )

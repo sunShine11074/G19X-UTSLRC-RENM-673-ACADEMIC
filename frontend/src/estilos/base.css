@@ -1,20 +1,19 @@
 /*
- * Estilos globales del cliente (SRS 4.5.1). Solo tokens de tokens.css.
- * Congelado tras C1: los cambios se piden a P-A por medio de ORQ.
- * Los estilos de la plantilla y de los controles viven en plantilla.css y
- * controles.css, que importan sus componentes.
+ * Estilos globales del cliente con el sistema de diseño «Proyecto 077 UI» (tokens.css).
+ * Solo tokens: nunca un color fijo. Los componentes del sistema (p77-*) viven en
+ * componentes.css; la plantilla, en plantilla.css; campos y casillas, en controles.css.
  */
 
 :root {
-  color-scheme: light dark;
-  background: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--fontFamily-body);
-  font-size: 100%; /* raíz de 16 px: los rem crecen con el zoom (1.4.4) */
-  line-height: var(--lineHeight-body);
+  background: var(--bg);
+  color: var(--ink);
+  font: var(--t-body);
+  font-size: 100%; /* raíz de 16 px: los rem crecen con el tamaño de letra del navegador (1.4.4) */
   font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  color-scheme: light;
 }
 
 *,
@@ -26,123 +25,102 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--color-bg);
-  color: var(--color-fg);
-  font-size: var(--fontSize-body);
-  line-height: var(--lineHeight-body);
-  font-weight: var(--fontWeight-body);
+  background: var(--bg);
+  color: var(--ink);
+  font: var(--t-body);
 }
 
-/* Escala tipográfica (un h1 por pantalla; h2 de sección; h3 de indicador) */
+/* Títulos en Manrope: un h1 por pantalla (t-display, en la barra superior); h2 de tarjeta en
+   t-title e ink-muted, como los títulos de tarjeta del sistema; h3 de subsección. */
 h1 {
-  margin: 0 0 var(--space-3);
-  font-size: var(--fontSize-title1);
-  line-height: var(--lineHeight-title1);
-  font-weight: var(--fontWeight-title1);
+  margin: 0;
+  font: var(--t-display);
+  color: var(--ink);
 }
 
 h2 {
-  margin: var(--space-4) 0 var(--space-2);
-  font-size: var(--fontSize-title3);
-  line-height: var(--lineHeight-title3);
-  font-weight: var(--fontWeight-title3);
+  margin: 0 0 var(--space-4);
+  font: var(--t-title);
+  color: var(--ink-muted);
 }
 
 h3 {
-  margin: var(--space-3) 0 var(--space-1);
-  font-size: var(--fontSize-headline);
-  line-height: var(--lineHeight-headline);
-  font-weight: var(--fontWeight-headline);
+  margin: var(--space-6) 0 var(--space-2);
+  font: var(--t-title-sm);
+  color: var(--ink);
 }
 
 p {
-  margin: 0 0 var(--space-2);
+  margin: 0 0 var(--space-4);
 }
 
 ul,
 ol {
-  margin: 0 0 var(--space-2);
-  padding-left: var(--space-3);
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-6);
 }
 
-/* Enlaces: siempre subrayados (1.4.1) */
+strong {
+  font-weight: 600;
+}
+
+/* Enlaces: siempre subrayados (1.4.1), en accent-ink (el acento como texto). */
 a {
-  color: var(--color-fgPrimary);
+  color: var(--accent-ink);
   text-decoration: underline;
-  text-underline-offset: 0.15em;
+  text-underline-offset: 3px;
 }
 
 a:hover {
   text-decoration-thickness: 2px;
 }
 
-/* Clases tipográficas para lo que no es encabezado */
-.texto-title2 {
-  font-size: var(--fontSize-title2);
-  line-height: var(--lineHeight-title2);
-  font-weight: var(--fontWeight-title2);
-}
-
+/* Clases de texto heredadas: equivalen a las del sistema. */
 .texto-headline {
-  font-size: var(--fontSize-headline);
-  line-height: var(--lineHeight-headline);
-  font-weight: var(--fontWeight-headline);
+  font: var(--t-title-sm);
 }
 
 .texto-label1 {
-  font-size: var(--fontSize-label1);
-  line-height: var(--lineHeight-label1);
-  font-weight: var(--fontWeight-label1);
+  font: var(--t-label);
 }
 
 .texto-label2 {
-  font-size: var(--fontSize-label2);
-  line-height: var(--lineHeight-label2);
-  font-weight: var(--fontWeight-label2);
+  font: var(--t-body-sm);
 }
 
 .texto-legal {
-  font-size: var(--fontSize-legal);
-  line-height: var(--lineHeight-legal);
-  font-weight: var(--fontWeight-legal);
+  font: var(--t-caption);
 }
 
 .texto-tenue {
-  color: var(--color-fgMuted);
+  color: var(--ink-muted);
 }
 
-/* Cifras: números de ancho fijo y sin cortar la cifra de su unidad */
+/* Cifras: ancho fijo y sin separar la cifra de su unidad. Las cifras sueltas (tablas,
+   indicadores) van en Google Sans Code; dentro de una oración se quedan en DM Sans. */
 .cifra {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-/* Foco visible: 2 px sólido en bgPrimary (2.4.7; 1.4.11) */
+/* Foco de teclado: anillo sólido de 2 px del color de la superficie y 2 px de accent-ink
+   (2.4.7; 1.4.11). Se dibuja con outline para que siga la forma redondeada del control. */
 :focus {
   outline: none;
 }
 
 :focus-visible {
-  outline: var(--ancho-foco) solid var(--color-bgPrimary);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
 }
 
-a:focus-visible {
-  outline-offset: 0;
-}
-
-input[type='checkbox']:focus-visible,
-input[type='radio']:focus-visible {
-  outline-offset: 1px;
-}
-
-/* Los encabezados y regiones que reciben foco por programa no lo pintan */
+/* Lo que recibe el foco por programa (h1 al navegar, main, resumen de errores) no lo pinta. */
 [tabindex='-1']:focus-visible {
   outline: none;
 }
 
 ::placeholder {
-  color: var(--color-fgMuted);
+  color: var(--ink-muted);
   opacity: 1;
 }
 
@@ -154,19 +132,20 @@ textarea {
   color: inherit;
 }
 
-/* Contenedor de ancho máximo (1200 px) */
-.contenedor {
-  width: 100%;
-  max-width: var(--ancho-maximo);
-  margin-inline: auto;
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 
+/* Párrafos largos, como el aviso de privacidad. */
 .lectura {
-  max-width: var(--ancho-lectura);
+  max-width: 70ch;
 }
 
 /* Solo para el lector de pantalla */
-.visualmente-oculto {
+.visualmente-oculto,
+.solo-lector,
+.p77-sr-only {
   position: absolute !important;
   width: 1px;
   height: 1px;
@@ -178,17 +157,33 @@ textarea {
   border: 0;
 }
 
-@media (max-width: 767px) {
-  :root {
-    --margen-lateral: var(--space-2);
+/* Cambio de tema o de modo: los colores pasan en duration-base (tema.js pone la clase); con
+   movimiento reducido cambian al instante. */
+@media (prefers-reduced-motion: no-preference) {
+  .cambiando-tema *,
+  .cambiando-tema *::before,
+  .cambiando-tema *::after {
+    transition:
+      background-color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard),
+      color var(--duration-base) var(--ease-standard),
+      fill var(--duration-base) var(--ease-standard),
+      stroke var(--duration-base) var(--ease-standard) !important;
   }
+}
+
+.cargando-ruta {
+  margin: var(--space-6);
+  color: var(--ink-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    transition: none !important;
-    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

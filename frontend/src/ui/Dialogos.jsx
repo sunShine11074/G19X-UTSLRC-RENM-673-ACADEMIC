@@ -19,6 +19,7 @@
 // y `textoEspera` (botón de confirmar en espera) y `textoCancelar`.
 import { useEffect, useId, useRef } from 'react'
 import { Boton } from './Boton.jsx'
+import { IconoError } from './Icono.jsx'
 import './datos.css'
 
 function enfocarRespaldo() {
@@ -96,7 +97,8 @@ function ErrorDialogo({ error }) {
   if (!error) return null
   return (
     <p className="dialogo-error" role="alert">
-      {error}
+      <IconoError />
+      <span>{error}</span>
     </p>
   )
 }

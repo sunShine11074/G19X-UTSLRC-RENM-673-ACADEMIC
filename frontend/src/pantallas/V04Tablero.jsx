@@ -3,6 +3,9 @@
 // tabla (RF-11 crit. 2), la procedencia (RF-31), la etiqueta de demostración (RF-07 crit. 3),
 // los avisos (RF-12 crit. 4) y, sin transacciones, el estado sin datos (RF-11 crit. 3).
 // Las cifras se muestran tal como llegan de E20, solo con formato.js (RNF-02; RD-16).
+// Cuadrícula de Cards del sistema «Proyecto 077 UI»: consulta, avisos, los cuatro indicadores (el
+// valor de mercado como cifra principal; el resultado y el TWR con su Delta, H-7 reabierto), la
+// gráfica y la procedencia.
 import { useEffect, useState } from 'react'
 import { esPortafolioInexistente } from '../api/cliente.js'
 import { verIntervalo, verTablero } from '../api/operaciones.js'
@@ -16,6 +19,8 @@ import { AYUDAS, MENSAJES, textoParaUsuario } from '../textos/textos.js'
 import { AvisosPermanentes, LineaFuente } from '../ui/Avisos.jsx'
 import { Boton } from '../ui/Boton.jsx'
 import { CampoFecha } from '../ui/Campo.jsx'
+import { Delta } from '../ui/Delta.jsx'
+import { conSigno } from '../ui/direccion.js'
 import { EtiquetaDemo } from '../ui/EtiquetaDemo.jsx'
 import { EstadoSinDatos, MensajeEstado } from '../ui/Mensajes.jsx'
 import { NoEncontrado } from '../ui/NoEncontrado.jsx'
@@ -61,12 +66,13 @@ function Indicadores({ datos }) {
         {datos.contiene_datos_de_demostracion && <EtiquetaDemo />}
       </div>
       <div className="v04-tarjetas">
-        <TarjetaValor titulo="Valor de mercado" importe={ind.valor_mercado} recorrido="tarjeta-valor" />
-        <TarjetaValor titulo="Resultado no realizado" importe={ind.resultado_no_realizado} />
+        <TarjetaValor titulo="Valor de mercado" importe={ind.valor_mercado} recorrido="tarjeta-valor" principal />
+        <TarjetaValor titulo="Resultado no realizado" importe={ind.resultado_no_realizado} palabras={PALABRAS_RESULTADO} />
         <TarjetaPorCiento
           titulo="Rendimiento ponderado por tiempo (TWR)"
           indicador={ind.twr}
           unidad={MENSAJES.sinAnualizar}
+          palabras={PALABRAS_TWR}
         />
         <TarjetaPorCiento titulo="Máxima caída" indicador={caida}>
           <p className="tarjeta-fecha">
@@ -80,28 +86,38 @@ function Indicadores({ datos }) {
   )
 }
 
+// Palabras de la Delta (flecha y color de ganancia o pérdida, además del signo).
+const PALABRAS_RESULTADO = { sube: 'Ganancia', baja: 'Pérdida', igual: 'Sin resultado' }
+const PALABRAS_TWR = { sube: 'Rendimiento positivo', baja: 'Rendimiento negativo', igual: 'Sin rendimiento' }
+
 // Importe al corte: cifra, unidad (la divisa base) y «Al DD/MM/AAAA». TarjetaIndicador (B3)
-// pone data-recorrido en el elemento de la cifra.
-function TarjetaValor({ titulo, importe, recorrido }) {
+// pone data-recorrido en el elemento de la cifra. Con `palabras`, la cifra lleva signo y Delta;
+// el valor de mercado se muestra tal cual (es la cifra que compara AC-04).
+function TarjetaValor({ titulo, importe, recorrido, principal, palabras }) {
+  const texto = pesos(importe.valor)
   return (
     <TarjetaIndicador
       titulo={titulo}
-      valor={pesos(importe.valor)}
+      valor={palabras ? conSigno(texto, importe.valor) : texto}
       unidad={importe.unidad}
       fecha={MENSAJES.alCorte(importe.fecha_corte)}
+      principal={principal}
+      delta={palabras && <Delta cifra={importe.valor} palabras={palabras} />}
       data-recorrido={recorrido}
     />
   )
 }
 
 // Por ciento del periodo: «4.39 %» y «Del DD/MM/AAAA al DD/MM/AAAA».
-function TarjetaPorCiento({ titulo, indicador, unidad, children }) {
+function TarjetaPorCiento({ titulo, indicador, unidad, palabras, children }) {
+  const texto = porCiento(indicador.valor)
   return (
     <TarjetaIndicador
       titulo={titulo}
-      valor={porCiento(indicador.valor)}
+      valor={palabras ? conSigno(texto, indicador.valor) : texto}
       unidad={unidad}
       fecha={MENSAJES.periodo(indicador.inicio, indicador.fin)}
+      delta={palabras && <Delta cifra={indicador.valor} palabras={palabras} />}
     >
       {children}
     </TarjetaIndicador>
@@ -112,10 +128,8 @@ function ProcedenciaTablero({ datos }) {
   if (datos.procedencia.length === 0 && datos.fuentes_del_periodo.length === 0) return null
   // La etiqueta de demostración de cada valuación la pone Procedencia junto a su cifra.
   return (
-    <section className="v04-bloque" aria-labelledby="v04-procedencia">
-      <div className="v04-encabezado-bloque">
-        <h2 id="v04-procedencia">Procedencia de las valuaciones al {fecha(datos.fecha_corte)}</h2>
-      </div>
+    <section className="p77-card" aria-labelledby="v04-procedencia">
+      <h2 id="v04-procedencia">Procedencia de las valuaciones al {fecha(datos.fecha_corte)}</h2>
       {datos.procedencia.length > 0 && (
         <ul className="v04-procedencia">
           {datos.procedencia.map((p) => (
@@ -210,7 +224,7 @@ export default function V04Tablero() {
 
   return (
     <Plantilla titulo="Tablero" pantalla="V-04" listo={listo}>
-      <form className="v04-consulta" onSubmit={consultar} noValidate aria-label="Portafolio y periodo">
+      <form className="v04-consulta p77-card" onSubmit={consultar} noValidate aria-label="Portafolio y periodo">
         <SelectorPortafolio idActual={idElegido} alCambiar={(nuevo) => fijar({ portafolio: nuevo })} />
         <CampoFecha
           id="fecha-inicio"
@@ -230,7 +244,7 @@ export default function V04Tablero() {
           error={errorFin}
           claseContenedor="v04-campo-fecha"
         />
-        <div className="v04-accion">
+        <div className="v04-accion alinear-con-control">
           <Boton
             type="submit"
             variante="primario"
@@ -269,7 +283,7 @@ export default function V04Tablero() {
       {conCifras && !datos.sin_datos && datos.indicadores && (
         <>
           <Indicadores datos={datos} />
-          <div className="v04-bloque">
+          <div className="p77-card">
             <GraficaValor
               serie={datos.serie}
               fechaCorte={datos.fecha_corte}

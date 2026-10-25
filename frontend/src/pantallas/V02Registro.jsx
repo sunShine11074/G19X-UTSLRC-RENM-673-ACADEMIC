@@ -16,6 +16,7 @@ import { AYUDAS, CASILLA_CONSENTIMIENTO, MENSAJES, textoParaUsuario } from '../t
 import { Boton } from '../ui/Boton.jsx'
 import { Campo, CampoContrasena } from '../ui/Campo.jsx'
 import { DialogoInformativo } from '../ui/Dialogos.jsx'
+import { IconoError } from '../ui/Icono.jsx'
 import { PlantillaPublica } from '../ui/Plantilla.jsx'
 import { ResumenError } from '../ui/ResumenError.jsx'
 import { Casilla } from '../ui/Seleccion.jsx'
@@ -80,10 +81,11 @@ export default function V02Registro() {
 
   return (
     <PlantillaPublica titulo="Crear cuenta" pantalla="V-02" listo={listo}>
-      <div className="cuentas">
+      <div className="cuentas p77-card">
         {sinAviso && (
           <p className="cuentas__aviso-error" role="alert">
-            {textoParaUsuario(aviso.error.mensaje)}
+            <IconoError />
+            <span>{textoParaUsuario(aviso.error.mensaje)}</span>
           </p>
         )}
         <ResumenError errores={errores} titulo="No se creó la cuenta. Corrige lo siguiente:" />

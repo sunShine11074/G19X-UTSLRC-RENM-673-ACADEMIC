@@ -1,7 +1,9 @@
 // Tabla de datos (B3; SRS 4.5.1, «Componentes»: table, caption y th con scope).
-// Contrato del Anexo A: Tabla({titulo, columnas:[{clave, encabezado, cifra}], filas, pie}).
+// Contrato del Anexo A: Tabla({titulo, columnas:[{clave, encabezado, cifra}], filas, pie}); opcional,
+// `fecha` en la columna pone sus fechas en Google Sans Code, alineadas a la izquierda.
 // - La primera columna es el encabezado de cada fila (th scope="row").
-// - Las columnas con `cifra` se alinean a la derecha con números de ancho fijo.
+// - Estilo DataTable del sistema «Proyecto 077 UI» (p77-table): las columnas con `cifra` llevan
+//   is-num, a la derecha y en Google Sans Code, para que los decimales queden en columna.
 // - Las celdas reciben el texto ya formado (formato.js) o un nodo de React; la tabla no
 //   convierte ni suma nada (RNF-02).
 // - `pie`: una fila (objeto con las mismas claves) o una lista de filas, en <tfoot>.
@@ -19,7 +21,7 @@ function Fila({ fila, columnas, celdaPie }) {
   return (
     <tr>
       {columnas.map((c, j) => {
-        const clase = c.cifra ? 'cifra' : undefined
+        const clase = c.cifra ? 'is-num cifra' : c.fecha ? 'is-fecha' : undefined
         const valor = fila[c.clave]
         if (j === 0) {
           return (
@@ -50,12 +52,12 @@ export function Tabla({ titulo, columnas = [], filas = [], pie, vacio = 'No hay 
       aria-label={titulo ? undefined : 'Tabla'}
       tabIndex={0}
     >
-      <table className="tabla">
+      <table className="p77-table">
         {titulo && <caption id={idTitulo}>{titulo}</caption>}
         <thead>
           <tr>
             {columnas.map((c) => (
-              <th key={c.clave} scope="col" className={c.cifra ? 'cifra' : undefined}>
+              <th key={c.clave} scope="col" className={c.cifra ? 'is-num cifra' : undefined}>
                 {c.encabezado}
               </th>
             ))}
