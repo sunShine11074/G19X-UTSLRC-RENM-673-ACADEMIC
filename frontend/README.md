@@ -1,16 +1,14 @@
-# React + Vite
+# Cliente web del Proyecto 077
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Las 12 pantallas del SRS §4.5.2 (V-01 a V-12), escritas con React 19, Vite 8 y Recharts 3. El
+cliente no calcula nada: muestra las cifras tal como las entrega la API, con formato de texto
+(`src/formato/formato.js`), sin convertirlas a número.
 
-Currently, two official plugins are available:
+- **Sistema de diseño:** «Proyecto 077 UI», con ocho temas (modo claro u oscuro y acento lima,
+  azul, rojo o morado) que la persona elige en la barra superior. Los valores viven en
+  `src/estilos/sistema/tokens.json`; `src/estilos/tokens.css` se genera desde ese archivo con
+  `node scripts/tokens-a-css.mjs` y no se edita a mano.
+- **Íconos y fuentes:** Font Awesome Free 7 (npm) y las fuentes Manrope, DM Sans y Google Sans
+  Code, autoalojadas en `src/estilos/fuentes/` (SIL Open Font License 1.1).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Cómo instalarlo, arrancarlo y probarlo: ver el [README de la raíz](../README.md), pasos 3, 5 y 7.

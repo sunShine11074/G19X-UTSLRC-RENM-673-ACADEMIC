@@ -14,12 +14,12 @@ motor único de cálculo. **No emite recomendaciones de inversión.**
 | Documento | Estado | Ubicación | Entregable de empresa que alimenta |
 |---|---|---|---|
 | Definición del proyecto | ✅ v1 | [docs/](docs/) | Documento de requerimientos |
-| MVP ([`MVP.md`](docs/MVP.md)) y documento de requisitos del producto ([`PRD.md`](docs/PRD.md)) | ✅ v1.1 del 18 oct: dan el MVP por completo y verificado (la v1.0, que entró en el commit 358fdae, se escribió antes de terminar el cliente web). El PRD se sigue trabajando durante la estadía | [docs/](docs/) | Revisión del líder de proyecto (AC-06) |
-| API, motor de cálculo y cliente web del MVP | ✅ hechos: API y motor (commit faf6b32) y cliente web con las pantallas V-01 a V-12 del SRS §4.5.2 (commit e636b78). Algunos detalles de presentación y accesibilidad (por ejemplo, el menú desplegable bajo 1280 px y los detalles del modo oscuro), que no quitan criterios de §3.2 ni RNF que se juzgan el 18 oct, quedan para la fase de refinamiento | [backend/](backend/) y [frontend/](frontend/) | Revisión del líder de proyecto (AC-01 a AC-04) |
+| MVP ([`MVP.md`](docs/MVP.md)) y documento de requisitos del producto ([`PRD.md`](docs/PRD.md)) | ✅ v1.1 del 18 oct: dan el MVP por completo y verificado (la v1.0, que entró en el commit 358fdae, se escribió antes de terminar el cliente web). Pendiente: describir el sistema de diseño del 24 oct, que reemplazó a la opción B de CDS | [docs/](docs/) | Revisión del líder de proyecto (AC-06) |
+| API, motor de cálculo y cliente web del MVP | ✅ hechos: API y motor (commit faf6b32) y cliente web con las pantallas V-01 a V-12 del SRS §4.5.2 (commit e636b78). El 24 oct el cliente pasó al sistema de diseño «Proyecto 077 UI» (commit f18a29b): menú lateral que se vuelve barra inferior bajo 768 px y ocho temas (modo claro u oscuro con cuatro acentos). Pendientes: las definiciones de los indicadores (RNF-07) y que V-05, V-06 y V-07 lleven a V-12 con un portafolio inexistente | [backend/](backend/) y [frontend/](frontend/) | Revisión del líder de proyecto (AC-01 a AC-04) |
 | Glosario del dominio financiero | ✅ hecho | Documento aparte, enlazado en SRS §1.3 | Manual técnico |
-| SRS — Especificación de Requisitos | 🔄 v0.3: §1 a §4.4, §4.5.1, §4.5.2, §5.1 y §5.2; pendientes §1.1, §4.5.3, §4.5.4, la matriz de §5.3 (solo tiene la fila de RF-01) y, en §3.1, la revisión del Diario Oficial de la Federación (AC-08) | [docs/](docs/) | Documento de requerimientos |
+| SRS — Especificación de Requisitos | 🔄 v0.3: §1 a §4.4, §4.5.1, §4.5.2, §5.1 y §5.2; pendientes §1.1, las definiciones de los indicadores en §1.3 (RNF-07), §4.5.3, §4.5.4, la matriz de §5.3 (solo tiene la fila de RF-01), la actualización de §4.5.1 al sistema de diseño del 24 oct y, en §3.1, la revisión del Diario Oficial de la Federación (AC-08) | [docs/](docs/) | Documento de requerimientos |
 | Modelo E-R y diccionario de datos | ✅ en el SRS e implementado en `backend/02_crear_esquema.sql` | SRS §4.3 y §4.4 | Documento de arquitectura |
-| Guía de estilo y mapa de navegación | ✅ hechos (18 oct) | SRS §4.5.1 y §4.5.2 | Documento de arquitectura |
+| Guía de estilo y mapa de navegación | 🔄 hechos el 18 oct; §4.5.1 todavía describe la opción B de CDS, y desde el 24 oct el cliente usa «Proyecto 077 UI», cuyos valores están en [`frontend/src/estilos/sistema/tokens.json`](frontend/src/estilos/sistema/tokens.json) | SRS §4.5.1 y §4.5.2 | Documento de arquitectura |
 | Wireframes y mockups | ⏳ | SRS §4.5.3 y §4.5.4 | Documento de arquitectura |
 | Registros de decisión (ADR) | ⏳ | `docs/adr/` | Documento de arquitectura |
 | Matriz de riesgos | ⏳ | `docs/riesgos.md` | Plan del proyecto |
@@ -87,9 +87,10 @@ Versiones que pide el SRS 3.5:
 | Navegador | Una versión vigente de un navegador basado en Chromium o de Firefox | Usar el cliente. El guion del recorrido de AC-04 usa Microsoft Edge. |
 | Git | — | Clonar el repositorio. |
 
-El MVP se probó el 18 de octubre de 2026 con uv 0.12.13, Python 3.13.5, Node.js 24.12.0
-(npm 11.6.2) y PostgreSQL 18.6. El paso a la última corrección de cada uno queda para la fase
-de refinamiento (SRS 3.1 y 3.6.3).
+El 7 de noviembre de 2026 se instaló desde un clon limpio, en Windows 11, siguiendo solo los
+pasos 1 a 6, con uv 0.12.13, Python 3.13.5, Node.js 24.12.0 (npm 11.6.2) y PostgreSQL 18.6 (la
+base, en un clúster de prueba en otro puerto). El paso a la última corrección de cada uno queda
+para la fase de refinamiento (SRS 3.1 y 3.6.3).
 
 Si `psql` no está en el PATH, agrega `C:\Program Files\PostgreSQL\18\bin` o escribe la ruta
 completa.
@@ -252,11 +253,11 @@ uv run python -m tests.referencia.cargador --url http://localhost:8000 --origen 
 
 **Comprobación rápida.** Inicia sesión en `http://localhost:5173` con esa cuenta. En el tablero
 de «Principal», con el periodo por omisión (del 11/09/2026 al 14/10/2026), deben aparecer el
-rendimiento ponderado por tiempo de 4.39 %, la máxima caída de -6.68 % (del pico del 16/09/2026
-al valle del 23/09/2026), el valor de mercado de $58,940.88 y el resultado no realizado de
-$2,632.99. En Posiciones al 14/10/2026, el total del valor es el mismo, $58,940.88, y el costo,
-$56,307.89. La misma comprobación por la API, sin el cliente, está en `docs/MVP.md`, sección
-11.6.
+rendimiento ponderado por tiempo de +4.39 %, la máxima caída de -6.68 % (del pico del 16/09/2026
+al valle del 23/09/2026), el valor de mercado de $58,940.88 y el resultado no realizado, marcado
+como «Ganancia», de +$2,632.99. En Posiciones al 14/10/2026, el total del valor es el mismo,
+$58,940.88, y el costo, $56,307.89. La misma comprobación por la API, sin el cliente, está en
+`docs/MVP.md`, sección 11.6.
 
 ### 7. Pruebas
 
