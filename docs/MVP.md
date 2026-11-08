@@ -6,7 +6,7 @@ Plataforma Inteligente de Gestión de Activos Financieros: producto mínimo viab
 |---|---|
 | Proyecto | 077 — Plataforma Inteligente de Gestión de Activos Financieros |
 | Documento | `docs/MVP.md`: descripción del MVP y de cómo comprobar cada una de sus capacidades |
-| Versión del documento | 1.1 (registro de cambios en la sección 14) |
+| Versión del documento | 1.2 (registro de cambios en la sección 14) |
 | Fecha | Domingo 18 de octubre de 2026 |
 | Autor | Ramon Ernesto Nieblas Mendivil, estudiante en estadía del TSU en Desarrollo de Software Multiplataforma (Universidad Tecnológica de San Luis Río Colorado). Analista, desarrollador y responsable de pruebas del proyecto (SRS 3.7). |
 | Empresa | PluriOne S.A. de C.V. (Develop Talent & Technology) |
@@ -1424,15 +1424,15 @@ En orden:
 Del cliente web, recortado en el nivel 1 del plan del 18 de octubre y para la fase de refinamiento. Ninguno quita un criterio del SRS 3.2 ni un requisito no funcional que se juzgue ese día:
 
 - Las definiciones desplegables de cada indicador que pide RNF-07; se conservan junto a cada uno su unidad y su fecha de corte o periodo, que piden el criterio 1 de RF-11 y RNF-02. RNF-07 se verifica el 23/10/2026.
-- El menú desplegable por debajo de 1280 px; la lista del menú queda visible.
-- La revisión a 320 px y los detalles del modo oscuro; los tokens del modo oscuro sí están.
+- La revisión a 320 px.
 - La página «Mapa del sitio».
 - La entrada al historial de la navegación N-17 del SRS 4.5.2: «Consultar» reemplaza la entrada en lugar de agregar otra.
 - El selector de portafolio N-16 en V-05 y V-06; queda en V-04.
 - La tecla Esc propia de la gráfica; las flechas ← y → de Recharts y la tabla alternativa sí están.
 - Guardar el portafolio activo en `sessionStorage`; queda en memoria.
-- El manejo del foco y el título del documento (`document.title`) en cada pantalla; queda un título fijo.
 - El diálogo de revisión de V-07 antes de registrar y la opción «Registrar otra».
+
+Actualización del 7 de noviembre de 2026: el 24 de octubre, el cliente pasó al sistema de diseño «Proyecto 077 UI» (commit `f18a29b`; SRS 4.5.1), que resolvió tres limitaciones que esta lista tenía al 18 de octubre: el menú por debajo de 1280 px, que ahora es un riel de navegación y, por debajo de 768 px, una barra inferior con «Más»; los detalles del modo oscuro, que es uno de los ocho temas, con el contraste medido en todos, y el manejo del foco y del título del documento, que pasan al h1 y al nombre de cada pantalla al navegar. El recorrido de AC-04 se repitió tras el cambio, con 54 filas correctas y ninguna falla.
 
 Hallazgos menores del cliente, al cerrar el código:
 
@@ -1511,3 +1511,4 @@ Para la fase de refinamiento:
 |---|---|---|---|
 | 1.0 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Primera versión (commit `358fdae`), con el servidor completo y el cliente web todavía sin construir. Reflejaba el SRS 0.3 del commit `268a2c2`. |
 | 1.1 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Estado de la entrega del MVP: el cliente web con las 12 pantallas (commit `e636b78`), la evidencia de `backend/tests/resultados/2026-10-18/` (corrida con registro, CPNF-01, AC-03, CPNF-05 y recorrido de AC-04) y los 18 imprescindibles hechos y verificados. AC-01 a AC-07 cumplidos y AC-08 pendiente. Se actualizan el encabezado, 1.3, 1.4, 2.4, el estado de cada requisito de la sección 3, 6.1, 7.1, 7.2, 8, 10.1, 10.2, la sección 11 (proxy de Vite, puertos fijos, `localhost` y no `127.0.0.1` por la comprobación de origen, el cargador y el nuevo apartado 11.8 del recorrido) y la sección 12 completa. Registra las precisiones del SRS del 18/10/2026: el criterio 1 de RF-11 (P-64), el script SQL de semillas en el SRS 4.2 (P-66), AC-08 «a más tardar» (P-67), la actualización de versiones en la semana del 19 de octubre (P-68) y la ruta del registro de resultados (P-70). Quita la hora de corte y «el repositorio que indique el líder»: el repositorio es público y lo revisan, hasta el fin de semana del 24 y 25 de octubre, los agentes de la plataforma del líder. Agrega esta sección. |
+| 1.2 | 07/11/2026 | Ramon Ernesto Nieblas Mendivil | 12.4: quita de las limitaciones el menú por debajo de 1280 px, los detalles del modo oscuro y el manejo del foco y del título del documento, que resolvió el 24/10/2026 el sistema de diseño «Proyecto 077 UI» (commit `f18a29b`), y lo registra en una actualización fechada. El resto de la sección 12 sigue siendo el estado al 18 de octubre. |

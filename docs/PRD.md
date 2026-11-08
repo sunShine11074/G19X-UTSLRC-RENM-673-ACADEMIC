@@ -6,7 +6,7 @@ Plataforma Inteligente de Gestión de Activos Financieros: documento de requisit
 |---|---|
 | Proyecto | 077 — Plataforma Inteligente de Gestión de Activos Financieros |
 | Documento | `docs/PRD.md`: requisitos del producto en su conjunto, por fases, con la forma de verificar cada uno |
-| Versión del documento | 1.1 (registro de cambios en la sección 16.3) |
+| Versión del documento | 1.2 (registro de cambios en la sección 16.3) |
 | Fecha | Domingo 18 de octubre de 2026 |
 | Autor | Ramon Ernesto Nieblas Mendivil, estudiante en estadía del TSU en Desarrollo de Software Multiplataforma (Universidad Tecnológica de San Luis Río Colorado). Analista y arquitecto, desarrollador del servidor y del cliente, y responsable de pruebas del proyecto (SRS 3.7). |
 | Empresa | PluriOne S.A. de C.V. (Develop Talent & Technology) |
@@ -163,7 +163,8 @@ Los términos del MVP (portafolio, intermediario, instrumento, CETES, posición,
 | Aplicación web progresiva | Sitio web que se puede instalar en el teléfono como una aplicación (RF-24). |
 | CSV | Archivo de texto con valores separados por comas (RF-33). |
 | WCAG 2.2, nivel AA | Pautas de accesibilidad para el contenido web del W3C, en su nivel intermedio (SRS 4.5.1). |
-| CDS | Coinbase Design System, base de la guía de estilo del cliente web, con un tema propio (SRS 4.5.1). |
+| CDS | Coinbase Design System. Fue la base de la guía de estilo del 18 al 23/10/2026 («opción B»), sin llegar a instalarse; el 24/10/2026 lo sustituyó «Proyecto 077 UI» (SRS 4.5.1). |
+| Proyecto 077 UI | Sistema de diseño propio del cliente web desde el 24/10/2026: ocho temas, tres fuentes autoalojadas e iconos de Font Awesome; sus valores viven en `frontend/src/estilos/sistema/tokens.json` (SRS 4.5.1). |
 | ADR | Registro de una decisión de arquitectura (*architecture decision record*). |
 | DOF | Diario Oficial de la Federación. |
 | LMV y LFPDPPP | Ley del Mercado de Valores y Ley Federal de Protección de Datos Personales en Posesión de los Particulares. |
@@ -1011,24 +1012,27 @@ Según el SRS 2.3 y 4.5.1:
 - El tablero debe entenderse «en frío», sin recordar sesiones anteriores; es el punto de entrada habitual (SRS 2.2).
 - Cada indicador va con su unidad, su fecha de corte o periodo y su definición, sin salir de la pantalla (RNF-07).
 - El cliente no redondea, suma, promedia ni convierte cifras: solo agrega separadores de miles, el símbolo de pesos y la unidad, y reordena las fechas. Toda cifra llega de la API como texto, ya calculada por el motor.
-- Formato: coma de miles y punto decimal («-$218.56», «1.00 %»); fechas DD/MM/AAAA; sin notación abreviada. La única conversión de una cifra a número en el cliente es la altura de cada punto de la gráfica; el texto que se muestra sigue siendo la cadena de la API (en el SRS sigue abierto, como excepción documentada de RD-12; en el cliente, P-62).
+- Formato: coma de miles y punto decimal («-$218.56», «1.00 %»); la ganancia y las variaciones positivas llevan «+» («+$2,632.99», «+4.39 %»); fechas DD/MM/AAAA; sin notación abreviada. La única conversión de una cifra a número en el cliente es la altura de cada punto de la gráfica, como excepción documentada de RD-12 (H-5, P-62); el texto que se muestra sigue siendo la cadena de la API.
 - Textos en español de México, trato de tú y lenguaje llano; un término por concepto («transacción», no «operación»); siglas desarrolladas en su primera aparición; nunca códigos internos.
 - Ningún texto, color o icono califica una inversión o sugiere operar; no hay indicadores «en vivo», contadores animados ni recarga automática (R-01; R-02; R-13). El botón dice «Registrar transacción», nunca «Comprar» ni «Vender».
-- Avisos permanentes, sin botón de cerrar, en el tablero, las posiciones y las transacciones. La propuesta los pone antes de las cifras, con la ubicación por decidir (SRS 4.5.1). Textos propuestos, por decidir: «La información de este sistema no constituye asesoría de inversión.» y «Las valuaciones son estimaciones informativas, no precios oficiales, y no sustituyen el estado de cuenta de tu intermediario.»
-- Ningún dato se distingue solo por el color: ganancia y pérdida llevan signo, los enlaces van subrayados, los errores llevan icono y texto, y las series de las gráficas se distinguen por el trazo.
+- Avisos permanentes, sin botón de cerrar, antes de las cifras del tablero, las posiciones y las transacciones (H-6; SRS 4.5.1): «La información de este sistema no constituye asesoría de inversión.» y «Las valuaciones son estimaciones informativas, no precios oficiales, y no sustituyen el estado de cuenta de tu intermediario.»
+- Ningún dato se distingue solo por el color: ganancia y pérdida llevan color, flecha y signo o palabra («Ganancia», «Pérdida»); los enlaces van subrayados; los errores llevan icono y texto, y la pantalla actual del menú se marca también para el lector de pantalla.
 
 ### 9.2 Guía de estilo
 
-- Base: CDS (Coinbase Design System) con un tema propio, la «opción B» del SRS 4.5.1. Se adoptan la estructura y los nombres de los tokens de CDS, su escala de espacio de base 8 px, sus radios y puntos de corte, su escala tipográfica con la fuente Inter autoalojada y un subconjunto sobrio de componentes con todos sus textos en español.
-- No se usan: los temas de CDS, cuyo primario es el azul de Coinbase; logotipos, ilustraciones ni glifos de marca; las gráficas de CDS (se usa Recharts 3.10.1); los componentes de venta, atracción o tiempo real, ni los que chocan con criterios de WCAG (Toast, Calendar y DatePicker). Coinbase solo se nombra en la página de avisos de licencias.
-- Paleta propia para los modos claro y oscuro, según la preferencia del sistema operativo, con mínimos de contraste de 4.5:1 para texto y de 3:1 para bordes, iconos, foco y líneas de las gráficas. Los colores son una propuesta (por confirmar), medidos con la fórmula de WCAG. El cliente del MVP ya los aplica, y las capturas de AC-04 son del modo claro; los detalles del modo oscuro quedaron para la fase de refinamiento, aunque sus tokens sí están. Por decisión del 18/10/2026 (P-83), ganancia y pérdida van sin color, solo con el signo que da la API, y el contenido tiene un ancho máximo de 1200 px.
-- Estado: CDS no está instalado. Para adoptar la opción B falta bajar React a la 19.1.10, que npm resuelva las dependencias sin forzarlas (por confirmar en una rama a más tardar el 23/10/2026) y que compile con Vite 8. Las vistas del MVP se escribieron con componentes propios delgados, con HTML nativo, los mismos nombres de tokens y la paleta de 4.5.1 (`frontend/src/ui/` y `frontend/src/estilos/`), y ya se quitaron los restos de la plantilla de Vite.
-- Abiertos: el identificador del tema o el uso de una identidad visual de PluriOne, si existe; el juego de iconos; los textos de varios componentes.
+- Sistema: «Proyecto 077 UI», propio, desde el 24/10/2026 (commit `f18a29b`; SRS 4.5.1). Sustituyó a la «opción B», CDS (Coinbase Design System) con un tema propio, que nunca se instaló: su versión 9.29.0 admite React 18 o 19.1, y el cliente usa React 19.3.0. El estudiante lo creó a partir de sus marcos de Figma y no es definitivo: la interfaz puede cambiar, siempre a través de sus tokens.
+- Tokens: los colores, la tipografía, el espacio, los radios, las sombras, los tamaños y los puntos de corte viven en `frontend/src/estilos/sistema/tokens.json`; `frontend/src/estilos/tokens.css` se genera desde ese archivo con `node scripts/tokens-a-css.mjs` y no se edita a mano.
+- Temas: ocho, modo claro u oscuro con un acento lima, azul, rojo o morado. En la primera visita, el modo sigue al sistema operativo y el acento es lima; lo que elige la persona en la barra superior se guarda en el navegador. El contraste de 41 pares de colores se midió en los ocho temas, sin fallas (4.5:1 para texto y 3:1 para bordes, iconos, foco y la línea de la gráfica).
+- Tipografía: Manrope para los títulos, DM Sans para el texto y Google Sans Code para las cifras, autoalojadas (SIL Open Font License 1.1). Iconos: Font Awesome Free 7.3.1, desde npm.
+- Ganancia y pérdida: con los colores fijos del sistema, que no cambian con el acento, siempre con flecha y signo «+» o «-» o palabra. Lo decidió el estudiante el 24/10/2026, al reabrir la decisión del 18/10/2026 (H-7, P-83) de mostrarlas sin color.
+- Disposición: riel de navegación negro a la izquierda, barra superior con el título de la pantalla, los controles del tema y el menú de la persona, y tarjetas en una cuadrícula de 12 columnas desde 1024 px y de 8 desde 768 px; por debajo de 768 px, una sola columna, y el riel se vuelve una barra inferior con 4 destinos y «Más».
+- Se conservan: la interfaz en español (los ejemplos del sistema están en inglés), el formato de cifras sobre el texto de la API (`frontend/src/formato/formato.js`) y los atributos que lee el guion del recorrido de AC-04, que se repitió tras el cambio con 54 filas correctas.
+- Abiertos: el uso de una identidad visual de PluriOne, si existe; los avisos de licencias de las fuentes y de Font Awesome (P-33; D-06).
 
 ### 9.3 Accesibilidad
 
 - Meta de diseño: nivel AA de WCAG 2.2. No es un requisito verificable, porque el SRS 3.3 no tiene un requisito de accesibilidad; agregarlo está abierto (SRS 4.5.1; sección 7.4).
-- Reglas que ya fija la guía (SRS 4.5.1): cada pantalla funciona a 320 px CSS (criterio 1.4.10); objetivos de clic de al menos 24 × 24 px (criterio 2.5.8); un solo h1 por pantalla y el foco en el h1 tras cada navegación; enlace «Saltar al contenido»; foco siempre visible; gráfica con resumen textual visible, tabla alterna, recorrido con las flechas y sin animación. En el MVP, la gráfica tiene su resumen textual, su tabla alterna y el recorrido con las flechas ← y → de Recharts; quedaron para la fase de refinamiento la revisión a 320 px, el manejo del foco y el título por pantalla, y la tecla Esc propia de la gráfica (MVP.md 12.4).
+- Reglas que ya fija la guía (SRS 4.5.1): cada pantalla funciona a 320 px CSS (criterio 1.4.10); objetivos de clic de al menos 24 × 24 px (criterio 2.5.8); un solo h1 por pantalla y el foco en el h1 tras cada navegación; enlace «Saltar al contenido»; foco siempre visible; gráfica con resumen textual visible, tabla alterna, recorrido con las flechas y sin animación. En el MVP, la gráfica tiene su resumen textual, su tabla alterna y el recorrido con las flechas ← y → de Recharts. Desde el 24/10/2026, el foco pasa al h1 y el título del documento cambia en cada pantalla; quedan para la fase de refinamiento la revisión a 320 px y la tecla Esc propia de la gráfica (MVP.md 12.4).
 - La sesión dura 480 minutos sin aviso ni renovación; cómo se atiende el criterio 2.2.1 está abierto (SRS 4.5.2).
 
 ### 9.4 Pantallas
@@ -1060,12 +1064,12 @@ Resoluciones (SRS 3.6.1): escritorio desde 1280 × 720 px CSS; en móvil, 360 px
 
 | Qué se verifica | Cómo | Cuándo |
 |---|---|---|
-| Contraste de los colores | Análisis con el script de contraste, que aplica la fórmula de WCAG | 17/10/2026 y en la prueba de CDS, a más tardar el 23/10/2026 |
+| Contraste de los colores en los ocho temas | Análisis con la fórmula de WCAG sobre los valores de `tokens.json`, y comprobación en el navegador | 24/10/2026 y 07/11/2026; sin fallas (SRS 4.5.1) |
 | Cifras idénticas en las vistas | Demostración (RNF-02) | 18/10/2026; cumplida (MVP.md 6.1) |
 | Unidad, fecha y definición de cada indicador | Demostración (RNF-07) | 23/10/2026 |
 | Resoluciones | Demostración en Chromium y Firefox a 1280 × 720 y 320 px CSS, y a 360 px si se conserva (RNF-11) | 13/11/2026 |
 | Teclado, lector de pantalla y revisión automática | Demostración con teclado y NVDA, y prueba con axe | Por decidir con el requisito de accesibilidad |
-| Idioma y marca | Inspección: ningún texto en inglés ni color azul de Coinbase | En la prueba de CDS |
+| Idioma | Inspección: ningún texto en inglés | Por decidir |
 | Recorrido de los imprescindibles | Demostración a 1280 px con capturas fechadas (AC-04) | 18/10/2026; hecho, con 33 capturas (MVP.md 12.3) |
 
 ### 9.6 Estado al 18/10/2026
@@ -1092,7 +1096,7 @@ Según el SRS 4.2:
 4. Autorización por propietario: se filtra por el usuario vigente lo que pertenece a una cuenta, y cada solicitud con sesión comprueba que la cuenta siga activa (RF-02; RNF-03; RD-23).
 5. El *token* del SIE no llega al cliente: vive solo en la configuración del servidor y viaja en el encabezado Bmx-Token (RNF-05).
 
-Los registros de decisión (ADR) de la interfaz de datos, la aritmética, las gráficas y CDS están pendientes: `docs/adr/` no existe (README, «Índice del paquete»).
+Los registros de decisión (ADR) de la interfaz de datos, la aritmética, las gráficas y el sistema de diseño están pendientes: `docs/adr/` no existe (README, «Índice del paquete»).
 
 ### 10.3 Componentes
 
@@ -1124,7 +1128,7 @@ Versiones exactas en MVP.md 7.2. En breve:
 | Servidor | Python 3.13, FastAPI, SQLAlchemy 2, psycopg 3, pydantic, pwdlib con Argon2id; entorno y dependencias con uv; pruebas con pytest |
 | Base de datos | PostgreSQL 18 |
 | Cliente web | React 19.3.0, Vite 8 (con un proxy de `/api` hacia la API y puertos fijos) y Recharts 3.10.1 en la gráfica del tablero; enrutador propio, sin dependencias nuevas; se construye con Node.js 24 |
-| Guía de estilo | CDS 9.29.0 como base, no instalado (sección 9.2) |
+| Guía de estilo | Sistema propio «Proyecto 077 UI» (tokens en `frontend/src/estilos/sistema/tokens.json`), Font Awesome Free 7.3.1 y las fuentes Manrope, DM Sans y Google Sans Code (sección 9.2) |
 | Cálculo | `decimal` de Python con 28 dígitos; nunca punto flotante binario (RD-12) |
 
 ### 10.6 Requisitos de software y hardware
@@ -1151,7 +1155,7 @@ Hardware (SRS 3.6):
 
 - Ninguna dependencia es GPL ni AGPL; una dependencia AGPL contradiría la justificación técnica de la Definición (D-06).
 - Las dependencias son permisivas, salvo psycopg 3 (LGPL-3.0) y certifi (MPL-2.0), que solo imponen obligaciones si se entrega una copia del servidor. Si la empresa lo entrega para instalarse (por confirmar), deberá incluir los avisos, ofrecer el código fuente de esas bibliotecas y permitir sustituir psycopg.
-- El código del navegador sí se entrega a cada usuario, y las licencias MIT, ISC y BSD-3-Clause de sus dependencias piden conservar sus avisos. Cómo se incluyen está abierto, igual que los avisos de CDS (Apache-2.0, que no concede el uso de las marcas de Coinbase) y de Inter (SIL Open Font License 1.1).
+- El código del navegador sí se entrega a cada usuario, y las licencias MIT, ISC y BSD-3-Clause de sus dependencias piden conservar sus avisos. Cómo se incluyen está abierto, igual que los avisos de las fuentes Manrope, DM Sans y Google Sans Code (SIL Open Font License 1.1) y de Font Awesome Free (iconos con licencia CC BY 4.0 y código con licencia MIT).
 
 ---
 
@@ -1278,7 +1282,7 @@ Al 18/10/2026 no hay imprescindibles trasladados por S-02. Lo que queda del MVP 
 
 | Semana | Requisitos con fecha | Verificaciones y otras fechas |
 |---|---|---|
-| Del 19 al 25 de octubre | Diferidos: RF-19, RF-20, RF-32 y RF-34. Deberían incluirse, como propuesta: RF-27 y RF-13. | 23/10: RNF-07, que necesita las definiciones desplegables de cada indicador que quedaron fuera del MVP (MVP.md 12.4). Antes del 23/10: fijar el volumen de referencia de RNF-06, completar el glosario del SRS 1.3 y probar CDS (opción B). |
+| Del 19 al 25 de octubre | Diferidos: RF-19, RF-20, RF-32 y RF-34. Deberían incluirse, como propuesta: RF-27 y RF-13. | 23/10: RNF-07, que necesita las definiciones desplegables de cada indicador que quedaron fuera del MVP (MVP.md 12.4). Antes del 23/10: fijar el volumen de referencia de RNF-06, completar el glosario del SRS 1.3 y probar CDS (opción B), prueba que no se hizo: el 24/10 se adoptó «Proyecto 077 UI» (sección 9.2). |
 | Del 26 de octubre al 1 de noviembre | Diferidos: RF-17, RF-21 y RF-33. Debería incluirse, como propuesta: RF-15. | 30/10: RNF-05 de nuevo (con RF-32), RNF-08 y RNF-09; línea base de RNF-06 para fijar T; mediciones del SRS 3.6. Al 1 de noviembre quedan fijos los indicadores que tendrá RF-24: los entregados a esa fecha. |
 | Del 2 al 8 de noviembre | Diferidos: RF-22, RF-23 y RF-24 (primera de dos semanas). Debería incluirse, con fecha decidida: RF-14. | 06/11: RNF-06 y RNF-10. Semanas del 2 y del 9: documentación técnica, manual de usuario y plan de mantenimiento. El lunes 2 de noviembre es día sin operaciones bursátiles (MVP.md 5.4); si la empresa labora ese día está por confirmar. |
 | Del 9 al 15 de noviembre | Diferido: RF-24 (segunda semana). Opcionales, como propuesta: RF-16 y RF-18, si hay margen; si no, posteriores a la estadía. | 13/11: RNF-11 y RNF-12, y límite de AC-09; el responsable de pruebas ejecuta las pruebas hasta esa fecha. 15/11: termina el desarrollo. |
@@ -1411,7 +1415,6 @@ Sin decisión registrada al 18/10/2026. Las fechas límite que no da el SRS vien
 | Aplicación móvil | Android o aplicación web progresiva frente a iOS; si el SRS 3.6.1 conserva los 360 px | Estudiante y empresa | Antes del 2/11 | RF-24; S-06 |
 | Forma de entrega y mantenimiento | Solo servicio web o instalación por los clientes; periodo del plan de mantenimiento; forma de los avisos de licencia del cliente | Empresa; los avisos, el estudiante | 2/11; los avisos, 23/10 | D-05; D-06; AC-12 |
 | Accesibilidad | Agregar un requisito de WCAG 2.2 AA; si RNF-11 exceptúa tablas y gráficas; duración de la sesión frente al criterio 2.2.1 | Estudiante | 23/10 | SRS 3.3; RNF-11; 4.5.1 |
-| Prueba de CDS | Bajar React a la 19.1.10, resolver sin forzar, compilar con Vite 8 e incorporar Inter | Estudiante | 23/10 | SRS 4.5.1; 3.5; D-06 |
 | RNF-06 y RNF-12 | Volumen, percentil, número de cargas y caché; plan alterno si no alcanzan los minutos de GitHub Actions | Estudiante | 23/10; 13/11 | AC-09 |
 | Glosario | Completar la tabla de términos del SRS 1.3, que usa RNF-07 | Estudiante | Antes del 23/10 | RNF-07 |
 | Importación en CSV | Contradicción de RF-33 con «nunca por carga de archivo» del SRS 2.3 | Estudiante | Antes de la semana del 26/10 | RF-33 |
@@ -1461,8 +1464,9 @@ El SRS 3.1 registra las versiones de la especificación: las 0.x son borradores,
 | 15/10/2026 | Se congela el SRS 5.2, evidencia de AC-03. No cambia el alcance. | Commit `11097f8`; SRS 5.2 |
 | 16 y 18/10/2026 | Decisiones de diseño, sin cambio de alcance: Recharts 3.10.1 para las gráficas; guía de estilo basada en CDS con tema propio (SRS 4.5.1) y mapa de navegación (SRS 4.5.2). | Commits `6cd253c` y `268a2c2`; SRS 3.1, fila 0.3 |
 | 18/10/2026 | Entrega del MVP, sin cambio de alcance: el cliente web con las 12 pantallas y la evidencia de AC-01 a AC-04. El SRS precisa el criterio 1 de RF-11 (P-64), registra en 4.2 el script SQL de semillas (P-66), dice «a más tardar» en AC-08 (P-67), pasa la actualización de versiones a la semana del 19 de octubre (P-68) y sitúa el registro de resultados en `backend/tests/resultados/` (P-70). El SRS 1.2 deja de listar datos de contacto, porque el repositorio pasó a ser público. | Commit `e636b78` (cliente web); SRS 3.1, fila 0.3 |
+| 24/10/2026 | Decisión de diseño, sin cambio de alcance: el cliente web pasa al sistema de diseño propio «Proyecto 077 UI», con ocho temas, en lugar de CDS, que nunca se instaló; la ganancia y la pérdida llevan color, flecha y signo (H-7 reabierta). El SRS lo registra el 7 de noviembre en 4.5.1 y abre la versión 0.4. | Commit `f18a29b`; SRS 3.1, fila 0.4 |
 
-Al 18/10/2026 no hubo traslados de imprescindibles por S-02. La revisión del DOF de AC-08 todavía no consta en el SRS 3.1, y la versión 0.3 sigue abierta y reúne todos los cambios del 7 al 18 de octubre (MVP.md 12; SRS 3.1).
+Al 18/10/2026 no hubo traslados de imprescindibles por S-02. La revisión del DOF de AC-08 todavía no consta en el SRS 3.1. La versión 0.3 reunió los cambios del 7 al 20 de octubre y se cerró el 7 de noviembre, al abrirse la 0.4 con el sistema de diseño del 24 de octubre (MVP.md 12; SRS 3.1).
 
 ### 16.3 Registro de cambios de este documento
 
@@ -1470,3 +1474,4 @@ Al 18/10/2026 no hubo traslados de imprescindibles por S-02. La revisión del DO
 |---|---|---|---|
 | 1.0 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Primera versión, entregada con el MVP (AC-06). Refleja el SRS 0.3 del commit `268a2c2` y el estado de MVP.md al 18/10/2026. |
 | 1.1 | 18/10/2026 | Ramon Ernesto Nieblas Mendivil | Estado de la entrega del MVP, según la versión 1.1 de MVP.md: el cliente web con las 12 pantallas (commit `e636b78`) y los 18 imprescindibles hechos y verificados, con la evidencia de `backend/tests/resultados/2026-10-18/`; AC-01 a AC-07 cumplidos y AC-08 pendiente. Se actualizan el encabezado, las convenciones de estado, OE-2 a OE-5, las métricas de 3.3, 3.4, el líder en 4.5, 5.3, el estado de los 18 imprescindibles en 6.2 a 6.9, RNF-01 a RNF-05 en 7.2, 9.1 a 9.6, 10.3, 10.5, 10.6, 11.2 a 11.4, la hoja de ruta y los entregables (13), los responsables y AC-01 a AC-08 (14), los riesgos y las preguntas abiertas (15) y 16.1 y 16.2. Registra las precisiones del SRS del 18/10/2026 (P-64, P-66, P-67, P-68 y P-70). Quita la hora de corte y «el repositorio que indique el líder»: el repositorio es público y lo revisan, hasta el fin de semana del 24 y 25 de octubre, los agentes de la plataforma del líder. |
+| 1.2 | 07/11/2026 | Ramon Ernesto Nieblas Mendivil | Lleva al documento el sistema de diseño «Proyecto 077 UI» del 24/10/2026 (commit `f18a29b`), según el SRS 0.4: reescribe 9.2 y ajusta el glosario (CDS y «Proyecto 077 UI»), 9.1, 9.3, 9.5, la tabla de tecnologías, las licencias del cliente (10.7) y el historial de cambios de alcance; quita la «Prueba de CDS» de las preguntas abiertas. |
