@@ -298,12 +298,16 @@ La del 18/10/2026 terminó con 0, sin coincidencias; su salida está en
 ```powershell
 npm run lint
 npm run build
-node --test src/formato/formato.test.js src/ui/direccion.test.js
+npm test
 ```
 
 `npm run lint` corre oxlint con `.oxlintrc.json`; `npm run build` deja el cliente compilado en
-`frontend/dist`, que no se versiona, y `node --test` prueba el módulo que da formato a cifras y
-fechas sin convertirlas a número, y el que decide si una variación sube o baja (solo con el texto).
+`frontend/dist`, que no se versiona, y `npm test` corre con `node --test`, sin dependencias
+nuevas, todos los archivos `*.test.js` de `src/`: el formato de cifras y fechas sin convertirlas a
+número; la dirección de una variación (solo con el texto); el cliente de la API, con `fetch`
+sustituido (respuestas correctas, sin conexión, respuestas que no son JSON, el 401 que cierra la
+sesión y el 404 del portafolio inexistente), y los ayudantes de la gráfica. El 7 de noviembre de
+2026 pasaron las 30 pruebas.
 
 **Sistema de diseño.** La interfaz sigue el sistema «Proyecto 077 UI»: rail negro, tarjetas
 redondeadas y ocho temas (modo claro u oscuro con acento lima, azul, rojo o morado), que la
