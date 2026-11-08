@@ -27,8 +27,8 @@ import { Campo, CampoFecha } from '../ui/Campo.jsx'
 import { DialogoFormulario } from '../ui/Dialogos.jsx'
 import { EtiquetaDemo } from '../ui/EtiquetaDemo.jsx'
 import { MensajeEstado } from '../ui/Mensajes.jsx'
-import { NoEncontrado } from '../ui/NoEncontrado.jsx'
 import { Plantilla } from '../ui/Plantilla.jsx'
+import { PortafolioInexistente } from '../ui/PortafolioInexistente.jsx'
 import { ResumenError } from '../ui/ResumenError.jsx'
 import { Select } from '../ui/Seleccion.jsx'
 import './transacciones.css'
@@ -138,13 +138,8 @@ export default function V07RegistrarTransaccion() {
   // Memorizado: ResumenError toma el foco cada vez que recibe una lista nueva.
   const { porCampo, resumen } = useMemo(() => erroresDe(rechazo), [rechazo])
 
-  if (portafolio.error && esPortafolioInexistente(portafolio.error)) {
-    return (
-      <Plantilla titulo={MENSAJES.registrarTransaccion ?? 'Registrar transacción'} pantalla="V-07" listo>
-        <NoEncontrado mensaje={MENSAJES.portafolioInexistente} />
-      </Plantilla>
-    )
-  }
+  // N-08: el portafolio ajeno o inexistente muestra V-12 en la misma ruta y deja de ser el activo.
+  if (esPortafolioInexistente(portafolio.error)) return <PortafolioInexistente />
 
   const cambiar = (campo) => (e) => setValores((v) => ({ ...v, [campo]: e.target.value }))
   const listaInstrumentos = instrumentos.datos ?? []

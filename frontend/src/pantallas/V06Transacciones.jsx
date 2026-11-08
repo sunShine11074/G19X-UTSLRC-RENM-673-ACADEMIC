@@ -15,8 +15,8 @@ import { AvisosPermanentes } from '../ui/Avisos.jsx'
 import { Boton } from '../ui/Boton.jsx'
 import { EtiquetaDemo } from '../ui/EtiquetaDemo.jsx'
 import { MensajeEstado } from '../ui/Mensajes.jsx'
-import { NoEncontrado } from '../ui/NoEncontrado.jsx'
 import { Plantilla } from '../ui/Plantilla.jsx'
+import { PortafolioInexistente } from '../ui/PortafolioInexistente.jsx'
 import { Tabla } from '../ui/Tabla.jsx'
 import './transacciones.css'
 
@@ -57,13 +57,8 @@ export default function V06Transacciones() {
   const portafolio = useConsulta(() => verPortafolio(id), [id])
   const lista = useConsulta(() => listarTransacciones(id), [id])
 
-  if (portafolio.error && esPortafolioInexistente(portafolio.error)) {
-    return (
-      <Plantilla titulo="Transacciones" pantalla="V-06" listo>
-        <NoEncontrado mensaje={MENSAJES.portafolioInexistente} />
-      </Plantilla>
-    )
-  }
+  // N-08: el portafolio ajeno o inexistente muestra V-12 en la misma ruta y deja de ser el activo.
+  if (esPortafolioInexistente(portafolio.error)) return <PortafolioInexistente />
 
   const error = portafolio.error ?? lista.error
   const listo = !portafolio.cargando && !lista.cargando

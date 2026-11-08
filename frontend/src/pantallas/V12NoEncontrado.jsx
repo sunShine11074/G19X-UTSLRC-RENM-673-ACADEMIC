@@ -1,7 +1,7 @@
 // V-12 No encontrado (ruta desconocida; RF-02 crit. 2; RNF-03; 4.5.2).
 // Con sesión y sin ella: «No existe esta página.» y un enlace a Portafolios o, sin sesión,
-// a Inicio de sesión. El portafolio ajeno o inexistente lo muestra V-04 (y las demás
-// pantallas con :id) con NoEncontrado y «No existe el portafolio.» (N-08).
+// a Inicio de sesión. El portafolio ajeno o inexistente lo muestran V-04 a V-07 con
+// PortafolioInexistente y «No existe el portafolio.» (N-08).
 import { useSesion } from '../sesion/useSesion.js'
 import { MENSAJES } from '../textos/textos.js'
 import { NoEncontrado } from '../ui/NoEncontrado.jsx'

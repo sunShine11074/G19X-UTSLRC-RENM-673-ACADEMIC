@@ -6,7 +6,7 @@
 // Cuadrícula de Cards del sistema «Proyecto 077 UI»: consulta, avisos, los cuatro indicadores (el
 // valor de mercado como cifra principal; el resultado y el TWR con su Delta, H-7 reabierto), la
 // gráfica y la procedencia.
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { esPortafolioInexistente } from '../api/cliente.js'
 import { verIntervalo, verTablero } from '../api/operaciones.js'
 import { useConsulta } from '../api/useConsulta.js'
@@ -14,7 +14,6 @@ import { Procedencia } from '../componentes/Procedencia.jsx'
 import { fecha, pesos, porCiento, titulos } from '../formato/formato.js'
 import { GraficaValor } from '../graficas/GraficaValor.jsx'
 import { navegar, useRuta } from '../rutas/navegacion.js'
-import { useSesion } from '../sesion/useSesion.js'
 import { AYUDAS, MENSAJES, textoParaUsuario } from '../textos/textos.js'
 import { AvisosPermanentes, LineaFuente } from '../ui/Avisos.jsx'
 import { Boton } from '../ui/Boton.jsx'
@@ -23,8 +22,8 @@ import { Delta } from '../ui/Delta.jsx'
 import { conSigno } from '../ui/direccion.js'
 import { EtiquetaDemo } from '../ui/EtiquetaDemo.jsx'
 import { EstadoSinDatos, MensajeEstado } from '../ui/Mensajes.jsx'
-import { NoEncontrado } from '../ui/NoEncontrado.jsx'
 import { Plantilla } from '../ui/Plantilla.jsx'
+import { PortafolioInexistente } from '../ui/PortafolioInexistente.jsx'
 import { SelectorPortafolio } from '../ui/SelectorPortafolio.jsx'
 import { TarjetaIndicador } from '../ui/TarjetaIndicador.jsx'
 import './V04Tablero.css'
@@ -175,21 +174,8 @@ export default function V04Tablero() {
   const error = tablero.error
   const porOmision = intervalo.datos?.por_omision
 
-  // N-08: si el portafolio no existe (o es ajeno), deja de ser el activo.
-  const { fijarPortafolioActivo } = useSesion()
-  const inexistente = esPortafolioInexistente(error)
-  useEffect(() => {
-    if (inexistente) fijarPortafolioActivo?.(null)
-  }, [inexistente, fijarPortafolioActivo])
-
-  if (inexistente) {
-    // N-08: V-12 en la misma ruta, con el mismo texto para lo ajeno y lo inexistente (RNF-03).
-    return (
-      <Plantilla titulo="No encontrado" pantalla="V-12" listo>
-        <NoEncontrado mensaje={MENSAJES.portafolioInexistente} />
-      </Plantilla>
-    )
-  }
+  // N-08: el portafolio ajeno o inexistente muestra V-12 en la misma ruta y deja de ser el activo.
+  if (esPortafolioInexistente(error)) return <PortafolioInexistente />
 
   const valorInicio = editado.inicio ?? inicioQ ?? datos?.periodo?.inicio ?? porOmision?.inicio ?? ''
   const valorFin = editado.fin ?? finQ ?? datos?.periodo?.fin ?? porOmision?.fin ?? ''

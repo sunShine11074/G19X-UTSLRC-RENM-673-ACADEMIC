@@ -22,8 +22,8 @@ import { CampoFecha } from '../ui/Campo.jsx'
 import { Delta } from '../ui/Delta.jsx'
 import { EtiquetaDemo } from '../ui/EtiquetaDemo.jsx'
 import { MensajeEstado } from '../ui/Mensajes.jsx'
-import { NoEncontrado } from '../ui/NoEncontrado.jsx'
 import { Plantilla } from '../ui/Plantilla.jsx'
+import { PortafolioInexistente } from '../ui/PortafolioInexistente.jsx'
 import { Tabla } from '../ui/Tabla.jsx'
 import './V05Posiciones.css'
 
@@ -180,13 +180,8 @@ export default function V05Posiciones() {
   const datos = posiciones.datos
   const valorCampo = propia && edicion.valor !== null ? edicion.valor : (fechaRuta ?? datos?.fecha_corte ?? '')
 
-  if (esPortafolioInexistente(posiciones.error)) {
-    return (
-      <Plantilla titulo={TITULO} pantalla="V-05" listo>
-        <NoEncontrado mensaje={MENSAJES.portafolioInexistente} />
-      </Plantilla>
-    )
-  }
+  // N-08: el portafolio ajeno o inexistente muestra V-12 en la misma ruta y deja de ser el activo.
+  if (esPortafolioInexistente(posiciones.error)) return <PortafolioInexistente />
 
   const errorFecha =
     (propia ? edicion.error : null) ?? (fechaRutaValida ? errorDeFecha(posiciones.error) : FECHA_INVALIDA)
